@@ -1,0 +1,235 @@
+---
+id: 01-algebre
+title: L'algèbre
+sidebar_position: 1
+---
+
+# L'algèbre
+
+## Qu'est-ce que l'algèbre et pourquoi elle est fondamentale
+
+L'**algèbre**, c'est l'art de **calculer avec des lettres** plutôt qu'avec des nombres seulement. Au lieu de dire « un nombre, plus 3, égale 7 », on écrit $x + 3 = 7$. Cette abstraction — remplacer des valeurs inconnues ou variables par des symboles — est l'une des inventions les plus puissantes des mathématiques, car elle permet de **raisonner sur des quantités qu'on ne connaît pas encore** et d'exprimer des règles générales.
+
+Pour ton profil, l'algèbre est le socle absolu : elle sous-tend toute la programmation (une variable en code, c'est une variable algébrique), toute l'analyse (dérivées, intégrales manipulent des expressions), la cryptographie (l'arithmétique modulaire, RSA reposent sur des manipulations algébriques), l'algèbre linéaire, et le raisonnement quantitatif en général. Maîtriser l'algèbre, c'est acquérir la grammaire de toutes les maths qui suivent. Ce cours reprend les bases en profondeur, avec beaucoup d'exemples, car des fondations solides ici rendent tout le reste plus facile.
+
+## Les ensembles de nombres
+
+Avant de manipuler, il faut savoir sur quoi on travaille. Les nombres se rangent dans des ensembles emboîtés, du plus simple au plus riche :
+
+**Les entiers naturels ($\mathbb{N}$)** — Les nombres pour compter : $0, 1, 2, 3, \ldots$ Ils sont positifs (ou nuls) et sans virgule. En informatique, ce sont les entiers non signés.
+
+**Les entiers relatifs ($\mathbb{Z}$)** — Les naturels plus leurs négatifs : $\ldots, -2, -1, 0, 1, 2, \ldots$ Le $\mathbb{Z}$ vient de l'allemand *Zahlen* (nombres). Ce sont les entiers signés en programmation.
+
+**Les nombres rationnels ($\mathbb{Q}$)** — Tous les nombres qui s'écrivent comme une **fraction** $\frac{a}{b}$ de deux entiers ($b \neq 0$). Exemples : $\frac{1}{2}$, $\frac{-3}{4}$, $5$ (qui est $\frac{5}{1}$), $0{.}25$ (qui est $\frac{1}{4}$). Leur écriture décimale est finie ou périodique (comme $\frac{1}{3} = 0{.}333\ldots$).
+
+**Les nombres réels ($\mathbb{R}$)** — Tous les nombres de la droite numérique, y compris ceux qui ne sont **pas** des fractions, les **irrationnels** : $\sqrt{2}$, $\pi$, $e$. Leur écriture décimale est infinie et non périodique. C'est l'ensemble le plus utilisé en pratique.
+
+**Les nombres complexes ($\mathbb{C}$)** — Une extension qui ajoute un nombre « imaginaire » $i$ tel que $i^2 = -1$. Indispensables en traitement du signal, en électronique (impédances) et pour Fourier (que tu connais). On les mentionne ici pour situer le paysage.
+
+L'emboîtement est : $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}$ (chaque ensemble contient le précédent). Savoir dans quel ensemble on travaille évite des erreurs : par exemple, l'équation $x^2 = 2$ n'a pas de solution rationnelle, mais en a dans les réels.
+
+## Les opérations et leurs priorités
+
+Les quatre opérations de base (addition, soustraction, multiplication, division) obéissent à des **règles de priorité** qu'il faut appliquer scrupuleusement, sinon tout faux. L'ordre (le fameux « PEMDAS » ou la règle des priorités) :
+
+1. **Parenthèses** d'abord (le contenu des parenthèses se calcule en premier).
+2. **Exposants** (puissances, racines) ensuite.
+3. **Multiplication et division** (de gauche à droite, à égalité de priorité).
+4. **Addition et soustraction** (de gauche à droite, en dernier).
+
+Exemple travaillé : calculons $2 + 3 \times 4^2 - (5 - 1)$.
+- Parenthèses : $5 - 1 = 4$, donc $2 + 3 \times 4^2 - 4$.
+- Exposant : $4^2 = 16$, donc $2 + 3 \times 16 - 4$.
+- Multiplication : $3 \times 16 = 48$, donc $2 + 48 - 4$.
+- Addition/soustraction de gauche à droite : $2 + 48 = 50$, puis $50 - 4 = 46$.
+
+Résultat : $46$. C'est exactement la même logique que l'ordre d'évaluation des opérateurs dans un langage de programmation — d'où l'importance de bien la maîtriser pour écrire des expressions correctes en code.
+
+## Les propriétés fondamentales des opérations
+
+Trois propriétés structurent tout le calcul algébrique. Les nommer aide à comprendre ce qu'on a le droit de faire :
+
+**La commutativité** — L'ordre n'affecte pas le résultat pour l'addition et la multiplication : $a + b = b + a$ et $a \times b = b \times a$. Attention : la soustraction et la division ne sont **pas** commutatives ($5 - 3 \neq 3 - 5$). Et rappelle-toi, en algèbre linéaire, la multiplication de matrices n'est pas commutative non plus — la commutativité n'est pas automatique.
+
+**L'associativité** — Le regroupement n'affecte pas le résultat : $(a + b) + c = a + (b + c)$ et $(a \times b) \times c = a \times (b \times c)$.
+
+**La distributivité** — La plus importante pour manipuler les expressions. La multiplication se distribue sur l'addition :
+
+```math
+a \times (b + c) = a \times b + a \times c
+```
+
+C'est la clé du développement et de la factorisation (voir plus bas). Exemple : $3 \times (x + 4) = 3x + 12$.
+
+## Les puissances (exposants)
+
+Une **puissance** est une multiplication répétée : $a^n$ signifie « $a$ multiplié par lui-même $n$ fois ». Par exemple $2^5 = 2 \times 2 \times 2 \times 2 \times 2 = 32$. Le nombre $a$ est la **base**, $n$ l'**exposant**. Les puissances sont partout en informatique (les $2^n$ de la mémoire, des adresses, des clés).
+
+Les **règles de calcul des puissances**, à connaître par cœur car elles reviennent sans cesse :
+
+**Produit de même base** — On additionne les exposants :
+
+```math
+a^m \times a^n = a^{m+n}
+```
+
+Exemple : $2^3 \times 2^4 = 2^7 = 128$ (vérification : $8 \times 16 = 128$).
+
+**Quotient de même base** — On soustrait les exposants :
+
+```math
+\frac{a^m}{a^n} = a^{m-n}
+```
+
+Exemple : $\frac{2^5}{2^2} = 2^3 = 8$.
+
+**Puissance d'une puissance** — On multiplie les exposants :
+
+```math
+(a^m)^n = a^{m \times n}
+```
+
+Exemple : $(2^3)^2 = 2^6 = 64$.
+
+**Exposant zéro** — Tout nombre non nul à la puissance 0 vaut 1 : $a^0 = 1$. (Logique via la règle du quotient : $\frac{a^n}{a^n} = a^{0} = 1$.)
+
+**Exposant négatif** — C'est l'inverse : $a^{-n} = \dfrac{1}{a^n}$. Exemple : $2^{-3} = \frac{1}{8}$.
+
+**Exposant fractionnaire** — C'est une racine : $a^{1/2} = \sqrt{a}$ et plus généralement $a^{1/n} = \sqrt[n]{a}$. Exemple : $9^{1/2} = 3$.
+
+Exemple travaillé combinant les règles : simplifions $\dfrac{(x^2)^3 \times x^4}{x^5}$.
+- $(x^2)^3 = x^6$ (puissance d'une puissance).
+- Numérateur : $x^6 \times x^4 = x^{10}$ (produit).
+- Le tout : $\frac{x^{10}}{x^5} = x^5$ (quotient).
+
+Résultat : $x^5$.
+
+## Les racines
+
+La **racine carrée** de $a$, notée $\sqrt{a}$, est le nombre positif qui, élevé au carré, redonne $a$ : $\sqrt{9} = 3$ car $3^2 = 9$. C'est l'opération inverse de « mettre au carré ». Plus généralement, la **racine $n$-ième** $\sqrt[n]{a}$ est le nombre qui, élevé à la puissance $n$, donne $a$.
+
+Règles utiles :
+- $\sqrt{a \times b} = \sqrt{a} \times \sqrt{b}$ (la racine d'un produit est le produit des racines). Exemple : $\sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2}$.
+- $\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$.
+- Attention : $\sqrt{a + b} \neq \sqrt{a} + \sqrt{b}$ (erreur très fréquente !). $\sqrt{9 + 16} = \sqrt{25} = 5$, alors que $\sqrt{9} + \sqrt{16} = 3 + 4 = 7$. Les deux diffèrent.
+
+Un nombre négatif n'a pas de racine carrée réelle (aucun réel au carré ne donne un négatif) — c'est justement ce qui a motivé l'invention des nombres complexes.
+
+## Le calcul littéral : manipuler les expressions
+
+Le cœur de l'algèbre est de **transformer des expressions** en gardant leur valeur, pour les simplifier ou les mettre sous une forme utile. Deux opérations inverses dominent : développer et factoriser.
+
+### Développer
+
+**Développer**, c'est transformer un produit en somme, en appliquant la distributivité et en supprimant les parenthèses. Exemples progressifs :
+
+Simple : $3(x + 5) = 3x + 15$.
+
+Avec deux parenthèses (double distributivité, chaque terme de la première multiplie chaque terme de la seconde) :
+
+```math
+(x + 2)(x + 3) = x \times x + x \times 3 + 2 \times x + 2 \times 3 = x^2 + 3x + 2x + 6 = x^2 + 5x + 6
+```
+
+On multiplie tout par tout, puis on regroupe les termes semblables ($3x + 2x = 5x$).
+
+### Les identités remarquables
+
+Certains développements reviennent si souvent qu'on les connaît par cœur — ce sont les **identités remarquables**, extrêmement utiles pour calculer vite et pour factoriser :
+
+```math
+(a + b)^2 = a^2 + 2ab + b^2
+```
+
+```math
+(a - b)^2 = a^2 - 2ab + b^2
+```
+
+```math
+(a + b)(a - b) = a^2 - b^2
+```
+
+La dernière (« produit de la somme par la différence ») est particulièrement précieuse. Exemples d'application :
+
+- $(x + 3)^2 = x^2 + 6x + 9$ (première identité avec $a = x$, $b = 3$).
+- $103^2 = (100 + 3)^2 = 10000 + 600 + 9 = 10609$ (calcul mental rapide !).
+- $(x - 5)(x + 5) = x^2 - 25$ (troisième identité).
+- $47 \times 53 = (50 - 3)(50 + 3) = 2500 - 9 = 2491$ (astuce de calcul mental).
+
+### Factoriser
+
+**Factoriser** est l'opération inverse de développer : transformer une somme en produit. C'est souvent l'étape clé pour résoudre des équations (on y reviendra). L'idée : repérer un **facteur commun** ou reconnaître une **identité remarquable**.
+
+Factorisation par facteur commun : on met en évidence ce qui apparaît dans chaque terme.
+
+```math
+6x^2 + 9x = 3x(2x + 3)
+```
+
+Ici $3x$ est commun aux deux termes (car $6x^2 = 3x \times 2x$ et $9x = 3x \times 3$). On le sort.
+
+Factorisation via une identité remarquable :
+- $x^2 - 16 = x^2 - 4^2 = (x - 4)(x + 4)$ (différence de deux carrés).
+- $x^2 + 6x + 9 = (x + 3)^2$ (carré parfait reconnu).
+
+Exemple travaillé complet : factorisons $x^2 - 9$.
+- On reconnaît une différence de carrés : $x^2 - 9 = x^2 - 3^2$.
+- Donc $x^2 - 9 = (x - 3)(x + 3)$.
+
+La factorisation est cruciale car un produit nul implique qu'un facteur est nul (base de la résolution d'équations) : si $(x-3)(x+3) = 0$, alors $x = 3$ ou $x = -3$.
+
+## Le calcul avec les fractions
+
+Les **fractions** (nombres rationnels) demandent des règles précises, souvent sources d'erreurs. Récapitulatif avec exemples :
+
+**Addition/soustraction** — Il faut un **dénominateur commun** :
+
+```math
+\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}
+```
+
+Exemple : $\frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$. On ne peut PAS additionner les numérateurs sans mettre au même dénominateur.
+
+**Multiplication** — On multiplie numérateurs entre eux et dénominateurs entre eux (simple) :
+
+```math
+\frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}
+```
+
+Exemple : $\frac{2}{3} \times \frac{4}{5} = \frac{8}{15}$.
+
+**Division** — Diviser par une fraction, c'est multiplier par son **inverse** :
+
+```math
+\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c} = \frac{ad}{bc}
+```
+
+Exemple : $\frac{1}{2} \div \frac{3}{4} = \frac{1}{2} \times \frac{4}{3} = \frac{4}{6} = \frac{2}{3}$.
+
+**Simplification** — On divise numérateur et dénominateur par un même facteur : $\frac{12}{18} = \frac{2}{3}$ (en divisant par 6). Toujours simplifier le résultat final.
+
+## La valeur absolue
+
+La **valeur absolue** d'un nombre, notée $|x|$, est sa « distance à zéro », donc toujours positive : $|5| = 5$ et $|-5| = 5$. Elle sert à mesurer un écart sans se soucier du signe (une erreur, une différence). Tu l'as croisée en algèbre linéaire (la norme d'un vecteur généralise cette idée) et en stats (les écarts). Concrètement, $|a - b|$ est la distance entre $a$ et $b$.
+
+## Les liens avec l'informatique et ton domaine
+
+L'algèbre imprègne tout ce que tu fais :
+
+- **Programmation** — les variables, les expressions, l'ordre d'évaluation des opérateurs sont de l'algèbre directe.
+- **Puissances de 2** — omniprésentes : $2^{10} = 1024$ (un kilo-octet), les adresses mémoire, les masques de sous-réseau, les tailles de clés. Les règles des exposants servent constamment.
+- **Cryptographie** — l'arithmétique modulaire (calculs avec des restes), RSA, Diffie-Hellman reposent sur des manipulations algébriques et des propriétés des puissances (que tu as vues en crypto).
+- **Analyse et algèbre linéaire** — tout le calcul symbolique en dépend.
+- **Complexité** — comparer $n^2$ et $2^n$ (polynomial vs exponentiel) mobilise les puissances.
+
+## Ce qu'il faut retenir
+
+- L'**algèbre** = calculer avec des lettres (variables) pour raisonner sur l'inconnu et exprimer des règles générales ; c'est la grammaire de toutes les maths.
+- Ensembles de nombres emboîtés : $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}$ (naturels, relatifs, rationnels, réels, complexes).
+- **Priorités** des opérations : parenthèses → exposants → ×/÷ → +/− (comme en programmation).
+- Propriétés : **commutativité** (ordre), **associativité** (regroupement), **distributivité** $a(b+c) = ab + ac$ (clé du développement/factorisation).
+- **Puissances** : $a^m a^n = a^{m+n}$, $\frac{a^m}{a^n} = a^{m-n}$, $(a^m)^n = a^{mn}$, $a^0 = 1$, $a^{-n} = \frac{1}{a^n}$, $a^{1/n} = \sqrt[n]{a}$. Omniprésentes ($2^n$).
+- **Identités remarquables** : $(a+b)^2 = a^2 + 2ab + b^2$, $(a-b)^2 = a^2 - 2ab + b^2$, $(a+b)(a-b) = a^2 - b^2$.
+- **Développer** (produit → somme) et **factoriser** (somme → produit, via facteur commun ou identité) — la factorisation est la clé pour résoudre les équations.
+- **Fractions** : dénominateur commun pour +/−, multiplier tout droit, diviser = multiplier par l'inverse, toujours simplifier.
+- Erreurs classiques à éviter : $\sqrt{a+b} \neq \sqrt{a} + \sqrt{b}$, la soustraction/division ne sont pas commutatives.

@@ -1,0 +1,97 @@
+---
+id: 03-algorithmes-graphes
+title: Les algorithmes de graphes
+sidebar_position: 3
+---
+
+# Les algorithmes de graphes
+
+## De la structure à l'action
+
+Les deux cours précédents ont posé les structures (graphes, arbres). Ce cours présente les **algorithmes** qui les exploitent — c'est là que la théorie devient utile. Ces algorithmes répondent à des questions concrètes de ton domaine : quel est le chemin le plus rapide entre deux machines ? Comment relier un réseau au moindre coût ? Comment détecter qu'un réseau est fragmenté ? Comment classer des pages web ?
+
+L'objectif ici n'est pas de mémoriser le code de chaque algorithme, mais de comprendre **ce que chacun résout, comment il raisonne, et où tu le croises**.
+
+## Les parcours : DFS et BFS
+
+Tout commence par la capacité à **explorer** un graphe systématiquement. On a vu ces deux parcours pour les arbres ; ils s'appliquent à tout graphe et sont la base de presque tous les autres algorithmes.
+
+**Le parcours en profondeur (DFS, Depth-First Search)** — On explore une branche aussi loin que possible avant de revenir en arrière (backtracking) et d'explorer les autres. Il utilise naturellement une **pile** (ou la récursion). Applications : détecter des cycles, explorer toutes les possibilités (labyrinthes, arbres de jeu), analyser les dépendances, faire un tri topologique.
+
+**Le parcours en largeur (BFS, Breadth-First Search)** — On explore niveau par niveau, en cercles concentriques depuis le point de départ. Il utilise une **file** (queue). Sa propriété clé : **BFS trouve le chemin le plus court en nombre d'arêtes** dans un graphe non pondéré. Si tu veux le minimum d'étapes (de sauts) entre deux machines, c'est BFS.
+
+Ces deux parcours servent aussi à répondre à des questions de base : le graphe est-il connexe ? (lance un parcours depuis un sommet, vois si tu atteins tout le monde) ; quelles sont les composantes connexes ? ; y a-t-il un cycle ?
+
+```python
+import networkx as nx
+G = nx.Graph()
+G.add_edges_from([("A","B"),("B","C"),("A","C"),("C","D")])
+
+# BFS / plus court chemin en nombre d'arêtes
+print(nx.shortest_path(G, "A", "D"))     # ['A', 'C', 'D']
+print(nx.is_connected(G))                 # True
+```
+
+## Le plus court chemin : Dijkstra
+
+Voici sans doute l'algorithme le plus important pour ton métier. Quand le graphe est **pondéré** (les arêtes ont un coût : latence, distance, temps), BFS ne suffit plus — il compte les arêtes, pas leur poids. Il faut l'algorithme de **Dijkstra**, qui trouve le chemin de **poids total minimal** entre un sommet de départ et tous les autres.
+
+L'idée de Dijkstra (sans le code) : on part du sommet de départ avec un coût de 0, et l'infini pour tous les autres. On explore en choisissant toujours le sommet non encore traité **le plus proche** (coût minimal connu), et on met à jour les coûts de ses voisins si on trouve un chemin moins cher en passant par lui. On répète jusqu'à avoir traité tous les sommets. C'est une stratégie **gloutonne** (on fait le choix localement optimal à chaque étape), et elle donne le résultat globalement optimal.
+
+Pourquoi c'est central pour toi : **Dijkstra est le cœur du routage réseau**. Le protocole **OSPF** (Open Shortest Path First), massivement utilisé dans les réseaux d'entreprise, calcule les meilleures routes avec un algorithme de plus court chemin de type Dijkstra. Chaque routeur construit une carte du réseau (un graphe pondéré par les coûts des liens) et calcule les chemins optimaux. Quand tu configures du routage OSPF, tu appliques Dijkstra sans le savoir. Le GPS aussi utilise du plus court chemin pondéré.
+
+Une limite : Dijkstra ne gère pas les poids **négatifs**. Pour ces cas (rares en réseau), il existe l'algorithme de **Bellman-Ford**, plus lent mais qui gère les poids négatifs et détecte les cycles négatifs — d'ailleurs utilisé par le protocole de routage RIP (à vecteur de distance).
+
+```python
+# Dijkstra avec des poids (latence par exemple)
+G = nx.Graph()
+G.add_weighted_edges_from([("A","B",4),("A","C",1),("C","B",2),("B","D",5),("C","D",8)])
+print(nx.dijkstra_path(G, "A", "D"))              # chemin de coût minimal
+print(nx.dijkstra_path_length(G, "A", "D"))       # coût total
+```
+
+## L'arbre couvrant minimal : Kruskal et Prim
+
+Autre problème classique, vu dans le cours sur les arbres : relier **tous** les sommets d'un graphe pondéré avec un coût total minimal, sans cycle. C'est l'**arbre couvrant de poids minimal** (MST), et deux algorithmes le calculent :
+
+**Kruskal** — On trie toutes les arêtes par poids croissant, et on les ajoute une par une (de la moins chère à la plus chère), en **sautant** celles qui créeraient un cycle. On s'arrête quand tous les sommets sont connectés.
+
+**Prim** — On part d'un sommet et on fait « grandir » l'arbre en ajoutant à chaque étape l'arête la moins chère qui connecte un nouveau sommet.
+
+Les deux sont gloutons et donnent le MST optimal. Application concrète : concevoir l'infrastructure d'un réseau (câblage, liaisons) en minimisant le coût total tout en connectant tous les sites. C'est un problème d'ingénierie réseau réel.
+
+## PageRank : l'algorithme qui a fait Google
+
+Un exemple spectaculaire qui relie graphes, algèbre linéaire et probabilités. **PageRank** est l'algorithme historique de Google pour classer les pages web par importance.
+
+L'idée : le web est un graphe orienté géant (pages = sommets, hyperliens = arcs). Une page est **importante** si beaucoup de pages importantes pointent vers elle (définition récursive et élégante). Mathématiquement, l'importance de chaque page est donnée par le **vecteur propre dominant** de la matrice du graphe (rappelle-toi ton cours sur les valeurs propres, où je mentionnais déjà PageRank).
+
+On peut aussi le voir en probabilités : imagine un « surfeur aléatoire » qui clique au hasard sur les liens. Le PageRank d'une page est la probabilité de s'y trouver à long terme. Les pages où on aboutit souvent sont les importantes.
+
+PageRank illustre parfaitement comment les domaines des maths se combinent : la **théorie des graphes** modélise le web, l'**algèbre linéaire** (valeurs propres) le résout, les **probabilités** l'interprètent. C'est un des plus beaux exemples de maths appliquées à grande échelle, et il a littéralement fondé une entreprise. La même idée sert aujourd'hui à mesurer l'influence dans les réseaux sociaux, l'importance de nœuds dans un réseau, etc.
+
+## La complexité : pourquoi certains problèmes sont durs
+
+Un point conceptuel important. Les algorithmes qu'on a vus (parcours, Dijkstra, MST) sont **efficaces** : leur temps de calcul croît raisonnablement avec la taille du graphe. Mais certains problèmes de graphes sont **intrinsèquement difficiles**.
+
+L'exemple le plus célèbre est le **problème du voyageur de commerce** (TSP, Traveling Salesman Problem) : trouver le plus court circuit qui passe par tous les sommets une fois et revient au départ. Contrairement au plus court chemin (facile), celui-ci est **NP-difficile** : à ce jour, aucun algorithme connu ne le résout efficacement pour de grands graphes — le temps de calcul explose. On se contente alors d'**approximations** (des solutions « assez bonnes » sans garantie d'optimalité).
+
+Cette distinction entre problèmes « faciles » (résolubles efficacement) et « durs » (où l'on doit approximer) est au cœur de l'informatique théorique et a des implications pratiques : savoir reconnaître qu'un problème est dur t'évite de chercher une solution exacte impossible, et t'oriente vers des heuristiques. C'est aussi lié à la crypto : la sécurité repose sur des problèmes computationnellement durs (factorisation, log discret — vus dans tes cours crypto).
+
+## Autres algorithmes utiles à connaître
+
+Pour compléter le paysage, quelques problèmes et algorithmes qu'on rencontre :
+
+- **Détection de cycles** — via DFS ; crucial pour repérer des dépendances circulaires (paquets logiciels, deadlocks) ou des boucles réseau.
+- **Tri topologique** — ordonner des tâches selon leurs dépendances (quelle tâche avant quelle autre) ; s'applique aux graphes orientés acycliques (DAG), très utilisé dans les systèmes de build et l'ordonnancement.
+- **Flot maximal** (Ford-Fulkerson) — calculer le débit maximal qu'on peut faire passer dans un réseau de capacités (bande passante max entre deux points). Directement pertinent en dimensionnement réseau.
+- **Coloration de graphes** — assigner des « couleurs » aux sommets de sorte que deux voisins n'aient pas la même ; sert à l'allocation de ressources (attribution de fréquences réseau sans interférence, allocation de registres dans un compilateur).
+
+## Ce qu'il faut retenir
+
+- Les **parcours DFS** (en profondeur, pile/récursion — cycles, dépendances) et **BFS** (en largeur, file — plus court chemin en nombre d'arêtes) sont la base de tout ; ils servent aussi à tester connexité et composantes.
+- **Dijkstra** trouve le plus court chemin dans un graphe **pondéré** (stratégie gloutonne) — **cœur du routage réseau (OSPF)** et du GPS. **Bellman-Ford** gère les poids négatifs (RIP).
+- **Kruskal** et **Prim** calculent l'**arbre couvrant minimal** (MST) — concevoir un réseau au moindre coût.
+- **PageRank** classe les pages web via le **vecteur propre dominant** du graphe — exemple magistral combinant graphes + algèbre linéaire + probabilités (le « surfeur aléatoire »).
+- Certains problèmes sont **NP-difficiles** (ex. **voyageur de commerce**) : pas de solution efficace connue → on **approxime**. Distinction facile/dur au cœur de l'info théorique (et de la crypto).
+- Autres classiques : détection de cycles, tri topologique (dépendances/build), flot maximal (bande passante), coloration (allocation de ressources/fréquences).

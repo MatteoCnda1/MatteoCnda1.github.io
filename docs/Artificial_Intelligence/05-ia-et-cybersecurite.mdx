@@ -1,0 +1,86 @@
+---
+id: 05-ia-et-cybersecurite
+title: IA et cybersécurité
+sidebar_position: 6
+---
+
+# IA et cybersécurité
+
+C'est la fiche la plus pertinente pour ton profil : l'intersection de tes deux spécialités. L'IA et la cybersécurité s'entremêlent de trois façons distinctes qu'il faut bien séparer — c'est un domaine en pleine explosion, où la demande de profils qui maîtrisent les deux est énorme.
+
+## Les trois intersections IA × sécurité
+
+Ne pas confondre trois choses très différentes :
+
+1. **L'IA au service de la défense** — utiliser le ML pour détecter et contrer les menaces.
+2. **L'IA au service de l'attaque** — comment les attaquants exploitent l'IA.
+3. **La sécurité de l'IA elle-même** — les modèles d'IA sont eux-mêmes des cibles vulnérables.
+
+Chacune est un champ à part entière. Voyons-les.
+
+## 1. L'IA pour la défense (ML appliqué à la sécurité)
+
+C'est l'usage le plus établi : le machine learning est un outil puissant pour la cyberdéfense, car il excelle à repérer des motifs dans d'énormes volumes de données — exactement ce qu'exige la détection de menaces. Applications concrètes :
+
+- **Détection d'intrusion (IDS/IPS)** — classer le trafic réseau comme légitime ou malveillant. C'est un problème de **classification** (ta fiche ML), souvent avec des données très déséquilibrées.
+- **Détection d'anomalies** — repérer les comportements qui sortent de la normale (connexions inhabituelles, exfiltration). Souvent du **non supervisé/clustering** : ce qui n'appartient à aucun groupe connu est suspect. Lien direct avec ta fiche stats (valeurs au-delà de 3 écarts-types) et clustering.
+- **Détection de malware** — classer des fichiers comme sains ou malveillants à partir de leurs caractéristiques.
+- **Antispam et anti-phishing** — les filtres bayésiens (ta fiche Bayes !) sont un cas d'école historique.
+- **Analyse de logs à grande échelle** — repérer des signaux faibles dans des millions d'événements.
+
+Le piège central ici, tu le connais déjà : les **faux positifs**. Un détecteur « fiable à 99 % » lâché sur des millions d'événements légitimes noie les analystes sous les fausses alertes (ta fiche Bayes et inférence statistique). C'est LE défi de l'IA défensive : le compromis faux positifs / faux négatifs. Ton socle probas/stats te donne exactement les bons outils pour le comprendre.
+
+## 2. L'IA pour l'attaque (le côté offensif)
+
+Les attaquants aussi utilisent l'IA, ce qui change le paysage des menaces :
+
+- **Phishing et ingénierie sociale automatisés** — les LLM génèrent des emails de phishing crédibles, personnalisés, sans fautes, à grande échelle. Les deepfakes (voix, vidéo) permettent l'usurpation d'identité.
+- **Génération de malware** — assistance à l'écriture de code malveillant, ou variation automatique pour échapper aux détecteurs.
+- **Découverte de vulnérabilités** — l'IA peut aider à trouver des failles (à double tranchant : utile en défense comme en attaque).
+- **Craquage de mots de passe** — des modèles qui apprennent les habitudes humaines pour deviner les mots de passe plus efficacement.
+
+Comprendre ces usages offensifs est essentiel pour anticiper les menaces — c'est la logique du pentester : penser comme l'attaquant.
+
+## 3. La sécurité de l'IA elle-même (le plus nouveau et le plus important)
+
+C'est le champ le plus récent et le plus stratégique : **les systèmes d'IA sont eux-mêmes des cibles**. Un modèle de ML introduit de nouvelles surfaces d'attaque, inconnues des applications classiques. Les grandes catégories (formalisées par l'OWASP et le NIST) :
+
+- **Attaques adverses (adversarial examples)** — modifier légèrement une entrée, de façon imperceptible pour un humain, pour tromper le modèle. Exemple célèbre : ajouter un bruit invisible à une image fait qu'un classifieur voit un « panda » comme un « gibbon » avec grande confiance. En sécurité : un malware légèrement modifié pour échapper à un détecteur ML, ou contourner un IDS. C'est une menace majeure car elle exploite le fonctionnement même des réseaux de neurones.
+- **Empoisonnement des données (data poisoning)** — corrompre les données d'entraînement pour saboter le modèle ou y insérer une porte dérobée (backdoor). Si un attaquant influence les données d'apprentissage, il contrôle le comportement du modèle.
+- **Vol de modèle (model extraction)** — reconstituer un modèle propriétaire en l'interrogeant massivement.
+- **Attaques par inférence (privacy)** — extraire des informations sur les données d'entraînement (potentiellement des données personnelles — enjeu RGPD, ta fiche droit).
+- **Attaques spécifiques aux LLM** — c'est très actuel : l'**injection de prompt** (faire dévier un LLM de ses instructions via une entrée malveillante — l'équivalent de l'injection SQL pour les LLM, un parallèle direct avec ta fiche sécurité SQL !), le **jailbreak** (contourner les garde-fous), la **fuite du prompt système**, les abus d'agents IA.
+
+Ce troisième volet est celui où la demande professionnelle explose : sécuriser les systèmes d'IA déployés en entreprise est un métier émergent, à la croisée exacte de tes compétences.
+
+## Le lien avec le droit et la réglementation
+
+Rappel de ta section droit : l'IA est de plus en plus **encadrée**. L'**AI Act** européen (règlement sur l'IA) impose des obligations selon le niveau de risque des systèmes d'IA. La sécurité et la conformité des systèmes d'IA rejoignent donc les enjeux NIS2 et RGPD que tu as étudiés. Un profil qui maîtrise IA + sécurité + cadre réglementaire est particulièrement recherché.
+
+## Ressources recommandées
+
+Ces ressources sont plus spécialisées ; certaines sont des références techniques à consulter au fil de l'eau plutôt que des cours linéaires.
+
+**OWASP Top 10 for LLM Applications** (owasp.org, projet « Top 10 for Large Language Model Applications ») — LA référence, gratuite, sur les risques de sécurité des applications à base de LLM (injection de prompt, fuite de données, etc.). Format familier si tu connais l'OWASP Top 10 web. Incontournable et directement dans ta lignée.
+
+**OWASP Machine Learning Security Top 10** (owasp.org) — Le pendant pour les systèmes de ML classiques (attaques adverses, empoisonnement...). Concis et structuré.
+
+**MITRE ATLAS** (atlas.mitre.org) — L'équivalent de MITRE ATT&CK, mais pour les menaces sur les systèmes d'IA. Une base de connaissances des tactiques et techniques d'attaque contre le ML, avec des cas réels. Référence professionnelle.
+
+**NIST — Adversarial Machine Learning** (une taxonomie officielle du NIST, cherchable sur nist.gov) — Le cadre de référence sur les attaques et défenses adverses. Plus formel, utile comme référence.
+
+**OWASP AI Exchange** (owaspai.org) — Un portail qui regroupe et met en relation tous les cadres de sécurité de l'IA (OWASP, NIST, ENISA, MITRE). Bon point d'entrée pour cartographier le domaine.
+
+**awesome-ai-security** (sur GitHub, dépôt ottosulin/awesome-ai-security) — Une liste communautaire open-source de ressources, outils et labs sur la sécurité de l'IA, dont des environnements d'entraînement type CTF (comme des labs sur l'injection de prompt). Parfait pour ta sensibilité open-source et pour pratiquer.
+
+**PortSwigger — Web LLM attacks** (portswigger.net/web-security) — La Web Security Academy (que tu connais peut-être pour le web) a ajouté des labs pratiques et gratuits sur les attaques LLM. Pour mettre les mains dedans.
+
+## Ce qu'il faut retenir
+
+- Trois intersections **distinctes** : l'IA **pour la défense**, l'IA **pour l'attaque**, et la **sécurité de l'IA** elle-même.
+- **IA défensive** : détection d'intrusion/anomalies/malware/spam = classification et clustering (tes fiches ML/stats/Bayes) ; défi central = le compromis **faux positifs/négatifs**.
+- **IA offensive** : phishing et deepfakes automatisés, génération de malware, craquage de mots de passe — penser comme l'attaquant.
+- **Sécurité de l'IA** (le plus stratégique) : **attaques adverses** (tromper le modèle par des perturbations), **empoisonnement** des données, vol de modèle, attaques sur la vie privée, et pour les LLM l'**injection de prompt** (le parallèle direct de l'injection SQL !) et le jailbreak.
+- Lien avec ta section droit : l'**AI Act**, NIS2, RGPD encadrent la sécurité et la conformité de l'IA.
+- Références : **OWASP Top 10 LLM** et **ML Security Top 10**, **MITRE ATLAS**, **NIST adversarial ML**, **OWASP AI Exchange**, **awesome-ai-security** (open-source, labs), **PortSwigger** (labs LLM).
+- C'est le domaine où ton profil **IA + cybersécurité + droit** a le plus de valeur — une demande professionnelle en pleine explosion.

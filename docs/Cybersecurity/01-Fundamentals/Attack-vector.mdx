@@ -1,0 +1,161 @@
+---
+
+title: Attack Vector
+sidebar_position: 5
+-------------------
+
+# Attack Vector
+
+## Introduction
+
+Un **Attack Vector** est le chemin, la technique ou le moyen utilisé pour tenter de compromettre un système.
+
+La question est :
+
+> **Comment un attaquant peut-il essayer d'atteindre sa cible ?**
+
+---
+
+# Exemples
+
+Un attaquant peut utiliser différents vecteurs :
+
+* phishing ;
+* exploitation d'une vulnérabilité ;
+* mots de passe compromis ;
+* service réseau exposé ;
+* application Web ;
+* périphérique USB ;
+* ingénierie sociale.
+
+---
+
+# Exemple
+
+```text
+Attacker
+    │
+    ▼
+Phishing email
+    │
+    ▼
+User interaction
+    │
+    ▼
+Credential theft
+```
+
+Le phishing représente ici l'**attack vector**.
+
+---
+
+# Attack Surface vs Attack Vector
+
+```text
+Attack Surface
+      │
+      │ Ensemble des points accessibles
+      ▼
+┌─────────────────────────┐
+│ Login page              │
+│ Web API                 │
+│ SSH                     │
+│ File upload             │
+└─────────────────────────┘
+      │
+      ▼
+Attack Vector
+      │
+      └── Méthode utilisée
+```
+
+Exemple :
+
+```text
+Attack Surface:
+Web login page
+```
+
+```text
+Attack Vector:
+Credential stuffing
+```
+
+---
+
+# Types d'Attack Vectors
+
+## Network
+
+```text
+Attacker
+   │
+   ▼
+Exposed network service
+```
+
+## Web
+
+```text
+Attacker
+   │
+   ▼
+Web application
+```
+
+## Human
+
+```text
+Attacker
+   │
+   ▼
+Phishing / Social engineering
+```
+
+## Physical
+
+```text
+Attacker
+   │
+   ▼
+Physical device access
+```
+
+## Supply Chain
+
+```text
+Attacker
+   │
+   ▼
+Third-party dependency
+```
+
+---
+
+# Importance en cybersécurité
+
+Identifier les attack vectors permet de :
+
+* mieux modéliser les menaces ;
+* améliorer les défenses ;
+* réduire l'exposition ;
+* prioriser les contrôles de sécurité.
+
+---
+
+# Points importants
+
+* Un Attack Vector est un moyen ou chemin d'attaque.
+* Il ne représente pas forcément une vulnérabilité.
+* Une même surface d'attaque peut être ciblée par plusieurs vecteurs.
+* L'identification des vecteurs fait partie du threat modeling.
+
+---
+
+## Concepts associés
+
+* Attack Surface
+* Threat
+* Vulnerability
+* Exploit
+* Threat Modeling

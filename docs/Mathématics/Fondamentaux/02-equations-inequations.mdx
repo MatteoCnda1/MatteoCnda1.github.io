@@ -1,0 +1,167 @@
+---
+id: 02-equations-inequations
+title: Équations et inéquations
+sidebar_position: 2
+---
+
+# Équations et inéquations
+
+## Ce qu'est une équation
+
+Une **équation** est une égalité contenant une (ou plusieurs) **inconnue(s)**, généralement notée $x$. **Résoudre** l'équation, c'est trouver toutes les valeurs de l'inconnue qui rendent l'égalité vraie — ses **solutions**.
+
+Exemple : $2x + 3 = 11$. La solution est $x = 4$, car $2 \times 4 + 3 = 11$. Aucune autre valeur ne convient.
+
+Les équations sont partout : elles traduisent des problèmes concrets en langage mathématique (« combien faut-il de... pour que... ? »), et savoir les résoudre est une compétence de base transversale — en physique, en électronique (loi d'Ohm, circuits), en finance, en dimensionnement réseau, en algorithmique. Ce cours couvre les grands types d'équations avec beaucoup d'exemples travaillés.
+
+## Le principe fondamental : l'équilibre
+
+L'idée maîtresse pour résoudre une équation : une égalité est comme une **balance en équilibre**. Ce qu'on fait d'un côté, on doit le faire de l'autre pour garder l'équilibre. On a le droit de :
+
+- **Ajouter ou soustraire** la même quantité des deux côtés.
+- **Multiplier ou diviser** les deux côtés par un même nombre **non nul**.
+
+En appliquant ces opérations, on **isole** progressivement l'inconnue. C'est la stratégie universelle. Tout revient à « déplacer » les termes pour laisser $x$ seul d'un côté.
+
+## Les équations du premier degré
+
+Une équation du **premier degré** (ou linéaire) a l'inconnue à la puissance 1 seulement (pas de $x^2$). Forme générale : $ax + b = 0$. Elles se résolvent toujours par isolation de $x$.
+
+Exemple travaillé détaillé : résolvons $3x + 5 = 20$.
+- On soustrait 5 des deux côtés : $3x + 5 - 5 = 20 - 5$, donc $3x = 15$.
+- On divise les deux côtés par 3 : $\frac{3x}{3} = \frac{15}{3}$, donc $x = 5$.
+- Vérification (toujours vérifier !) : $3 \times 5 + 5 = 20$. Correct.
+
+Exemple avec l'inconnue des deux côtés : résolvons $5x - 4 = 2x + 11$.
+- On rassemble les $x$ d'un côté : on soustrait $2x$ des deux côtés → $3x - 4 = 11$.
+- On isole le terme en $x$ : on ajoute 4 → $3x = 15$.
+- On divise par 3 → $x = 5$.
+- Vérification : $5 \times 5 - 4 = 21$ et $2 \times 5 + 11 = 21$. Égaux, correct.
+
+Exemple avec parenthèses et fractions : résolvons $2(x - 3) = \frac{x + 6}{2}$.
+- On développe à gauche : $2x - 6 = \frac{x+6}{2}$.
+- On multiplie tout par 2 pour éliminer la fraction : $2(2x - 6) = x + 6$, soit $4x - 12 = x + 6$.
+- On rassemble : $4x - x = 6 + 12$, soit $3x = 18$.
+- On divise : $x = 6$.
+
+Ces trois exemples montrent la même méthode : simplifier (développer, éliminer les fractions), rassembler les $x$ d'un côté et les nombres de l'autre, puis diviser.
+
+## Les équations du second degré
+
+Une équation du **second degré** (quadratique) contient un terme en $x^2$. Forme générale :
+
+```math
+ax^2 + bx + c = 0 \quad (a \neq 0)
+```
+
+Elles sont fondamentales (trajectoires, optimisation, physique) et se résolvent avec une méthode systématique : le **discriminant**.
+
+### La méthode du discriminant
+
+On calcule d'abord le **discriminant**, noté $\Delta$ (delta) :
+
+```math
+\Delta = b^2 - 4ac
+```
+
+Le signe de $\Delta$ détermine le nombre de solutions (une idée géométrique : c'est le nombre de fois où la parabole croise l'axe horizontal) :
+
+- Si $\Delta > 0$ : **deux solutions** distinctes, données par
+
+```math
+x_1 = \frac{-b - \sqrt{\Delta}}{2a} \qquad x_2 = \frac{-b + \sqrt{\Delta}}{2a}
+```
+
+- Si $\Delta = 0$ : **une seule solution** (double) : $x = \dfrac{-b}{2a}$.
+- Si $\Delta < 0$ : **aucune solution réelle** (la parabole ne touche jamais l'axe ; les solutions sont complexes).
+
+Exemple travaillé ($\Delta > 0$) : résolvons $x^2 - 5x + 6 = 0$.
+- Ici $a = 1$, $b = -5$, $c = 6$.
+- Discriminant : $\Delta = (-5)^2 - 4 \times 1 \times 6 = 25 - 24 = 1$. Positif → deux solutions.
+- $x_1 = \frac{5 - \sqrt{1}}{2} = \frac{5 - 1}{2} = 2$ et $x_2 = \frac{5 + 1}{2} = 3$.
+- Vérification : $2^2 - 5 \times 2 + 6 = 0$ ✓ et $3^2 - 5 \times 3 + 6 = 0$ ✓.
+
+Exemple ($\Delta = 0$) : résolvons $x^2 - 4x + 4 = 0$.
+- $a = 1$, $b = -4$, $c = 4$. $\Delta = 16 - 16 = 0$ → une solution double.
+- $x = \frac{4}{2} = 2$. (On reconnaît d'ailleurs $x^2 - 4x + 4 = (x-2)^2$.)
+
+Exemple ($\Delta < 0$) : $x^2 + x + 1 = 0$.
+- $\Delta = 1 - 4 = -3 < 0$ → pas de solution réelle.
+
+### Résolution par factorisation
+
+Quand c'est possible, factoriser est plus rapide que le discriminant. On utilise le fait qu'**un produit est nul si et seulement si l'un de ses facteurs est nul**. Reprenons $x^2 - 5x + 6 = 0$ : elle se factorise en $(x - 2)(x - 3) = 0$. Donc soit $x - 2 = 0$ (d'où $x = 2$), soit $x - 3 = 0$ (d'où $x = 3$). Mêmes solutions, sans discriminant. Cette technique « produit nul » est très puissante quand la factorisation saute aux yeux.
+
+## Les systèmes d'équations
+
+Un **système** est un ensemble de plusieurs équations à plusieurs inconnues qui doivent être vraies **simultanément**. Le cas le plus courant : deux équations, deux inconnues ($x$ et $y$). On l'a vu en profondeur en algèbre linéaire ; voici les méthodes de base « à la main ».
+
+Exemple :
+
+```math
+\begin{cases} 2x + y = 7 \\ x - y = 2 \end{cases}
+```
+
+**Méthode par substitution** — On isole une inconnue dans une équation, puis on la remplace dans l'autre.
+- De la 2ᵉ équation : $x = y + 2$.
+- On remplace dans la 1ʳᵉ : $2(y + 2) + y = 7$, soit $2y + 4 + y = 7$, donc $3y = 3$, $y = 1$.
+- On revient : $x = 1 + 2 = 3$.
+- Solution : $x = 3$, $y = 1$. Vérification : $2 \times 3 + 1 = 7$ ✓ et $3 - 1 = 2$ ✓.
+
+**Méthode par combinaison (élimination)** — On additionne ou soustrait les équations pour éliminer une inconnue.
+- En additionnant les deux équations membre à membre : $(2x + y) + (x - y) = 7 + 2$, les $y$ s'annulent → $3x = 9$, donc $x = 3$.
+- On reporte : $2 \times 3 + y = 7$ → $y = 1$.
+- Même solution.
+
+Les deux méthodes donnent le même résultat ; on choisit selon ce qui est le plus simple. Pour les grands systèmes, on utilise le pivot de Gauss et les matrices (cours d'algèbre linéaire).
+
+## Les inéquations
+
+Une **inéquation** ressemble à une équation, mais avec un signe d'**inégalité** au lieu de l'égalité : $<$ (strictement inférieur), $\le$ (inférieur ou égal), $>$ (strictement supérieur), $\ge$ (supérieur ou égal). Résoudre une inéquation, c'est trouver **toutes** les valeurs qui la satisfont — généralement un **intervalle**, pas une valeur unique.
+
+Exemple : $2x + 1 < 7$. On isole $x$ comme pour une équation : $2x < 6$, donc $x < 3$. La solution est l'intervalle de tous les nombres strictement inférieurs à 3, noté $]-\infty\,;\,3[$.
+
+### La règle cruciale du signe négatif
+
+Il y a **une** différence capitale avec les équations, source d'erreur classique : **quand on multiplie ou divise les deux côtés par un nombre négatif, on inverse le sens de l'inégalité**.
+
+Exemple : résolvons $-3x + 2 > 11$.
+- On soustrait 2 : $-3x > 9$.
+- On divise par $-3$ — et **on inverse** le sens : $x < -3$ (le $>$ devient $<$).
+- La solution est $]-\infty\,;\,-3[$.
+
+Pourquoi cette inversion ? Intuition : $2 < 5$ est vrai, mais si on multiplie par $-1$, on obtient $-2$ et $-5$, et $-2 > -5$ (l'ordre s'inverse sur les négatifs). Il faut donc retourner le signe. **Ne jamais oublier cette règle.**
+
+### Représentation des solutions
+
+Les solutions d'une inéquation se représentent par un **intervalle** et/ou sur une **droite numérique**. Notations :
+- $x < 3$ s'écrit $]-\infty\,;\,3[$ (crochet ouvert : 3 est exclu).
+- $x \le 3$ s'écrit $]-\infty\,;\,3]$ (crochet fermé : 3 est inclus).
+- $1 \le x < 5$ s'écrit $[1\,;\,5[$ (borné des deux côtés).
+
+Cette logique d'intervalles est directement utile en programmation (conditions, bornes, validation de plages de valeurs) et en réseau (plages d'adresses, de ports).
+
+## Mettre un problème en équation
+
+La compétence la plus utile en pratique : **traduire un problème concret en équation**. La démarche :
+1. Identifier l'inconnue (« que cherche-t-on ? ») et la nommer $x$.
+2. Traduire les données de l'énoncé en une équation.
+3. Résoudre.
+4. Vérifier que la solution a du sens dans le contexte.
+
+Exemple : « Un serveur traite un nombre fixe de requêtes par seconde. En 8 secondes il en a traité 120 de plus qu'en 2 secondes. Combien par seconde ? »
+- Inconnue : $x$ = requêtes par seconde.
+- Mise en équation : en 8 s il traite $8x$, en 2 s il traite $2x$ ; l'écart est 120 → $8x - 2x = 120$.
+- Résolution : $6x = 120$, donc $x = 20$.
+- Vérification : $8 \times 20 - 2 \times 20 = 160 - 40 = 120$ ✓. Le serveur traite 20 requêtes/seconde.
+
+Cet aller-retour entre le monde concret et l'équation est l'essence de la modélisation mathématique — exactement ce que tu feras pour dimensionner, estimer, optimiser.
+
+## Ce qu'il faut retenir
+
+- Une **équation** est une égalité à inconnue ; la **résoudre** = trouver les valeurs qui la vérifient. Principe : garder l'**équilibre** (même opération des deux côtés) pour **isoler** l'inconnue.
+- **Premier degré** ($ax + b = 0$) : simplifier, rassembler les $x$ d'un côté, isoler, diviser. Toujours **vérifier**.
+- **Second degré** ($ax^2 + bx + c = 0$) : calculer le **discriminant** $\Delta = b^2 - 4ac$. $\Delta > 0$ → deux solutions $\frac{-b \pm \sqrt{\Delta}}{2a}$ ; $\Delta = 0$ → une solution $\frac{-b}{2a}$ ; $\Delta < 0$ → aucune réelle. La **factorisation** (produit nul) est un raccourci quand elle est visible.
+- **Systèmes** : par **substitution** (isoler puis remplacer) ou **combinaison** (additionner/soustraire pour éliminer) — mêmes solutions ; Gauss/matrices pour les grands (algèbre linéaire).
+- **Inéquations** : mêmes techniques, mais solution = **intervalle**. Règle capitale : **multiplier/diviser par un négatif inverse le sens** de l'inégalité. Notation par intervalles ($[\,]$ inclus, $]\,[$ exclu).
+- **Mettre en équation** un problème (nommer l'inconnue, traduire, résoudre, vérifier) est la compétence pratique clé — le cœur de la modélisation.

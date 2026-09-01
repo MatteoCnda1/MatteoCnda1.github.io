@@ -1,0 +1,72 @@
+---
+id: 04-llm-ia-generative
+title: LLM et IA générative
+sidebar_position: 5
+---
+
+# LLM et IA générative
+
+L'**IA générative** — capable de créer du texte, des images, du code — est la vague actuelle, et les **grands modèles de langage** (LLM) en sont la pièce maîtresse. Cette fiche explique ce qu'ils sont, comment ils fonctionnent en gros, et où approfondir. C'est aussi l'IA que tu utilises directement (comme cet assistant).
+
+## Qu'est-ce qu'un LLM ?
+
+Un **grand modèle de langage** (Large Language Model, LLM) est un réseau de neurones géant entraîné sur d'immenses quantités de texte, dont la tâche de base est étonnamment simple : **prédire le mot (ou token) suivant**. À partir d'un début de phrase, il prédit la suite la plus probable, mot après mot. Répété à grande échelle, ce mécanisme simple produit des textes cohérents, des réponses, du code, des raisonnements.
+
+Ce qui est frappant, c'est que de cette tâche de prédiction émergent des capacités qu'on n'a pas programmées explicitement : traduire, résumer, coder, raisonner. On parle de **capacités émergentes** qui apparaissent quand le modèle et les données atteignent une certaine échelle. Les modèles grand public que tu connais (ceux de type GPT, Claude, etc.) sont des LLM.
+
+Un point de vocabulaire : un **token** est l'unité de base que manipule le modèle — souvent un morceau de mot plutôt qu'un mot entier. Le texte est découpé en tokens, et le modèle raisonne sur ces tokens.
+
+## L'architecture Transformer
+
+Les LLM reposent sur l'architecture **Transformer**, introduite en 2017 (article « Attention Is All You Need »). C'est l'innovation qui a rendu possible l'IA générative actuelle. Son idée clé est le mécanisme d'**attention** : pour comprendre un mot, le modèle « fait attention » à tous les autres mots du contexte et pèse leur importance relative. Cela lui permet de saisir les dépendances à longue distance dans un texte (le sujet en début de phrase qui régit un verbe à la fin, par exemple) bien mieux que les architectures précédentes.
+
+L'attention permet aussi de **paralléliser** l'entraînement (contrairement aux anciens réseaux récurrents séquentiels), ce qui a rendu possible l'entraînement sur des corpus gigantesques. Tu n'as pas besoin de maîtriser les détails mathématiques pour commencer, mais retiens : **attention = pondérer l'importance des autres mots du contexte**, et c'est le cœur des Transformers.
+
+## Comment un LLM est créé (les grandes étapes)
+
+Trois phases, utiles à connaître pour comprendre les forces et limites :
+
+1. **Pré-entraînement** — le modèle apprend à prédire le mot suivant sur d'énormes corpus de texte (une grande partie d'Internet, des livres...). Il acquiert là sa connaissance du langage et du monde. Phase extrêmement coûteuse (des mois de calcul, des millions d'euros).
+2. **Fine-tuning (ajustement)** — on affine le modèle sur des données plus ciblées pour le rendre utile et suivre des instructions.
+3. **Alignement (ex. RLHF)** — on ajuste le modèle avec des retours humains pour qu'il soit utile, honnête et inoffensif. C'est ce qui transforme un « prédicteur de texte » brut en assistant utilisable et plus sûr.
+
+## Les limites à connaître (esprit critique)
+
+Essentiel, surtout pour ton profil technique et sécurité :
+
+- **Les hallucinations** — un LLM peut produire des affirmations fausses avec assurance. Il génère du texte plausible, pas nécessairement vrai. Il ne « sait » pas au sens strict ; il prédit. Toujours vérifier les faits critiques.
+- **La date de connaissance** — un modèle ne connaît que ce qui était dans ses données d'entraînement (sauf s'il a accès à une recherche web). Il peut ignorer les événements récents.
+- **Pas de vraie compréhension** — débat ouvert, mais un LLM manipule des régularités statistiques du langage ; attribuer une « pensée » relève de l'anthropomorphisme.
+- **Les biais** — il reflète les biais de ses données d'entraînement.
+- **La confidentialité** — attention à ce qu'on envoie à un LLM (données sensibles, secrets). Enjeu direct en entreprise et en sécurité.
+
+Garder cet esprit critique est ce qui distingue un utilisateur averti d'un utilisateur naïf.
+
+## Au-delà du texte : l'IA générative d'images et plus
+
+L'IA générative ne se limite pas au texte. Les modèles de **génération d'images** (à partir de descriptions textuelles) reposent souvent sur des techniques dites de **diffusion** (partir d'un bruit aléatoire et le « débruiter » progressivement vers une image). Il existe aussi de la génération audio, vidéo, de code. Le principe commun : apprendre la distribution de données réelles pour en générer de nouvelles, vraisemblables.
+
+## Le prompt engineering
+
+Puisque tu utilises ces modèles, savoir bien les **piloter** est une compétence en soi. Le **prompt engineering** consiste à formuler ses demandes (prompts) pour obtenir de meilleurs résultats : être précis, donner du contexte, des exemples, décomposer les tâches complexes. C'est peu coûteux à apprendre et très rentable. Plusieurs ressources ci-dessous y sont dédiées.
+
+## Ressources recommandées
+
+**3Blue1Brown — chapitres sur les Transformers et les LLM** (suite de sa série deep learning, sur YouTube) — Les chapitres 5, 6, 7 expliquent visuellement les Transformers, le mécanisme d'attention, et comment les LLM stockent l'information. La meilleure explication visuelle du fonctionnement interne. À voir après ses chapitres sur les réseaux de neurones.
+
+**Hugging Face — cours NLP/LLM** (huggingface.co/learn) — La référence open-source pour manipuler concrètement des modèles de langage (Transformers, datasets). Gratuit, très pratique, avec du code. Hugging Face est LA plateforme open-source de l'IA moderne — parfaite pour ta sensibilité open-source.
+
+**Anthropic Academy** (anthropic.com, section learn) — Cours sur l'usage des LLM, le prompt engineering et l'usage de l'API, par les créateurs de Claude. Bon pour apprendre à bien utiliser et développer avec les LLM.
+
+**DeepLearning.AI — short courses** (deeplearning.ai/short-courses) — Courts cours gratuits sur le prompt engineering, la construction d'applications LLM, les agents. Très pratiques et à jour.
+
+**« Attention Is All You Need »** (l'article original de 2017, arxiv.org) — Pour les curieux qui veulent la source. Ardu, mais c'est le texte fondateur des Transformers. À réserver pour plus tard.
+
+## Ce qu'il faut retenir
+
+- Un **LLM** est un réseau géant entraîné à **prédire le token suivant** ; de cette tâche simple **émergent** des capacités (traduire, coder, raisonner). Un **token** = un morceau de mot.
+- Ils reposent sur l'architecture **Transformer** (2017) et son mécanisme d'**attention** (pondérer l'importance des autres mots du contexte), qui capte les dépendances longues et permet la parallélisation.
+- Création en 3 phases : **pré-entraînement** (prédire le mot suivant, coûteux), **fine-tuning**, **alignement** (ex. RLHF, pour un assistant utile et sûr).
+- **Limites à garder en tête** : hallucinations (faux avec assurance), date de connaissance, pas de vraie compréhension, biais, confidentialité — esprit critique indispensable.
+- L'IA générative couvre aussi images (modèles de **diffusion**), audio, vidéo, code. Le **prompt engineering** est une compétence rentable.
+- Ressources : **3Blue1Brown** (Transformers en visuel), **Hugging Face** (open-source, pratique), **Anthropic Academy** et **DeepLearning.AI** (usage, prompt, API).

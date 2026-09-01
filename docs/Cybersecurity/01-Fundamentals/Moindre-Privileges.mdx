@@ -1,0 +1,169 @@
+---
+
+title: Least Privilege
+sidebar_position: 10
+--------------------
+
+# Least Privilege
+
+## Introduction
+
+Le principe du **Least Privilege** signifie :
+
+> Donner uniquement les permissions nécessaires, et rien de plus.
+
+Un utilisateur, un programme ou un service ne devrait pas recevoir des privilèges dont il n'a pas besoin.
+
+---
+
+# Exemple
+
+Mauvaise configuration :
+
+```text
+Web application
+       │
+       ▼
+Administrator privileges
+```
+
+Même si l'application doit seulement lire certaines données.
+
+Meilleure configuration :
+
+```text
+Web application
+       │
+       ▼
+Read-only database role
+```
+
+---
+
+# Pourquoi c'est important
+
+Si un compte est compromis, l'impact dépend notamment de ses privilèges.
+
+```text
+Compromised account
+       │
+       ▼
+Low privileges
+       │
+       ▼
+Limited impact
+```
+
+Comparé à :
+
+```text
+Compromised account
+       │
+       ▼
+Administrator
+       │
+       ▼
+Potentially major impact
+```
+
+---
+
+# Least Privilege pour les utilisateurs
+
+Un utilisateur normal ne devrait pas nécessairement avoir :
+
+```text
+Administrator
+Root
+Domain Admin
+```
+
+Il devrait posséder uniquement les permissions nécessaires à son travail.
+
+---
+
+# Least Privilege pour les applications
+
+Les applications doivent également respecter ce principe.
+
+Exemple :
+
+```text
+Application
+   │
+   ├── Read database
+   └── Write specific table
+```
+
+Mais pas nécessairement :
+
+```text
+DROP DATABASE
+Manage users
+Modify system configuration
+```
+
+---
+
+# Just Enough Access
+
+Un concept proche est :
+
+> **Just Enough Access**
+
+L'accès doit être :
+
+* limité ;
+* adapté ;
+* justifié.
+
+---
+
+# Just-in-Time Access
+
+Les privilèges peuvent également être temporaires.
+
+```text
+Normal user
+     │
+     ▼
+Requests temporary privilege
+     │
+     ▼
+Privilege granted for limited time
+     │
+     ▼
+Privilege automatically removed
+```
+
+Cela réduit l'exposition permanente.
+
+---
+
+# Least Privilege et Privilege Escalation
+
+Une mauvaise gestion des permissions peut faciliter une escalation de privilèges.
+
+Une bonne séparation des privilèges limite le nombre de chemins permettant d'obtenir des droits importants.
+
+---
+
+# Points importants
+
+* Ne donner que les permissions nécessaires.
+* Éviter les privilèges permanents inutiles.
+* Limiter l'impact d'une compromission.
+* Appliquer le principe aux utilisateurs, applications et services.
+* Réévaluer régulièrement les permissions.
+
+---
+
+## Concepts associés
+
+* RBAC
+* ABAC
+* IAM
+* Privilege Escalation
+* Zero Trust
+* Defense in Depth
+* Access Control

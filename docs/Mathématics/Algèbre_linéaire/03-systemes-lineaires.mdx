@@ -1,0 +1,125 @@
+---
+id: 03-systemes-lineaires
+title: Les systèmes linéaires
+sidebar_position: 3
+---
+
+# Les systèmes linéaires
+
+## Le problème
+
+Un **système d'équations linéaires** est un ensemble d'équations du premier degré (pas de carré, pas de produit d'inconnues) partageant les mêmes inconnues. Exemple classique à deux inconnues :
+
+```math
+\begin{cases} 2x + y = 5 \\ x - y = 1 \end{cases}
+```
+
+Résoudre le système, c'est trouver les valeurs de $x$ et $y$ qui satisfont **toutes** les équations en même temps (ici $x = 2$, $y = 1$).
+
+Ça paraît scolaire, mais les systèmes linéaires sont **omniprésents** en ingénierie et en informatique : équilibrer des circuits électriques (lois de Kirchhoff), ajuster une courbe à des données (régression), résoudre des équations en physique et en simulation numérique, optimiser des ressources, faire de l'imagerie médicale (reconstruction), et bien plus. Dès qu'on a plusieurs contraintes linéaires liant plusieurs quantités, c'est un système linéaire. Savoir les résoudre — et comprendre quand ils ont ou non une solution — est une compétence centrale.
+
+## L'écriture matricielle
+
+C'est ici que l'algèbre linéaire montre sa puissance. Tout système linéaire peut s'écrire sous la forme compacte :
+
+```math
+A\vec{x} = \vec{b}
+```
+
+où $A$ est la **matrice des coefficients**, $\vec{x}$ le vecteur des **inconnues**, et $\vec{b}$ le vecteur des **constantes** (le second membre). Reprenons l'exemple :
+
+```math
+\begin{cases} 2x + y = 5 \\ x - y = 1 \end{cases}
+\quad\Longleftrightarrow\quad
+\underbrace{\begin{pmatrix} 2 & 1 \\ 1 & -1 \end{pmatrix}}_{A} \underbrace{\begin{pmatrix} x \\ y \end{pmatrix}}_{\vec{x}} = \underbrace{\begin{pmatrix} 5 \\ 1 \end{pmatrix}}_{\vec{b}}
+```
+
+Cette écriture n'est pas qu'une notation compacte : elle relie les systèmes à tout ce qu'on a vu. Résoudre $A\vec{x} = \vec{b}$, c'est demander : « quel vecteur $\vec{x}$, une fois transformé par $A$, donne $\vec{b}$ ? » On cherche l'antécédent de $\vec{b}$ par la transformation $A$.
+
+## Interprétation géométrique
+
+Comprendre visuellement ce qu'est une solution éclaire tout le reste. Chaque équation linéaire à deux inconnues représente une **droite** dans le plan. Résoudre le système à deux équations, c'est trouver le **point d'intersection** des deux droites.
+
+Trois cas se présentent, et ils sont fondamentaux :
+
+**Une solution unique** — Les deux droites se croisent en un point unique. C'est le cas « normal ». En termes matriciels : $\det(A) \neq 0$, la matrice est inversible.
+
+**Aucune solution** — Les droites sont **parallèles** et distinctes : elles ne se croisent jamais. Le système est dit **incompatible**. En 3D avec des plans, ça correspond à des contraintes contradictoires.
+
+**Une infinité de solutions** — Les deux droites sont **confondues** (la même droite écrite de deux façons) : tous les points conviennent. Le système est **indéterminé** (il manque de l'information pour fixer une solution unique).
+
+Dans les deux derniers cas, $\det(A) = 0$ : la matrice n'est pas inversible. Le déterminant nul, qu'on a vu comme un « écrasement » de l'espace, se traduit ici par « pas de solution unique ». Tout se relie.
+
+À plus de deux inconnues, on remplace les droites par des plans (3D) ou des hyperplans (dimension supérieure), mais la logique des trois cas reste la même.
+
+## Résoudre par la matrice inverse
+
+Puisque le système s'écrit $A\vec{x} = \vec{b}$, et si $A$ est inversible, on peut « diviser par $A$ » en multipliant par l'inverse :
+
+```math
+A\vec{x} = \vec{b} \quad\Rightarrow\quad A^{-1}A\vec{x} = A^{-1}\vec{b} \quad\Rightarrow\quad \vec{x} = A^{-1}\vec{b}
+```
+
+(car $A^{-1}A = I$, l'identité). C'est élégant conceptuellement : la solution est $\vec{x} = A^{-1}\vec{b}$.
+
+**Mais en pratique, on ne fait presque jamais ça.** Calculer l'inverse est coûteux et numériquement instable pour les grands systèmes. On préfère des méthodes de résolution directe, plus efficaces et plus stables — la principale étant l'élimination de Gauss.
+
+```python
+import numpy as np
+A = np.array([[2, 1], [1, -1]])
+b = np.array([5, 1])
+x = np.linalg.solve(A, b)        # [2. 1.] — méthode recommandée
+# PAS np.linalg.inv(A) @ b : moins efficace et moins stable
+```
+
+Note bien le `np.linalg.solve(A, b)` : c'est la bonne façon de résoudre un système en pratique, plus rapide et plus précise que de calculer l'inverse.
+
+## L'élimination de Gauss (pivot de Gauss)
+
+C'est **la** méthode fondamentale pour résoudre les systèmes, celle qu'utilisent (sous des formes optimisées) les ordinateurs. L'idée : transformer le système en un système équivalent (mêmes solutions) mais **triangulaire**, facile à résoudre.
+
+Le principe repose sur des **opérations élémentaires** qui ne changent pas les solutions :
+- échanger deux équations ;
+- multiplier une équation par un nombre non nul ;
+- ajouter à une équation un multiple d'une autre.
+
+On utilise ces opérations pour **éliminer** progressivement les inconnues : on se sert de la première équation pour supprimer $x$ des suivantes, puis de la deuxième pour supprimer $y$, etc. On obtient une forme « en escalier » (triangulaire) :
+
+```math
+\begin{cases} 2x + y = 5 \\ \phantom{2x} - \tfrac{3}{2}y = -\tfrac{3}{2} \end{cases}
+```
+
+La dernière équation donne directement $y$, puis on **remonte** (substitution arrière) pour trouver $x$. Cette méthode marche pour n'importe quelle taille de système et se programme facilement.
+
+L'élimination de Gauss révèle aussi directement les trois cas : si on aboutit à une ligne du type « $0 = 3$ » (impossible), le système n'a **pas de solution** ; si on aboutit à « $0 = 0 $» (toujours vraie, une équation redondante), il y a une **infinité** de solutions.
+
+## Le rang d'une matrice
+
+Notion liée, utile pour analyser les systèmes. Le **rang** d'une matrice est le nombre de lignes (ou colonnes) **linéairement indépendantes** — autrement dit, le nombre d'équations qui apportent réellement de l'information (non redondantes). C'est aussi la dimension de l'espace « atteint » par la transformation.
+
+Le rang permet de diagnostiquer un système :
+- Si le rang de $A$ égale le nombre d'inconnues et correspond à $\vec{b}$ : solution unique.
+- Si une équation est redondante (rang inférieur au nombre d'inconnues) : infinité de solutions.
+- Si les contraintes sont contradictoires : pas de solution.
+
+Le rang formalise l'idée intuitive de « combien de contraintes réellement indépendantes ai-je ? ». Un système bien posé a autant de contraintes indépendantes que d'inconnues.
+
+## Systèmes sur ou sous-déterminés
+
+En pratique, on rencontre souvent des systèmes qui ne sont pas « carrés » :
+
+**Sous-déterminé** — Moins d'équations que d'inconnues. Généralement une infinité de solutions (pas assez de contraintes pour fixer une réponse unique).
+
+**Sur-déterminé** — Plus d'équations que d'inconnues. Souvent pas de solution exacte (trop de contraintes, incompatibles). C'est le cas typique en **science des données** : on a beaucoup plus de mesures que de paramètres à estimer. On ne cherche alors pas une solution exacte (impossible) mais la **meilleure approximation** — celle qui minimise l'erreur. C'est la méthode des **moindres carrés** (least squares), fondement de la régression linéaire (que tu verras en statistiques). Elle se ramène à résoudre un système lié via la transposée : $A^T A \vec{x} = A^T \vec{b}$ (les « équations normales »).
+
+Ce lien entre systèmes linéaires et moindres carrés est l'un des ponts les plus importants entre l'algèbre linéaire et les statistiques/le machine learning.
+
+## Ce qu'il faut retenir
+
+- Un **système linéaire** cherche les valeurs des inconnues satisfaisant toutes les équations ; omniprésent en ingénierie (circuits, régression, simulation...).
+- Il s'écrit sous forme matricielle **$A\vec{x} = \vec{b}$** : trouver l'antécédent de $\vec{b}$ par la transformation $A$.
+- Géométriquement : intersection de droites/plans. Trois cas — **solution unique** ($\det A \neq 0$), **aucune** (parallèles, incompatible), **infinité** (confondues, indéterminé).
+- Solution formelle $\vec{x} = A^{-1}\vec{b}$ si $A$ inversible, mais **en pratique on utilise `solve`** (Gauss), pas l'inverse.
+- L'**élimination de Gauss** (pivot) triangularise le système par opérations élémentaires puis remonte ; c'est la méthode de référence, et elle révèle les cas sans/avec infinité de solutions.
+- Le **rang** = nombre d'équations réellement indépendantes ; il diagnostique le système.
+- Systèmes **sur-déterminés** (plus d'équations que d'inconnues) → pas de solution exacte → **moindres carrés** (meilleure approximation), pont vers la régression et le machine learning.

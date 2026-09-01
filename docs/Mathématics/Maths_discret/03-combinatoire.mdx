@@ -1,0 +1,105 @@
+---
+id: 03-combinatoire
+title: La combinatoire
+sidebar_position: 3
+---
+
+# La combinatoire
+
+## L'art de compter
+
+La **combinatoire** est l'art de **compter les possibilités** — dénombrer le nombre de façons dont quelque chose peut arriver, sans avoir à toutes les énumérer une par une. Ça paraît anodin, mais c'est d'une importance capitale, notamment en **cryptographie et sécurité**, où toute la question est : « combien de possibilités un attaquant devrait-il essayer ? ».
+
+Quelques questions typiques de combinatoire pertinentes pour toi :
+- Combien de mots de passe possibles avec 8 caractères ? (force d'un mot de passe)
+- Combien de clés possibles pour un chiffrement de $n$ bits ? (résistance au brute force)
+- Combien d'adresses dans un sous-réseau ? (subnetting)
+- Quelle est la probabilité d'une collision de hash ? (paradoxe des anniversaires)
+
+La combinatoire fournit les outils pour répondre, et elle est le fondement du calcul des probabilités (compter les cas favorables et possibles, comme vu dans ce domaine).
+
+## Le principe fondamental du dénombrement
+
+Tout part d'une règle simple mais puissante, le **principe multiplicatif** : si une première chose peut se faire de $m$ façons, et une seconde de $n$ façons (indépendamment), alors les deux ensemble peuvent se faire de $m \times n$ façons.
+
+Exemple : un menu avec 3 entrées et 4 plats offre $3 \times 4 = 12$ repas possibles. Ça se généralise : pour plusieurs choix successifs, on **multiplie** le nombre d'options de chaque étape.
+
+Application directe et fondamentale en sécurité : **le nombre de mots de passe**. Avec un alphabet de $k$ caractères possibles et une longueur $n$, chaque position offre $k$ choix, donc le nombre total est :
+
+```math
+k^n
+```
+
+Par exemple, un mot de passe de 8 caractères parmi 95 caractères imprimables donne $95^8 \approx 6,6 \times 10^{15}$ possibilités. C'est ce nombre qui détermine le temps nécessaire à une attaque par force brute. De même, une **clé de chiffrement de $n$ bits** a $2^n$ valeurs possibles : une clé de 128 bits donne $2^{128}$ possibilités, un nombre si gigantesque qu'aucun ordinateur ne peut les parcourir — c'est exactement pourquoi AES-128 est sûr. Toute la sécurité par force brute se ramène à ce dénombrement. Ajouter un bit **double** l'espace des clés ; ajouter un caractère à un mot de passe le multiplie par la taille de l'alphabet — d'où l'importance de la longueur.
+
+## Les permutations : quand l'ordre compte
+
+Une **permutation** est un arrangement **ordonné** de tous les éléments d'un ensemble. Combien de façons d'ordonner $n$ objets distincts ? Pour la première position, $n$ choix ; pour la deuxième, $n-1$ (un est déjà placé) ; etc. Le résultat est la **factorielle** :
+
+```math
+n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1
+```
+
+Exemple : 5 personnes peuvent s'asseoir sur 5 chaises de $5! = 120$ façons. La factorielle **croît extrêmement vite** ($10! \approx 3,6$ millions, $20! \approx 2,4 \times 10^{18}$) — plus vite que toute exponentielle. C'est pourquoi les problèmes qui nécessitent d'examiner toutes les permutations (comme le voyageur de commerce, vu en graphes) deviennent vite impossibles à résoudre par force brute : c'est le lien direct avec la complexité NP-difficile.
+
+On peut aussi arranger seulement $k$ éléments parmi $n$ (arrangements) : $n \times (n-1) \times \cdots$ ($k$ facteurs). L'ordre compte toujours, mais on ne prend qu'une partie.
+
+## Les combinaisons : quand l'ordre ne compte pas
+
+Une **combinaison** est une sélection **non ordonnée** de $k$ éléments parmi $n$ — on choisit un sous-ensemble, l'ordre est indifférent. C'est la différence clé avec les permutations : pour une équipe de 3 personnes parmi 10, l'ordre dans lequel on les choisit n'a pas d'importance (Alice-Bob-Charlie = Charlie-Alice-Bob).
+
+Le nombre de combinaisons se note $\binom{n}{k}$ (« $k$ parmi $n$ ») et vaut :
+
+```math
+\binom{n}{k} = \frac{n!}{k!\,(n-k)!}
+```
+
+L'intuition de la formule : on compte les arrangements ordonnés ($n! / (n-k)!$), puis on divise par $k!$ pour effacer l'ordre (chaque groupe a été compté $k!$ fois, une fois par ordre possible de ses membres).
+
+La distinction **permutation vs combinaison** est LE point à maîtriser : « l'ordre compte-t-il ? ». Un code PIN (l'ordre compte : 1234 ≠ 4321) est un arrangement ; une main de cartes (l'ordre ne compte pas) est une combinaison ; un tiercé dans l'ordre vs désordre illustre exactement la différence.
+
+Tu as déjà croisé $\binom{n}{k}$ en probabilités : c'est le coefficient de la **loi binomiale** (le nombre de façons d'obtenir $k$ succès parmi $n$ essais). Combinatoire et probabilités sont intimement liées.
+
+```python
+import math
+# Nombre de façons de choisir 3 éléments parmi 10 (ordre indifférent)
+print(math.comb(10, 3))     # 120
+# Nombre d'arrangements ordonnés de 3 parmi 10
+print(math.perm(10, 3))     # 720
+# Factorielle
+print(math.factorial(5))    # 120
+```
+
+## Le paradoxe des anniversaires (application crypto)
+
+Un résultat combinatoire contre-intuitif, directement lié à ta crypto (les collisions de hash). Question : dans un groupe de personnes, combien faut-il en réunir pour qu'il y ait plus d'une chance sur deux que **deux** partagent le même anniversaire ?
+
+La réponse surprend : **seulement 23 personnes** suffisent pour dépasser 50 % ! On s'attend intuitivement à un nombre proche de 365, mais c'est faux. La raison combinatoire : on ne compare pas une personne aux autres, mais **toutes les paires** entre elles. Avec 23 personnes, il y a $\binom{23}{2} = 253$ paires possibles — beaucoup de chances qu'une coïncide. Le nombre de paires croît comme le carré du nombre de personnes, d'où la surprise.
+
+Pourquoi c'est crucial pour toi : ce paradoxe est la base des **attaques par collision** sur les fonctions de hachage (vu en crypto). Pour trouver une collision dans un hash de $n$ bits, il ne faut pas essayer $2^n$ valeurs, mais seulement environ $2^{n/2}$ (la racine carrée) — bien moins. C'est pourquoi un hash doit être deux fois plus long qu'on ne le penserait naïvement : pour résister aux collisions à 128 bits de sécurité, il faut un hash de 256 bits (d'où SHA-256). La combinatoire explique directement le dimensionnement des algorithmes cryptographiques.
+
+## Le principe des tiroirs
+
+Un principe simple et étonnamment utile : le **principe des tiroirs** (pigeonhole). S'il y a plus d'objets que de tiroirs, alors au moins un tiroir contient plusieurs objets. Formellement : si on range $n$ objets dans $m$ tiroirs avec $n > m$, au moins un tiroir en contient au moins deux.
+
+Évident, mais puissant pour prouver des existences. Applications : dans toute fonction de hachage qui réduit des données vers un espace plus petit, des **collisions sont inévitables** (plus d'entrées possibles que de sorties — c'est le principe des tiroirs qui le garantit mathématiquement). Ça prouve qu'aucune fonction de compression sans perte ne peut compresser tous les fichiers. En réseau, si on a plus de machines que d'adresses disponibles, un conflit est certain.
+
+## Le principe d'inclusion-exclusion
+
+Pour compter les éléments d'une union sans les compter deux fois, on retrouve la formule vue en probabilités et en ensembles :
+
+```math
+|A \cup B| = |A| + |B| - |A \cap B|
+```
+
+On additionne les cardinaux, puis on retranche l'intersection (comptée deux fois). Ça se généralise à plusieurs ensembles. Utile pour dénombrer des possibilités avec des conditions qui se chevauchent (« combien de mots de passe contiennent au moins un chiffre OU un symbole ? »).
+
+## Ce qu'il faut retenir
+
+- La **combinatoire** compte les possibilités sans les énumérer ; cruciale en **sécurité/crypto** (« combien un attaquant doit-il essayer ? ») et fondement des probabilités.
+- **Principe multiplicatif** : des choix successifs se **multiplient**. D'où les mots de passe ($k^n$ combinaisons) et les clés ($2^n$ pour $n$ bits) — ajouter un bit double l'espace, base de la résistance au brute force.
+- **Permutations** (ordre compte) : $n!$ façons d'ordonner $n$ objets ; la factorielle **explose** (lien avec les problèmes NP-difficiles).
+- **Combinaisons** (ordre indifférent) : $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ façons de choisir $k$ parmi $n$. Question clé : **l'ordre compte-t-il ?** (PIN = arrangement, main de cartes = combinaison). C'est le coefficient de la loi binomiale.
+- **Paradoxe des anniversaires** : 23 personnes suffisent pour 50 % de collision (on compte les paires) → base des **attaques par collision** ($2^{n/2}$ au lieu de $2^n$, d'où SHA-256 pour 128 bits de sécurité).
+- **Principe des tiroirs** : plus d'objets que de tiroirs → collision inévitable (prouve que les collisions de hash sont inévitables).
+- **Inclusion-exclusion** : $|A \cup B| = |A| + |B| - |A \cap B|$ pour compter sans double comptage.

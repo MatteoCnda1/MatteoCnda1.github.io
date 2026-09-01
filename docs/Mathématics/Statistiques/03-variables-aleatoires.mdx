@@ -1,0 +1,100 @@
+---
+id: 03-variables-aleatoires
+title: Les variables aléatoires
+sidebar_position: 3
+---
+
+# Les variables aléatoires
+
+## Le concept
+
+Jusqu'ici, on parlait d'événements (« obtenir un nombre pair »). Une **variable aléatoire** est un outil plus puissant : c'est une **fonction qui associe un nombre à chaque résultat** d'une expérience aléatoire. Elle traduit les résultats en valeurs numériques, ce qui permet de faire des calculs (moyennes, sommes, etc.).
+
+Exemple : je lance deux dés. La variable aléatoire $X$ = « somme des deux dés » associe à chaque lancer un nombre entre 2 et 12. Le résultat concret (les faces obtenues) devient une valeur numérique manipulable.
+
+On note traditionnellement les variables aléatoires par des majuscules ($X$, $Y$), et leurs valeurs possibles par des minuscules ($x$). On écrit $P(X = x)$ pour « la probabilité que la variable $X$ prenne la valeur $x$ ».
+
+L'intérêt : au lieu de raisonner cas par cas, on manipule la variable comme un objet mathématique, avec des propriétés globales (sa moyenne, sa dispersion, sa loi).
+
+## Variables discrètes et continues
+
+Distinction fondamentale, car elle change les outils utilisés :
+
+**Variable aléatoire discrète** — Elle prend un nombre **dénombrable** de valeurs (souvent des entiers) : le résultat d'un dé, le nombre de paquets perdus, le nombre de tentatives de connexion échouées, le nombre de bugs dans un code. On peut lister ses valeurs possibles.
+
+**Variable aléatoire continue** — Elle prend des valeurs dans un **intervalle continu** de réels : une durée (temps de réponse d'un serveur), une taille, une température, une tension. Entre deux valeurs, il y en a une infinité.
+
+Cette distinction impose deux boîtes à outils différentes (sommes pour le discret, intégrales pour le continu — ton cours d'analyse trouve ici une application directe).
+
+## La loi de probabilité (distribution)
+
+La **loi** (ou distribution) d'une variable aléatoire décrit **comment les probabilités se répartissent** sur ses valeurs possibles. C'est la carte d'identité complète de la variable.
+
+**Pour une variable discrète** : la loi est donnée par la **fonction de masse** $P(X = x)$ pour chaque valeur $x$. Exemple, pour un dé équilibré : $P(X = 1) = P(X = 2) = \cdots = P(X = 6) = 1/6$. La somme de toutes les probabilités vaut toujours 1 (c'est une certitude qu'une valeur se réalise).
+
+**Pour une variable continue** : on ne peut pas parler de $P(X = x)$ (la probabilité d'une valeur exacte est nulle — il y a une infinité de valeurs). On utilise une **densité de probabilité** $f(x)$ : la probabilité que $X$ tombe dans un intervalle $[a, b]$ est l'**aire sous la courbe** de la densité sur cet intervalle :
+
+```math
+P(a \le X \le b) = \int_a^b f(x)\, dx
+```
+
+C'est ici que l'intégrale (ton cours d'analyse) devient concrète : la probabilité continue **est** une aire. L'aire totale sous la densité vaut 1 (probabilité de l'univers entier).
+
+## La fonction de répartition
+
+Un outil unifié pour les deux cas : la **fonction de répartition** (CDF, cumulative distribution function), notée $F(x)$, donne la probabilité que la variable soit **inférieure ou égale** à une valeur :
+
+```math
+F(x) = P(X \le x)
+```
+
+Elle « cumule » les probabilités. Elle va de 0 (à gauche) à 1 (à droite), en croissant. Elle est très pratique pour répondre à « quelle est la probabilité que le temps de réponse dépasse 2 secondes ? » ($1 - F(2)$) ou « soit compris entre 1 et 3 s ? » ($F(3) - F(1)$).
+
+## L'espérance : la valeur moyenne
+
+L'**espérance** (notée $E[X]$ ou $\mu$, mu) est la **valeur moyenne** de la variable aléatoire — ce qu'on obtiendrait en moyenne en répétant l'expérience un très grand nombre de fois. C'est le « centre de gravité » de la distribution.
+
+Pour une variable discrète, c'est la moyenne des valeurs **pondérée par leurs probabilités** :
+
+```math
+E[X] = \sum_x x \cdot P(X = x)
+```
+
+Exemple : espérance d'un dé équilibré = $1 \cdot \tfrac{1}{6} + 2 \cdot \tfrac{1}{6} + \cdots + 6 \cdot \tfrac{1}{6} = \tfrac{21}{6} = 3,5$. En moyenne, un dé « vaut » 3,5 (même si cette valeur n'est jamais obtenue — l'espérance n'est pas forcément une valeur possible).
+
+Pour une variable continue, la somme devient une intégrale : $E[X] = \int x \, f(x)\, dx$.
+
+L'espérance est **linéaire**, propriété très utile : $E[X + Y] = E[X] + E[Y]$ (toujours vrai, même si $X$ et $Y$ sont dépendants), et $E[aX] = a\,E[X]$. Cette linéarité simplifie énormément de calculs.
+
+Application concrète : l'espérance est au cœur de l'évaluation des risques et des jeux. Un jeu est « équitable » si l'espérance du gain est nulle. Un pari où l'espérance est négative te fait perdre à long terme (c'est le principe des casinos et des loteries). En sécurité, l'espérance de perte (probabilité d'un incident × coût) guide les décisions.
+
+## La variance et l'écart-type : la dispersion
+
+L'espérance dit où se situe le centre, mais pas à quel point les valeurs sont **dispersées** autour. Deux variables peuvent avoir la même moyenne mais des comportements très différents (l'une très concentrée, l'autre très étalée). C'est le rôle de la **variance**.
+
+La variance (notée $\text{Var}(X)$ ou $\sigma^2$, sigma carré) mesure la dispersion moyenne autour de l'espérance :
+
+```math
+\text{Var}(X) = E[(X - \mu)^2]
+```
+
+C'est la moyenne des **carrés des écarts** à la moyenne. On élève au carré pour deux raisons : rendre tous les écarts positifs (sinon ils s'annuleraient), et pénaliser davantage les grands écarts. Une variance faible = valeurs concentrées près de la moyenne ; variance élevée = valeurs très étalées.
+
+L'**écart-type** (noté $\sigma$, sigma) est la racine carrée de la variance :
+
+```math
+\sigma = \sqrt{\text{Var}(X)}
+```
+
+On préfère souvent l'écart-type à la variance car il est dans la **même unité** que la variable (si $X$ est en secondes, la variance est en secondes², peu parlant, mais l'écart-type est en secondes). L'écart-type est la mesure de dispersion la plus intuitive : « en moyenne, de combien s'écarte-t-on de la moyenne ? »
+
+Application : en analyse réseau, deux serveurs peuvent avoir le même temps de réponse moyen (même espérance), mais celui avec le plus faible écart-type est plus **régulier**, plus prévisible — souvent préférable. En sécurité, un écart-type inhabituel peut signaler une anomalie (comportement qui sort de la normale).
+
+## Ce qu'il faut retenir
+
+- Une **variable aléatoire** est une fonction qui associe un **nombre** à chaque résultat d'une expérience — elle rend le hasard calculable. Notée $X$, valeurs $x$, avec $P(X = x)$.
+- **Discrète** (valeurs dénombrables : dés, comptages) vs **continue** (intervalle de réels : durées, tailles) — deux boîtes à outils (sommes vs intégrales).
+- La **loi** décrit la répartition des probabilités : **fonction de masse** $P(X=x)$ (discret) ou **densité** $f(x)$ (continu, où $P(a \le X \le b) = \int_a^b f(x)dx$ = aire sous la courbe).
+- La **fonction de répartition** $F(x) = P(X \le x)$ cumule les probabilités (de 0 à 1) ; pratique pour les calculs d'intervalles.
+- L'**espérance** $E[X] = \mu$ est la valeur moyenne (centre de gravité) ; linéaire ($E[X+Y]=E[X]+E[Y]$) ; base de l'évaluation des risques et des jeux.
+- La **variance** $\sigma^2 = E[(X-\mu)^2]$ mesure la dispersion ; l'**écart-type** $\sigma = \sqrt{\text{Var}(X)}$ est dans la même unité que $X$, plus intuitif — clé pour la régularité et la détection d'anomalies.

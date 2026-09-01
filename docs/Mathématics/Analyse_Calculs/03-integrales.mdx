@@ -1,0 +1,99 @@
+---
+id: 03-integrales
+title: Les intégrales
+sidebar_position: 3
+---
+
+# Les intégrales
+
+## L'idée : accumuler, sommer l'infiniment petit
+
+Si la dérivée découpe et mesure le changement instantané, l'**intégrale** fait l'inverse : elle **accumule**, elle **somme**. Son idée centrale : **calculer une quantité totale en additionnant une infinité de contributions infiniment petites**.
+
+L'interprétation géométrique la plus parlante : l'intégrale d'une fonction sur un intervalle est l'**aire sous sa courbe** entre deux bornes.
+
+```math
+\int_a^b f(x)\, dx
+```
+
+Ce symbole se lit « intégrale de $a$ à $b$ de $f(x)$ ». Le $\int$ est un « S » allongé pour « Somme », et le $dx$ rappelle qu'on somme des tranches infiniment fines de largeur $dx$. Tu as déjà étudié les intégrales ; ce cours en consolide le sens.
+
+## Pourquoi une aire ? L'intuition des sommes de Riemann
+
+Pourquoi l'intégrale égale-t-elle une aire ? Voici l'intuition fondatrice (les sommes de Riemann). Pour calculer l'aire sous une courbe irrégulière, on la découpe en fines **tranches verticales** (des rectangles). L'aire de chaque rectangle est facile : hauteur × largeur, soit $f(x) \times dx$. On additionne toutes ces aires de rectangles.
+
+Plus les rectangles sont fins (plus $dx$ est petit), plus l'approximation est précise. À la **limite**, quand la largeur tend vers zéro et le nombre de rectangles vers l'infini, la somme des rectangles devient exactement l'aire sous la courbe. L'intégrale **est** cette limite d'une somme (voilà encore le lien avec les limites, et avec la sommation).
+
+Cette vision « somme de tranches infinitésimales » est la clé pour comprendre à quoi sert une intégrale au-delà des aires : chaque fois qu'on veut **totaliser** une quantité qui varie continûment, on intègre.
+
+## Ce qu'une intégrale calcule concrètement
+
+L'aire n'est qu'une interprétation. Concrètement, l'intégrale totalise une grandeur qui varie :
+
+- Intégrer une **vitesse** sur le temps donne la **distance parcourue** (on accumule les petits déplacements).
+- Intégrer un **débit** (données par seconde) sur le temps donne le **volume total de données** transféré.
+- Intégrer une **puissance** sur le temps donne l'**énergie** consommée.
+- Intégrer une **densité de probabilité** donne une **probabilité** (tu l'as vu en probabilités : $P(a \le X \le b) = \int_a^b f(x)dx$).
+
+Le motif est toujours le même : une grandeur « par unité » (vitesse = distance par temps, débit = données par temps) intégrée sur cette unité donne le **total**. L'intégrale et la dérivée sont les deux faces d'une même pièce : la dérivée découpe le total en taux instantané, l'intégrale recompose le total à partir des taux.
+
+## Le théorème fondamental de l'analyse
+
+C'est l'un des résultats les plus profonds et élégants des mathématiques : il établit que **dérivation et intégration sont des opérations inverses l'une de l'autre**.
+
+Concrètement : si on intègre une fonction puis qu'on dérive le résultat, on retrouve la fonction de départ (et réciproquement). L'intégration « défait » la dérivation.
+
+La conséquence pratique est énorme. Pour calculer une intégrale $\int_a^b f(x)dx$, au lieu d'additionner une infinité de rectangles, il suffit de trouver une **primitive** $F$ de $f$ (une fonction dont la dérivée est $f$), puis de calculer :
+
+```math
+\int_a^b f(x)\, dx = F(b) - F(a)
+```
+
+C'est ce qui rend le calcul d'intégrales possible « à la main » : on cherche à rebours quelle fonction, une fois dérivée, donne $f$. Ce théorème unifie les deux moitiés de l'analyse (dérivées et intégrales) en un seul cadre cohérent — d'où son nom de « théorème fondamental ».
+
+## Intégrale définie et indéfinie
+
+Deux notions à distinguer :
+
+**L'intégrale définie** — $\int_a^b f(x)dx$ avec des bornes précises. Elle donne un **nombre** (l'aire, le total accumulé entre $a$ et $b$).
+
+**L'intégrale indéfinie** (ou primitive) — $\int f(x)dx$ sans bornes. Elle donne une **fonction** (la primitive $F$, définie à une constante près, notée $+ C$). C'est l'opération inverse de la dérivation.
+
+Les deux sont reliées par le théorème fondamental : l'intégrale définie se calcule via une primitive.
+
+## Les techniques d'intégration
+
+Contrairement à la dérivation (mécanique, il y a toujours une règle), l'intégration est un **art** : il n'existe pas de méthode universelle, et certaines fonctions n'ont même pas de primitive exprimable simplement. Les techniques principales (rappel) :
+
+- **Primitives usuelles** — l'inverse des dérivées connues ($\int x^n dx = \frac{x^{n+1}}{n+1} + C$, etc.).
+- **Intégration par substitution** — l'inverse de la règle de la chaîne (on change de variable pour simplifier).
+- **Intégration par parties** — l'inverse de la règle du produit, utile pour les produits de fonctions.
+- **Décomposition** en éléments plus simples.
+
+Le fait que certaines intégrales n'aient pas de solution analytique (impossible à exprimer avec les fonctions usuelles) est une des raisons d'être de l'**analyse numérique** : quand on ne sait pas calculer une intégrale exactement, on l'**approxime** numériquement (méthode des rectangles, des trapèzes, de Simpson — que tu verras dans ce domaine). En informatique, on intègre souvent numériquement.
+
+## Le lien avec Fourier (que tu as déjà étudié)
+
+Tu as étudié les séries et transformées de Fourier — et elles reposent entièrement sur les intégrales. Les **coefficients de Fourier** sont définis par des intégrales (on intègre le signal multiplié par des sinusoïdes pour extraire « combien » de chaque fréquence il contient). La **transformée de Fourier** elle-même est une intégrale qui décompose un signal en ses fréquences. Le **théorème de Parseval** que tu connais (l'énergie d'un signal égale la somme/intégrale de ses composantes fréquentielles) est une égalité entre intégrales.
+
+Autrement dit, tout ce que tu as vu sur Fourier est bâti sur l'intégration. C'est un bel exemple de la façon dont les briques de l'analyse (limites → intégrales → Fourier) s'empilent. Le côté « traitement du signal » de Fourier, tu le verras dans le domaine dédié ; mais son socle mathématique, ce sont les intégrales de ce cours.
+
+## Applications en informatique et ingénierie
+
+Au-delà de Fourier, l'intégration est partout :
+
+- **Probabilités continues** — calculer des probabilités comme des aires sous une densité.
+- **Traitement du signal et d'images** — filtrage, convolution (une opération intégrale), énergie d'un signal.
+- **Calcul d'aires, de volumes, de moyennes** de quantités continues (la valeur moyenne d'une fonction sur un intervalle est une intégrale divisée par la longueur).
+- **Physique et simulation** — accumulation de grandeurs (énergie, charge, distance).
+- **Machine learning** — certaines quantités (espérances, aires sous courbe ROC pour évaluer un classifieur) sont des intégrales.
+
+## Ce qu'il faut retenir
+
+- L'**intégrale** **accumule** : elle somme une infinité de contributions infinitésimales. Interprétation géométrique : l'**aire sous la courbe** $\int_a^b f(x)dx$.
+- Intuition (sommes de Riemann) : on découpe en fines tranches ($f(x)\,dx$), on somme, et à la **limite** (tranches infiniment fines) on obtient l'aire exacte.
+- Concrètement, elle **totalise** une grandeur qui varie : vitesse → distance, débit → volume de données, densité → probabilité.
+- **Théorème fondamental de l'analyse** : dérivation et intégration sont **inverses**. Donc $\int_a^b f(x)dx = F(b) - F(a)$ avec $F$ une **primitive** de $f$.
+- **Intégrale définie** (un nombre, avec bornes) vs **indéfinie / primitive** (une fonction, $+C$).
+- L'intégration est un **art** (substitution, parties) et certaines intégrales n'ont pas de forme close → on les **approxime numériquement** (lien analyse numérique).
+- **Fourier** (séries, transformée, Parseval, que tu connais) est **entièrement bâti sur les intégrales** — c'en est le socle mathématique.

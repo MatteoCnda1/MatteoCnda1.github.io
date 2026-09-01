@@ -1,0 +1,96 @@
+---
+id: 01-limites-continuite
+title: Limites et continuité
+sidebar_position: 1
+---
+
+# Limites et continuité
+
+## Ce qu'est l'analyse
+
+L'**analyse** (calculus en anglais) est la branche des maths qui étudie le **changement** et l'**infiniment petit**. Elle repose sur une idée centrale : comprendre le comportement d'une fonction en la regardant « d'aussi près qu'on veut ». C'est le socle de tout le reste (dérivées, intégrales, équations différentielles), et l'outil mathématique de la physique, de l'ingenierie, du signal et de nombreux algorithmes.
+
+Tu as déjà étudié ces notions ; ce cours les consolide en insistant sur le **sens** plutôt que sur les techniques de calcul, car c'est la compréhension conceptuelle qui rend le reste solide.
+
+## L'idée de limite
+
+La **limite** est le concept fondateur de toute l'analyse. Elle répond à la question : **vers quelle valeur une fonction se rapproche-t-elle quand sa variable s'approche d'un point donné ?**
+
+L'idée clé : on ne demande pas « que vaut la fonction *en* ce point », mais « vers quoi tend-elle quand on s'en approche ». C'est une distinction subtile mais essentielle. On peut avoir une limite en un point où la fonction n'est même pas définie.
+
+L'exemple classique : la fonction $f(x) = \dfrac{\sin(x)}{x}$ n'est pas définie en $x = 0$ (division par zéro). Pourtant, quand $x$ se rapproche de 0, $f(x)$ se rapproche de 1. On écrit :
+
+```math
+\lim_{x \to 0} \frac{\sin(x)}{x} = 1
+```
+
+La fonction « veut » valoir 1 en 0, même si elle n'y est techniquement pas définie. C'est ça, une limite : le comportement au voisinage, pas la valeur exacte au point.
+
+## Pourquoi les limites comptent
+
+Les limites ne sont pas qu'une curiosité : elles sont le fondement caché de tout le reste.
+
+- La **dérivée** est une limite (le taux de variation quand l'intervalle tend vers zéro).
+- L'**intégrale** est une limite (une somme quand le pas tend vers zéro).
+- La **continuité** se définit par une limite.
+- En informatique, la notion de **complexité asymptotique** (le comportement d'un algorithme quand la taille des données tend vers l'infini, le fameux « grand O ») est une idée de limite.
+
+Comprendre les limites, c'est comprendre le mécanisme commun à toute l'analyse.
+
+## Limites à l'infini et comportement asymptotique
+
+On peut aussi regarder ce qui se passe quand la variable tend vers l'infini : c'est le **comportement asymptotique**. Comment se comporte $f(x)$ quand $x$ devient très grand ?
+
+```math
+\lim_{x \to +\infty} \frac{1}{x} = 0
+```
+
+Quand $x$ grandit indéfiniment, $1/x$ se rapproche de 0. Cette idée est directement liée à l'informatique : quand tu analyses la performance d'un algorithme, tu regardes son comportement quand la taille de l'entrée tend vers l'infini. Dire qu'un algorithme est en $O(n^2)$, c'est décrire une limite de croissance. L'analyse et l'algorithmique se rejoignent ici.
+
+Les limites permettent aussi de comparer des « vitesses de croissance » : une exponentielle croît infiniment plus vite qu'un polynôme, qui croît plus vite qu'un logarithme. C'est exactement ce qui distingue un algorithme praticable d'un algorithme inutilisable à grande échelle (lien avec la complexité, la crypto).
+
+## La continuité
+
+Une fonction est **continue** si, intuitivement, on peut tracer sa courbe **sans lever le crayon** — pas de saut, pas de trou, pas de rupture brutale. Formellement, une fonction est continue en un point si sa limite en ce point existe et **égale sa valeur** en ce point :
+
+```math
+\lim_{x \to a} f(x) = f(a)
+```
+
+Autrement dit, la fonction « arrive » exactement là où elle « devrait » d'après son comportement au voisinage. Pas de surprise au point.
+
+Les **discontinuités** (ruptures) prennent plusieurs formes : un saut brusque (la fonction passe d'une valeur à une autre sans transition), un trou (point manquant), une asymptote (la fonction part à l'infini). Reconnaître où une fonction est continue ou non est important : beaucoup de théorèmes ne s'appliquent qu'aux fonctions continues.
+
+La continuité a un sens concret : un signal continu n'a pas de coupure brutale ; une grandeur physique (température, position) varie continûment. En traitement du signal, le passage du continu au discret (échantillonnage) est justement un enjeu majeur.
+
+## Deux théorèmes fondamentaux
+
+Deux résultats sur les fonctions continues, dont l'intuition est plus importante que la démonstration :
+
+**Le théorème des valeurs intermédiaires** — Si une fonction continue passe d'une valeur $A$ à une valeur $B$, elle prend **toutes** les valeurs intermédiaires entre $A$ et $B$ au moins une fois. Intuition : pour passer de -5 à +5 en variant continûment, on est forcément passé par 0 à un moment.
+
+Ce théorème a une conséquence pratique majeure : il **garantit l'existence de solutions**. Si une fonction continue est négative quelque part et positive ailleurs, elle s'annule forcément entre les deux — donc l'équation $f(x) = 0$ a une solution dans cet intervalle. C'est exactement le principe de la **recherche de racines par dichotomie** (que tu verras en analyse numérique) : on encadre une solution et on resserre l'intervalle. L'analyse numérique repose sur ce théorème.
+
+**Le théorème des bornes** — Une fonction continue sur un intervalle fermé et borné atteint un maximum et un minimum sur cet intervalle. Utile en optimisation : ça garantit qu'un « meilleur point » existe.
+
+## Le lien avec l'informatique
+
+Au-delà des applications déjà citées, l'analyse imprègne l'informatique de façons parfois inattendues :
+
+- **Complexité algorithmique** — le comportement asymptotique (limites à l'infini).
+- **Recherche de racines** — le théorème des valeurs intermédiaires (dichotomie).
+- **Optimisation et machine learning** — trouver les minima d'une fonction de coût (via les dérivées, cours suivant) est le cœur de l'entraînement des modèles.
+- **Traitement du signal** — la distinction continu/discret, l'échantillonnage.
+- **Analyse numérique** — approximer des quantités continues par des calculs discrets.
+
+L'analyse est le langage du continu, et même si l'informatique est fondamentalement discrète, elle doit constamment faire le pont entre les deux — d'où l'importance de ces notions.
+
+## Ce qu'il faut retenir
+
+- L'**analyse** étudie le **changement** et l'**infiniment petit** ; son concept fondateur est la **limite**.
+- Une **limite** décrit vers quelle valeur une fonction **tend** quand sa variable s'approche d'un point — indépendamment de sa valeur (voire de son existence) en ce point.
+- Les limites fondent tout le reste : **dérivée** (limite d'un taux), **intégrale** (limite d'une somme), **continuité**, et la **complexité asymptotique** en informatique.
+- Les **limites à l'infini** décrivent le comportement asymptotique — directement lié au « grand O » et à la comparaison des vitesses de croissance (exponentielle > polynôme > log).
+- Une fonction est **continue** si $\lim_{x \to a} f(x) = f(a)$ (tracé sans lever le crayon, pas de saut/trou).
+- **Théorème des valeurs intermédiaires** : une fonction continue prend toutes les valeurs entre deux qu'elle atteint → garantit l'existence de solutions, fonde la **recherche de racines par dichotomie**.
+- L'analyse est le langage du continu ; l'informatique fait constamment le pont entre continu et discret.

@@ -1,0 +1,227 @@
+---
+
+title: Attack Surface
+sidebar_position: 4
+-------------------
+
+# Attack Surface
+
+## Introduction
+
+L'**Attack Surface**, ou surface d'attaque, représente l'ensemble des points par lesquels un système peut potentiellement être :
+
+* atteint ;
+* interrogé ;
+* manipulé ;
+* ou compromis.
+
+La question principale est :
+
+> **Par quels points un attaquant peut-il interagir avec mon système ?**
+
+---
+
+# Exemple simple
+
+Imaginons un serveur :
+
+```text
+                 Internet
+                     │
+                     ▼
+              ┌─────────────┐
+              │   Server    │
+              ├─────────────┤
+              │ Port 22     │ SSH
+              │ Port 80     │ HTTP
+              │ Port 443    │ HTTPS
+              │ Web API     │
+              │ Login page  │
+              └─────────────┘
+```
+
+Chaque service exposé peut faire partie de la surface d'attaque.
+
+---
+
+# Types d'Attack Surface
+
+## Network Attack Surface
+
+Les éléments accessibles via le réseau :
+
+* ports ouverts ;
+* services ;
+* protocoles ;
+* VPN ;
+* DNS ;
+* API ;
+* interfaces d'administration.
+
+Exemple :
+
+```text
+22   SSH
+80   HTTP
+443  HTTPS
+3306 MySQL
+```
+
+Plus il existe de services exposés, plus la surface d'attaque peut être importante.
+
+---
+
+## Application Attack Surface
+
+Les points d'interaction avec une application.
+
+Exemples :
+
+* formulaires ;
+* API ;
+* upload de fichiers ;
+* authentification ;
+* paramètres URL ;
+* cookies ;
+* WebSockets.
+
+```text
+User
+ │
+ ├── Login
+ ├── Search
+ ├── File Upload
+ ├── API
+ └── Admin Panel
+```
+
+---
+
+## Human Attack Surface
+
+Les humains peuvent également faire partie de la surface d'attaque.
+
+Exemples :
+
+* phishing ;
+* ingénierie sociale ;
+* mots de passe faibles ;
+* erreurs humaines ;
+* mauvaises pratiques.
+
+---
+
+## Physical Attack Surface
+
+Les accès physiques :
+
+* ports USB ;
+* interfaces de debug ;
+* disques ;
+* consoles ;
+* équipements réseau.
+
+---
+
+## Cloud Attack Surface
+
+Dans le Cloud :
+
+* buckets ;
+* API ;
+* IAM ;
+* machines virtuelles ;
+* clés d'accès ;
+* services exposés ;
+* configurations réseau.
+
+---
+
+# Attack Surface Management
+
+Réduire la surface d'attaque est un principe important.
+
+Exemple :
+
+```text
+Before
+
+Internet
+   │
+   ├── SSH
+   ├── HTTP
+   ├── HTTPS
+   ├── Database
+   ├── Admin panel
+   └── Test service
+```
+
+Après réduction :
+
+```text
+Internet
+   │
+   └── HTTPS
+```
+
+Les autres services peuvent être :
+
+* désactivés ;
+* protégés ;
+* placés sur un réseau interne ;
+* accessibles uniquement via VPN.
+
+---
+
+# Principe fondamental
+
+> **Every unnecessary service increases the attack surface.**
+
+Un service inutile devrait généralement être supprimé ou désactivé.
+
+---
+
+# Attack Surface vs Attack Vector
+
+Ces concepts sont différents.
+
+### Attack Surface
+
+L'ensemble des points potentiellement accessibles.
+
+### Attack Vector
+
+Le chemin ou la méthode utilisée pour attaquer.
+
+Exemple :
+
+```text
+Attack Surface:
+Login page
+```
+
+```text
+Attack Vector:
+Credential stuffing
+```
+
+---
+
+# Points importants à retenir
+
+* L'attack surface représente les points d'interaction avec un système.
+* Elle peut être réseau, applicative, humaine, physique ou Cloud.
+* Une surface d'attaque importante ne signifie pas automatiquement qu'un système est vulnérable.
+* Réduire les services inutiles permet généralement de réduire les risques.
+* Attack Surface et Attack Vector sont deux concepts différents.
+
+---
+
+## Concepts associés
+
+* Attack Vector
+* Threat Modeling
+* Asset
+* Vulnerability
+* Attack Surface Management
+* Defense in Depth

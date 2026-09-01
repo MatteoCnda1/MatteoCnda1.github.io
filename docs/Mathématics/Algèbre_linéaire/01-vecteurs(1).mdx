@@ -1,0 +1,139 @@
+---
+id: 01-vecteurs
+title: Les vecteurs
+sidebar_position: 1
+---
+
+# Les vecteurs
+
+## Pourquoi l'algèbre linéaire
+
+Avant les vecteurs eux-mêmes, un mot sur le domaine. L'**algèbre linéaire** est sans doute la branche des maths la plus utile en informatique et ingénierie. Elle est partout : dans les graphismes 3D, le machine learning (un réseau de neurones n'est presque que des multiplications de matrices), le traitement du signal et d'images, les moteurs de recherche (l'algorithme PageRank de Google repose sur des valeurs propres), la compression, la cryptographie, les graphes. Si tu ne devais maîtriser qu'un domaine de maths pour l'ingénierie moderne, ce serait celui-là.
+
+Le fil conducteur de tout le domaine : **représenter et manipuler des données organisées en tableaux de nombres** (vecteurs, matrices) et comprendre les transformations qu'on peut leur appliquer. On commence par la brique de base : le vecteur.
+
+## Qu'est-ce qu'un vecteur ?
+
+Il y a trois façons de voir un vecteur, et c'est en les reliant qu'on le comprend vraiment.
+
+**Vue géométrique** — Un vecteur est une **flèche** dans l'espace : il a une direction, un sens et une longueur. En 2D, on peut le dessiner sur un plan ; en 3D, dans l'espace. C'est l'intuition physique (déplacement, vitesse, force).
+
+**Vue algébrique** — Un vecteur est une **liste ordonnée de nombres** (ses composantes). En 2D : $\vec{v} = (3, 2)$ ; en 3D : $\vec{v} = (3, 2, -1)$. Chaque nombre est une coordonnée selon un axe. C'est cette vue qu'on manipule en calcul et en code (un vecteur = un tableau).
+
+**Vue informatique** — Un vecteur est simplement un **tableau** (`array`, `list`, `numpy.array`). C'est comme ça que tu le manipuleras en pratique.
+
+Le point clé : ces trois vues décrivent le même objet. La flèche $(3,2)$, la liste $[3, 2]$ et le tableau en mémoire sont la même chose. Savoir passer de l'une à l'autre est le début de la maîtrise.
+
+On note souvent un vecteur en colonne :
+
+```math
+\vec{v} = \begin{pmatrix} 3 \\ 2 \\ -1 \end{pmatrix}
+```
+
+Un vecteur à $n$ composantes vit dans l'espace $\mathbb{R}^n$. On peut avoir des vecteurs en 2D, 3D, mais aussi en 100 dimensions (un vecteur de 100 nombres) — impossible à dessiner, mais l'algèbre fonctionne pareil. C'est justement la force de l'algèbre linéaire : les mêmes règles marchent en toute dimension.
+
+## Les opérations de base
+
+**L'addition** — On additionne deux vecteurs composante par composante :
+
+```math
+\begin{pmatrix} 3 \\ 2 \end{pmatrix} + \begin{pmatrix} 1 \\ 4 \end{pmatrix} = \begin{pmatrix} 4 \\ 6 \end{pmatrix}
+```
+
+Géométriquement, additionner deux vecteurs, c'est mettre le second au bout du premier (relation de Chasles) : on avance le long du premier, puis du second. Le résultat va du départ à l'arrivée.
+
+**La multiplication par un scalaire** — Multiplier un vecteur par un nombre (un « scalaire ») multiplie chaque composante :
+
+```math
+2 \cdot \begin{pmatrix} 3 \\ 2 \end{pmatrix} = \begin{pmatrix} 6 \\ 4 \end{pmatrix}
+```
+
+Géométriquement, ça **étire** (ou rétrécit) le vecteur sans changer sa direction. Un scalaire négatif inverse le sens. Multiplier par $2$ double la longueur, par $0,5$ la divise par deux, par $-1$ retourne le vecteur.
+
+Ces deux opérations (addition, multiplication par un scalaire) sont **les** opérations fondamentales. Un ensemble muni de ces deux opérations avec de bonnes propriétés s'appelle un **espace vectoriel** — le cadre abstrait de toute l'algèbre linéaire.
+
+## La norme : la longueur d'un vecteur
+
+La **norme** d'un vecteur, notée $\|\vec{v}\|$, est sa longueur. On la calcule avec le théorème de Pythagore généralisé :
+
+```math
+\|\vec{v}\| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}
+```
+
+Par exemple, la norme de $(3, 4)$ est $\sqrt{9 + 16} = \sqrt{25} = 5$. C'est la longueur de la flèche.
+
+Un vecteur de norme $1$ est dit **unitaire** (normé). Pour normaliser un vecteur (le ramener à une longueur de 1 en gardant sa direction), on le divise par sa norme : $\vec{u} = \vec{v} / \|\vec{v}\|$. C'est très courant : en graphisme, en machine learning, on travaille souvent avec des directions pures (vecteurs unitaires).
+
+```python
+import numpy as np
+
+v = np.array([3, 4])
+norme = np.linalg.norm(v)        # 5.0
+u = v / norme                    # vecteur unitaire, norme = 1
+```
+
+## Le produit scalaire : l'opération centrale
+
+Le **produit scalaire** (dot product) de deux vecteurs est l'opération la plus importante à comprendre. Il prend deux vecteurs et renvoie **un nombre** (un scalaire, d'où le nom). On le calcule en multipliant les composantes deux à deux et en sommant :
+
+```math
+\vec{a} \cdot \vec{b} = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n
+```
+
+Par exemple : $(3, 2) \cdot (1, 4) = 3 \times 1 + 2 \times 4 = 3 + 8 = 11$.
+
+Ce simple calcul a une signification géométrique profonde. Le produit scalaire est aussi égal à :
+
+```math
+\vec{a} \cdot \vec{b} = \|\vec{a}\| \, \|\vec{b}\| \cos\theta
+```
+
+où $\theta$ est l'angle entre les deux vecteurs. Cette formule est la clé : le produit scalaire mesure **à quel point deux vecteurs pointent dans la même direction**.
+
+Les conséquences, qu'il faut vraiment retenir :
+
+- Si $\vec{a} \cdot \vec{b} > 0$ : les vecteurs pointent globalement dans le même sens (angle aigu).
+- Si $\vec{a} \cdot \vec{b} = 0$ : les vecteurs sont **perpendiculaires** (orthogonaux). C'est le test d'orthogonalité le plus utile de toute l'algèbre linéaire.
+- Si $\vec{a} \cdot \vec{b} < 0$ : ils pointent dans des sens opposés (angle obtus).
+
+Le produit scalaire permet aussi de **calculer l'angle** entre deux vecteurs :
+
+```math
+\cos\theta = \frac{\vec{a} \cdot \vec{b}}{\|\vec{a}\| \, \|\vec{b}\|}
+```
+
+C'est exactement la **similarité cosinus**, omniprésente en informatique : comparer deux documents, deux images, deux profils utilisateurs revient souvent à calculer le cosinus de l'angle entre leurs vecteurs de caractéristiques. Deux vecteurs très « similaires » ont un cosinus proche de 1.
+
+```python
+a = np.array([3, 2])
+b = np.array([1, 4])
+produit = np.dot(a, b)                              # 11
+cos_theta = produit / (np.linalg.norm(a) * np.linalg.norm(b))
+```
+
+## Le produit vectoriel (en 3D)
+
+Spécifique à la 3D, le **produit vectoriel** (cross product) de deux vecteurs renvoie un **troisième vecteur**, perpendiculaire aux deux premiers. Sa norme vaut $\|\vec{a}\| \|\vec{b}\| \sin\theta$ (l'aire du parallélogramme formé par les deux vecteurs).
+
+Il sert beaucoup en géométrie 3D et en physique : calculer une normale à une surface (essentiel en graphisme 3D pour l'éclairage), un moment, un champ magnétique. Contrairement au produit scalaire, il n'est pas commutatif : $\vec{a} \times \vec{b} = -(\vec{b} \times \vec{a})$.
+
+## Combinaisons linéaires, dépendance et base
+
+On arrive à des notions plus abstraites mais fondamentales pour la suite.
+
+Une **combinaison linéaire** de vecteurs, c'est une somme de ces vecteurs multipliés par des scalaires : $2\vec{a} + 3\vec{b} - \vec{c}$. C'est l'opération de base pour « fabriquer » de nouveaux vecteurs à partir d'autres.
+
+Des vecteurs sont **linéairement indépendants** si aucun ne peut s'écrire comme combinaison linéaire des autres — autrement dit, chacun apporte une « direction » nouvelle. S'ils sont **dépendants**, l'un est redondant (il n'ajoute rien). Exemple : $(1,0)$ et $(2,0)$ sont dépendants (même direction) ; $(1,0)$ et $(0,1)$ sont indépendants (deux directions distinctes).
+
+Une **base** d'un espace est un ensemble de vecteurs linéairement indépendants qui permettent, par combinaisons linéaires, de fabriquer **tous** les vecteurs de l'espace. En 2D, $\{(1,0), (0,1)\}$ est la base canonique : tout vecteur du plan s'écrit comme combinaison de ces deux-là. Le nombre de vecteurs d'une base, c'est la **dimension** de l'espace.
+
+Ces notions (indépendance, base, dimension) sont le socle conceptuel de l'algèbre linéaire. Elles reviendront constamment : résoudre un système, c'est chercher des combinaisons ; comprendre une matrice, c'est comprendre ce qu'elle fait aux vecteurs de base.
+
+## Ce qu'il faut retenir
+
+- Un **vecteur** se voit de trois façons équivalentes : flèche (géométrie), liste de nombres (algèbre), tableau (code). Il vit dans $\mathbb{R}^n$, en toute dimension.
+- Opérations fondamentales : **addition** (composante par composante) et **multiplication par un scalaire** (étirement) — elles définissent un **espace vectoriel**.
+- La **norme** $\|\vec{v}\| = \sqrt{\sum v_i^2}$ est la longueur ; un vecteur **unitaire** a une norme de 1.
+- Le **produit scalaire** $\vec{a}\cdot\vec{b} = \sum a_i b_i = \|\vec{a}\|\|\vec{b}\|\cos\theta$ est central : il mesure l'alignement. Nul $\Rightarrow$ **orthogonaux**. Il donne l'angle (similarité cosinus, très utilisée en info).
+- Le **produit vectoriel** (3D) donne un vecteur perpendiculaire aux deux autres (normales, graphisme 3D).
+- **Combinaison linéaire**, **indépendance**, **base** et **dimension** sont le socle conceptuel de tout le domaine.

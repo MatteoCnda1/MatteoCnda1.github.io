@@ -1,0 +1,76 @@
+---
+id: 03-deep-learning
+title: Deep learning et réseaux de neurones
+sidebar_position: 4
+---
+
+# Deep learning et réseaux de neurones
+
+Le **deep learning** est la branche du ML qui a fait exploser les performances de l'IA depuis 2012 et qui est derrière presque toute l'IA moderne (vision, langage, IA générative). Cette fiche explique l'idée des réseaux de neurones et pointe vers LA ressource visuelle qui les rend intuitifs — un pont parfait entre tes maths et l'IA.
+
+## L'idée du réseau de neurones
+
+Un **réseau de neurones artificiel** est un modèle inspiré (de loin) du cerveau. Il est composé de **neurones** organisés en **couches** :
+
+- Une **couche d'entrée** reçoit les données (par exemple, les pixels d'une image, chacun étant un nombre).
+- Des **couches cachées** au milieu transforment progressivement l'information.
+- Une **couche de sortie** produit le résultat (par exemple, « c'est un 7 » avec telle probabilité).
+
+Chaque neurone tient un nombre (son « activation »), et chaque connexion entre neurones a un **poids** (un nombre qui dit l'importance de cette connexion). Un neurone calcule une somme pondérée de ses entrées (via les poids), y applique une **fonction d'activation** (qui introduit de la non-linéarité), et transmet le résultat.
+
+Le lien avec tes maths est direct et frappant : **calculer les activations d'une couche, c'est une multiplication de matrices** (les poids forment une matrice, les activations un vecteur — exactement ton cours d'algèbre linéaire). C'est pourquoi on dit qu'« un réseau de neurones n'est presque que des multiplications de matrices », et pourquoi les GPU (excellents pour multiplier des matrices) ont rendu le deep learning possible. « Deep » (profond) signifie simplement « avec beaucoup de couches cachées ».
+
+## Comment un réseau apprend
+
+C'est le point le plus important, et tu as déjà tous les outils pour le comprendre.
+
+Au départ, les poids sont aléatoires : le réseau donne n'importe quoi. On mesure son erreur avec une **fonction de coût** (l'écart entre ses prédictions et les bonnes réponses). Apprendre = **trouver les poids qui minimisent cette erreur**. Or, minimiser une fonction, tu sais faire : c'est la **descente de gradient** de ta fiche « dérivées » !
+
+Le processus, appelé **rétropropagation** (backpropagation) :
+1. Le réseau fait une prédiction (propagation avant).
+2. On calcule l'erreur (fonction de coût).
+3. On calcule le **gradient** de l'erreur par rapport à chaque poids — c'est-à-dire dans quel sens ajuster chaque poids pour réduire l'erreur. Ce calcul remonte le réseau couche par couche en appliquant la **règle de la chaîne** (dérivée des fonctions composées, ta fiche dérivées).
+4. On ajuste tous les poids d'un petit pas dans la direction qui réduit l'erreur (descente de gradient).
+5. On répète des milliers/millions de fois.
+
+Autrement dit : **la rétropropagation, c'est la règle de la chaîne appliquée à grande échelle, au service de la descente de gradient**. Tout ce qui te semblait abstrait en analyse (gradient, règle de la chaîne, minimisation) prend ici tout son sens. C'est le moteur de l'apprentissage de toute l'IA moderne.
+
+## Les grandes architectures
+
+Différents types de réseaux pour différents problèmes :
+
+- **Réseaux denses (fully connected)** — la forme de base, tous les neurones d'une couche reliés à la suivante.
+- **Réseaux convolutifs (CNN)** — spécialisés pour les **images** ; ils détectent des motifs locaux (contours, formes). Derrière la vision par ordinateur, la reconnaissance faciale, l'analyse d'images médicales.
+- **Réseaux récurrents (RNN)** — pour les **séquences** (texte, séries temporelles), avec une forme de mémoire. Largement remplacés aujourd'hui par les Transformers.
+- **Transformers** — l'architecture révolutionnaire (2017) derrière tous les LLM modernes. Traitée dans la fiche suivante (LLM).
+
+## LA ressource à voir : 3Blue1Brown
+
+S'il ne fallait qu'une ressource pour comprendre les réseaux de neurones, ce serait la série **Neural Networks de 3Blue1Brown** (chaîne YouTube, aussi sur 3blue1brown.com). Grant Sanderson, mathématicien, explique le deep learning par des **visualisations** magnifiques et intuitives. C'est le pont idéal pour toi car il relie explicitement les maths (algèbre linéaire, gradient, dérivées) et le fonctionnement des réseaux.
+
+La série (regarder dans l'ordre) :
+1. **But what is a neural network?** — ce qu'est un réseau, les couches, les activations.
+2. **Gradient descent, how neural networks learn** — comment il apprend (ta descente de gradient en action).
+3. **Backpropagation, intuitively** — la rétropropagation en intuition.
+4. **Backpropagation calculus** — les maths derrière (la règle de la chaîne).
+5. et suivants — les Transformers et les LLM (pour la fiche suivante).
+
+C'est gratuit, sous-titrable en français, et considéré comme la meilleure introduction visuelle au domaine. À voir absolument après avoir revu ta fiche « dérivées ».
+
+## Autres ressources
+
+**fast.ai — Practical Deep Learning for Coders** (course.fast.ai) — Approche « top-down » : tu construis des modèles qui marchent dès le début, puis tu comprends la théorie. Gratuit, très réputé, orienté pratique. Idéal après 3Blue1Brown pour mettre les mains dedans.
+
+**Deep Learning Specialization** (Andrew Ng, Coursera, audit gratuit) — Approche plus académique et progressive du deep learning. Complémentaire de fast.ai.
+
+**PyTorch** (pytorch.org) et **Keras/TensorFlow** (keras.io) — Les bibliothèques Python open-source pour construire des réseaux. Leurs tutoriels officiels sont d'excellents points de départ pratiques. PyTorch est très répandu dans la recherche et l'open-source.
+
+**Neural Networks and Deep Learning** (neuralnetworksanddeeplearning.com) — Un livre en ligne gratuit de Michael Nielsen, qui construit un réseau from scratch. Plus texte, très pédagogique.
+
+## Ce qu'il faut retenir
+
+- Un **réseau de neurones** = des **neurones** en **couches** (entrée, cachées, sortie) reliés par des **poids** ; calculer une couche = une **multiplication de matrices** (ton algèbre linéaire), d'où le rôle des GPU. « Deep » = beaucoup de couches.
+- Il **apprend** en minimisant une **fonction de coût** par **descente de gradient** (ta fiche dérivées) via la **rétropropagation** = la **règle de la chaîne** appliquée couche par couche. C'est le moteur de toute l'IA moderne.
+- Architectures : denses (base), **CNN** (images), **RNN** (séquences, dépassés), **Transformers** (LLM, fiche suivante).
+- **Ressource maîtresse : la série 3Blue1Brown** (visuelle, gratuite) — le pont parfait entre tes maths et l'IA ; à voir dans l'ordre.
+- Pour pratiquer : **fast.ai**, **PyTorch/Keras** (libs open-source), le livre de **Michael Nielsen**.

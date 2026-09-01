@@ -1,0 +1,271 @@
+---
+
+title: Zero Trust
+sidebar_position: 11
+--------------------
+
+# Zero Trust
+
+## Introduction
+
+Le **Zero Trust** est une approche de sécurité basée sur l'idée suivante :
+
+> **Never trust, always verify.**
+
+En français :
+
+> **Ne jamais accorder une confiance implicite, toujours vérifier.**
+
+Être connecté à un réseau interne ne signifie pas automatiquement qu'un utilisateur ou un appareil doit être considéré comme sûr.
+
+---
+
+# Le modèle traditionnel
+
+Dans une architecture traditionnelle :
+
+```text
+                Internet
+                    │
+                    ▼
+              ┌──────────┐
+              │ Firewall │
+              └────┬─────┘
+                   │
+                   ▼
+            Internal Network
+                   │
+                   ▼
+              Trusted zone
+```
+
+Le réseau interne est souvent considéré comme plus fiable.
+
+Mais si un attaquant parvient à entrer dans ce réseau, il peut potentiellement se déplacer vers d'autres ressources.
+
+---
+
+# Zero Trust
+
+Dans une approche Zero Trust :
+
+```text
+User
+  │
+  ▼
+Verify identity
+  │
+  ▼
+Verify device
+  │
+  ▼
+Check context
+  │
+  ▼
+Check authorization
+  │
+  ▼
+Grant minimum required access
+```
+
+Chaque accès est évalué.
+
+---
+
+# Principes principaux
+
+## Verify Explicitly
+
+Vérifier explicitement l'identité et le contexte.
+
+Exemples :
+
+* utilisateur ;
+* MFA ;
+* appareil ;
+* localisation ;
+* niveau de risque.
+
+---
+
+## Least Privilege Access
+
+L'utilisateur reçoit uniquement les permissions nécessaires.
+
+```text
+User
+ │
+ ▼
+Minimum required access
+```
+
+---
+
+## Assume Breach
+
+Le système doit être conçu en considérant qu'une compromission peut déjà exister.
+
+La question devient :
+
+> Que se passe-t-il si un utilisateur ou un appareil est compromis ?
+
+---
+
+# Microsegmentation
+
+La segmentation permet de limiter les mouvements entre différentes parties d'une infrastructure.
+
+Sans segmentation :
+
+```text
+Internal Network
+│
+├── Server A
+├── Server B
+├── Database
+└── Admin System
+```
+
+Avec microsegmentation :
+
+```text
+User
+ │
+ ├── Access Application
+ │
+ └── No direct access to Database
+
+Application
+ │
+ └── Limited access to Database
+```
+
+Chaque communication peut être contrôlée.
+
+---
+
+# Zero Trust et Identity
+
+L'identité devient un élément central.
+
+Les décisions d'accès peuvent dépendre de :
+
+```text
+Identity
++
+Role
++
+Device
++
+Location
++
+Risk
++
+Requested resource
+```
+
+---
+
+# Exemple
+
+Un utilisateur tente d'accéder à une application.
+
+Le système vérifie :
+
+```text
+1. Who is the user?
+```
+
+```text
+2. Is MFA valid?
+```
+
+```text
+3. Is the device compliant?
+```
+
+```text
+4. Is access authorized?
+```
+
+```text
+5. What is the minimum required permission?
+```
+
+Ensuite seulement, l'accès peut être accordé.
+
+---
+
+# Zero Trust vs absence de confiance
+
+Zero Trust ne signifie pas :
+
+```text
+Trust nobody
+```
+
+Cela signifie plutôt :
+
+```text
+Do not grant trust automatically.
+Verify before granting access.
+```
+
+La confiance devient :
+
+* limitée ;
+* contextualisée ;
+* vérifiée ;
+* réévaluée.
+
+---
+
+# Zero Trust et Defense in Depth
+
+Zero Trust peut être intégré dans une stratégie de Defense in Depth.
+
+```text
+Identity verification
+        │
+        ▼
+MFA
+        │
+        ▼
+Least Privilege
+        │
+        ▼
+Segmentation
+        │
+        ▼
+Monitoring
+        │
+        ▼
+Incident Response
+```
+
+Plusieurs mécanismes travaillent ensemble.
+
+---
+
+# Points importants à retenir
+
+* Zero Trust élimine la confiance implicite.
+* L'accès doit être vérifié explicitement.
+* Least Privilege est un principe central.
+* Le système doit considérer qu'une compromission est possible.
+* La segmentation limite les déplacements et l'impact d'une compromission.
+* L'identité et le contexte jouent un rôle central.
+
+---
+
+## Concepts associés
+
+* Least Privilege
+* Defense in Depth
+* IAM
+* MFA
+* Network Segmentation
+* Microsegmentation
+* Conditional Access
+* Identity Security
+* Continuous Monitoring

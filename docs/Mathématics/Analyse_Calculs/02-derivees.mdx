@@ -1,0 +1,91 @@
+---
+id: 02-derivees
+title: Les dérivées
+sidebar_position: 2
+---
+
+# Les dérivées
+
+## L'idée centrale : mesurer le changement
+
+La **dérivée** est l'un des concepts les plus puissants et les plus utiles des mathématiques. Son idée est simple à énoncer : **la dérivée mesure la vitesse à laquelle une quantité change**. C'est le taux de variation instantané.
+
+Des exemples parlants :
+- La dérivée de la **position** par rapport au temps, c'est la **vitesse** (à quelle vitesse la position change).
+- La dérivée de la **vitesse**, c'est l'**accélération**.
+- La dérivée d'une **fonction de coût** en machine learning indique dans quelle direction ajuster les paramètres pour réduire l'erreur.
+- La dérivée d'une courbe de trafic réseau indique s'il augmente ou diminue, et à quel rythme.
+
+Partout où quelque chose change et où l'on veut savoir « à quelle vitesse » ou « dans quel sens », la dérivée est l'outil.
+
+## De la pente moyenne à la pente instantanée
+
+Pour comprendre la dérivée, partons d'une idée familière : la **pente**. La pente d'une droite mesure son inclinaison (de combien elle monte quand on avance). Mais une courbe n'a pas une pente unique — elle change de direction en permanence. La dérivée résout ça : elle donne la **pente en chaque point** de la courbe.
+
+L'idée géométrique : en un point de la courbe, on trace la **tangente** (la droite qui « épouse » la courbe en ce point). La dérivée en ce point est la **pente de cette tangente**. Elle dit dans quelle direction et à quelle vitesse la courbe monte ou descend juste à cet endroit.
+
+Comment l'obtient-on ? Par une **limite** (voilà le lien avec le cours précédent). On calcule la pente moyenne entre deux points proches, puis on fait tendre l'écart vers zéro :
+
+```math
+f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+```
+
+Cette formule dit : prends deux points distants de $h$, calcule la pente entre eux (montée/déplacement), et regarde vers quoi cette pente tend quand $h$ devient infiniment petit. Le résultat est la pente instantanée : la dérivée. C'est une limite d'un taux de variation.
+
+On note la dérivée $f'(x)$ ou $\dfrac{df}{dx}$ (notation de Leibniz, qui rappelle « variation de $f$ sur variation de $x$ »).
+
+## Interpréter le signe et la valeur
+
+La dérivée en un point te dit tout sur le comportement local de la fonction :
+
+- $f'(x) > 0$ : la fonction **croît** (elle monte) en ce point.
+- $f'(x) < 0$ : la fonction **décroît** (elle descend).
+- $f'(x) = 0$ : la fonction est **plate** en ce point — c'est un candidat pour un **maximum ou un minimum** (un sommet ou un creux, où la courbe change de sens).
+- Plus $|f'(x)|$ est grand, plus le changement est **rapide** (pente raide).
+
+Ce dernier point est capital : les points où la dérivée s'annule sont les **extrema** (maxima et minima). C'est le fondement de l'**optimisation** — chercher le meilleur/pire d'une quantité revient à chercher où sa dérivée est nulle. On y revient plus bas car c'est l'application reine pour toi.
+
+## Les règles de dérivation
+
+En pratique, on ne recalcule pas la limite à chaque fois : on connaît les dérivées des fonctions usuelles et des règles pour les combiner. Les essentielles (tu les as déjà vues, c'est un rappel de référence) :
+
+- Constante : $(c)' = 0$ (une constante ne change pas).
+- Puissance : $(x^n)' = n x^{n-1}$.
+- Exponentielle : $(e^x)' = e^x$ (elle est sa propre dérivée — propriété unique et centrale).
+- Logarithme : $(\ln x)' = \dfrac{1}{x}$.
+- Sinus/cosinus : $(\sin x)' = \cos x$, $(\cos x)' = -\sin x$.
+
+Et les règles de combinaison :
+- Somme : $(f + g)' = f' + g'$.
+- Produit : $(fg)' = f'g + fg'$.
+- **Composition (règle de la chaîne)** : $(f(g(x)))' = f'(g(x)) \cdot g'(x)$.
+
+La **règle de la chaîne** mérite une attention spéciale : elle dérive les fonctions composées (une fonction dans une fonction). Elle est fondamentale car c'est exactement ce qui fait fonctionner la **rétropropagation** (backpropagation) dans les réseaux de neurones — l'algorithme qui entraîne toute l'IA moderne applique la règle de la chaîne à grande échelle pour ajuster les paramètres. Si tu vas vers le ML, c'est LE calcul à comprendre.
+
+## Les dérivées d'ordre supérieur
+
+On peut dériver une dérivée. La **dérivée seconde** $f''(x)$ est la dérivée de la dérivée — elle mesure comment la *pente* change, donc la **courbure** :
+
+- $f''(x) > 0$ : la courbe est **convexe** (tournée vers le haut, en forme de vallée) — un point où $f'=0$ est alors un **minimum**.
+- $f''(x) < 0$ : la courbe est **concave** (tournée vers le bas, en forme de colline) — un point où $f'=0$ est alors un **maximum**.
+
+C'est ainsi qu'on distingue un maximum d'un minimum : la dérivée première trouve les extrema (pente nulle), la dérivée seconde dit si c'est un sommet ou un creux. En physique, la dérivée seconde de la position est l'accélération.
+
+## L'application reine : l'optimisation
+
+Voici pourquoi les dérivées sont si importantes en informatique et en data science. **Optimiser**, c'est trouver le maximum ou le minimum d'une fonction — maximiser une performance, minimiser un coût, une erreur, un temps. Et comme les extrema sont là où la dérivée s'annule, la dérivée est l'outil central de l'optimisation.
+
+L'exemple le plus important pour toi : l'**entraînement des modèles de machine learning**. Un modèle a une **fonction de coût** (l'erreur qu'il commet), et l'entraîner consiste à trouver les paramètres qui **minimisent** cette erreur. L'algorithme roi pour ça est la **descente de gradient** :
+
+L'idée de la descente de gradient est magnifiquement intuitive. Imagine que tu es sur une montagne dans le brouillard et que tu veux descendre au point le plus bas. Tu ne vois pas loin, mais tu peux sentir la **pente** sous tes pieds (la dérivée). Alors tu fais un pas dans la direction de la descente la plus raide, puis tu recommences, encore et encore, jusqu'à atteindre le fond. À chaque étape, la dérivée (le gradient) te dit dans quelle direction descendre. C'est exactement ainsi que les réseaux de neurones apprennent : ils ajustent leurs millions de paramètres pas à pas, guidés par le gradient de la fonction de coût.
+
+Le **gradient** est la généralisation de la dérivée à plusieurs variables : c'est un vecteur (lien avec ton algèbre linéaire) qui pointe dans la direction de plus forte pente. La descente de gradient suit ce vecteur vers le bas. Comprendre la dérivée, c'est comprendre le moteur de tout l'apprentissage automatique.
+
+## Ce qu'il faut retenir
+
+- La **dérivée** mesure la **vitesse de changement** d'une quantité : le taux de variation instantané (vitesse = dérivée de la position, etc.).
+- Géométriquement, c'est la **pente de la tangente** en un point ; formellement, une **limite** d'un taux de variation : $f'(x) = \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}$.
+- Le **signe** renseigne : $f' > 0$ croît, $f' < 0$ décroît, $f' = 0$ = extremum candidat (max/min).
+- Règles usuelles à connaître ; la **règle de la chaîne** (dériver les compositions) est le fondement de la **rétropropagation** en deep learning.
+- La **dérivée seconde** $f''$ mesure la **courbure** : convexe ($f''>0$, minimum) ou concave ($f''<0$, maximum) — elle distingue max et min.
+- Application reine : l'**optimisation** (min/max où la dérivée s'annule). La **descente de gradient** (suivre la pente vers le bas) entraîne les modèles de ML ; le **gradient** généralise la dérivée à plusieurs variables (vecteur de plus forte pente).

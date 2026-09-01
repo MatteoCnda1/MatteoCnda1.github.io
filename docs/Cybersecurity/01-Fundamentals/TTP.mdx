@@ -1,0 +1,157 @@
+---
+
+title: TTP
+sidebar_position: 8
+-------------------
+
+# TTP — Tactics, Techniques and Procedures
+
+## Introduction
+
+TTP signifie :
+
+* **Tactics**
+* **Techniques**
+* **Procedures**
+
+Ce modèle permet de décrire le comportement et les méthodes utilisées lors d'activités adverses.
+
+---
+
+# Tactics
+
+Une **tactic** représente un objectif.
+
+La question est :
+
+> **Pourquoi cette action est-elle réalisée ?**
+
+Exemples :
+
+* obtenir un accès initial ;
+* maintenir un accès ;
+* découvrir l'environnement ;
+* obtenir des informations.
+
+Une tactique représente donc généralement le **but**.
+
+---
+
+# Techniques
+
+Une **technique** représente une méthode générale utilisée pour atteindre un objectif.
+
+La question est :
+
+> **Comment l'objectif est-il atteint ?**
+
+Une même tactique peut être réalisée à travers différentes techniques.
+
+---
+
+# Procedures
+
+Une **procedure** représente une implémentation ou une manière spécifique d'appliquer une technique.
+
+```text
+Tactic
+  │
+  ▼
+Technique
+  │
+  ▼
+Procedure
+```
+
+---
+
+# Exemple conceptuel
+
+```text
+Tactic:
+Credential Access
+```
+
+```text
+Technique:
+A method used to obtain credentials
+```
+
+```text
+Procedure:
+A specific implementation observed in a particular environment
+```
+
+---
+
+# Pourquoi les TTP sont importants
+
+Les IOC peuvent changer facilement.
+
+```text
+IP address → changed
+File hash  → changed
+Domain     → changed
+```
+
+Mais certains comportements peuvent rester similaires.
+
+Les TTP permettent donc d'étudier :
+
+* les objectifs ;
+* les méthodes ;
+* les comportements.
+
+---
+
+# MITRE ATT&CK
+
+Le framework MITRE ATT&CK organise notamment les comportements adverses sous forme de :
+
+* tactics ;
+* techniques ;
+* sous-techniques.
+
+Cela permet notamment de :
+
+* comprendre des attaques ;
+* cartographier des détections ;
+* identifier des lacunes ;
+* réaliser du threat hunting.
+
+---
+
+# Exemple de relation
+
+```text
+Objective
+   │
+   ▼
+Tactic
+   │
+   ▼
+Technique
+   │
+   ▼
+Specific Procedure
+```
+
+---
+
+# Points importants
+
+* Une **Tactic** représente généralement un objectif.
+* Une **Technique** représente une méthode.
+* Une **Procedure** représente une implémentation spécifique.
+* Les TTP permettent d'analyser les comportements au-delà des simples IOC.
+
+---
+
+## Concepts associés
+
+* MITRE ATT&CK
+* Threat Intelligence
+* IOC
+* IOA
+* Threat Hunting
+* Detection Engineering

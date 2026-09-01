@@ -1,0 +1,50 @@
+---
+id: 01-concepts-fondamentaux
+title: Concepts fondamentaux de l'IA
+sidebar_position: 2
+---
+
+# Concepts fondamentaux de l'IA
+
+Cette fiche pose le vocabulaire et les grandes idées de l'IA, puis renvoie aux meilleures ressources conceptuelles pour approfondir. L'objectif : avoir le cadre mental avant de plonger dans la technique.
+
+## Les grandes idées à comprendre
+
+**Apprendre à partir de données, pas de règles.** Le changement de paradigme de l'IA moderne : au lieu d'écrire des règles explicites (« si l'email contient "gagnez de l'argent", c'est du spam »), on **montre des exemples** à un modèle qui en déduit lui-même les régularités. On ne programme plus la solution, on programme la capacité à apprendre la solution. C'est pourquoi les **données** sont si centrales : un modèle ne vaut que par les données sur lesquelles il a appris.
+
+**Les trois grands types d'apprentissage.** Une distinction fondamentale à connaître :
+
+- **Apprentissage supervisé** — on entraîne le modèle sur des données **étiquetées** (des exemples avec la bonne réponse). Exemple : des milliers d'emails marqués « spam » ou « non spam ». Le modèle apprend à prédire l'étiquette. C'est le cas le plus courant (classification, régression). Lien direct avec ta stat : la régression est de l'apprentissage supervisé.
+- **Apprentissage non supervisé** — les données n'ont **pas** d'étiquettes ; le modèle cherche des structures cachées tout seul. Exemple : regrouper des utilisateurs par comportement similaire (clustering), sans savoir à l'avance les groupes. Utile en détection d'anomalies (un comportement qui ne ressemble à aucun groupe connu est suspect — pertinent en sécurité).
+- **Apprentissage par renforcement** — un agent apprend par **essai-erreur** en recevant des récompenses/punitions. Exemple : une IA qui apprend à jouer, ou un système qui optimise une stratégie. C'est ainsi qu'on a battu les champions de Go.
+
+**Le cycle entraînement / inférence.** Deux phases distinctes : l'**entraînement** (le modèle apprend sur des données, phase coûteuse) puis l'**inférence** (le modèle entraîné est utilisé pour faire des prédictions sur de nouvelles données, phase rapide). Quand tu utilises un chatbot, tu fais de l'inférence sur un modèle déjà entraîné.
+
+**Le surapprentissage (overfitting).** Le piège central, déjà vu dans ta fiche régression : un modèle trop complexe « mémorise » les données d'entraînement (y compris leur bruit) au lieu d'apprendre la tendance générale, et devient mauvais sur de nouvelles données. L'objectif d'un modèle est de **généraliser**, pas de mémoriser. D'où la pratique de séparer les données en jeu d'entraînement et jeu de test.
+
+**Les biais.** Un modèle apprend ce qu'il y a dans ses données — y compris leurs biais. Si les données reflètent des discriminations, le modèle les reproduira, voire les amplifiera. Enjeu éthique et technique majeur, particulièrement sensible quand l'IA prend des décisions sur des personnes.
+
+## Une brève histoire (pour situer)
+
+L'IA n'est pas née hier : le terme date de 1956. Le domaine a connu des cycles d'enthousiasme et de déceptions (les « hivers de l'IA »). Les approches ont évolué : d'abord des **systèmes à base de règles** et de logique (l'IA « symbolique »), puis le **machine learning** statistique, et depuis ~2012 l'explosion du **deep learning** (grâce à trois facteurs réunis : beaucoup de données, une grande puissance de calcul via les GPU, et des algorithmes améliorés). La vague actuelle des **LLM et de l'IA générative** date de la fin des années 2010 avec l'architecture Transformer (2017). Connaître cette histoire évite de croire que « l'IA = ChatGPT » : c'est un champ vaste et ancien.
+
+## Ressources conceptuelles recommandées
+
+Pour approfondir les concepts **sans code**, dans l'ordre de priorité :
+
+**Elements of AI** (elementsofai.com) — Le meilleur point de départ conceptuel. Cours gratuit de l'Université d'Helsinki, sans code, traduit en français, qui construit les mental models, l'éthique et le vocabulaire. Environ 20-30h, très bien noté. Idéal pour la première étape de ton parcours.
+
+**AI for Everyone** (Andrew Ng, sur Coursera, audit gratuit) — Une vue d'ensemble non technique par une des figures majeures du domaine. Bon pour comprendre ce que l'IA peut et ne peut pas faire, et son impact.
+
+**CS50's Introduction to AI with Python** (Harvard, cs50.harvard.edu/ai) — Plus technique (nécessite un peu de Python), une vraie fondation universitaire sur les algorithmes d'IA (recherche, logique, apprentissage). Excellent une fois les bases conceptuelles acquises.
+
+**Anthropic Academy — AI Fluency** (anthropic.com, section learn) — Sur la collaboration efficace et éthique avec les systèmes d'IA. Utile pour l'usage raisonné des outils.
+
+## Ce qu'il faut retenir
+
+- L'IA moderne **apprend à partir de données** au lieu de suivre des règles programmées ; les **données** sont donc centrales.
+- Trois types d'apprentissage : **supervisé** (données étiquetées, ex. classification/régression), **non supervisé** (structures cachées, ex. clustering/anomalies), **par renforcement** (essai-erreur/récompense).
+- Deux phases : **entraînement** (apprendre, coûteux) puis **inférence** (prédire, rapide).
+- Le **surapprentissage** (mémoriser au lieu de généraliser) est le piège central ; on sépare entraînement et test. Les **biais** des données sont un enjeu majeur.
+- L'IA est un champ **ancien** (1956) avec des cycles ; le deep learning explose depuis 2012, l'IA générative depuis les Transformers (2017).
+- Meilleure ressource conceptuelle de départ : **Elements of AI** (gratuit, en français, sans code).

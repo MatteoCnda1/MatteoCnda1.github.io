@@ -1,0 +1,100 @@
+---
+id: 01-fondations
+title: Les fondations des probabilités
+sidebar_position: 1
+---
+
+# Les fondations des probabilités
+
+## À quoi servent les probabilités
+
+Les probabilités sont la branche des maths qui **quantifie l'incertitude**. Partout où le hasard, l'aléa ou l'incomplétude d'information interviennent, elles donnent un cadre rigoureux pour raisonner. Pour ton profil, elles sont fondamentales :
+
+- En **cryptographie** : la sécurité repose sur l'aléa (génération de clés), et beaucoup d'attaques sont probabilistes (le paradoxe des anniversaires pour les collisions de hash, que tu as vu en crypto, est du pur calcul de probabilités).
+- En **machine learning et data science** : tout repose sur les probabilités (un classifieur estime des probabilités, un modèle bayésien raisonne sur des incertitudes).
+- En **réseaux** : modéliser le trafic, les pertes de paquets, les temps d'attente (files d'attente).
+- En **sécurité** : évaluer des risques, détecter des anomalies (un événement improbable est suspect).
+
+Le but des probabilités : passer de « ça pourrait arriver » à « ça a telle chance d'arriver, précisément ».
+
+## Le vocabulaire de base
+
+Tout part d'une **expérience aléatoire** : une expérience dont on ne peut pas prédire le résultat avec certitude (lancer un dé, tirer une carte, observer si un paquet réseau arrive). Quelques termes structurants :
+
+**L'univers** (noté $\Omega$, oméga) — L'ensemble de **tous les résultats possibles** de l'expérience. Pour un dé à six faces : $\Omega = \{1, 2, 3, 4, 5, 6\}$. Pour un lancer de pièce : $\Omega = \{\text{pile}, \text{face}\}$.
+
+**Un événement** — Un sous-ensemble de l'univers, c'est-à-dire une **partie** des résultats possibles qui nous intéresse. « Obtenir un nombre pair » avec un dé est l'événement $\{2, 4, 6\}$. « Obtenir plus de 4 » est $\{5, 6\}$.
+
+**Un événement élémentaire** — Un résultat unique : $\{3\}$.
+
+**La probabilité d'un événement** — Un nombre entre 0 et 1 qui mesure sa chance de se produire. 0 = impossible, 1 = certain, 0,5 = une chance sur deux. On la note $P(A)$ pour un événement $A$.
+
+## Comment calculer une probabilité
+
+Dans le cas le plus simple (résultats **équiprobables**, c'est-à-dire tous aussi probables — un dé équilibré, une pièce non truquée), la probabilité d'un événement se calcule par un rapport de dénombrement :
+
+```math
+P(A) = \frac{\text{nombre de cas favorables}}{\text{nombre de cas possibles}}
+```
+
+Exemple : probabilité d'obtenir un nombre pair avec un dé. Cas favorables : $\{2, 4, 6\}$, soit 3. Cas possibles : 6. Donc $P(\text{pair}) = 3/6 = 0,5$.
+
+Cette formule (attribuée à Laplace) n'est valable que si tous les résultats sont équiprobables. Quand ce n'est pas le cas (un dé pipé, un événement réel), on estime les probabilités autrement : par la fréquence observée sur de nombreuses répétitions (approche **fréquentiste**), ou par un degré de croyance mis à jour (approche **bayésienne**, qu'on retrouvera).
+
+## Les axiomes de Kolmogorov
+
+Pour être rigoureux, les probabilités reposent sur trois **axiomes** (posés par Kolmogorov en 1933) — les règles de base dont tout découle :
+
+1. **Positivité** — Une probabilité est toujours comprise entre 0 et 1 : $0 \le P(A) \le 1$. Pas de probabilité négative ni supérieure à 1.
+2. **Certitude** — La probabilité de l'univers entier est 1 : $P(\Omega) = 1$ (il est certain qu'un des résultats possibles se produira).
+3. **Additivité** — Pour deux événements **incompatibles** (qui ne peuvent pas se produire ensemble), la probabilité de l'un OU l'autre est la somme : $P(A \cup B) = P(A) + P(B)$.
+
+Ces trois règles simples suffisent à fonder toute la théorie. Elles formalisent l'intuition (une chance est entre 0 et 1, quelque chose arrive forcément, les chances de choses exclusives s'additionnent).
+
+## Les opérations sur les événements
+
+Comme les événements sont des ensembles, on utilise la logique des ensembles (lien direct avec les maths discrètes) :
+
+**L'union** ($A \cup B$) — « $A$ OU $B$ » (l'un, l'autre, ou les deux). Événement « pair OU supérieur à 4 » = $\{2,4,6\} \cup \{5,6\} = \{2,4,5,6\}$.
+
+**L'intersection** ($A \cap B$) — « $A$ ET $B$ » (les deux à la fois). « Pair ET supérieur à 4 » = $\{2,4,6\} \cap \{5,6\} = \{6\}$.
+
+**Le complémentaire** ($\bar{A}$ ou $A^c$) — « NON $A$ » (tout sauf $A$). Une propriété très utile : $P(\bar{A}) = 1 - P(A)$. Souvent, calculer la probabilité du contraire est plus facile (« au moins un » se calcule souvent via « aucun »).
+
+**Événements incompatibles (disjoints)** — Quand $A \cap B = \emptyset$ (ils ne peuvent pas coexister). Exemple : « pair » et « impair ».
+
+## La formule d'addition générale
+
+L'axiome d'additivité ne marche que pour les événements incompatibles. Dans le cas général (les événements peuvent se chevaucher), la formule est :
+
+```math
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+```
+
+Pourquoi le « moins $P(A \cap B)$ » ? Parce qu'en additionnant $P(A)$ et $P(B)$, on compte **deux fois** la partie commune (l'intersection). On la retranche une fois pour corriger. C'est le principe d'inclusion-exclusion (que tu reverras en combinatoire).
+
+Exemple : dans un jeu de 52 cartes, probabilité de tirer un cœur OU un roi. $P(\text{cœur}) = 13/52$, $P(\text{roi}) = 4/52$, mais le roi de cœur est compté dans les deux, donc $P(\text{cœur} \cap \text{roi}) = 1/52$. Résultat : $13/52 + 4/52 - 1/52 = 16/52$.
+
+## L'indépendance
+
+Deux événements sont **indépendants** si la réalisation de l'un n'influence **pas** la probabilité de l'autre. Exemple : deux lancers de pièce successifs — le résultat du premier ne change rien au second. Formellement, $A$ et $B$ sont indépendants si :
+
+```math
+P(A \cap B) = P(A) \times P(B)
+```
+
+C'est-à-dire que la probabilité qu'ils se produisent **tous les deux** est le produit de leurs probabilités. Exemple : probabilité d'obtenir deux fois pile en deux lancers = $0,5 \times 0,5 = 0,25$.
+
+Attention à ne pas confondre **indépendants** et **incompatibles** — c'est une erreur classique. Incompatibles = ne peuvent pas coexister ($P(A \cap B) = 0$). Indépendants = n'influencent pas l'un l'autre ($P(A \cap B) = P(A)P(B)$). Ce sont des notions différentes, voire opposées : deux événements incompatibles de probabilités non nulles sont forcément **dépendants** (si l'un arrive, l'autre ne peut pas, donc il y a une influence forte).
+
+L'indépendance est une hypothèse cruciale et souvent abusée. En crypto, on **veut** que les bits d'une clé soient indépendants (sinon on peut prédire). En sécurité, supposer à tort que des événements sont indépendants mène à sous-estimer des risques (plusieurs failles corrélées).
+
+## Ce qu'il faut retenir
+
+- Les probabilités **quantifient l'incertitude** : fondamentales en crypto (aléa, collisions), ML, réseaux, sécurité.
+- Vocabulaire : **univers** $\Omega$ (tous les résultats), **événement** (un sous-ensemble), **probabilité** $P(A) \in [0,1]$.
+- Cas équiprobable : $P(A) = \dfrac{\text{cas favorables}}{\text{cas possibles}}$ (formule de Laplace).
+- Trois **axiomes** (Kolmogorov) : positivité ($0 \le P \le 1$), certitude ($P(\Omega)=1$), additivité pour événements incompatibles.
+- Opérations : union (OU), intersection (ET), complémentaire ($P(\bar A) = 1 - P(A)$, souvent le calcul le plus simple).
+- Formule d'addition générale : $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ (on retranche le chevauchement compté deux fois).
+- **Indépendance** : $P(A \cap B) = P(A)P(B)$ (pas d'influence mutuelle) — à ne PAS confondre avec **incompatibles** ($P(A\cap B)=0$).

@@ -1,0 +1,187 @@
+---
+title: Defense in Depth
+sidebar_position: 9
+---
+
+---
+
+# Defense in Depth
+
+## Introduction
+
+Le principe de **Defense in Depth** consiste à utiliser plusieurs couches de sécurité.
+
+L'idée fondamentale est :
+
+> Une seule mesure de sécurité ne doit pas être la seule protection.
+
+---
+
+# Exemple
+
+Une infrastructure peut utiliser :
+
+```text
+Internet
+   │
+   ▼
+┌──────────────┐
+│ Firewall     │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│ Authentication│
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│ Authorization │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│ Endpoint     │
+│ Protection   │
+└──────┬───────┘
+       ▼
+┌──────────────┐
+│ Monitoring   │
+└──────────────┘
+```
+
+Si une couche échoue, les autres peuvent encore limiter l'attaque.
+
+---
+
+# Exemple concret
+
+Imaginons qu'un utilisateur soit victime d'un phishing.
+
+Première couche compromise :
+
+```text
+User credentials exposed
+```
+
+Mais d'autres protections peuvent exister :
+
+```text
+MFA
+   │
+Device verification
+   │
+Conditional access
+   │
+Least privilege
+   │
+Monitoring
+```
+
+Une compromission initiale ne doit pas automatiquement permettre une compromission complète.
+
+---
+
+# Les différentes couches
+
+## Physical Security
+
+- contrôle d'accès ;
+- salles sécurisées ;
+- équipements protégés.
+
+## Network Security
+
+- firewalls ;
+- segmentation ;
+- IDS ;
+- IPS.
+
+## Identity Security
+
+- MFA ;
+- IAM ;
+- Least Privilege.
+
+## Endpoint Security
+
+- EDR ;
+- antivirus ;
+- hardening.
+
+## Application Security
+
+- validation des entrées ;
+- authentification ;
+- contrôle d'accès ;
+- mises à jour.
+
+## Monitoring
+
+- logs ;
+- SIEM ;
+- alertes ;
+- threat hunting.
+
+---
+
+# Defense in Depth vs Security by Obscurity
+
+Defense in Depth ne signifie pas cacher un système en espérant qu'il ne soit jamais découvert.
+
+```text
+Security by obscurity
+```
+
+repose principalement sur le fait qu'un attaquant ne connaisse pas une information.
+
+Defense in Depth repose sur plusieurs contrôles indépendants.
+
+---
+
+# Exemple de défaillance
+
+Sans Defense in Depth :
+
+```text
+Single password
+      │
+      ▼
+Full administrator access
+```
+
+Avec plusieurs couches :
+
+```text
+Password
+   │
+   ▼
+MFA
+   │
+   ▼
+Role restrictions
+   │
+   ▼
+Network segmentation
+   │
+   ▼
+Monitoring
+```
+
+---
+
+# Points importants
+
+- Une seule défense peut échouer.
+- Plusieurs couches réduisent le risque global.
+- Les contrôles doivent être complémentaires.
+- Defense in Depth inclut prévention, détection et réponse.
+- Least Privilege et Zero Trust peuvent faire partie d'une stratégie de défense en profondeur.
+
+---
+
+## Concepts associés
+
+- Least Privilege
+- Zero Trust
+- Network Segmentation
+- MFA
+- Monitoring
+- Incident Response

@@ -1,0 +1,114 @@
+---
+id: 01-fondamentaux-graphes
+title: Fondamentaux des graphes
+sidebar_position: 1
+---
+
+# Fondamentaux des graphes
+
+## Pourquoi les graphes sont LE domaine des réseaux
+
+Si un seul domaine des maths décrit littéralement ton métier, c'est celui-ci. Un **graphe** est une structure qui modélise des **objets et les liens entre eux**. Or un réseau informatique, c'est exactement ça : des machines (objets) reliées par des câbles ou des connexions (liens). La théorie des graphes est donc le langage mathématique naturel des réseaux — mais aussi de bien d'autres choses en informatique.
+
+Quelques exemples de ce que les graphes modélisent, tous pertinents pour toi :
+- Un **réseau informatique** : routeurs/machines = objets, liaisons = liens.
+- Le **web** : pages = objets, hyperliens = liens (c'est ainsi que Google le voit).
+- Les **réseaux sociaux** : personnes = objets, amitiés = liens.
+- Le **routage** : trouver le meilleur chemin d'un point à un autre (protocoles OSPF, BGP).
+- Les **dépendances** : entre paquets logiciels, entre tâches.
+- La **cartographie** : intersections et routes (le GPS calcule des chemins dans un graphe).
+
+Comprendre les graphes, c'est disposer d'un cadre puissant pour raisonner sur les structures connectées — le cœur de l'informatique en réseau.
+
+## La définition
+
+Un **graphe** $G$ est constitué de deux ensembles :
+
+- Les **sommets** (ou nœuds, en anglais *vertices* ou *nodes*) — les objets. On note l'ensemble $V$.
+- Les **arêtes** (en anglais *edges*) — les liens entre paires de sommets. On note l'ensemble $E$.
+
+On écrit $G = (V, E)$. Par exemple, un petit réseau de 4 machines reliées entre elles est un graphe à 4 sommets et quelques arêtes.
+
+Visuellement, on dessine les sommets par des points et les arêtes par des traits qui les relient. Mais attention : **seule compte la structure des connexions**, pas le dessin. Deux dessins très différents peuvent représenter le même graphe si les liens sont identiques. Un graphe est une structure abstraite de relations, pas une image.
+
+## Graphes orientés et non orientés
+
+Distinction fondamentale selon que les liens ont un sens ou non :
+
+**Graphe non orienté** — Les arêtes n'ont pas de direction : le lien entre A et B est le même que entre B et A (relation symétrique). Exemple : une liaison réseau bidirectionnelle, une amitié (si A est ami avec B, B est ami avec A).
+
+**Graphe orienté** (digraph) — Les arêtes ont un **sens** (on parle alors d'*arcs*). Le lien de A vers B n'implique pas le lien de B vers A. Exemple : les hyperliens du web (une page peut pointer vers une autre sans réciprocité), le suivi sur les réseaux sociaux (tu peux suivre quelqu'un sans être suivi en retour), un flux de données à sens unique.
+
+Le choix orienté/non orienté dépend de ce qu'on modélise, et change les algorithmes qu'on applique. Un réseau physique symétrique est souvent non orienté ; un flux ou une hiérarchie est orienté.
+
+## Le vocabulaire essentiel
+
+Quelques termes qui reviennent constamment :
+
+**Le degré d'un sommet** — Le nombre d'arêtes qui lui sont connectées. Dans un réseau, le degré d'une machine est son nombre de connexions directes. Pour un graphe orienté, on distingue le **degré entrant** (arcs qui arrivent) et le **degré sortant** (arcs qui partent). Un sommet de fort degré est un **hub** — un point très connecté, souvent critique (et une cible privilégiée en sécurité : compromettre un hub touche beaucoup de connexions).
+
+**Un chemin** — Une suite de sommets reliés par des arêtes, permettant d'aller d'un sommet à un autre. La **longueur** d'un chemin est son nombre d'arêtes. Trouver des chemins est au cœur du routage.
+
+**Un cycle** — Un chemin qui revient à son point de départ. Un graphe **sans cycle** est dit acyclique (important pour les arbres et les dépendances).
+
+**La connexité** — Un graphe est **connexe** si on peut aller de n'importe quel sommet à n'importe quel autre par un chemin. Un réseau connexe garantit que toutes les machines peuvent communiquer. Un graphe non connexe se décompose en plusieurs **composantes connexes** (des « îlots » séparés). Détecter qu'un réseau se scinde en composantes déconnectées est un enjeu de fiabilité majeur.
+
+**Les voisins** — Les sommets directement reliés à un sommet donné par une arête.
+
+## Les graphes pondérés
+
+Souvent, les liens ne sont pas tous équivalents : on leur attribue un **poids** (un nombre). Un graphe dont les arêtes portent des poids est **pondéré**.
+
+Le poids peut représenter : une distance, un coût, une latence réseau, une bande passante, un temps de trajet, une capacité. C'est essentiel pour ton domaine : dans un réseau, on ne cherche pas juste « un » chemin, mais le chemin de **plus faible latence** ou de **plus grande bande passante** — donc le chemin optimal dans un graphe pondéré. C'est exactement ce que calculent les protocoles de routage.
+
+Le fameux algorithme de Dijkstra (cours sur les algorithmes) trouve le plus court chemin dans un graphe pondéré — il est au cœur du routage réseau.
+
+## Comment représenter un graphe en machine
+
+Pour manipuler un graphe en informatique, il faut le stocker. Deux représentations principales, avec des compromis :
+
+**La matrice d'adjacence** — Une matrice carrée $n \times n$ (où $n$ est le nombre de sommets) : la case $(i, j)$ vaut 1 s'il y a une arête entre $i$ et $j$, 0 sinon (ou le poids pour un graphe pondéré). C'est ici que ton cours d'**algèbre linéaire** rejoint les graphes : un graphe se représente par une matrice, et des opérations matricielles révèlent des propriétés du graphe (les puissances de la matrice d'adjacence comptent les chemins, les valeurs propres renseignent sur la structure — c'est le fondement de PageRank).
+
+```math
+A = \begin{pmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 1 & 0 \\ 1 & 1 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+```
+
+Avantage : test instantané de l'existence d'une arête. Inconvénient : occupe $n^2$ cases même si le graphe a peu d'arêtes (gaspillage pour les graphes « creux », comme la plupart des réseaux réels où chaque machine n'est connectée qu'à quelques autres).
+
+**La liste d'adjacence** — Pour chaque sommet, on stocke la liste de ses voisins. Bien plus économe en mémoire pour les graphes creux (on ne stocke que les arêtes existantes), c'est la représentation la plus utilisée en pratique pour les grands réseaux.
+
+Le choix dépend du graphe : matrice pour les petits graphes denses ou quand on fait de l'algèbre linéaire dessus ; liste pour les grands graphes creux (le cas courant en réseau).
+
+```python
+# Liste d'adjacence en Python (dictionnaire)
+graphe = {
+    "A": ["B", "C"],
+    "B": ["A", "C"],
+    "C": ["A", "B", "D"],
+    "D": ["C"]
+}
+# La bibliothèque networkx est la référence pour manipuler des graphes
+import networkx as nx
+G = nx.Graph()
+G.add_edges_from([("A","B"), ("A","C"), ("B","C"), ("C","D")])
+print(G.degree("C"))    # 3 (C est un hub)
+```
+
+## Quelques graphes particuliers
+
+Des structures qu'on rencontre souvent :
+
+**Le graphe complet** — Tous les sommets sont reliés à tous les autres. Le maximum de connexions possibles. Un réseau « maillé complet » (chaque machine reliée à toutes) est robuste mais coûteux (le nombre d'arêtes croît en $n^2$).
+
+**Le graphe biparti** — Les sommets se divisent en deux groupes, et les arêtes ne relient que des sommets de groupes différents (jamais au sein d'un même groupe). Utile pour modéliser des associations (utilisateurs ↔ ressources, par exemple pour les droits d'accès).
+
+**L'arbre** — Un graphe connexe **sans cycle**. Structure si importante qu'elle a son propre cours (le suivant) : arborescence de fichiers, hiérarchie réseau, arbres de décision.
+
+## Ce qu'il faut retenir
+
+- Un **graphe** $G = (V, E)$ modélise des **objets (sommets)** et leurs **liens (arêtes)** — le langage mathématique naturel des réseaux, du web, des réseaux sociaux, du routage.
+- **Non orienté** (liens symétriques, ex. liaison réseau) vs **orienté/digraph** (liens à sens unique, ex. hyperliens).
+- Vocabulaire clé : **degré** (nombre de connexions, un fort degré = **hub** critique), **chemin**, **cycle**, **connexité** (peut-on relier tous les sommets ? sinon **composantes** séparées), **voisins**.
+- Les graphes **pondérés** (arêtes avec un poids : latence, coût, bande passante) permettent de chercher le chemin **optimal** — cœur du routage réseau.
+- Représentations : **matrice d'adjacence** ($n \times n$, pont avec l'algèbre linéaire, bien pour les petits graphes denses) vs **liste d'adjacence** (économe, pour les grands graphes creux — le cas réseau courant).
+- Graphes particuliers : complet (tout relié), biparti (deux groupes), **arbre** (connexe sans cycle, cours suivant).

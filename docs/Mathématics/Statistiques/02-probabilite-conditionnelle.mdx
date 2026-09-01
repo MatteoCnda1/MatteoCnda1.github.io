@@ -1,0 +1,107 @@
+---
+id: 02-probabilite-conditionnelle
+title: Probabilité conditionnelle et théorème de Bayes
+sidebar_position: 2
+---
+
+# Probabilité conditionnelle et théorème de Bayes
+
+## L'idée : mettre à jour ses croyances
+
+La probabilité conditionnelle répond à une question fondamentale : **comment la probabilité d'un événement change-t-elle quand on obtient une nouvelle information ?**
+
+Exemple intuitif : la probabilité qu'il pleuve aujourd'hui est disons 30 %. Mais si j'apprends que le ciel est couvert, cette probabilité monte. L'information « ciel couvert » a **mis à jour** ma probabilité. C'est exactement ce que formalise la probabilité conditionnelle — et c'est le cœur du raisonnement en présence d'information partielle, omniprésent en ML, en sécurité (détection), en diagnostic.
+
+## La définition
+
+La probabilité de $A$ **sachant** $B$ (c'est-à-dire sachant que $B$ s'est produit) se note $P(A \mid B)$ et se définit par :
+
+```math
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+```
+
+Lisons la formule : on **restreint l'univers** à $B$ (puisqu'on sait que $B$ est arrivé), et on regarde quelle fraction de ce nouvel univers correspond aussi à $A$. Le dénominateur $P(B)$ « renormalise » : on ne considère plus tout l'univers, mais seulement la partie où $B$ est vrai.
+
+Exemple avec un dé. Quelle est la probabilité d'avoir un 6, sachant qu'on a obtenu un nombre pair ? L'information « pair » restreint l'univers à $\{2, 4, 6\}$ (3 possibilités). Parmi elles, une seule est un 6. Donc $P(6 \mid \text{pair}) = 1/3$ — bien plus que le $1/6$ sans information. L'information a changé la probabilité.
+
+## Lien avec l'indépendance
+
+On retrouve ici l'indépendance sous un autre angle. Si $A$ et $B$ sont **indépendants**, alors savoir que $B$ s'est produit ne change **rien** à la probabilité de $A$ :
+
+```math
+P(A \mid B) = P(A)
+```
+
+C'est une autre façon de définir l'indépendance, souvent plus parlante : « $B$ n'apporte aucune information sur $A$ ». Si au contraire $P(A \mid B) \neq P(A)$, les événements sont dépendants — l'un renseigne sur l'autre.
+
+## La règle de multiplication
+
+En réarrangeant la définition, on obtient une formule très utile pour calculer la probabilité que **deux événements se produisent ensemble** :
+
+```math
+P(A \cap B) = P(A \mid B) \times P(B)
+```
+
+C'est-à-dire : la probabilité que $A$ et $B$ arrivent = probabilité que $B$ arrive, fois probabilité que $A$ arrive une fois $B$ acquis. Ça permet de décomposer des situations séquentielles (tirer une carte, puis une autre sans remise : la deuxième dépend de la première).
+
+## La formule des probabilités totales
+
+Souvent, on veut la probabilité d'un événement $A$ qui peut survenir dans plusieurs « scénarios » distincts. Si $B_1, B_2, \ldots, B_n$ sont des scénarios qui **partitionnent** l'univers (ils couvrent tous les cas et sont incompatibles entre eux), alors :
+
+```math
+P(A) = P(A \mid B_1)P(B_1) + P(A \mid B_2)P(B_2) + \cdots + P(A \mid B_n)P(B_n)
+```
+
+L'idée : on décompose $A$ selon les scénarios, on calcule sa probabilité dans chacun, et on pondère par la probabilité de chaque scénario. C'est une somme pondérée.
+
+Exemple concret en sécurité : la probabilité qu'un email soit détecté comme spam dépend de scénarios (email réellement spam, ou légitime). $P(\text{détecté}) = P(\text{détecté} \mid \text{spam})P(\text{spam}) + P(\text{détecté} \mid \text{légitime})P(\text{légitime})$. Cette décomposition est la base du calcul suivant.
+
+## Le théorème de Bayes
+
+On arrive au résultat le plus important — et l'un des plus puissants de toutes les mathématiques appliquées. Le **théorème de Bayes** permet d'**inverser** une probabilité conditionnelle : passer de $P(B \mid A)$ à $P(A \mid B)$.
+
+```math
+P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)}
+```
+
+Pourquoi c'est révolutionnaire ? Parce qu'on connaît souvent une direction de la conditionnelle mais on veut l'autre. Exemple médical typique : on connaît $P(\text{test positif} \mid \text{malade})$ (la fiabilité du test, mesurée en labo), mais ce qu'on veut vraiment savoir, c'est $P(\text{malade} \mid \text{test positif})$ (« je suis positif, suis-je vraiment malade ? »). Bayes fait le pont.
+
+Le vocabulaire bayésien, à connaître :
+- $P(A)$ est la probabilité **a priori** (prior) : ce qu'on croit avant l'information.
+- $P(A \mid B)$ est la probabilité **a posteriori** (posterior) : ce qu'on croit après avoir intégré l'information $B$.
+- Bayes est donc une **machine à mettre à jour ses croyances** avec de nouvelles données.
+
+## L'exemple qui change la vision : le piège des faux positifs
+
+Voici l'exemple le plus important à comprendre, car il est contre-intuitif et a des conséquences énormes en pratique (tests médicaux, détection d'intrusion, antispam, biométrie).
+
+Supposons une maladie rare touchant **1 personne sur 1000** ($P(\text{malade}) = 0,001$). Un test la détecte avec une fiabilité de **99 %** : il est positif dans 99 % des cas si on est malade, et il n'a que 1 % de faux positifs (positif à tort chez un sain). Tu es testé positif. **Quelle est la probabilité que tu sois réellement malade ?**
+
+L'intuition dit « 99 % ». C'est faux. Appliquons Bayes. Sur 100 000 personnes :
+- 100 sont malades (1 pour 1000), dont 99 testées positives (99 %).
+- 99 900 sont saines, dont 1 % = 999 testées positives à tort (faux positifs).
+- Total de positifs : 99 + 999 = 1098.
+- Parmi eux, réellement malades : 99.
+
+Donc $P(\text{malade} \mid \text{positif}) = 99 / 1098 \approx 0,09$, soit **environ 9 %** seulement ! Malgré un test « fiable à 99 % », un positif n'a que 9 % de chances d'être un vrai malade, parce que la maladie est rare : les faux positifs (sur l'énorme population saine) noient les vrais positifs.
+
+Cette leçon est capitale en sécurité informatique. Un système de détection d'intrusion « fiable à 99 % » qui analyse des millions d'événements légitimes va générer une avalanche de **fausses alertes** (faux positifs), au point de noyer les vraies. C'est le fléau des SOC (centres de sécurité) : le taux de base des vraies attaques est si faible que même un excellent détecteur produit surtout des faux positifs. Comprendre Bayes, c'est comprendre pourquoi « fiable à 99 % » ne suffit pas quand l'événement recherché est rare.
+
+## Applications en informatique et sécurité
+
+Le raisonnement bayésien est partout dans ton domaine :
+
+- **Filtres antispam** — Les filtres bayésiens estiment $P(\text{spam} \mid \text{mots du message})$ en apprenant des exemples. Historiquement l'une des premières applications grand public efficaces de Bayes.
+- **Classification et ML** — Le classifieur « naïf bayésien » repose directement dessus ; plus largement, l'inférence bayésienne est un pan entier du machine learning.
+- **Détection d'anomalies / IDS** — Évaluer la probabilité qu'un comportement soit malveillant sachant les observations.
+- **Cryptanalyse** — Certaines attaques estiment la probabilité d'une clé sachant des observations.
+
+## Ce qu'il faut retenir
+
+- La **probabilité conditionnelle** $P(A \mid B) = \dfrac{P(A \cap B)}{P(B)}$ met à jour la probabilité de $A$ quand on sait que $B$ s'est produit (on restreint l'univers à $B$).
+- Indépendance vue autrement : $P(A \mid B) = P(A)$ (savoir $B$ ne change rien à $A$).
+- **Règle de multiplication** : $P(A \cap B) = P(A \mid B)P(B)$ (utile pour les situations séquentielles).
+- **Probabilités totales** : décomposer $P(A)$ selon des scénarios qui partitionnent l'univers (somme pondérée).
+- **Théorème de Bayes** : $P(A \mid B) = \dfrac{P(B \mid A)P(A)}{P(B)}$ — inverse la conditionnelle, met à jour un **a priori** en **a posteriori**. Machine à réviser ses croyances.
+- **Le piège des faux positifs** : quand l'événement recherché est rare, même un test « fiable à 99 % » donne surtout des faux positifs — capital pour les tests médicaux ET la détection d'intrusion (fléau des fausses alertes).
+- Applications : antispam bayésien, classification ML, détection d'anomalies, cryptanalyse.

@@ -1,0 +1,100 @@
+---
+id: 04-equations-differentielles
+title: Les équations différentielles
+sidebar_position: 4
+---
+
+# Les équations différentielles
+
+## L'idée : décrire un système par son changement
+
+On arrive au sommet de l'analyse, et probablement à la notion la plus puissante pour modéliser le monde réel. Une **équation différentielle** est une équation qui relie une fonction à ses **dérivées**.
+
+Pourquoi est-ce si important ? Parce que, très souvent, on ne connaît pas directement comment une quantité évolue, mais on connaît la **règle qui gouverne son changement**. Les lois de la nature sont presque toutes formulées ainsi :
+
+- On ne connaît pas d'emblée la position d'un objet à tout instant, mais on connaît la loi de Newton qui relie son accélération (une dérivée seconde) aux forces.
+- On ne connaît pas d'emblée la charge d'un condensateur, mais on connaît comment son taux de variation dépend du courant.
+- On ne connaît pas la population future, mais on connaît son taux de croissance.
+
+Une équation différentielle **capture cette règle de changement**, et la **résoudre** consiste à retrouver la fonction elle-même — l'évolution complète du système. C'est passer de « voici comment ça change » à « voici comment ça se comporte dans le temps ».
+
+## Un premier exemple : la croissance exponentielle
+
+L'exemple le plus fondamental. Supposons qu'une quantité croît à un rythme **proportionnel à sa taille actuelle** (plus il y en a, plus ça augmente vite). C'est le cas d'une population, d'un capital avec intérêts composés, d'une réaction en chaîne. Mathématiquement :
+
+```math
+\frac{dy}{dt} = k y
+```
+
+Cette équation dit : « le taux de variation de $y$ (sa dérivée par rapport au temps) est proportionnel à $y$ lui-même », avec une constante $k$. C'est une équation différentielle : elle relie la fonction $y$ à sa dérivée $\frac{dy}{dt}$.
+
+La **solution** (la fonction qui satisfait cette règle) est :
+
+```math
+y(t) = y_0 \, e^{kt}
+```
+
+où $y_0$ est la valeur initiale. On retrouve la **croissance exponentielle** ! Si $k > 0$, la quantité explose (croissance) ; si $k < 0$, elle décroît vers zéro (décroissance exponentielle — désintégration radioactive, refroidissement, décharge d'un condensateur). Cette fonction $e^{kt}$ apparaît partout précisément parce que « croître proportionnellement à soi-même » est une situation universelle. Et rappelle-toi : $e^x$ est sa propre dérivée (cours sur les dérivées), c'est pour ça qu'elle résout naturellement cette équation.
+
+## Le vocabulaire
+
+Quelques termes pour s'orienter :
+
+**Ordre de l'équation** — L'ordre de la dérivée la plus élevée qui apparaît. Une équation avec seulement $y'$ est du **premier ordre** ; une avec $y''$ (dérivée seconde) est du **second ordre**. La loi de Newton (avec l'accélération = dérivée seconde de la position) donne des équations du second ordre.
+
+**Équation ordinaire (ODE) vs partielle (PDE)** — Une **ODE** (Ordinary Differential Equation) porte sur une fonction d'**une seule variable** (typiquement le temps). Une **PDE** (Partial Differential Equation) porte sur une fonction de **plusieurs variables** (temps ET espace, par exemple) et utilise des dérivées partielles. Les PDE décrivent les phénomènes qui varient dans l'espace et le temps : propagation de la chaleur, des ondes, écoulement des fluides, propagation des ondes électromagnétiques (donc les télécommunications !). Elles sont plus complexes ; on se concentre ici sur les ODE.
+
+**Conditions initiales** — Une équation différentielle a en général une **infinité** de solutions (toutes les exponentielles $y_0 e^{kt}$ pour différentes valeurs de départ, par exemple). Pour en fixer une seule, il faut une **condition initiale** : la valeur de la quantité à un instant donné (« à $t=0$, la population était de 1000 »). C'est cette condition qui ancre la solution dans la réalité. Physiquement, ça correspond au fait que l'évolution future dépend de l'état de départ.
+
+## Pourquoi c'est central en ingénierie et en R&T
+
+Les équations différentielles sont le langage de la physique et de l'ingénierie, et elles te concernent directement en électronique et télécoms.
+
+**Circuits électriques** — C'est l'application la plus directe pour toi. Un circuit **RC** (résistance + condensateur) est décrit par une équation différentielle : la charge du condensateur évolue selon $\frac{dq}{dt}$ qui dépend de la tension et de la résistance. La solution est une exponentielle : c'est pourquoi un condensateur se charge et se décharge selon une courbe exponentielle, avec une **constante de temps** $\tau = RC$. Un circuit **RLC** (avec une bobine) donne une équation du second ordre dont les solutions sont des **oscillations** (éventuellement amorties) — le fondement des circuits résonnants, des oscillateurs, des filtres. Toute l'électronique analogique repose là-dessus.
+
+**Signaux et systèmes** — Le comportement d'un système (un filtre, un amplificateur) se décrit par des équations différentielles reliant l'entrée et la sortie. C'est le pont vers le traitement du signal (et Fourier : les équations différentielles linéaires se résolvent élégamment via les transformées, car dériver devient une simple multiplication dans le domaine fréquentiel).
+
+**Ondes électromagnétiques** — La propagation des signaux radio, la lumière dans une fibre optique, sont régies par des équations différentielles (les équations de Maxwell, qui sont des PDE). Les télécommunications reposent fondamentalement dessus.
+
+**Au-delà** — dynamique des populations, épidémies (les modèles SIR d'épidémiologie sont des systèmes d'équations différentielles), mécanique, thermique, chimie, économie, contrôle de systèmes (l'automatique, les asservissements). Presque toute modélisation dynamique passe par elles.
+
+## Résoudre : analytiquement ou numériquement
+
+Il y a deux façons d'aborder une équation différentielle :
+
+**La résolution analytique** — Trouver une formule exacte pour la solution (comme $y_0 e^{kt}$ plus haut). C'est élégant et exact, mais possible seulement pour des équations « gentilles » (linéaires, à coefficients constants...). Les techniques (séparation des variables, équations linéaires, transformées de Laplace/Fourier) permettent de résoudre les cas classiques — dont la plupart des circuits électroniques.
+
+**La résolution numérique** — Pour la grande majorité des équations différentielles réelles, il n'existe **pas** de solution analytique. On les résout alors **numériquement** : on approxime la solution pas à pas. L'idée de base (méthode d'Euler) est intuitive : on connaît l'état actuel et la règle de changement (l'équation donne la dérivée), donc on avance d'un petit pas de temps en suivant cette pente, on recalcule la nouvelle pente, on avance encore, et ainsi de suite. On « déroule » l'évolution petit à petit.
+
+```python
+# Méthode d'Euler : résoudre dy/dt = k*y numériquement (schéma de principe)
+k = 0.5
+y = 100          # condition initiale
+dt = 0.01        # petit pas de temps
+for i in range(1000):
+    dydt = k * y         # l'équation donne la dérivée
+    y = y + dydt * dt    # on avance d'un pas en suivant la pente
+# y approxime maintenant la solution après le temps écoulé
+```
+
+En pratique, on utilise des méthodes plus précises (Runge-Kutta) et des bibliothèques dédiées (`scipy.integrate.solve_ivp` en Python). Cette résolution numérique est un pan entier de l'**analyse numérique** (que tu verras) et le cœur de toute simulation : jeux vidéo (physique), météo, ingénierie, effets spéciaux — tout ce qui « simule » une évolution résout des équations différentielles numériquement.
+
+## Le lien entre les concepts
+
+Les équations différentielles couronnent l'analyse en reliant tout ce qu'on a vu :
+
+- Elles utilisent les **dérivées** (le changement) et les **limites** (leur fondement).
+- Les résoudre analytiquement fait souvent appel à l'**intégration** (intégrer, c'est déjà résoudre l'équation différentielle la plus simple $y' = f$).
+- Les résoudre numériquement relève de l'**analyse numérique**.
+- Les équations différentielles linéaires se résolvent élégamment via **Fourier/Laplace** (ce que tu as étudié).
+
+C'est l'aboutissement naturel du domaine : après avoir appris à mesurer le changement (dérivées) et à l'accumuler (intégrales), on apprend à décrire des systèmes entiers par leurs lois de changement, et à en déduire leur comportement.
+
+## Ce qu'il faut retenir
+
+- Une **équation différentielle** relie une fonction à ses **dérivées** : elle décrit un système par sa **règle de changement**. La **résoudre** = retrouver la fonction, l'évolution complète.
+- Cas fondamental : $\frac{dy}{dt} = ky$ (croissance/décroissance proportionnelle à soi-même) → solution **exponentielle** $y = y_0 e^{kt}$, omniprésente (populations, charge/décharge, désintégration).
+- Vocabulaire : **ordre** (dérivée la plus haute), **ODE** (une variable) vs **PDE** (plusieurs, ex. chaleur/ondes/électromagnétisme), **conditions initiales** (fixent LA solution parmi une infinité).
+- **Application directe en R&T** : les **circuits** (RC → charge exponentielle avec $\tau = RC$ ; RLC → oscillations), les **systèmes et signaux**, les **ondes EM** (télécoms, fibre — équations de Maxwell).
+- Résolution **analytique** (formule exacte, cas gentils) ou **numérique** (méthode d'Euler/Runge-Kutta, indispensable car la plupart n'ont pas de solution exacte) — cœur de toute **simulation**.
+- Les équations différentielles **couronnent l'analyse** : elles relient limites, dérivées, intégrales, analyse numérique et Fourier.

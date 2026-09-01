@@ -1,0 +1,98 @@
+---
+id: 04-valeurs-vecteurs-propres
+title: Valeurs propres et vecteurs propres
+sidebar_position: 4
+---
+
+# Valeurs propres et vecteurs propres
+
+## L'idée intuitive
+
+On arrive au concept le plus profond de l'algèbre linéaire — celui qui déroute le plus, mais qui débloque une quantité impressionnante d'applications (PageRank de Google, compression d'images, machine learning, physique quantique, analyse de vibrations, stabilité des systèmes). Prends le temps de comprendre l'intuition, le reste suit.
+
+Rappelle-toi : une matrice $A$ **transforme** les vecteurs (elle les tourne, les étire, les déforme). Pour la plupart des vecteurs, la transformation change à la fois leur **direction** et leur **longueur**.
+
+Mais il existe, pour beaucoup de matrices, des vecteurs **spéciaux** : ceux dont la direction **ne change pas** sous la transformation. La matrice ne fait que les **allonger ou les rétrécir** (éventuellement les retourner), sans les faire dévier de leur axe. Ces vecteurs privilégiés sont les **vecteurs propres** (eigenvectors), et le facteur d'étirement associé est la **valeur propre** (eigenvalue).
+
+Image mentale : imagine une transformation qui étire une feuille en caoutchouc. La plupart des flèches dessinées dessus vont tourner en plus de s'allonger. Mais certaines flèches, alignées avec les « axes naturels » de l'étirement, ne font que grandir sans tourner. Ce sont les directions propres — les axes intrinsèques de la transformation.
+
+## La définition
+
+Formellement, un vecteur $\vec{v}$ (non nul) est un **vecteur propre** de la matrice $A$ s'il existe un nombre $\lambda$ (lambda) tel que :
+
+```math
+A\vec{v} = \lambda \vec{v}
+```
+
+Lisons cette équation : appliquer la transformation $A$ au vecteur $\vec{v}$ (côté gauche) donne le même résultat que simplement **multiplier $\vec{v}$ par le nombre $\lambda$** (côté droit). Autrement dit, $A$ agit sur $\vec{v}$ comme un simple étirement de facteur $\lambda$, sans changer sa direction. Le nombre $\lambda$ est la **valeur propre** associée.
+
+- $\lambda = 2$ : le vecteur propre est doublé (même direction, longueur ×2).
+- $\lambda = 1$ : le vecteur est inchangé (direction ET longueur).
+- $\lambda = 0,5$ : il est rétréci de moitié.
+- $\lambda = -1$ : il est retourné (direction opposée, même longueur).
+- $\lambda = 0$ : il est écrasé sur l'origine (lien avec le déterminant nul).
+
+## Un exemple concret
+
+Prenons la matrice qui étire ×3 horizontalement et ×2 verticalement :
+
+```math
+A = \begin{pmatrix} 3 & 0 \\ 0 & 2 \end{pmatrix}
+```
+
+Le vecteur $\vec{v_1} = (1, 0)$ (horizontal) : $A\vec{v_1} = (3, 0) = 3 \cdot (1,0)$. Il reste horizontal, multiplié par 3. C'est un vecteur propre de valeur propre $\lambda_1 = 3$.
+
+Le vecteur $\vec{v_2} = (0, 1)$ (vertical) : $A\vec{v_2} = (0, 2) = 2 \cdot (0,1)$. Il reste vertical, multiplié par 2. Vecteur propre, valeur propre $\lambda_2 = 2$.
+
+En revanche, un vecteur en diagonale comme $(1, 1)$ donne $A(1,1) = (3, 2)$, qui n'est plus dans la direction $(1,1)$ : ce n'est **pas** un vecteur propre (sa direction a changé). Pour une matrice diagonale, les axes sont naturellement les directions propres — mais pour une matrice quelconque, les directions propres peuvent être « penchées », et c'est justement leur découverte qui est intéressante.
+
+## Comment on les trouve
+
+Sans entrer dans tous les calculs, voici la logique. On part de $A\vec{v} = \lambda\vec{v}$, qu'on réarrange en $(A - \lambda I)\vec{v} = \vec{0}$ (où $I$ est l'identité). Pour qu'il existe un vecteur $\vec{v}$ non nul solution, la matrice $(A - \lambda I)$ doit être **non inversible** — donc son déterminant doit être nul :
+
+```math
+\det(A - \lambda I) = 0
+```
+
+Cette équation, appelée **équation caractéristique**, est un polynôme en $\lambda$ (le polynôme caractéristique). Ses **racines** sont les valeurs propres. Une matrice $n \times n$ a $n$ valeurs propres (comptées avec multiplicité, éventuellement complexes). Une fois chaque $\lambda$ trouvé, on résout $(A - \lambda I)\vec{v} = \vec{0}$ (un système linéaire !) pour obtenir le vecteur propre correspondant. On voit que tout se relie : déterminant, systèmes, inversibilité.
+
+En pratique, on calcule les valeurs et vecteurs propres numériquement :
+
+```python
+import numpy as np
+A = np.array([[3, 0], [0, 2]])
+valeurs, vecteurs = np.linalg.eig(A)
+# valeurs = [3., 2.]  (les valeurs propres)
+# vecteurs = les vecteurs propres en colonnes
+```
+
+## Pourquoi c'est si important : les applications
+
+Les valeurs et vecteurs propres révèlent la **structure intrinsèque** d'une transformation ou d'un système. Quelques applications majeures qui te concernent :
+
+**PageRank (Google)** — L'algorithme historique de classement des pages web repose sur un calcul de vecteur propre. On modélise le web comme une matrice géante (qui pointe vers qui), et le classement des pages est le vecteur propre dominant de cette matrice. C'est l'un des exemples les plus spectaculaires de l'algèbre linéaire appliquée.
+
+**PCA / réduction de dimension (data science, ML)** — L'Analyse en Composantes Principales trouve les directions propres d'une matrice de covariance de données. Ces directions sont les « axes principaux » selon lesquels les données varient le plus. On peut alors réduire la dimension (compresser, visualiser) en gardant les directions à grande valeur propre. C'est un outil fondamental du machine learning et de l'analyse de données.
+
+**Compression d'images (SVD)** — La décomposition en valeurs singulières (cousine des valeurs propres) permet de compresser des images en ne gardant que les composantes dominantes.
+
+**Vibrations et stabilité** — En ingénierie, les valeurs propres d'un système décrivent ses **modes propres** de vibration (les fréquences naturelles d'un pont, d'un bâtiment) et sa **stabilité** (un système est stable si ses valeurs propres ont certaines propriétés). C'est central en physique, mécanique, automatique.
+
+**Physique quantique** — Les états observables sont des vecteurs propres, les valeurs mesurables des valeurs propres. Toute la mécanique quantique est formulée en ces termes.
+
+Le fil commun : les vecteurs propres révèlent les **directions naturelles** d'un système, celles selon lesquelles il se comporte le plus simplement. C'est pourquoi ce concept, abstrait au premier abord, est un des plus puissants et des plus utilisés de toutes les mathématiques appliquées.
+
+## La diagonalisation
+
+Une conséquence importante : si une matrice a suffisamment de vecteurs propres indépendants, on peut la **diagonaliser** — l'écrire sous la forme $A = PDP^{-1}$, où $D$ est diagonale (les valeurs propres) et $P$ contient les vecteurs propres. L'intérêt : dans la « base propre », la transformation devient un simple étirement selon les axes (une matrice diagonale, très facile à manipuler).
+
+C'est extrêmement utile pour, par exemple, calculer des **puissances de matrices** ($A^{100}$ devient facile car $A^n = PD^nP^{-1}$, et élever une matrice diagonale à une puissance est trivial). Ça sert à étudier l'évolution de systèmes dynamiques, les chaînes de Markov (probabilités), et bien d'autres. Diagonaliser, c'est trouver le « bon point de vue » (la bonne base) où le problème devient simple.
+
+## Ce qu'il faut retenir
+
+- Un **vecteur propre** d'une matrice $A$ est un vecteur dont la **direction ne change pas** sous la transformation : $A\vec{v} = \lambda\vec{v}$. Le facteur d'étirement $\lambda$ est la **valeur propre**.
+- Ce sont les **axes intrinsèques** de la transformation, ses directions naturelles selon lesquelles elle agit comme un simple étirement.
+- Interprétation de $\lambda$ : ×2 (allonge), 1 (inchangé), inférieur à 1 (rétrécit), négatif (retourne), 0 (écrase).
+- On les trouve via l'**équation caractéristique** $\det(A - \lambda I) = 0$ (valeurs propres = racines), puis en résolvant un système pour chaque (vecteurs propres). En pratique : `np.linalg.eig`.
+- Applications majeures : **PageRank**, **PCA/réduction de dimension** (ML/data), **compression** (SVD), **modes de vibration et stabilité** (ingénierie), **physique quantique**.
+- La **diagonalisation** ($A = PDP^{-1}$) exprime la matrice dans sa base propre où elle devient un simple étirement — utile pour les puissances de matrices et les systèmes dynamiques.

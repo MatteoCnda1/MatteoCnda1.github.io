@@ -1,0 +1,137 @@
+---
+id: 03-fonctions
+title: Les fonctions
+sidebar_position: 3
+---
+
+# Les fonctions
+
+## Le concept de fonction
+
+Une **fonction** est l'une des idées les plus importantes de toutes les mathématiques. Une fonction est une **règle qui associe, à chaque valeur d'entrée, une unique valeur de sortie**. On peut la voir comme une machine : on met un nombre dedans (l'entrée), elle applique sa règle, et elle en ressort un autre (la sortie).
+
+On note $f(x)$ la sortie de la fonction $f$ pour l'entrée $x$. Par exemple, si $f(x) = 2x + 1$, alors :
+- $f(0) = 2 \times 0 + 1 = 1$
+- $f(3) = 2 \times 3 + 1 = 7$
+- $f(-2) = 2 \times (-2) + 1 = -3$
+
+À chaque entrée correspond une sortie et une seule — c'est la règle d'or de la définition d'une fonction. (Une machine qui donnerait deux résultats différents pour la même entrée ne serait pas une fonction.)
+
+Pour ton profil, le concept est fondamental et **directement transposable à la programmation** : une fonction en code (`def f(x): return 2*x + 1`) est exactement une fonction mathématique — une entrée, un traitement, une sortie. Les fonctions modélisent aussi toutes les relations « quand ceci varie, cela varie » : le temps de réponse en fonction de la charge, le débit en fonction du temps, la consommation en fonction de l'usage. Comprendre les fonctions, c'est comprendre comment les quantités dépendent les unes des autres.
+
+## Vocabulaire : domaine, image, variable
+
+Quelques termes structurants :
+
+**La variable** — L'entrée, souvent notée $x$ (variable indépendante). La sortie $y = f(x)$ est la variable dépendante (elle dépend de $x$).
+
+**Le domaine de définition** — L'ensemble des valeurs d'entrée pour lesquelles la fonction est définie (a un sens). Par exemple, $f(x) = \frac{1}{x}$ n'est pas définie en $x = 0$ (division par zéro) : son domaine est tous les réels sauf 0. La fonction $\sqrt{x}$ n'est définie que pour $x \ge 0$. Identifier le domaine est important (en code, ça correspond aux valeurs valides d'un argument — sinon erreur).
+
+**L'image** — L'ensemble des valeurs de sortie possibles.
+
+## La représentation graphique
+
+Une fonction se **visualise** par sa **courbe** dans un repère : l'axe horizontal porte les entrées $x$, l'axe vertical les sorties $y = f(x)$. Chaque point de la courbe a pour coordonnées $(x, f(x))$. La courbe est le portrait visuel du comportement de la fonction : on y lit d'un coup d'œil où elle croît, décroît, ses extrema, ses racines.
+
+Un test visuel utile (test de la droite verticale) : une courbe représente une fonction si toute droite verticale la coupe **au plus une fois** — ce qui traduit « une entrée, une seule sortie ».
+
+Lire un graphique est une compétence en soi, très utile pour interpréter des données (courbe de trafic, de performance, de charge). On y repère : les **racines** (ou zéros, là où la courbe croise l'axe horizontal, $f(x) = 0$), les **extrema** (sommets et creux), les zones de **croissance** (la courbe monte) et de **décroissance** (elle descend).
+
+## Croissance, décroissance, extrema
+
+Une fonction est **croissante** sur un intervalle si, quand $x$ augmente, $f(x)$ augmente aussi (la courbe monte). Elle est **décroissante** si $f(x)$ diminue quand $x$ augmente (la courbe descend). Un point où la fonction passe de croissante à décroissante est un **maximum** (local) ; l'inverse est un **minimum**.
+
+Ces notions sont capitales car elles décrivent le **comportement** d'un système : à partir de quelle charge le temps de réponse se met-il à exploser ? Où se situe le point optimal ? On les étudie précisément avec les dérivées (ton cours d'analyse), mais l'intuition graphique suffit souvent.
+
+## Les grandes familles de fonctions
+
+Le reste du cours passe en revue les fonctions usuelles à connaître. Chacune a une forme, une courbe et des usages caractéristiques. Savoir les reconnaître est essentiel.
+
+### La fonction constante
+
+La plus simple : $f(x) = c$ (un nombre fixe). Quelle que soit l'entrée, la sortie est toujours la même. Sa courbe est une **droite horizontale**. Exemple : $f(x) = 5$ vaut 5 partout. Utile pour modéliser une quantité qui ne varie pas (un coût fixe, une capacité constante).
+
+### La fonction linéaire et affine
+
+La **fonction affine** a la forme :
+
+```math
+f(x) = ax + b
+```
+
+Sa courbe est une **droite**. Deux paramètres la définissent :
+- $a$ est la **pente** (le coefficient directeur) : de combien $y$ augmente quand $x$ augmente de 1. Pente positive → droite montante ; négative → descendante ; nulle → horizontale.
+- $b$ est l'**ordonnée à l'origine** : la valeur de $f(0)$, là où la droite croise l'axe vertical.
+
+Quand $b = 0$ (la droite passe par l'origine), on parle de fonction **linéaire** : $f(x) = ax$. Elle modélise la **proportionnalité** (doubler l'entrée double la sortie).
+
+Exemples concrets : le coût d'un service à $2$ € l'unité plus $10$ € d'abonnement est $f(x) = 2x + 10$. Le temps de transfert d'un fichier à débit constant est linéaire en la taille. La relation entre deux grandeurs proportionnelles est linéaire. Les fonctions affines sont partout car beaucoup de relations simples sont « à taux constant ».
+
+Exemple de lecture : pour $f(x) = 3x - 2$, la pente est 3 (ça monte de 3 par unité) et l'ordonnée à l'origine est $-2$ (la droite croise l'axe vertical en $-2$). $f(0) = -2$, $f(1) = 1$, $f(2) = 4$ : on monte bien de 3 à chaque pas.
+
+### La fonction carrée et les fonctions polynomiales
+
+La **fonction carrée** est $f(x) = x^2$. Sa courbe est une **parabole** en forme de U, symétrique par rapport à l'axe vertical, avec un minimum en 0. Elle croît de façon accélérée : $f(1) = 1$, $f(2) = 4$, $f(3) = 9$, $f(10) = 100$. Elle modélise les phénomènes « quadratiques » (aire en fonction du côté, énergie cinétique, et en informatique la complexité $O(n^2)$ d'un algorithme).
+
+Plus généralement, une **fonction polynomiale** est une somme de puissances de $x$ : $f(x) = a_n x^n + \cdots + a_1 x + a_0$. Le **degré** (la plus haute puissance) détermine l'allure. Une fonction du second degré ($ax^2 + bx + c$) est une parabole ; son sommet est un minimum (si $a > 0$) ou un maximum (si $a < 0$) — d'où son usage en **optimisation** (trouver le meilleur point). Les racines d'un polynôme du second degré se trouvent avec le discriminant (cours précédent).
+
+### La fonction inverse (rationnelle)
+
+La **fonction inverse** est $f(x) = \dfrac{1}{x}$. Sa courbe est une **hyperbole**. Comportement caractéristique : quand $x$ devient grand, $f(x)$ tend vers 0 (mais ne l'atteint jamais — asymptote horizontale) ; quand $x$ s'approche de 0, $f(x)$ explose vers l'infini (asymptote verticale). Elle n'est pas définie en 0.
+
+Elle modélise les relations **inversement proportionnelles** : quand l'un augmente, l'autre diminue. Exemple : le temps pour transférer une quantité fixe de données est inversement proportionnel au débit (débit ×2 → temps ÷2). Les fonctions rationnelles (quotients de polynômes) généralisent cette idée.
+
+### La fonction exponentielle
+
+La **fonction exponentielle** a la forme $f(x) = a^x$ (souvent $f(x) = e^x$ avec $e \approx 2{.}718$). Ici la variable est en **exposant** — c'est ce qui la distingue radicalement des polynômes. Sa caractéristique : une **croissance de plus en plus rapide** (si $a > 1$). Chaque pas multiplie la sortie par un facteur constant.
+
+Exemple : $2^x$ donne $2, 4, 8, 16, 32, 64, \ldots$ — ça **double** à chaque étape. Cette croissance est explosive : $2^{10} = 1024$, $2^{20} \approx$ un million, $2^{30} \approx$ un milliard. C'est LA fonction de l'informatique : nombre de valeurs sur $n$ bits ($2^n$), espace des clés en crypto, croissance du nombre de possibilités. La croissance exponentielle « bat » n'importe quelle croissance polynomiale à terme — c'est pourquoi un algorithme en $O(2^n)$ est impraticable alors qu'un $O(n^2)$ passe.
+
+Si $a < 1$ (ou exposant négatif), on a une **décroissance exponentielle** : la sortie diminue vers 0 de plus en plus lentement. Elle modélise la décharge d'un condensateur, la désintégration, le refroidissement (lien avec les équations différentielles de ton cours d'analyse).
+
+### La fonction logarithme
+
+Le **logarithme** est la **fonction inverse de l'exponentielle** : il « défait » ce que l'exponentielle fait. Le logarithme en base $b$ de $y$, noté $\log_b(y)$, répond à la question « à quelle puissance faut-il élever $b$ pour obtenir $y$ ? ». Par exemple $\log_2(8) = 3$ car $2^3 = 8$.
+
+Sa caractéristique : une **croissance très lente**. Pour que le logarithme augmente de 1, il faut **multiplier** l'entrée par la base. $\log_2$ donne : $\log_2(2) = 1$, $\log_2(4) = 2$, $\log_2(1024) = 10$, $\log_2(1000000) \approx 20$. Autrement dit, même pour des entrées gigantesques, le logarithme reste petit.
+
+C'est fondamental en informatique : les algorithmes efficaces sont souvent en $O(\log n)$ (recherche dichotomique, arbres binaires de recherche, index de bases de données — vus en graphes et SQL). Un algorithme logarithmique reste rapide même sur des milliards d'éléments, car $\log n$ croît à peine. Le logarithme mesure aussi « le nombre de chiffres » d'un nombre (donc la taille d'une clé, l'information en bits — lien avec l'entropie en crypto). La propriété reine du log : il **transforme les produits en sommes** ($\log(ab) = \log a + \log b$), ce qui simplifie énormément de calculs.
+
+### Les fonctions trigonométriques
+
+Tu as déjà étudié la trigonométrie et Fourier, donc juste un rappel de situation. Les fonctions **sinus** ($\sin x$) et **cosinus** ($\cos x$) sont **périodiques** : leur courbe est une onde qui se répète indéfiniment, oscillant entre $-1$ et $1$. Elles modélisent tout ce qui est cyclique ou ondulatoire : les signaux, les ondes (radio, son, lumière), les alternances, les rotations. Elles sont le cœur de l'analyse de Fourier (décomposer un signal en somme de sinusoïdes) et donc du traitement du signal et des télécommunications. La **période** est la longueur d'un cycle complet, la **fréquence** le nombre de cycles par unité de temps — notions centrales en R&T.
+
+## Transformer et combiner les fonctions
+
+Au-delà des familles de base, on manipule les fonctions :
+
+**Les transformations** — À partir d'une fonction, on peut la décaler, l'étirer, la retourner. Ajouter une constante $f(x) + k$ décale la courbe verticalement ; $f(x + k)$ la décale horizontalement ; multiplier $a \cdot f(x)$ l'étire verticalement ; $-f(x)$ la retourne. Comprendre ces transformations permet de « lire » rapidement une fonction modifiée à partir d'une fonction connue.
+
+**La composition** — Appliquer une fonction au résultat d'une autre : $(f \circ g)(x) = f(g(x))$ signifie « d'abord $g$, puis $f$ ». Exemple : si $g(x) = x + 1$ et $f(x) = x^2$, alors $f(g(x)) = (x+1)^2$. La composition est omniprésente (en programmation, enchaîner des fonctions ; en analyse, la règle de la chaîne pour dériver les composées).
+
+**La réciproque (fonction inverse)** — La fonction qui « défait » une fonction donnée : si $f$ transforme $x$ en $y$, sa réciproque $f^{-1}$ transforme $y$ en $x$. Le logarithme est la réciproque de l'exponentielle ; la racine carrée est la réciproque du carré (sur les positifs). Une fonction n'a de réciproque que si chaque sortie provient d'une seule entrée (bijection).
+
+## Les fonctions en informatique
+
+Le lien est direct et profond :
+
+- **Programmation** — une fonction en code est une fonction mathématique (entrée → traitement → sortie). Le paradigme fonctionnel repose entièrement sur cette notion.
+- **Complexité algorithmique** — on classe les algorithmes par la fonction qui décrit leur temps en fonction de la taille $n$ : $O(1)$ constant, $O(\log n)$ logarithmique (excellent), $O(n)$ linéaire, $O(n^2)$ quadratique, $O(2^n)$ exponentiel (impraticable). Reconnaître ces familles de fonctions, c'est évaluer la performance d'un algorithme.
+- **Modélisation** — décrire comment une grandeur dépend d'une autre (performance/charge, débit/temps).
+- **Cryptographie** — les fonctions de hachage sont des fonctions (à sens unique) ; l'exponentielle et le logarithme discret fondent RSA et Diffie-Hellman.
+- **Traitement du signal** — les fonctions trigonométriques et Fourier.
+
+## Ce qu'il faut retenir
+
+- Une **fonction** associe à chaque entrée **une unique** sortie, notée $f(x)$ ; c'est une « machine » entrée → règle → sortie, exactement comme une fonction en programmation.
+- Vocabulaire : **variable** (entrée $x$), **domaine** (entrées valides), **image** (sorties), **courbe** (représentation graphique où l'on lit racines, extrema, croissance/décroissance).
+- Familles usuelles à reconnaître :
+  - **Constante** $f(x) = c$ (droite horizontale).
+  - **Affine/linéaire** $f(x) = ax + b$ (droite ; $a$ = pente, $b$ = ordonnée à l'origine ; proportionnalité si $b=0$).
+  - **Carrée/polynomiale** $x^2$ (parabole, optimisation, complexité $O(n^2)$).
+  - **Inverse** $\frac{1}{x}$ (hyperbole, inversement proportionnel, asymptotes).
+  - **Exponentielle** $a^x$ (croissance explosive, $2^n$ — clés, bits ; ou décroissance).
+  - **Logarithme** $\log_b(x)$ (réciproque de l'exponentielle, croissance très lente, $O(\log n)$ des algos efficaces, transforme produits en sommes).
+  - **Trigonométriques** $\sin, \cos$ (périodiques, ondes/signaux, Fourier).
+- On **transforme** (décalages, étirements), **compose** ($f(g(x))$, d'abord $g$ puis $f$) et **inverse** ($f^{-1}$ défait $f$) les fonctions.
+- En informatique, les fonctions sont partout : code, **complexité** (du $O(\log n)$ excellent au $O(2^n)$ impraticable), modélisation, crypto, signal.

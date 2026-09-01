@@ -1,0 +1,65 @@
+---
+id: 00-introduction-ia
+title: Introduction et parcours
+sidebar_position: 1
+---
+
+# Intelligence artificielle — hub de ressources
+
+Ce topic n'est pas un cours figé mais un **hub de ressources** : l'IA évolue trop vite pour qu'un texte reste à jour, alors on rassemble ici les meilleures ressources externes, organisées en un parcours cohérent, avec des repères pour s'y retrouver. Les fiches suivantes approfondissent chaque grande brique (concepts fondamentaux, machine learning, deep learning, LLM, IA et sécurité).
+
+## Ton point de départ : les maths sont déjà là
+
+Un mot d'orientation avant tout. Beaucoup de gens abordent l'IA comme une boîte noire mystérieuse. Toi, tu as un avantage : tu viens de construire tout le **socle mathématique** de l'IA. Ce n'est pas un hasard si les domaines que tu as étudiés sont exactement ceux dont l'IA a besoin :
+
+- **Algèbre linéaire** (vecteurs, matrices, produit matriciel) — un réseau de neurones n'est presque que des multiplications de matrices. Les données (images, textes) sont des vecteurs ; les transformations sont des matrices.
+- **Analyse / dérivées** (gradient, descente de gradient) — c'est *littéralement* la façon dont un modèle apprend : minimiser une fonction de coût par descente de gradient (vu dans ta fiche « dérivées »).
+- **Probabilités** (Bayes, distributions) — un classifieur estime des probabilités ; beaucoup de modèles sont probabilistes.
+- **Statistiques** (régression, inférence, surapprentissage) — la régression est le premier modèle de ML ; l'évaluation d'un modèle est de la statistique.
+
+Autrement dit, **l'IA est l'application de tes maths**, pas une matière séparée. Garde ce lien en tête : chaque fois qu'une ressource parle de « gradient », « matrice de poids », « distribution », tu sais déjà de quoi il s'agit.
+
+## Comprendre le vocabulaire : IA, ML, DL, IA générative
+
+Un repère essentiel pour ne pas confondre des termes souvent mélangés. Ce sont des ensembles **emboîtés** (comme tes ensembles de nombres) :
+
+- **Intelligence artificielle (IA)** — le terme le plus large : toute technique visant à faire réaliser par une machine des tâches « intelligentes ». Inclut des approches anciennes (systèmes à base de règles, logique) pas forcément apprenantes.
+- **Machine learning (ML, apprentissage automatique)** — un sous-ensemble de l'IA : au lieu de programmer des règles explicites, on laisse la machine **apprendre à partir de données**. C'est le cœur de l'IA moderne.
+- **Deep learning (DL, apprentissage profond)** — un sous-ensemble du ML utilisant des **réseaux de neurones** à plusieurs couches. C'est ce qui a fait exploser les performances depuis ~2012 (vision, langage).
+- **IA générative** — des modèles (souvent de deep learning) qui **créent** du contenu : texte (LLM comme les modèles de type GPT ou Claude), images, audio, code. C'est la vague actuelle.
+
+Retiens l'emboîtement : IA ⊃ ML ⊃ DL, et l'IA générative est une application récente du DL. Quand on parle de « l'IA » aujourd'hui dans les médias, il s'agit presque toujours de deep learning et d'IA générative.
+
+## Un parcours conseillé (ne pas tout ouvrir en même temps)
+
+Le piège classique est d'ouvrir dix onglets et de ne rien finir. Choisis **un** chemin et suis-le. Voici un ordre logique adapté à ton niveau (tu as déjà les maths et la programmation) :
+
+1. **Fondations conceptuelles** — pour le cadre général et le vocabulaire (Elements of AI, voir la fiche concepts).
+2. **Comprendre les réseaux de neurones visuellement** — la série 3Blue1Brown (voir la fiche deep learning) : c'est le pont parfait entre tes maths et l'IA, en visuel.
+3. **Mettre les mains dedans** — un cours pratique orienté code (Google ML Crash Course, ou fast.ai), pour entraîner tes premiers modèles.
+4. **Approfondir un domaine** — selon ton intérêt : les LLM (Hugging Face), ou l'IA appliquée à la sécurité (ton domaine).
+
+Chaque fiche de ce topic détaille les ressources de chaque étape. Ne saute pas la 1 et la 2 même si tu es pressé : elles donnent les fondations qui rendent le reste solide.
+
+## Comment ce topic est organisé
+
+Les fiches suivantes :
+- **Concepts fondamentaux de l'IA** — le vocabulaire, les types d'apprentissage, les grandes idées, avec les ressources conceptuelles.
+- **Machine learning** — les algorithmes classiques (régression, classification, clustering), en lien avec tes stats.
+- **Deep learning et réseaux de neurones** — le cœur de l'IA moderne, avec la série 3Blue1Brown en pièce maîtresse.
+- **LLM et IA générative** — les modèles de langage, les transformers, comment ils fonctionnent.
+- **IA et cybersécurité** — l'angle qui te concerne le plus : l'IA pour la défense/attaque, et la sécurité des modèles eux-mêmes.
+
+## Conseils d'usage
+
+- **Comprendre plutôt que suivre la mode** : les fondations (comment un modèle apprend, la descente de gradient, les données) restent valables des années, alors que tel outil ou tel modèle précis change tous les mois. Priorise la compréhension.
+- **Pratiquer** : l'IA se comprend en faisant. Entraîne un petit modèle, observe le surapprentissage en vrai, joue avec les données.
+- **Garder un œil critique** : biais des données, limites des modèles, questions éthiques et de sécurité — d'autant plus important pour ton profil cyber.
+
+## Ce qu'il faut retenir
+
+- Ce topic est un **hub de ressources** (l'IA évolue trop vite pour un cours figé), organisé en un parcours cohérent.
+- **L'IA est l'application de tes maths** : algèbre linéaire (matrices), analyse (descente de gradient), probas et stats (modèles, évaluation) — tu as déjà le socle.
+- Vocabulaire emboîté : **IA ⊃ ML ⊃ DL**, l'**IA générative** étant l'application récente du deep learning.
+- Suis **un** parcours à la fois : fondations → réseaux de neurones (3Blue1Brown) → pratique (code) → spécialisation (LLM ou sécurité).
+- Priorise la **compréhension durable** sur les outils du moment, et **pratique**.

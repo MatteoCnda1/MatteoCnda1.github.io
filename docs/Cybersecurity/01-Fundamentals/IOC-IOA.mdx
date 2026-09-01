@@ -1,0 +1,165 @@
+---
+
+title: IOC / IOA
+sidebar_position: 7
+-------------------
+
+# IOC et IOA
+
+## Introduction
+
+Les **IOC** et **IOA** sont utilisés pour détecter et analyser des activités suspectes.
+
+Ils permettent de répondre à deux approches différentes :
+
+> **Quelles traces une attaque a-t-elle laissées ?**
+
+et :
+
+> **Quel comportement suspect est en train de se produire ?**
+
+---
+
+# IOC — Indicator of Compromise
+
+Un **IOC** est un élément indiquant qu'une compromission a potentiellement eu lieu.
+
+Exemples :
+
+* adresse IP malveillante connue ;
+* domaine suspect ;
+* hash d'un fichier ;
+* fichier inhabituel ;
+* processus identifié comme malveillant.
+
+Exemple :
+
+```text
+Suspicious file
+Hash:
+ABC123...
+```
+
+Le hash peut être utilisé comme IOC.
+
+---
+
+# IOA — Indicator of Attack
+
+Un **IOA** se concentre davantage sur le comportement ou l'activité associée à une attaque.
+
+Exemple conceptuel :
+
+```text
+Process
+   │
+   ▼
+Unexpected privilege escalation
+   │
+   ▼
+Suspicious behavior
+```
+
+L'important est ici le comportement, et pas uniquement un indicateur statique.
+
+---
+
+# IOC vs IOA
+
+| IOC                         | IOA                                            |
+| --------------------------- | ---------------------------------------------- |
+| Trace ou indicateur         | Comportement ou action                         |
+| Souvent après compromission | Peut permettre une détection pendant l'attaque |
+| IP, hash, domaine           | Technique ou comportement suspect              |
+| Plus statique               | Plus comportemental                            |
+
+---
+
+# Exemple
+
+## IOC
+
+```text
+Malicious IP:
+203.0.113.10
+```
+
+Si cette adresse apparaît dans un log, elle peut déclencher une alerte.
+
+---
+
+## IOA
+
+```text
+Normal user account
+        │
+        ▼
+Unexpected administrative activity
+        │
+        ▼
+Suspicious behavior detected
+```
+
+Même si l'attaquant utilise une nouvelle IP inconnue, le comportement peut rester détectable.
+
+---
+
+# Limites des IOC
+
+Un IOC peut devenir inutile si l'attaquant change :
+
+* d'adresse IP ;
+* de domaine ;
+* de hash ;
+* de fichier.
+
+```text
+Old malicious hash
+        │
+        ▼
+Attacker modifies file
+        │
+        ▼
+New hash
+```
+
+La détection basée uniquement sur les IOC peut donc être limitée.
+
+---
+
+# Detection Engineering
+
+Une bonne stratégie de détection peut combiner :
+
+```text
+IOC
+ +
+IOA
+ +
+Context
+ +
+Logs
+ +
+Behavior analysis
+```
+
+---
+
+# Points importants
+
+* IOC signifie **Indicator of Compromise**.
+* IOA signifie **Indicator of Attack**.
+* Un IOC correspond généralement à une trace identifiable.
+* Un IOA se concentre davantage sur le comportement.
+* Les deux approches peuvent être complémentaires.
+
+---
+
+## Concepts associés
+
+* SIEM
+* EDR
+* Threat Hunting
+* Detection Engineering
+* MITRE ATT&CK
+* Logging

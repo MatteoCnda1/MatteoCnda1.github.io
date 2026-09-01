@@ -1,0 +1,111 @@
+---
+id: 01-logique
+title: La logique
+sidebar_position: 1
+---
+
+# La logique
+
+## Pourquoi la logique est le socle de l'informatique
+
+Les **mathématiques discrètes** étudient les structures « séparées », dénombrables (par opposition au continu de l'analyse) : des objets distincts, des états 0/1, des ensembles finis, des configurations qu'on peut compter. C'est **le domaine mathématique de l'informatique** : un ordinateur manipule des bits (0 ou 1), des états discrets, des structures finies. Là où l'analyse décrit le monde physique continu, les maths discrètes décrivent le monde numérique.
+
+Et à la base de tout, il y a la **logique**. Un ordinateur est, littéralement, une machine à faire de la logique : ses circuits sont des portes logiques, ses programmes sont des enchaînements de conditions vraies ou fausses. Comprendre la logique, c'est comprendre le langage fondamental des machines — et raisonner correctement, ce qui est utile bien au-delà du code (démonstrations, sécurité, débogage).
+
+## Les propositions
+
+Une **proposition** est un énoncé qui est soit **vrai** (V, ou 1, ou True) soit **faux** (F, ou 0, ou False), mais pas les deux. C'est l'unité de base de la logique.
+
+Exemples de propositions : « 2 + 2 = 4 » (vraie), « il pleut » (vraie ou fausse selon le moment), « ce port est ouvert » (vraie ou fausse). Ce ne sont **pas** des propositions : « quelle heure est-il ? » (une question), « ferme la porte » (un ordre) — car on ne peut pas leur attribuer vrai/faux.
+
+Cette réduction du raisonnement à des valeurs binaires (vrai/faux, 1/0) est exactement ce qui permet à un ordinateur de « raisonner » : tout se ramène à des bits. La logique est le pont entre le raisonnement humain et le calcul binaire.
+
+## Les connecteurs logiques
+
+On combine les propositions avec des **connecteurs logiques** pour former des propositions composées. Les fondamentaux, que tu retrouveras à l'identique dans tous les langages de programmation et dans les circuits :
+
+**La négation (NON, NOT, $\neg$)** — Inverse la valeur. NON vrai = faux. Si $P$ est « le port est ouvert », $\neg P$ est « le port n'est pas ouvert ».
+
+**La conjonction (ET, AND, $\wedge$)** — Vraie seulement si **les deux** propositions sont vraies. « Le pare-feu est actif ET le port est fermé » n'est vraie que si les deux conditions le sont.
+
+**La disjonction (OU, OR, $\vee$)** — Vraie si **au moins une** des propositions est vraie (OU inclusif). « L'utilisateur est admin OU propriétaire » est vraie dès que l'une l'est.
+
+**L'implication (SI... ALORS, $\Rightarrow$)** — « Si $P$ alors $Q$ ». Elle traduit une conséquence logique. Subtilité importante : l'implication n'est **fausse que dans un seul cas**, quand $P$ est vraie mais $Q$ est fausse (la promesse est rompue). Dans tous les autres cas elle est vraie — notamment, une implication avec une prémisse fausse est toujours vraie (« si la lune est carrée, alors... » est vraie quoi qu'il suive). Ça déroute au début mais c'est cohérent : on n'a pas menti tant qu'on n'a pas eu $P$ vrai et $Q$ faux.
+
+**L'équivalence (SI ET SEULEMENT SI, $\Leftrightarrow$)** — Vraie quand les deux propositions ont la **même** valeur (toutes deux vraies ou toutes deux fausses).
+
+## Les tables de vérité
+
+Une **table de vérité** liste toutes les combinaisons possibles de valeurs des propositions et le résultat de la proposition composée. C'est l'outil de base pour analyser une expression logique. Pour le ET :
+
+| $P$ | $Q$ | $P \wedge Q$ |
+|-----|-----|--------------|
+| V   | V   | V            |
+| V   | F   | F            |
+| F   | V   | F            |
+| F   | F   | F            |
+
+Avec $n$ propositions, il y a $2^n$ lignes (chaque proposition doublant le nombre de cas). Les tables de vérité permettent de vérifier si deux expressions sont équivalentes, ou de concevoir un circuit. Elles sont la méthode exhaustive : on teste tous les cas.
+
+## Le lien direct avec les circuits et le binaire
+
+Voici pourquoi c'est si concret pour toi. Les **portes logiques** électroniques (les briques de tout processeur) sont l'implémentation physique exacte de ces connecteurs : une porte AND, une porte OR, une porte NOT, plus XOR, NAND, NOR. Un microprocesseur, c'est des millions de ces portes assemblées. Quand tu as manipulé du XOR en crypto (chiffrement de Vernam, opérations bit à bit), tu faisais de la logique appliquée aux bits.
+
+Le **XOR** (OU exclusif) mérite une mention : vrai quand les deux entrées **diffèrent** (exactement une des deux est vraie). C'est le connecteur roi de la crypto (réversible : $A \oplus B \oplus B = A$) et de la détection d'erreurs (bits de parité). Tu l'as déjà croisé — c'est de la logique pure.
+
+En programmation, ces mêmes connecteurs sont tes conditions (`if (a && b || !c)`). Maîtriser la logique, c'est écrire des conditions correctes et déboguer les erreurs de raisonnement dans le code.
+
+## Les équivalences logiques et lois de De Morgan
+
+Certaines expressions logiques différentes sont en fait **équivalentes** (même table de vérité). Savoir les transformer sert à simplifier du code, optimiser des circuits, ou reformuler une condition. Les plus importantes sont les **lois de De Morgan**, à connaître absolument :
+
+```math
+\neg(P \wedge Q) \equiv \neg P \vee \neg Q
+```
+
+```math
+\neg(P \vee Q) \equiv \neg P \wedge \neg Q
+```
+
+En mots : la négation d'un ET est le OU des négations, et inversement. « Il n'est pas vrai que (A ET B) » équivaut à « (NON A) OU (NON B) ». Exemple concret : « le serveur n'est pas (actif et à jour) » = « le serveur est inactif OU pas à jour ».
+
+Ces lois sont omniprésentes en programmation (réécrire une condition `!(a && b)` en `!a || !b`), en conception de circuits (simplifier pour économiser des portes), et en requêtes (SQL, filtres). C'est l'un des outils les plus pratiques de la logique.
+
+## Tautologies et contradictions
+
+Deux cas particuliers :
+
+Une **tautologie** est une proposition **toujours vraie**, quelles que soient les valeurs de ses composantes (exemple : $P \vee \neg P$ — « soit il pleut, soit il ne pleut pas », forcément vrai). Une **contradiction** est **toujours fausse** ($P \wedge \neg P$ — impossible qu'une chose soit vraie et fausse en même temps).
+
+Ces notions comptent en vérification : prouver qu'une propriété de sécurité tient toujours revient à montrer une tautologie ; détecter une contradiction dans un ensemble de règles (pare-feu, permissions) révèle une incohérence exploitable.
+
+## La logique des prédicats et les quantificateurs
+
+La logique des propositions a une limite : elle ne peut pas exprimer « tous » ou « il existe ». La **logique des prédicats** ajoute les **quantificateurs** :
+
+**Le quantificateur universel ($\forall$, « pour tout »)** — « $\forall x, P(x)$ » signifie « pour tout $x$, la propriété $P$ est vraie ». Exemple : « tous les paquets sont chiffrés ».
+
+**Le quantificateur existentiel ($\exists$, « il existe »)** — « $\exists x, P(x)$ » signifie « il existe au moins un $x$ tel que $P$ est vraie ». Exemple : « il existe un port ouvert ».
+
+La négation des quantificateurs suit une logique de type De Morgan, très utile : la négation de « tous sont sûrs » est « il existe un qui n'est pas sûr » ($\neg \forall x\, P(x) \equiv \exists x\, \neg P(x)$). C'est exactement le raisonnement du pentest : pour réfuter « le système est sûr » (tout est sûr), il suffit de trouver **une** faille (il existe un point non sûr). Un seul contre-exemple suffit à faire tomber un « pour tout ». Cette asymétrie est au cœur de la sécurité et de la démonstration mathématique.
+
+## Les méthodes de raisonnement
+
+La logique fonde les **démonstrations** mathématiques, et ces schémas de raisonnement servent aussi en informatique :
+
+**La démonstration directe** — On part des hypothèses et on déduit la conclusion étape par étape.
+
+**La démonstration par contraposée** — Pour prouver « si $P$ alors $Q$ », on prouve l'équivalent « si non $Q$ alors non $P$ ». Parfois plus simple.
+
+**La démonstration par l'absurde** — On suppose le contraire de ce qu'on veut prouver, et on aboutit à une contradiction, ce qui prouve qu'on avait tort de supposer le contraire. Élégante et puissante (la preuve classique de l'infinité des nombres premiers, utile en crypto, fonctionne ainsi).
+
+**La récurrence (induction)** — Pour prouver qu'une propriété est vraie pour tous les entiers : on la prouve pour le cas de base (souvent $n=0$ ou $1$), puis on montre que si elle est vraie pour $n$, elle l'est pour $n+1$. Comme des dominos qui tombent en chaîne. C'est fondamental en informatique : la récurrence est le pendant mathématique de la **récursivité** en programmation, et sert à prouver qu'un algorithme est correct.
+
+## Ce qu'il faut retenir
+
+- Les **maths discrètes** = les structures dénombrables/finies, le domaine mathématique de l'informatique ; la **logique** en est le socle (les circuits et programmes sont de la logique appliquée).
+- Une **proposition** est vraie ou fausse ; on les combine par **NON** ($\neg$), **ET** ($\wedge$), **OU** ($\vee$), **implication** ($\Rightarrow$, fausse seulement si prémisse vraie et conclusion fausse), **équivalence** ($\Leftrightarrow$).
+- Les **tables de vérité** ($2^n$ lignes) analysent toute expression ; ces connecteurs sont exactement les **portes logiques** des circuits et les conditions en programmation (le **XOR** relie à ta crypto).
+- Les **lois de De Morgan** ($\neg(P \wedge Q) \equiv \neg P \vee \neg Q$) sont l'outil pratique n°1 pour transformer conditions et circuits.
+- Les **quantificateurs** $\forall$ (pour tout) et $\exists$ (il existe) : nier « tout est sûr » donne « il existe une faille » — la logique même du pentest (un contre-exemple suffit).
+- Méthodes de preuve : directe, contraposée, par l'absurde, et **récurrence** (le pendant de la récursivité, pour prouver la correction d'algorithmes).

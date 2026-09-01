@@ -1,0 +1,80 @@
+---
+id: 02-machine-learning
+title: Machine learning
+sidebar_position: 3
+---
+
+# Machine learning
+
+Le **machine learning** (apprentissage automatique) est le cœur de l'IA moderne : faire apprendre une machine à partir de données. Cette fiche présente les grandes familles d'algorithmes (en t'appuyant sur tes stats) et les ressources pour pratiquer.
+
+## Le lien avec tes statistiques
+
+Bonne nouvelle : tu as déjà rencontré le ML sans le nommer. Ta fiche **régression** (dans les statistiques) était déjà du machine learning supervisé. Les concepts se recouvrent largement :
+
+- La **régression linéaire** (prédire une valeur continue) = le premier modèle de ML.
+- La **régression logistique** (prédire une catégorie/probabilité) = un classifieur de base.
+- Le **surapprentissage**, l'évaluation sur données de test, les moindres carrés — tout ça, tu l'as déjà vu.
+
+Le ML, c'est en grande partie de la statistique appliquée à grande échelle avec des outils informatiques. Ton socle stats est donc un vrai atout.
+
+## Les grandes tâches du ML
+
+On classe les problèmes de ML par le type de sortie recherchée :
+
+**La classification** — Prédire une **catégorie** (une étiquette discrète). Exemples pertinents pour toi : cet email est-il un spam ou non ? Ce trafic réseau est-il malveillant ou légitime ? Ce fichier est-il un malware ? La classification est omniprésente en cybersécurité (détection). Algorithmes classiques : régression logistique, arbres de décision, forêts aléatoires, SVM, k plus proches voisins.
+
+**La régression** — Prédire une **valeur numérique continue**. Exemples : le temps de réponse d'un serveur, la charge future, un prix. C'est ta fiche régression.
+
+**Le clustering (partitionnement)** — Regrouper des données **similaires** sans étiquettes (non supervisé). Exemple : segmenter des utilisateurs par comportement, ou détecter des anomalies (un point qui n'appartient à aucun cluster). Algorithme emblématique : k-means.
+
+**La réduction de dimension** — Simplifier des données à nombreuses variables en gardant l'essentiel. L'**ACP (PCA)** que tu as vue en algèbre linéaire (valeurs propres) en est l'exemple type. Utile pour visualiser, compresser, accélérer.
+
+## Quelques algorithmes à connaître
+
+Sans entrer dans les détails, savoir ce qu'ils font aide à s'orienter :
+
+- **Arbres de décision** — une suite de questions oui/non (comme ton cours sur les arbres en théorie des graphes) menant à une décision. Très interprétables.
+- **Forêts aléatoires** — plein d'arbres de décision combinés ; robustes et performants.
+- **k plus proches voisins (k-NN)** — classe un point selon ses voisins les plus proches (utilise la distance/norme de ton algèbre linéaire).
+- **SVM (machines à vecteurs de support)** — trouvent la frontière optimale entre catégories.
+- **k-means** — le clustering de référence (regroupe autour de k centres).
+- **Réseaux de neurones** — traités dans la fiche deep learning.
+
+## Le workflow d'un projet ML
+
+Un projet de ML suit toujours à peu près les mêmes étapes — bon à connaître :
+
+1. **Collecter et préparer les données** — souvent 80 % du travail réel. Nettoyer, normaliser, gérer les valeurs manquantes. La qualité des données prime sur le choix de l'algorithme.
+2. **Séparer** en jeu d'entraînement et jeu de test (pour évaluer la généralisation).
+3. **Choisir et entraîner** un modèle sur le jeu d'entraînement.
+4. **Évaluer** sur le jeu de test (précision, rappel, etc. — de la statistique).
+5. **Ajuster** (hyperparamètres, autre modèle) et itérer.
+6. **Déployer** et surveiller.
+
+Retiens surtout le point 1 : en pratique, le ML c'est beaucoup de préparation de données, pas seulement des algorithmes brillants.
+
+## Évaluer un modèle : au-delà de la précision
+
+Point crucial pour ton profil sécurité, en lien direct avec ta fiche sur Bayes et les faux positifs. La simple « précision » (pourcentage de bonnes réponses) est **trompeuse** quand les classes sont déséquilibrées. Si 99,9 % du trafic est légitime, un modèle qui dit toujours « légitime » a 99,9 % de précision... mais ne détecte aucune attaque. On utilise donc d'autres mesures : le **rappel** (quelle proportion des vraies attaques on détecte), la **précision** au sens technique (parmi les alertes, combien sont justes), le **F1-score** (compromis des deux). C'est exactement le dilemme faux positifs / faux négatifs vu en probabilités et en inférence statistique — central en détection d'intrusion.
+
+## Ressources recommandées
+
+**Google Machine Learning Crash Course** (developers.google.com/machine-learning/crash-course) — Le meilleur point d'entrée pratique et gratuit. Bien structuré, couvre la descente de gradient, la régression, la classification, les réseaux de neurones, avec des exercices en Google Colab. Régulièrement mis à jour. À faire après les fondations conceptuelles.
+
+**Andrew Ng — Machine Learning Specialization** (Coursera, audit gratuit) — Le cours de ML le plus célèbre au monde, refondu récemment. Excellente pédagogie, couvre les algorithmes classiques en profondeur. Une référence.
+
+**scikit-learn** (scikit-learn.org) — LA bibliothèque Python open-source pour le ML classique. Sa documentation contient des tutoriels excellents et tu l'utiliseras en pratique. Parfaite pour tes premiers modèles (elle apparaît déjà dans tes fiches de maths).
+
+**Kaggle** (kaggle.com) — Plateforme de compétitions et de datasets, avec des notebooks partagés et des mini-cours gratuits (« Kaggle Learn »). Idéal pour pratiquer sur de vraies données et voir comment font les autres.
+
+**Made With ML** (madewithml.com) — Gratuit, orienté bonnes pratiques et mise en production (MLOps), au-delà des seuls algorithmes.
+
+## Ce qu'il faut retenir
+
+- Le **ML** est en grande partie de la **statistique appliquée à grande échelle** ; ta fiche régression en faisait déjà partie.
+- Grandes tâches : **classification** (catégorie, ex. spam/malware — clé en sécurité), **régression** (valeur continue), **clustering** (regrouper sans étiquettes, non supervisé), **réduction de dimension** (PCA, tes valeurs propres).
+- Algorithmes à situer : arbres de décision, forêts aléatoires, k-NN (distance), SVM, k-means.
+- **Workflow** : la préparation des données est ~80 % du travail ; toujours séparer entraînement/test.
+- **Évaluer** au-delà de la précision : rappel, précision, F1 — car la précision trompe sur classes déséquilibrées (le dilemme faux positifs/négatifs de la détection).
+- Meilleures ressources pratiques : **Google ML Crash Course** (gratuit), **Andrew Ng**, **scikit-learn** (la lib Python), **Kaggle** (pratique).

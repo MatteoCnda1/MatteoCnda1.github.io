@@ -1,0 +1,104 @@
+---
+id: 02-ensembles
+title: Les ensembles
+sidebar_position: 2
+---
+
+# Les ensembles
+
+## L'idée : regrouper des objets
+
+Un **ensemble** est une collection d'objets distincts, appelés ses **éléments**. C'est l'un des concepts les plus fondamentaux des mathématiques — au point que presque tout peut se définir en termes d'ensembles. Pour toi, c'est aussi éminemment concret : une base de données est une collection d'ensembles, les résultats d'une requête SQL forment un ensemble, les permissions d'un utilisateur sont un ensemble, une plage d'adresses IP est un ensemble.
+
+L'idée est simple mais la puissance vient des **opérations** qu'on peut faire dessus et de la rigueur qu'elles apportent. Beaucoup d'opérations que tu fais en informatique (filtrer, croiser, combiner des données) sont, mathématiquement, des opérations sur des ensembles.
+
+## Notation et appartenance
+
+On note un ensemble entre accolades, en listant ses éléments : $A = \{1, 2, 3, 4\}$. L'ordre n'a pas d'importance, et les répétitions ne comptent pas (un élément y est ou n'y est pas). $\{1, 2, 3\}$ et $\{3, 1, 2, 2\}$ sont le même ensemble.
+
+L'**appartenance** se note $\in$ : « $3 \in A$ » se lit « 3 appartient à $A$ ». Sa négation est $\notin$ : « $7 \notin A$ ».
+
+Quelques ensembles particuliers :
+- L'**ensemble vide**, noté $\emptyset$ ou $\{\}$ : il ne contient aucun élément. Utile comme cas de base (une requête sans résultat, une intersection sans élément commun).
+- Un **singleton** : un ensemble à un seul élément, $\{5\}$.
+- Les ensembles de nombres classiques : $\mathbb{N}$ (entiers naturels), $\mathbb{Z}$ (entiers relatifs), $\mathbb{Q}$ (rationnels), $\mathbb{R}$ (réels).
+
+On peut définir un ensemble en listant ses éléments (**en extension** : $\{2, 4, 6, 8\}$) ou par une propriété qui les caractérise (**en compréhension** : « les entiers pairs entre 1 et 9 »). Cette seconde façon rappelle exactement une clause `WHERE` en SQL : on décrit une condition, et l'ensemble est constitué de ce qui la satisfait.
+
+## Le cardinal
+
+Le **cardinal** d'un ensemble est son **nombre d'éléments**, noté $|A|$. Pour $A = \{1, 2, 3, 4\}$, $|A| = 4$. Le cardinal de l'ensemble vide est 0.
+
+Un ensemble peut être **fini** (dénombrable, on peut compter ses éléments — le cas courant en informatique) ou **infini** ($\mathbb{N}$, $\mathbb{R}$). Compter les cardinaux est le cœur de la combinatoire (cours suivant) : combien d'éléments dans tel ensemble de possibilités ?
+
+## Les sous-ensembles
+
+Un ensemble $A$ est un **sous-ensemble** de $B$ (noté $A \subseteq B$) si **tous** les éléments de $A$ sont aussi dans $B$. Exemple : $\{1, 2\} \subseteq \{1, 2, 3, 4\}$. On dit aussi que $A$ est inclus dans $B$.
+
+Concrètement : l'ensemble des administrateurs est un sous-ensemble de l'ensemble des utilisateurs ; les adresses d'un sous-réseau sont un sous-ensemble des adresses du réseau. La notion de sous-ensemble modélise les hiérarchies d'inclusion, omniprésentes en gestion de droits et en réseau.
+
+L'**ensemble des parties** (power set) d'un ensemble est l'ensemble de **tous ses sous-ensembles**. Fait important : un ensemble à $n$ éléments a exactement $2^n$ sous-ensembles. Pourquoi $2^n$ ? Parce que pour chaque élément, on a deux choix indépendants (il est dans le sous-ensemble, ou non) — on retrouve la puissance de 2, comme les $2^n$ lignes d'une table de vérité. Ce nombre explose vite, ce qui a des implications en complexité (explorer tous les sous-ensembles devient vite infaisable).
+
+## Les opérations sur les ensembles
+
+C'est le cœur pratique. Les opérations ensemblistes correspondent directement aux connecteurs logiques du cours précédent (ET/OU/NON) et aux opérations que tu fais sur des données.
+
+**L'union ($\cup$)** — $A \cup B$ contient les éléments qui sont dans $A$ **OU** dans $B$ (ou les deux). C'est la fusion. $\{1,2,3\} \cup \{3,4,5\} = \{1,2,3,4,5\}$ (le 3 commun n'est pas dupliqué).
+
+**L'intersection ($\cap$)** — $A \cap B$ contient les éléments qui sont dans $A$ **ET** dans $B$ (les communs). $\{1,2,3\} \cap \{3,4,5\} = \{3\}$. Si l'intersection est vide, les ensembles sont **disjoints**.
+
+**La différence ($\setminus$)** — $A \setminus B$ contient les éléments de $A$ qui ne sont **pas** dans $B$. $\{1,2,3\} \setminus \{3,4,5\} = \{1,2\}$. C'est « ce qui est dans $A$ mais pas dans $B$ ».
+
+**Le complémentaire ($\bar{A}$)** — Tout ce qui n'est **pas** dans $A$ (par rapport à un ensemble de référence, l'univers). Correspond au NON logique.
+
+La correspondance avec la logique est exacte : union ↔ OU, intersection ↔ ET, complémentaire ↔ NON. Et les **lois de De Morgan** s'appliquent aussi aux ensembles : le complémentaire d'une union est l'intersection des complémentaires. Logique et théorie des ensembles sont deux faces d'une même structure (l'algèbre de Boole).
+
+## Le lien direct avec SQL et les bases de données
+
+Point très concret pour toi : les opérations ensemblistes **sont** au cœur des bases de données relationnelles. Ce n'est pas une analogie, c'est le fondement théorique du SQL.
+
+- Une **table** (ou un résultat de requête) est un ensemble de lignes.
+- L'opérateur SQL `UNION` est l'**union** ensembliste.
+- L'opérateur `INTERSECT` est l'**intersection**.
+- L'opérateur `EXCEPT` (ou `MINUS`) est la **différence**.
+- Une **jointure** repose sur des correspondances entre ensembles.
+- Une clause `WHERE` définit un sous-ensemble par compréhension (les lignes qui satisfont la condition).
+
+Le modèle relationnel (rappelle-toi ton cours SQL) est littéralement bâti sur la théorie des ensembles — le mot « relationnel » vient de la notion mathématique de relation, elle-même définie via les ensembles. Comprendre les ensembles, c'est comprendre en profondeur ce que fait vraiment une requête SQL.
+
+```python
+# En Python, les ensembles (set) implémentent directement ces opérations
+admins = {"alice", "bob"}
+utilisateurs = {"alice", "bob", "charlie", "dave"}
+
+print(admins | utilisateurs)      # union
+print(admins & utilisateurs)      # intersection -> {alice, bob}
+print(utilisateurs - admins)      # différence -> {charlie, dave} (les non-admins)
+print(admins <= utilisateurs)     # admins est-il sous-ensemble ? -> True
+```
+
+## Le produit cartésien
+
+Une opération qui construit un ensemble à partir de deux autres : le **produit cartésien** $A \times B$ est l'ensemble de **toutes les paires** $(a, b)$ où $a \in A$ et $b \in B$. Si $A = \{1, 2\}$ et $B = \{x, y\}$, alors $A \times B = \{(1,x), (1,y), (2,x), (2,y)\}$.
+
+Son cardinal : $|A \times B| = |A| \times |B|$ (d'où le nom « produit »). Le produit cartésien est fondamental : il modélise toutes les combinaisons possibles. En base de données, une jointure part conceptuellement d'un produit cartésien (toutes les combinaisons de lignes) qu'on filtre ensuite. En combinatoire, il compte les possibilités. Les coordonnées d'un plan $\mathbb{R} \times \mathbb{R} = \mathbb{R}^2$ (ton cours de vecteurs) sont un produit cartésien.
+
+## Applications transversales
+
+Les ensembles structurent énormément de choses en informatique :
+
+- **Bases de données** — le fondement du relationnel (vu ci-dessus).
+- **Gestion des droits et sécurité** — les permissions, rôles, groupes sont des ensembles ; vérifier un accès = tester une appartenance ou une intersection (l'utilisateur a-t-il un rôle dans l'ensemble des rôles autorisés ?).
+- **Réseaux** — les plages d'adresses IP, les sous-réseaux sont des ensembles ; le calcul de sous-réseaux (subnetting) manipule des ensembles d'adresses.
+- **Types de données** — un `set` est une structure de données standard dans tous les langages, efficace pour tester l'appartenance et éliminer les doublons.
+- **Théorie des bases de données, compilation, IA** — les ensembles sont partout.
+
+## Ce qu'il faut retenir
+
+- Un **ensemble** est une collection d'**éléments** distincts (ordre et répétitions sans importance) ; **appartenance** notée $\in$, ensemble vide $\emptyset$, **cardinal** $|A|$ = nombre d'éléments.
+- On définit un ensemble **en extension** (liste) ou **en compréhension** (propriété — comme un `WHERE` SQL).
+- Un **sous-ensemble** ($A \subseteq B$) : tous les éléments de $A$ sont dans $B$ (modélise les hiérarchies de droits, sous-réseaux). Un ensemble à $n$ éléments a $2^n$ sous-ensembles.
+- Opérations : **union** ($\cup$, OU), **intersection** ($\cap$, ET), **différence** ($\setminus$), **complémentaire** ($\bar{A}$, NON) — en correspondance exacte avec la logique (De Morgan s'y applique).
+- **Lien direct avec SQL** : une table est un ensemble de lignes ; `UNION`/`INTERSECT`/`EXCEPT` sont les opérations ensemblistes ; le modèle relationnel est bâti sur la théorie des ensembles.
+- Le **produit cartésien** $A \times B$ (toutes les paires, cardinal $|A| \times |B|$) modélise les combinaisons — base des jointures et de la combinatoire.
+- Applications : bases de données, gestion des droits/sécurité (appartenance, intersection), réseaux (plages d'IP, subnetting), structure `set` en programmation.

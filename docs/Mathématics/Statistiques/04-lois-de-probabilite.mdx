@@ -1,0 +1,134 @@
+---
+id: 04-lois-de-probabilite
+title: Les lois de probabilité usuelles
+sidebar_position: 4
+---
+
+# Les lois de probabilité usuelles
+
+## Pourquoi des lois « toutes faites »
+
+Beaucoup de situations aléatoires reviennent si souvent qu'on a identifié des **modèles types** — des lois de probabilité standard qui décrivent des phénomènes récurrents. Les reconnaître te fait gagner un temps énorme : plutôt que de tout recalculer, tu identifies « ah, c'est une loi de Poisson » et tu appliques directement ses propriétés (espérance, variance, formules).
+
+Ce cours présente les lois les plus utiles pour ton domaine. L'important n'est pas de mémoriser les formules par cœur, mais de **savoir reconnaître quelle loi modélise quelle situation**.
+
+## Lois discrètes
+
+### La loi de Bernoulli : le oui/non
+
+La plus simple. Elle modélise une **expérience à deux issues** : succès (1) ou échec (0), avec une probabilité $p$ de succès. Un seul essai.
+
+Exemples : un lancer de pièce (pile = succès), un paquet réseau qui arrive ou se perd, un bit qui vaut 0 ou 1, une tentative de connexion qui réussit ou échoue.
+
+- Espérance : $E[X] = p$.
+- Variance : $\text{Var}(X) = p(1-p)$.
+
+C'est la brique de base : beaucoup d'autres lois se construisent en répétant des Bernoulli.
+
+### La loi binomiale : compter les succès
+
+Elle modélise le **nombre de succès sur $n$ essais indépendants**, chacun de type Bernoulli avec probabilité $p$. On répète la même expérience oui/non $n$ fois et on compte les succès.
+
+Exemples : sur 100 paquets envoyés, combien arrivent ? Sur 20 tentatives de mot de passe, combien réussissent ? Sur 1000 bits transmis, combien sont erronés ?
+
+La probabilité d'obtenir exactement $k$ succès :
+
+```math
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+```
+
+où $\binom{n}{k}$ (coefficient binomial, « $k$ parmi $n$ », que tu verras en combinatoire) compte le nombre de façons d'obtenir $k$ succès parmi $n$ essais.
+
+- Espérance : $E[X] = np$ (logique : $n$ essais, chacun réussit avec probabilité $p$).
+- Variance : $\text{Var}(X) = np(1-p)$.
+
+La loi binomiale est partout où l'on compte des succès sur des essais répétés.
+
+### La loi de Poisson : les événements rares
+
+Elle modélise le **nombre d'événements se produisant dans un intervalle** (de temps, d'espace) donné, quand ces événements sont rares et indépendants, avec un taux moyen $\lambda$ (lambda) connu.
+
+Exemples très pertinents pour toi : nombre de requêtes arrivant sur un serveur par seconde, nombre de paquets par intervalle, nombre de connexions par minute, nombre de pannes par an, nombre d'attaques détectées par jour. C'est **la** loi du trafic réseau et des files d'attente.
+
+```math
+P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+```
+
+- Espérance : $E[X] = \lambda$.
+- Variance : $\text{Var}(X) = \lambda$ (particularité : moyenne = variance).
+
+Le paramètre $\lambda$ est le nombre moyen d'événements par intervalle. La loi de Poisson est fondamentale en dimensionnement de réseaux et de serveurs (combien de capacité prévoir pour absorber le trafic ?) et en théorie des files d'attente.
+
+### La loi géométrique : attendre le premier succès
+
+Elle modélise le **nombre d'essais nécessaires pour obtenir le premier succès** (essais de Bernoulli répétés). Exemples : combien de tentatives avant de deviner un mot de passe ? Combien de paquets avant le premier échec ?
+
+- Espérance : $E[X] = 1/p$ (logique : si un succès a une chance sur 10, il faut en moyenne 10 essais).
+
+## Lois continues
+
+### La loi uniforme : tout est équiprobable
+
+La plus simple des lois continues : toutes les valeurs d'un intervalle $[a, b]$ sont **également probables**. La densité est constante sur l'intervalle.
+
+Exemples : un nombre « au hasard » entre 0 et 1 (ce que renvoie un générateur aléatoire de base), une position aléatoire uniforme. C'est le point de départ de la génération de nombres aléatoires en informatique — les autres lois se dérivent souvent d'une uniforme transformée.
+
+- Espérance : $E[X] = \dfrac{a+b}{2}$ (le milieu de l'intervalle).
+
+Point crucial en crypto : un bon générateur d'aléa doit produire une distribution **vraiment uniforme** et imprévisible. Un biais dans l'uniformité (certaines valeurs plus probables) est une faille exploitable — on l'a vu dans ton cours crypto avec les mauvais RNG.
+
+### La loi normale (gaussienne) : la reine des lois
+
+La plus importante de toutes, reconnaissable à sa **courbe en cloche** symétrique. Elle est caractérisée par deux paramètres : sa moyenne $\mu$ (le centre de la cloche) et son écart-type $\sigma$ (sa largeur).
+
+Pourquoi est-elle si centrale ? À cause du **théorème central limite** (voir plus bas) : énormément de phénomènes naturels et de mesures suivent une loi normale (tailles, erreurs de mesure, bruit, agrégats de nombreux petits effets aléatoires).
+
+Sa propriété la plus utile en pratique, la **règle des 68-95-99,7** :
+- Environ **68 %** des valeurs sont à moins de 1 écart-type de la moyenne.
+- Environ **95 %** à moins de 2 écarts-types.
+- Environ **99,7 %** à moins de 3 écarts-types.
+
+Cette règle est un outil puissant pour la **détection d'anomalies** : une valeur à plus de 3 écarts-types de la moyenne est très rare (moins de 0,3 %) — donc suspecte. C'est le principe de beaucoup de systèmes de détection : ce qui sort de la « cloche normale » attire l'attention. En contrôle qualité, en surveillance réseau, en sécurité, ce seuil est constamment utilisé.
+
+### La loi exponentielle : les temps d'attente
+
+Elle modélise le **temps écoulé entre deux événements** rares (le pendant continu de Poisson). Exemples : temps entre deux requêtes serveur, durée de vie d'un composant avant panne, temps entre deux pannes.
+
+- Espérance : $E[X] = 1/\lambda$ (si les événements arrivent au taux $\lambda$, le temps moyen entre deux est $1/\lambda$).
+
+Elle a une propriété curieuse dite « sans mémoire » : le temps déjà attendu ne change pas la probabilité d'attente restante (un composant « n'a pas de mémoire » de son âge dans ce modèle). Loi centrale en fiabilité et en files d'attente, en tandem avec Poisson.
+
+## Le théorème central limite
+
+C'est l'un des résultats les plus profonds et utiles de toutes les probabilités, et il explique pourquoi la loi normale est omniprésente.
+
+Le **théorème central limite** (TCL) affirme, en substance : **la somme (ou la moyenne) d'un grand nombre de variables aléatoires indépendantes tend vers une loi normale**, quelle que soit la loi de départ de ces variables.
+
+Autrement dit : même si les phénomènes individuels ne sont pas normaux, dès qu'on en additionne beaucoup, le résultat le devient. C'est pourquoi tant de choses dans la nature suivent une cloche : elles résultent de la somme de multiples petits effets aléatoires indépendants (la taille d'une personne = somme de nombreux facteurs génétiques et environnementaux, le bruit de mesure = somme de multiples perturbations).
+
+Conséquences pratiques énormes :
+- Ça justifie l'usage de la loi normale dans une multitude de contextes.
+- C'est le fondement de l'**inférence statistique** (ton prochain domaine) : quand on estime une moyenne à partir d'un échantillon, la distribution de cette estimation est normale grâce au TCL, ce qui permet de calculer des intervalles de confiance.
+- Ça explique pourquoi les moyennes sont plus stables que les valeurs individuelles.
+
+Le TCL est le pont entre les probabilités et les statistiques.
+
+## Comment choisir la bonne loi
+
+Un petit guide de reconnaissance, l'essentiel de ce cours :
+
+- Une seule expérience oui/non → **Bernoulli**.
+- Compter les succès sur $n$ essais → **binomiale**.
+- Compter des événements rares sur un intervalle (trafic, arrivées) → **Poisson**.
+- Attendre le premier succès (nombre d'essais) → **géométrique**.
+- Toutes les valeurs d'un intervalle équiprobables (aléa de base) → **uniforme**.
+- Un temps d'attente entre événements → **exponentielle**.
+- Une mesure naturelle, un agrégat de nombreux effets, un bruit → **normale** (gaussienne).
+
+## Ce qu'il faut retenir
+
+- Les **lois usuelles** sont des modèles types ; l'essentiel est de **reconnaître quelle loi modélise quelle situation**.
+- Discrètes : **Bernoulli** (oui/non), **binomiale** (compter les succès sur $n$ essais, $E=np$), **Poisson** (événements rares/trafic, $E=\text{Var}=\lambda$), **géométrique** (attente du 1er succès, $E=1/p$).
+- Continues : **uniforme** (équiprobable, base de l'aléa — enjeu crypto), **normale/gaussienne** (cloche, la plus importante, règle **68-95-99,7** pour la détection d'anomalies), **exponentielle** (temps d'attente, $E=1/\lambda$).
+- La loi de **Poisson** et l'**exponentielle** sont les lois du trafic réseau et des files d'attente — directement utiles en R&T.
+- Le **théorème central limite** : la somme/moyenne de nombreuses variables indépendantes tend vers une **normale**, quelle que soit leur loi. Explique l'omniprésence de la cloche et fonde l'inférence statistique (pont vers les stats).

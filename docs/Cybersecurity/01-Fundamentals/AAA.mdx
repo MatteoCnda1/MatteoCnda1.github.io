@@ -1,0 +1,904 @@
+---
+title: AAA
+sidebar_position: 2
+---
+
+---
+
+# Le modèle AAA
+
+## Introduction
+
+Le modèle **AAA** est un concept fondamental en cybersécurité utilisé pour contrôler et gérer l'accès aux ressources d'un système.
+
+AAA signifie :
+
+- **Authentication** — Authentification
+- **Authorization** — Autorisation
+- **Accounting** — Traçabilité / Comptabilisation
+
+Ces trois concepts permettent de répondre à trois questions fondamentales :
+
+> **Qui es-tu ?**
+
+> **Qu'as-tu le droit de faire ?**
+
+> **Qu'as-tu fait ?**
+
+Le modèle AAA est utilisé dans de nombreux environnements :
+
+- systèmes Linux et Windows ;
+- réseaux d'entreprise ;
+- VPN ;
+- WiFi d'entreprise ;
+- serveurs ;
+- applications Web ;
+- Active Directory ;
+- Cloud ;
+- équipements réseau.
+
+---
+
+# Vue d'ensemble
+
+```text
+Utilisateur
+    │
+    ▼
+┌─────────────────┐
+│ Authentication  │
+│  Qui es-tu ?    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Authorization   │
+│ Que peux-tu     │
+│ faire ?         │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Accounting      │
+│ Qu'as-tu fait ? │
+└─────────────────┘
+```
+
+Le processus logique est généralement :
+
+```text
+1. Authentication
+        ↓
+2. Authorization
+        ↓
+3. Accounting
+```
+
+---
+
+# 1. Authentication
+
+## Définition
+
+L'**authentication** consiste à vérifier l'identité d'un utilisateur, d'un système ou d'un service.
+
+La question posée est :
+
+> **Who are you?**
+
+ou :
+
+> **Qui es-tu ?**
+
+Un système ne doit pas simplement croire une identité déclarée.
+
+Par exemple, si un utilisateur indique :
+
+```text
+Username: matteo
+```
+
+cela ne prouve pas qu'il est réellement Matteo.
+
+Le système doit demander une preuve d'identité.
+
+---
+
+## Les facteurs d'authentification
+
+L'authentification peut utiliser plusieurs types de preuves.
+
+### Something you know
+
+Quelque chose que l'utilisateur **connaît**.
+
+Exemples :
+
+- mot de passe ;
+- PIN ;
+- réponse à une question secrète.
+
+```text
+Username + Password
+```
+
+---
+
+### Something you have
+
+Quelque chose que l'utilisateur **possède**.
+
+Exemples :
+
+- téléphone ;
+- carte à puce ;
+- clé de sécurité ;
+- token ;
+- application d'authentification.
+
+Par exemple :
+
+```text
+Password
++
+One-Time Password
+```
+
+---
+
+### Something you are
+
+Quelque chose qui correspond à une caractéristique **biométrique**.
+
+Exemples :
+
+- empreinte digitale ;
+- reconnaissance faciale ;
+- iris.
+
+---
+
+## Multi-Factor Authentication
+
+Le **MFA** consiste à utiliser plusieurs facteurs d'authentification différents.
+
+Exemple :
+
+```text
+Mot de passe
++
+Code généré par une application
+```
+
+Cela combine :
+
+```text
+Something you know
++
+Something you have
+```
+
+Il est important de noter que deux mots de passe ne constituent pas du MFA.
+
+```text
+Password 1
++
+Password 2
+```
+
+Les deux appartiennent à la même catégorie :
+
+> Something you know
+
+---
+
+## Exemples d'authentification
+
+### Linux
+
+```text
+Utilisateur
+    │
+    ▼
+Username: matteo
+Password: ********
+    │
+    ▼
+Identité vérifiée
+```
+
+---
+
+### SSH
+
+```bash
+ssh user@server
+```
+
+L'authentification peut utiliser :
+
+- un mot de passe ;
+- une clé SSH ;
+- une clé matérielle ;
+- plusieurs facteurs.
+
+---
+
+### Application Web
+
+```text
+Utilisateur
+      │
+      ▼
+Login + Password
+      │
+      ▼
+Serveur d'authentification
+      │
+      ▼
+Identité vérifiée
+      │
+      ▼
+Session créée
+```
+
+---
+
+# 2. Authorization
+
+## Définition
+
+L'**authorization** détermine ce qu'une identité authentifiée a le droit de faire.
+
+La question est :
+
+> **What are you allowed to do?**
+
+ou :
+
+> **Qu'as-tu le droit de faire ?**
+
+L'autorisation intervient généralement **après l'authentification**.
+
+Exemple :
+
+```text
+Utilisateur : matteo
+
+Authentification : SUCCESS
+```
+
+Le système connaît maintenant l'identité de l'utilisateur.
+
+Il doit ensuite déterminer ses permissions.
+
+```text
+Peut lire un fichier ?       YES
+Peut modifier un fichier ?   YES
+Peut supprimer le fichier ?  NO
+```
+
+---
+
+## Authentication ≠ Authorization
+
+Ces deux concepts sont souvent confondus.
+
+### Authentication
+
+```text
+Qui es-tu ?
+```
+
+### Authorization
+
+```text
+Qu'as-tu le droit de faire ?
+```
+
+Exemple :
+
+```text
+Utilisateur : alice
+
+Authentication:
+Alice a prouvé son identité.
+
+Authorization:
+Alice peut accéder au dossier /home/alice.
+
+Alice ne peut pas accéder à /root.
+```
+
+Alice est donc correctement authentifiée, mais cela ne signifie pas qu'elle possède tous les droits.
+
+---
+
+# Modèles d'autorisation
+
+Il existe plusieurs modèles pour gérer les permissions.
+
+## RBAC — Role-Based Access Control
+
+Les permissions sont attribuées à des **rôles**.
+
+Exemple :
+
+```text
+User
+ │
+ ▼
+Role
+ │
+ ▼
+Permissions
+```
+
+```text
+Matteo
+   │
+   ▼
+Administrator
+   │
+   ├── Read
+   ├── Write
+   ├── Delete
+   └── Manage users
+```
+
+Un autre utilisateur :
+
+```text
+Bob
+ │
+ ▼
+User
+ │
+ ├── Read
+ └── Write
+```
+
+RBAC est très utilisé dans :
+
+- entreprises ;
+- Cloud ;
+- Active Directory ;
+- applications ;
+- systèmes d'administration.
+
+---
+
+## ABAC — Attribute-Based Access Control
+
+L'accès est déterminé à partir d'attributs.
+
+Exemple :
+
+```text
+User.department = Security
+AND
+User.level >= 3
+AND
+Resource.classification = Internal
+```
+
+L'accès peut être accordé uniquement si toutes les conditions sont satisfaites.
+
+---
+
+## DAC — Discretionary Access Control
+
+Le propriétaire d'une ressource peut décider qui possède l'accès.
+
+Exemple Linux :
+
+```text
+-rw-r----- file.txt
+```
+
+Le propriétaire peut modifier les permissions avec :
+
+```bash
+chmod
+```
+
+ou modifier le propriétaire avec :
+
+```bash
+chown
+```
+
+---
+
+## MAC — Mandatory Access Control
+
+Les règles d'accès sont définies par une politique centrale.
+
+L'utilisateur ne décide pas directement des permissions.
+
+Exemples :
+
+- SELinux ;
+- systèmes militaires ;
+- environnements fortement sécurisés.
+
+---
+
+# Le principe du Least Privilege
+
+L'autorisation doit idéalement respecter le principe du :
+
+> **Least Privilege**
+
+Un utilisateur ou un programme doit recevoir uniquement les permissions nécessaires.
+
+Mauvais exemple :
+
+```text
+Application Web
+    │
+    ▼
+Administrator privileges
+```
+
+Même si l'application n'a besoin que de lire une base de données.
+
+Meilleur exemple :
+
+```text
+Application
+    │
+    ▼
+Database role
+    │
+    └── SELECT
+```
+
+L'application possède uniquement :
+
+```text
+Read permission
+```
+
+et pas :
+
+```text
+DELETE
+DROP
+ALTER
+ADMIN
+```
+
+---
+
+# 3. Accounting
+
+## Définition
+
+L'**accounting** consiste à enregistrer et suivre les actions effectuées.
+
+La question est :
+
+> **What did you do?**
+
+ou :
+
+> **Qu'as-tu fait ?**
+
+Le système conserve des informations permettant de savoir :
+
+- qui a effectué une action ;
+- quelle action a été réalisée ;
+- quand ;
+- depuis quelle machine ;
+- sur quelle ressource ;
+- si l'action a réussi ou échoué.
+
+---
+
+# Exemple de journalisation
+
+```text
+User: matteo
+Action: Login
+Status: Success
+Time: 2026-08-25 21:30
+Source IP: 192.168.1.50
+```
+
+Une autre action :
+
+```text
+User: matteo
+Action: Delete file
+File: /home/matteo/test.txt
+Time: 2026-08-25 21:35
+Status: Success
+```
+
+Ces informations peuvent être stockées dans :
+
+- logs système ;
+- SIEM ;
+- bases de données ;
+- journaux d'audit.
+
+---
+
+# Accounting et sécurité
+
+L'accounting permet notamment :
+
+- l'audit ;
+- l'investigation ;
+- la détection d'activités suspectes ;
+- la réponse aux incidents ;
+- la conformité ;
+- la reconstruction d'une attaque.
+
+Sans logs, il devient beaucoup plus difficile de répondre à des questions comme :
+
+```text
+Qui s'est connecté ?
+```
+
+```text
+Quand ?
+```
+
+```text
+Depuis quelle adresse IP ?
+```
+
+```text
+Quelles actions ont été réalisées ?
+```
+
+---
+
+# Exemple complet
+
+Imaginons un utilisateur qui se connecte à un serveur.
+
+## Étape 1 — Authentication
+
+```text
+Username: matteo
+Password: ********
+```
+
+Le serveur vérifie l'identité.
+
+```text
+Authentication: SUCCESS
+```
+
+---
+
+## Étape 2 — Authorization
+
+Le serveur vérifie les permissions.
+
+```text
+User: matteo
+Role: Developer
+```
+
+Permissions :
+
+```text
+Read project files     ✓
+Modify project files   ✓
+Delete users           ✗
+Access /root           ✗
+```
+
+---
+
+## Étape 3 — Accounting
+
+Les actions sont enregistrées.
+
+```text
+2026-08-25 21:00
+User matteo logged in.
+
+2026-08-25 21:05
+User matteo modified app.py.
+
+2026-08-25 21:10
+User matteo logged out.
+```
+
+---
+
+# AAA dans une infrastructure réseau
+
+AAA est très utilisé dans les infrastructures réseau.
+
+Exemple :
+
+```text
+                ┌───────────────┐
+                │   User        │
+                └───────┬───────┘
+                        │
+                        ▼
+                ┌───────────────┐
+                │ Network Device│
+                │ Switch / VPN  │
+                └───────┬───────┘
+                        │
+                        ▼
+                ┌───────────────┐
+                │ AAA Server    │
+                │ RADIUS / TACACS│
+                └───────────────┘
+```
+
+Le serveur AAA peut gérer :
+
+```text
+Authentication
+Authorization
+Accounting
+```
+
+---
+
+# Protocoles associés
+
+## RADIUS
+
+RADIUS signifie :
+
+> **Remote Authentication Dial-In User Service**
+
+Il est fréquemment utilisé pour :
+
+- WiFi Enterprise ;
+- VPN ;
+- contrôle d'accès réseau ;
+- authentification centralisée.
+
+Exemple :
+
+```text
+User
+  │
+  ▼
+WiFi Access Point
+  │
+  ▼
+RADIUS Server
+  │
+  ├── Authentication
+  ├── Authorization
+  └── Accounting
+```
+
+---
+
+## TACACS+
+
+TACACS+ est principalement utilisé pour l'administration d'équipements réseau.
+
+Il peut notamment permettre de gérer séparément :
+
+```text
+Authentication
+Authorization
+Accounting
+```
+
+Exemple :
+
+```text
+Admin
+  │
+  ▼
+Router / Switch
+  │
+  ▼
+TACACS+ Server
+```
+
+Le serveur peut déterminer :
+
+```text
+Qui est connecté ?
+```
+
+```text
+Quelles commandes peut-il exécuter ?
+```
+
+```text
+Quelles commandes a-t-il exécutées ?
+```
+
+---
+
+# AAA et Zero Trust
+
+Le modèle AAA est très important dans une architecture **Zero Trust**.
+
+Le principe général est :
+
+> Ne jamais faire confiance implicitement.
+
+Un utilisateur authentifié ne reçoit pas automatiquement tous les accès.
+
+Le système doit continuellement vérifier :
+
+```text
+Identity
++
+Permissions
++
+Context
++
+Security policies
+```
+
+Exemple :
+
+```text
+User authenticated
+        │
+        ▼
+Device trusted?
+        │
+        ▼
+Location allowed?
+        │
+        ▼
+MFA completed?
+        │
+        ▼
+Permission granted?
+```
+
+---
+
+# Attaques liées à AAA
+
+Les systèmes AAA peuvent être ciblés de différentes manières.
+
+## Attaques contre l'Authentication
+
+Exemples :
+
+- credential stuffing ;
+- brute force ;
+- password spraying ;
+- phishing ;
+- vol de session ;
+- vol de cookies ;
+- MFA fatigue ;
+- vol de tokens.
+
+---
+
+## Attaques contre l'Authorization
+
+Exemples :
+
+- privilege escalation ;
+- IDOR ;
+- broken access control ;
+- abuse de rôles ;
+- modification de permissions ;
+- accès à des ressources non autorisées.
+
+Exemple :
+
+```text
+Normal user
+      │
+      ▼
+Privilege Escalation
+      │
+      ▼
+Administrator
+```
+
+---
+
+## Attaques contre l'Accounting
+
+Un attaquant peut tenter de :
+
+- supprimer des logs ;
+- modifier des logs ;
+- désactiver la journalisation ;
+- contourner la surveillance ;
+- utiliser des comptes légitimes afin de se cacher dans les activités normales.
+
+C'est pourquoi les logs importants peuvent être envoyés vers un système centralisé.
+
+```text
+Server
+   │
+   └──────► Central Logging / SIEM
+```
+
+Ainsi, même si le serveur est compromis, l'attaquant ne contrôle pas nécessairement toutes les copies des journaux.
+
+---
+
+# Tableau récapitulatif
+
+| Élément            | Question            | Objectif                  | Exemple                    |
+| ------------------ | ------------------- | ------------------------- | -------------------------- |
+| **Authentication** | Qui es-tu ?         | Vérifier l'identité       | Mot de passe, MFA, clé SSH |
+| **Authorization**  | Que peux-tu faire ? | Contrôler les permissions | RBAC, ACL, rôles           |
+| **Accounting**     | Qu'as-tu fait ?     | Enregistrer les actions   | Logs, audit, SIEM          |
+
+---
+
+# Exemple simple
+
+```text
+                    USER
+                      │
+                      ▼
+            ┌──────────────────┐
+            │ AUTHENTICATION   │
+            │                  │
+            │ "Who are you?"   │
+            └────────┬─────────┘
+                     │
+                     ▼
+            ┌──────────────────┐
+            │ AUTHORIZATION    │
+            │                  │
+            │ "What can you do?"│
+            └────────┬─────────┘
+                     │
+                     ▼
+            ┌──────────────────┐
+            │ ACCOUNTING       │
+            │                  │
+            │ "What did you do?"│
+            └──────────────────┘
+```
+
+---
+
+# Points importants à retenir
+
+- **Authentication** permet de vérifier une identité.
+- **Authorization** permet de déterminer les permissions associées à cette identité.
+- **Accounting** permet de conserver une trace des actions.
+- Être authentifié ne signifie pas avoir accès à toutes les ressources.
+- Une bonne politique d'autorisation applique le principe du **Least Privilege**.
+- Les logs sont essentiels pour l'investigation et la détection.
+- AAA est utilisé dans les systèmes, les réseaux, les VPN, le Cloud et les environnements WiFi Enterprise.
+
+---
+
+# Ressources et concepts associés
+
+Concepts à explorer ensuite :
+
+- Authentication vs Authorization
+- MFA
+- RBAC
+- ABAC
+- DAC
+- MAC
+- Least Privilege
+- Access Control
+- IAM
+- RADIUS
+- TACACS+
+- LDAP
+- Kerberos
+- OAuth 2.0
+- OpenID Connect
+- SAML
+- Zero Trust
+- SIEM
+- Logging
+- Auditing

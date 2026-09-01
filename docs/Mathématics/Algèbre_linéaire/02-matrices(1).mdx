@@ -1,0 +1,144 @@
+---
+id: 02-matrices
+title: Les matrices
+sidebar_position: 2
+---
+
+# Les matrices
+
+## Qu'est-ce qu'une matrice ?
+
+Une **matrice** est un tableau rectangulaire de nombres, organisé en lignes et colonnes. On la note avec des parenthèses (ou crochets) :
+
+```math
+A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}
+```
+
+Cette matrice a 2 lignes et 3 colonnes : on dit qu'elle est de **dimension** (ou taille) $2 \times 3$ (toujours lignes × colonnes, dans cet ordre). L'élément à la ligne $i$, colonne $j$ se note $a_{ij}$. Ici $a_{12} = 2$ (ligne 1, colonne 2).
+
+Comme pour les vecteurs, il y a plusieurs façons de voir une matrice, et c'est en les reliant qu'on la comprend :
+
+**Comme un tableau de données** — Une grille de nombres. En info, c'est une image (grille de pixels), un tableau de données, une matrice d'adjacence de graphe.
+
+**Comme un ensemble de vecteurs** — Chaque colonne (ou ligne) est un vecteur. Une matrice $2 \times 3$ peut se voir comme 3 vecteurs de dimension 2 mis côte à côte.
+
+**Comme une transformation** — C'est la vue la plus profonde et la plus importante : **une matrice représente une transformation de l'espace** (une fonction qui prend un vecteur et en renvoie un autre). C'est le cœur du sujet, développé plus bas.
+
+## Les opérations de base
+
+**Addition et soustraction** — Élément par élément (les matrices doivent avoir la même taille) :
+
+```math
+\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} + \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} = \begin{pmatrix} 6 & 8 \\ 10 & 12 \end{pmatrix}
+```
+
+**Multiplication par un scalaire** — Chaque élément est multiplié :
+
+```math
+3 \cdot \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = \begin{pmatrix} 3 & 6 \\ 9 & 12 \end{pmatrix}
+```
+
+**La transposée** — Noter $A^T$ : on échange les lignes et les colonnes. La ligne 1 devient la colonne 1, etc. Une matrice $2 \times 3$ devient $3 \times 2$ :
+
+```math
+A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}, \quad A^T = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix}
+```
+
+La transposée revient tout le temps (produit scalaire, matrices symétriques, moindres carrés).
+
+## La multiplication de matrices : le cœur du sujet
+
+C'est l'opération centrale, et elle est **contre-intuitive** au début : on ne multiplie **pas** élément par élément. La règle : pour multiplier $A$ par $B$, chaque élément du résultat est le **produit scalaire** d'une ligne de $A$ par une colonne de $B$.
+
+```math
+\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} = \begin{pmatrix} 1\cdot5 + 2\cdot7 & 1\cdot6 + 2\cdot8 \\ 3\cdot5 + 4\cdot7 & 3\cdot6 + 4\cdot8 \end{pmatrix} = \begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}
+```
+
+L'élément en haut à gauche (19) = ligne 1 de $A$ « produit scalaire » colonne 1 de $B$ = $1\cdot5 + 2\cdot7$.
+
+**Condition de compatibilité** : pour multiplier $A \times B$, le nombre de **colonnes de $A$** doit égaler le nombre de **lignes de $B$**. Une matrice $(m \times n)$ fois une $(n \times p)$ donne une matrice $(m \times p)$. Le $n$ « au milieu » doit correspondre et disparaît ; les dimensions extérieures donnent la taille du résultat. Si les dimensions ne correspondent pas, le produit n'existe pas.
+
+Propriété cruciale : **la multiplication de matrices n'est PAS commutative**. En général $AB \neq BA$ (parfois $BA$ n'existe même pas). C'est une différence majeure avec la multiplication des nombres, et une source d'erreurs classique. L'ordre compte.
+
+```python
+import numpy as np
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+C = A @ B          # @ = multiplication matricielle (PAS A * B qui multiplie élément par élément)
+```
+
+Attention en code : `A * B` en NumPy fait la multiplication **élément par élément** (pas ce qu'on veut), c'est `A @ B` (ou `np.dot`) qui fait la vraie multiplication matricielle. Erreur ultra-fréquente.
+
+## Pourquoi cette règle bizarre ? Les matrices comme transformations
+
+La règle de multiplication paraît arbitraire, mais elle découle d'une idée magnifique : **une matrice est une fonction qui transforme les vecteurs**. Quand tu multiplies une matrice $A$ par un vecteur $\vec{v}$, tu obtiens un nouveau vecteur $A\vec{v}$ — c'est $\vec{v}$ transformé.
+
+```math
+\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}
+```
+
+Ici la matrice a étiré le vecteur : ×2 en horizontal, ×3 en vertical. Les matrices peuvent représenter toutes sortes de transformations géométriques :
+
+- **Étirement / compression** (scaling).
+- **Rotation** (faire tourner l'espace d'un angle).
+- **Réflexion** (miroir).
+- **Cisaillement** (shear, qui « penche » l'espace).
+- **Projection** (aplatir sur une droite ou un plan).
+
+L'idée profonde : **une matrice décrit entièrement ce qu'elle fait aux vecteurs de base**. Ses colonnes indiquent où atterrissent les vecteurs de base après transformation. Comprendre ça débloque toute l'intuition de l'algèbre linéaire.
+
+Et la multiplication de matrices prend alors tout son sens : **multiplier deux matrices, c'est composer deux transformations** (appliquer l'une puis l'autre). $AB$ signifie « appliquer $B$, puis $A$ » (d'où l'ordre, et la non-commutativité : tourner puis étirer ≠ étirer puis tourner). C'est exactement pourquoi la règle de calcul est ce qu'elle est. C'est aussi pourquoi les transformations 3D en jeu vidéo, en robotique, en graphisme s'enchaînent par des produits de matrices.
+
+## Les matrices particulières
+
+Quelques matrices spéciales à connaître :
+
+**La matrice identité** $I$ — Des 1 sur la diagonale, des 0 ailleurs. C'est l'élément neutre : $A \cdot I = A$ (comme multiplier par 1). Elle représente la transformation « ne rien faire ».
+
+```math
+I = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}
+```
+
+**Matrice carrée** — Autant de lignes que de colonnes ($n \times n$). Beaucoup de propriétés importantes (inverse, déterminant, valeurs propres) n'existent que pour les matrices carrées.
+
+**Matrice diagonale** — Nulle partout sauf sur la diagonale. Très simple à manipuler (elle ne fait qu'étirer selon les axes).
+
+**Matrice symétrique** — Égale à sa transposée ($A = A^T$). Elles ont des propriétés remarquables (valeurs propres réelles), importantes en physique et en data.
+
+## Le déterminant
+
+Le **déterminant** (noté $\det(A)$ ou $|A|$) est un nombre qu'on peut calculer pour toute matrice **carrée**, et qui condense une information cruciale sur la transformation qu'elle représente.
+
+Pour une matrice $2\times2$ :
+
+```math
+\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc
+```
+
+Sa signification géométrique : le déterminant est le **facteur par lequel la transformation multiplie les aires (2D) ou les volumes (3D)**. Un déterminant de 2 signifie que la transformation double les aires ; de 0,5 qu'elle les divise par deux.
+
+Le cas le plus important : **si $\det(A) = 0$, la transformation « écrase » l'espace** (elle réduit une dimension — par exemple aplatit un plan en une droite). Conséquence majeure : une matrice de déterminant nul n'est **pas inversible** (on ne peut pas « défaire » l'écrasement, l'information est perdue). Le déterminant est donc le test d'inversibilité. Un déterminant négatif indique en plus que la transformation retourne l'orientation (comme un miroir).
+
+## La matrice inverse
+
+L'**inverse** d'une matrice carrée $A$, notée $A^{-1}$, est la matrice qui « annule » la transformation : $A \cdot A^{-1} = I$ (l'identité). Si $A$ fait une rotation de 30°, $A^{-1}$ fait la rotation inverse de -30°.
+
+Point clé : **une matrice n'est inversible que si son déterminant est non nul**. Si $\det(A) = 0$, la transformation a perdu de l'information (elle a écrasé une dimension), donc impossible de la défaire — pas d'inverse. Une telle matrice est dite **singulière**.
+
+L'inverse est central pour **résoudre les systèmes d'équations** : un système $A\vec{x} = \vec{b}$ se résout en $\vec{x} = A^{-1}\vec{b}$ (on y revient dans le cours sur les systèmes linéaires). En pratique, on calcule rarement l'inverse à la main (coûteux et instable numériquement) ; on utilise des méthodes dédiées, mais le concept est fondamental.
+
+```python
+A = np.array([[2, 1], [1, 3]])
+det = np.linalg.det(A)           # 5.0 (non nul → inversible)
+A_inv = np.linalg.inv(A)         # la matrice inverse
+```
+
+## Ce qu'il faut retenir
+
+- Une **matrice** est un tableau $m \times n$ (lignes × colonnes) ; on la voit comme des données, un paquet de vecteurs, ou surtout une **transformation de l'espace**.
+- Addition et multiplication par un scalaire se font **élément par élément** ; la **transposée** $A^T$ échange lignes et colonnes.
+- La **multiplication de matrices** = produit scalaire ligne × colonne ; compatibilité $(m\times n)(n\times p)=(m\times p)$ ; **non commutative** ($AB \neq BA$). En code : `A @ B`, pas `A * B`.
+- Une matrice **transforme les vecteurs** ($A\vec{v}$) ; multiplier deux matrices = **composer deux transformations** (d'où l'ordre et la non-commutativité).
+- Matrices spéciales : **identité** $I$ (neutre), carrée, diagonale, symétrique ($A=A^T$).
+- Le **déterminant** mesure le facteur d'aire/volume ; **$\det=0 \Rightarrow$ écrasement, non inversible**.
+- L'**inverse** $A^{-1}$ annule la transformation ($AA^{-1}=I$) ; existe **ssi** $\det \neq 0$ ; sert à résoudre $A\vec{x}=\vec{b}$.

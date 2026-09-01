@@ -1,0 +1,86 @@
+---
+id: 02-arbres
+title: Les arbres
+sidebar_position: 2
+---
+
+# Les arbres
+
+## Qu'est-ce qu'un arbre ?
+
+Un **arbre** est un type de graphe particulier, tellement fondamental en informatique qu'il mérite son propre cours. La définition est simple : un arbre est un graphe **connexe** (tout est relié) et **sans cycle** (pas de boucle). Ces deux conditions ensemble donnent une structure aux propriétés remarquables.
+
+Intuitivement, un arbre ressemble à... un arbre (généalogique, ou botanique renversé) : une structure hiérarchique qui se ramifie, sans jamais revenir sur elle-même. Cette absence de cycle est ce qui le distingue d'un graphe quelconque et lui donne sa clarté.
+
+Pourquoi les arbres sont-ils omniprésents en informatique ? Parce que d'innombrables structures sont naturellement hiérarchiques :
+- L'**arborescence de fichiers** de ton système (dossiers et sous-dossiers) — un arbre pur, que tu manipules tous les jours.
+- Le **DOM** d'une page web (que tu as vu en HTML) — un arbre de balises imbriquées.
+- La structure d'un document **XML/JSON**.
+- Les **hiérarchies réseau** (topologie en arbre, du cœur vers les extrémités).
+- Les **arbres de décision** en machine learning.
+- L'organisation interne des **bases de données** (les index B-tree, vus dans ton cours SQL).
+
+## Le vocabulaire des arbres
+
+Les arbres ont leur vocabulaire propre, emprunté à la fois à la botanique et à la généalogie :
+
+**La racine** (root) — Le sommet de départ, le point d'entrée de la hiérarchie. Un arbre a une seule racine. Dans une arborescence de fichiers, c'est `/` (ou `C:\`).
+
+**Les nœuds enfants et parents** — Chaque nœud (sauf la racine) a un **parent** (le nœud juste au-dessus) et peut avoir des **enfants** (les nœuds juste en dessous). C'est la relation hiérarchique de base.
+
+**Les feuilles** (leaves) — Les nœuds sans enfant, aux extrémités de l'arbre. Dans une arborescence de fichiers, ce sont les fichiers (par opposition aux dossiers qui ont un contenu).
+
+**Les nœuds internes** — Les nœuds qui ont au moins un enfant (ni racine ni feuille, ou la racine si elle a des enfants).
+
+**La profondeur d'un nœud** — Sa distance à la racine (le nombre de niveaux à descendre). La racine est à profondeur 0.
+
+**La hauteur de l'arbre** — La profondeur maximale, c'est-à-dire la longueur du plus long chemin de la racine à une feuille. Elle mesure « à quel point l'arbre est profond ».
+
+## Les propriétés fondamentales
+
+Les arbres ont des propriétés mathématiques élégantes qui découlent de leur définition (connexe + sans cycle) :
+
+**Relation entre sommets et arêtes** — Un arbre à $n$ sommets a **exactement $n - 1$ arêtes**. Toujours. C'est le minimum d'arêtes pour connecter $n$ sommets : en enlever une déconnecte l'arbre, en ajouter une crée un cycle. Cette propriété est caractéristique des arbres.
+
+**Chemin unique** — Entre deux nœuds quelconques d'un arbre, il existe **un et un seul chemin**. Pas de choix, pas d'ambiguïté. C'est une conséquence directe de l'absence de cycle (s'il y avait deux chemins entre deux nœuds, ils formeraient un cycle). Cette unicité rend la navigation dans un arbre simple et prévisible — une des raisons de leur utilité.
+
+**Fragilité** — Supprimer une seule arête déconnecte l'arbre en deux. Un arbre est la structure connexe « minimale » : aucune redondance. C'est à la fois un avantage (simplicité, économie) et un inconvénient (pas de tolérance aux pannes — si un lien tombe, le réseau se scinde). En conception réseau, on ajoute parfois des liens redondants (créant des cycles) précisément pour éviter cette fragilité.
+
+## Les arbres enracinés et les parcours
+
+Quand on désigne une racine, l'arbre devient **enraciné** (orienté du haut vers le bas), ce qui est le cas le plus courant en informatique. On veut alors souvent **parcourir** l'arbre — visiter tous ses nœuds dans un ordre systématique. Deux grandes stratégies :
+
+**Le parcours en profondeur** (DFS, Depth-First Search) — On descend aussi loin que possible dans une branche avant de remonter et d'explorer la suivante. Comme explorer un labyrinthe en suivant toujours un couloir jusqu'au bout avant de revenir. C'est le parcours naturel pour explorer une arborescence de fichiers récursivement (entrer dans un dossier, explorer tout son contenu, puis passer au dossier suivant).
+
+**Le parcours en largeur** (BFS, Breadth-First Search) — On visite tous les nœuds d'un niveau avant de passer au niveau suivant. On explore par « cercles concentriques » autour de la racine. Utile pour trouver le chemin le plus court en nombre d'étapes.
+
+Ces deux parcours (DFS et BFS) sont des algorithmes fondamentaux qui s'appliquent aussi aux graphes généraux (cours suivant). Les maîtriser est essentiel : une grande partie des algorithmes sur les structures arborescentes et les graphes en dérivent.
+
+## Les arbres binaires
+
+Un cas particulier très important : l'**arbre binaire**, où chaque nœud a **au plus deux enfants** (un gauche, un droit). Cette contrainte simple débloque des structures de données extrêmement efficaces.
+
+**L'arbre binaire de recherche** (BST, Binary Search Tree) — Un arbre binaire où, pour chaque nœud, tous les nœuds de gauche ont une valeur inférieure et ceux de droite une valeur supérieure. Cette organisation permet de **rechercher une valeur très rapidement** : à chaque nœud, on sait s'il faut aller à gauche ou à droite, divisant l'espace de recherche par deux à chaque étape. La recherche prend un temps proportionnel à la **hauteur** de l'arbre, soit environ $\log(n)$ pour un arbre équilibré — bien plus rapide qu'une recherche linéaire dans une liste.
+
+C'est le principe derrière les **index de bases de données** (les B-trees de ton cours SQL sont une généralisation) : ils permettent de retrouver une ligne parmi des millions en quelques comparaisons, au lieu de tout parcourir. L'efficacité vient de la structure arborescente.
+
+**L'importance de l'équilibre** — Un arbre binaire n'est efficace que s'il est **équilibré** (bien réparti, faible hauteur). Un arbre déséquilibré (qui dégénère en une longue chaîne) perd tout son avantage et se comporte comme une simple liste. D'où les arbres « auto-équilibrés » (AVL, arbres rouge-noir) qui maintiennent automatiquement une hauteur faible — au cœur des bases de données et des structures performantes.
+
+## Les arbres couvrants
+
+Notion très utile en réseau : un **arbre couvrant** (spanning tree) d'un graphe est un sous-ensemble d'arêtes qui connecte **tous** les sommets **sans former de cycle** — c'est-à-dire un arbre qui « couvre » tout le graphe.
+
+L'**arbre couvrant de poids minimal** (minimum spanning tree, MST) est celui dont la somme des poids des arêtes est la plus faible. Applications directes :
+- **Concevoir un réseau au moindre coût** : relier toutes les machines avec le minimum de câble/coût total.
+- Les algorithmes de Kruskal et Prim (cours suivant) le calculent.
+
+Application ultra-pertinente pour toi : le **Spanning Tree Protocol** (STP), un protocole réseau fondamental. Dans un réseau commuté avec des liens redondants (donc des cycles), les boucles causeraient des tempêtes de diffusion catastrophiques. STP construit automatiquement un arbre couvrant en **désactivant** certains liens pour éliminer les cycles, tout en gardant le réseau connexe — et réactive les liens de secours en cas de panne. C'est de la théorie des graphes appliquée directement dans le matériel réseau que tu configureras. Le nom même du protocole vient de la notion mathématique d'arbre couvrant.
+
+## Ce qu'il faut retenir
+
+- Un **arbre** est un graphe **connexe et sans cycle** — la structure hiérarchique par excellence (fichiers, DOM, XML/JSON, index de BDD, arbres de décision).
+- Vocabulaire : **racine**, **parent/enfant**, **feuilles** (sans enfant), **profondeur** (distance à la racine), **hauteur** (profondeur max).
+- Propriétés clés : $n$ sommets → **exactement $n-1$ arêtes** ; **chemin unique** entre deux nœuds ; structure connexe minimale donc **fragile** (pas de redondance).
+- **Parcours** : en profondeur (**DFS**, descendre à fond puis remonter) et en largeur (**BFS**, niveau par niveau) — algorithmes fondamentaux.
+- Les **arbres binaires de recherche** permettent une recherche en $\log(n)$ (diviser par deux à chaque nœud) — principe des **index de bases de données** ; nécessitent d'être **équilibrés** (AVL, rouge-noir).
+- Un **arbre couvrant** connecte tout le graphe sans cycle ; le **MST** (poids minimal) sert à concevoir un réseau au moindre coût. Le **Spanning Tree Protocol (STP)** en est l'application réseau directe (éliminer les boucles tout en gardant la connexité).
