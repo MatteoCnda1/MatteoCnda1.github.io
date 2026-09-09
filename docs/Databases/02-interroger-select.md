@@ -2,6 +2,7 @@
 id: 02-interroger-select
 title: Interroger les données (SELECT)
 sidebar_position: 3
+tags: [sql]
 ---
 
 # Interroger les données (SELECT)

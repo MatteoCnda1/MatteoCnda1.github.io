@@ -5,5 +5,10 @@ sidebar_position: 4
 
 # Programmation
 
-Dossier Programmation
+> Notes et exemples de code par langage.
+
+- Bash · PowerShell
+- Python
+- C · C++ · Rust
+- Html · Css · Javascript · Php
 

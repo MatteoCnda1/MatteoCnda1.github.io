@@ -2,6 +2,7 @@
 id: 01-xor-et-one-time-pad
 title: XOR et One-Time Pad
 sidebar_position: 3
+tags: [cryptographie]
 ---
 
 # XOR et One-Time Pad

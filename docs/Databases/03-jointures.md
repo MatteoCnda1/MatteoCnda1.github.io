@@ -2,6 +2,7 @@
 id: 03-jointures
 title: Les jointures
 sidebar_position: 4
+tags: [sql]
 ---
 
 # Les jointures (JOIN)

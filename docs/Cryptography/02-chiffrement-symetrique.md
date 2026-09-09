@@ -2,6 +2,7 @@
 id: 02-chiffrement-symetrique
 title: Chiffrement symétrique (AES et modes)
 sidebar_position: 4
+tags: [cryptographie]
 ---
 
 # Chiffrement symétrique (AES et modes opératoires)

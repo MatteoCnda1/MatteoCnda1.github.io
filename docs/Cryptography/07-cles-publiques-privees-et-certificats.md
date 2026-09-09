@@ -2,6 +2,7 @@
 id: 07-cles-publiques-privees-et-certificats
 title: Clés publiques/privées, PKI et certificats
 sidebar_position: 9
+tags: [cryptographie, web]
 ---
 
 # Clés publiques/privées, PKI et certificats

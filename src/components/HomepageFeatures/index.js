@@ -1,49 +1,90 @@
-import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
-const FeatureList = [
+const CategoryGroups = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
+    title: 'Cybersécurité & Réseaux',
+    items: [
+      {icon: '🛡️', title: 'Cybersecurity', to: '/docs/Cybersecurity'},
+      {icon: '🌐', title: 'Networking', to: '/docs/networking'},
+      {icon: '🔐', title: 'Cryptography', to: '/docs/Cryptography'},
+      {icon: '🔎', title: 'OSINT', to: '/docs/OSINT'},
+    ],
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
+    title: 'Systèmes & Infrastructure',
+    items: [
+      {icon: '💻', title: 'Operating Systems', to: '/docs/Operating_sys'},
+      {icon: '📦', title: 'Containers', to: '/docs/Containers'},
+      {icon: '☸️', title: 'Container Orchestration', to: '/docs/Container_Orchestration'},
+      {icon: '⚙️', title: 'Config Management & Automation', to: '/docs/Configuration_Management_Automation'},
+      {icon: '🔧', title: 'Hardware', to: '/docs/Hardware'},
+      {icon: '🚀', title: 'DevOps', to: '/docs/DevOps'},
+      {icon: '☁️', title: 'Cloud Computing', to: '/docs/Cloud_Computing'},
+      {icon: '🔌', title: 'Électronique', to: '/docs/Electronique'},
+      {icon: '🦾', title: 'Robotique & Embarqué', to: '/docs/Robotique'},
+    ],
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
+    title: 'Programmation & Données',
+    items: [
+      {icon: '👨‍💻', title: 'Programmation', to: '/docs/Programmation'},
+      {icon: '🗄️', title: 'Database', to: '/docs/Databases'},
+      {icon: '🤖', title: 'AI', to: '/docs/Artificial_Intelligence'},
+      {icon: '🧮', title: 'Algorithmique & Structures de données', to: '/docs/Algorithmique_Structures_De_Donnees'},
+      {icon: '🏗️', title: 'Architecture logicielle', to: '/docs/Software_Architecture'},
+      {icon: '🕸️', title: 'Systèmes distribués', to: '/docs/Systemes_Distribues'},
+    ],
+  },
+  {
+    title: 'Sciences',
+    items: [
+      {icon: '📐', title: 'Mathématiques', to: '/docs/Mathématics'},
+      {icon: '⚛️', title: 'Physics', to: '/docs/Physics'},
+      {icon: '📡', title: 'Traitement du signal', to: '/docs/Traitement_du_signal'},
+      {icon: '📊', title: 'Statistiques & Probabilités', to: '/docs/Statistiques_Probabilites'},
+      {icon: '🧪', title: 'Chimie', to: '/docs/Chimie'},
+      {icon: '🧬', title: 'Biologie', to: '/docs/Biologie'},
+    ],
+  },
+  {
+    title: 'Culture générale & vie pratique',
+    items: [
+      {icon: '⚖️', title: 'Droit', to: '/docs/Droit'},
+      {icon: '🗣️', title: 'Langues', to: '/docs/Langues'},
+      {icon: '💰', title: 'Économie & Finance', to: '/docs/Economie_Finance'},
+      {icon: '🗂️', title: 'Productivité', to: '/docs/Productivite'},
+      {icon: '📋', title: 'Gestion de projet', to: '/docs/Gestion_de_Projet'},
+      {icon: '🧠', title: 'Philosophie', to: '/docs/Philosophie'},
+      {icon: '🏛️', title: 'Histoire', to: '/docs/Histoire'},
+      {icon: '🌍', title: 'Géopolitique', to: '/docs/Geopolitique'},
+      {icon: '🩺', title: 'Santé & Nutrition', to: '/docs/Sante_Nutrition'},
+    ],
   },
 ];
 
-function Feature({Svg, title, description}) {
+function CategoryCard({icon, title, to}) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+    <Link to={to} className={styles.card}>
+      <span className={styles.cardIcon} aria-hidden="true">
+        {icon}
+      </span>
+      <span className={styles.cardTitle}>{title}</span>
+    </Link>
+  );
+}
+
+function CategoryGroup({title, items}) {
+  return (
+    <div className={styles.group}>
+      <Heading as="h3" className={styles.groupTitle}>
+        {title}
+      </Heading>
+      <div className={styles.grid}>
+        {items.map((item) => (
+          <CategoryCard key={item.title} {...item} />
+        ))}
       </div>
     </div>
   );
@@ -53,11 +94,9 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
+        {CategoryGroups.map((group) => (
+          <CategoryGroup key={group.title} {...group} />
+        ))}
       </div>
     </section>
   );

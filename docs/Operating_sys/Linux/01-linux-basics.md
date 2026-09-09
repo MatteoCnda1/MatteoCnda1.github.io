@@ -1,6 +1,7 @@
 ---
 id: 01-linux-basics
 title: Linux Basics
+tags: [linux]
 ---
 
 # Linux — Les fondamentaux

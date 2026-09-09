@@ -2,6 +2,7 @@
 id: 04-diffie-hellman
 title: Diffie-Hellman (échange de clés)
 sidebar_position: 6
+tags: [cryptographie, mathematiques]
 ---
 
 # Diffie-Hellman — l'échange de clés

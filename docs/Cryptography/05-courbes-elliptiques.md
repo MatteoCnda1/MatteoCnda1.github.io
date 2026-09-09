@@ -2,6 +2,7 @@
 id: 05-courbes-elliptiques
 title: Cryptographie sur courbes elliptiques (ECC)
 sidebar_position: 7
+tags: [cryptographie, mathematiques]
 ---
 
 # Cryptographie sur courbes elliptiques (ECC)

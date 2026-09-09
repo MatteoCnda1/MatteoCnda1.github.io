@@ -2,6 +2,7 @@
 id: 06-fonctions-de-hachage
 title: Fonctions de hachage
 sidebar_position: 8
+tags: [cryptographie]
 ---
 
 # Fonctions de hachage

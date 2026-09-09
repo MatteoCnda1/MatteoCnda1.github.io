@@ -1,0 +1,99 @@
+linux:
+  label: Linux
+  description: "Pages liées à Linux (administration, sécurité, réseau)."
+
+windows:
+  label: Windows
+  description: "Pages liées à Windows et à l'écosystème Microsoft."
+
+active-directory:
+  label: Active Directory
+  description: "Pages liées à Active Directory et aux environnements Windows d'entreprise."
+
+reseau:
+  label: Réseau
+  description: "Pages liées aux réseaux et à leur configuration."
+
+web:
+  label: Web
+  description: "Pages liées aux technologies et à la sécurité Web."
+
+cryptographie:
+  label: Cryptographie
+  description: "Pages liées au chiffrement et à la cryptographie."
+
+sql:
+  label: SQL
+  description: "Pages liées aux bases de données relationnelles et au SQL."
+
+cloud:
+  label: Cloud
+  description: "Pages liées au cloud computing et à sa sécurité."
+
+conteneurs:
+  label: Conteneurs
+  description: "Pages liées à Docker, Podman et à la conteneurisation."
+
+kubernetes:
+  label: Kubernetes
+  description: "Pages liées à Kubernetes et à l'orchestration de conteneurs."
+
+automatisation:
+  label: Automatisation
+  description: "Pages liées à Ansible et à l'automatisation de la configuration."
+
+osint:
+  label: OSINT
+  description: "Pages liées au renseignement en sources ouvertes."
+
+forensics:
+  label: Forensics
+  description: "Pages liées à l'analyse forensique numérique."
+
+malware:
+  label: Malware
+  description: "Pages liées à l'analyse de logiciels malveillants."
+
+red-team:
+  label: Red Team
+  description: "Pages liées à l'attaque offensive et au pentesting."
+
+blue-team:
+  label: Blue Team
+  description: "Pages liées à la défense et à la détection."
+
+hardware:
+  label: Hardware
+  description: "Pages liées au matériel informatique et à l'électronique."
+
+embarque:
+  label: Embarqué
+  description: "Pages liées aux systèmes embarqués et à l'IoT."
+
+ia:
+  label: Intelligence Artificielle
+  description: "Pages liées au machine learning et à l'IA."
+
+algorithmes:
+  label: Algorithmes
+  description: "Pages liées aux algorithmes et structures de données."
+
+mathematiques:
+  label: Mathématiques
+  description: "Pages liées aux mathématiques."
+
+scripting:
+  label: Scripting
+  description: "Pages liées à l'écriture de scripts (Bash, Python, PowerShell...)."
+
+methodologie:
+  label: Méthodologie
+  description: "Pages décrivant une méthodologie ou un processus."
+
+cheatsheet:
+  label: Cheatsheet
+  description: "Aide-mémoires et fiches de référence rapide."
+
+outil:
+  label: Outil
+  description: "Pages présentant un outil spécifique."

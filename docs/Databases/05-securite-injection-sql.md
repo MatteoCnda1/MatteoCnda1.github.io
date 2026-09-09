@@ -2,6 +2,7 @@
 id: 05-securite-injection-sql
 title: Sécurité et injection SQL
 sidebar_position: 6
+tags: [sql, web]
 ---
 
 # Sécurité et injection SQL

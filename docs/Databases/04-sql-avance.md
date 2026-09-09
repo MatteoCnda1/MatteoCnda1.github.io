@@ -2,6 +2,7 @@
 id: 04-sql-avance
 title: SQL avancé (agrégation, sous-requêtes, vues)
 sidebar_position: 5
+tags: [sql]
 ---
 
 # SQL avancé

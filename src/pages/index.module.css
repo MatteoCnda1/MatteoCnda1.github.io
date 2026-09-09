@@ -16,6 +16,11 @@
   }
 }
 
+.heroDescription {
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+
 .buttons {
   display: flex;
   align-items: center;

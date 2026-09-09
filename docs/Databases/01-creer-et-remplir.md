@@ -2,6 +2,7 @@
 id: 01-creer-et-remplir
 title: Créer et remplir des tables
 sidebar_position: 2
+tags: [sql]
 ---
 
 # Créer et remplir des tables (DDL + écriture)

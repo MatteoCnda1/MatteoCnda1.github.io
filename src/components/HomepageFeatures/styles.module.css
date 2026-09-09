@@ -1,11 +1,57 @@
 .features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
   width: 100%;
+  padding: 1rem 0 3rem;
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+.group {
+  margin-top: 2.5rem;
+}
+
+.groupTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: transform var(--site-transition), box-shadow var(--site-transition),
+    border-color var(--site-transition);
+}
+
+.card:hover {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.cardIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.cardTitle {
+  font-weight: 600;
+  font-size: 0.95rem;
 }

@@ -2,6 +2,7 @@
 id: 00-introduction
 title: Introduction à la cryptographie
 sidebar_position: 2
+tags: [cryptographie]
 ---
 
 # Introduction à la cryptographie
