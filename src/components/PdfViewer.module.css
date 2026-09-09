@@ -1,0 +1,122 @@
+.wrapper {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .wrapper {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--site-transition), color var(--site-transition);
+}
+
+.iconButton:hover:not(:disabled) {
+  background: var(--ifm-color-emphasis-200);
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+
+.iconButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pageForm {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pageInput {
+  width: 2.4rem;
+  text-align: center;
+  padding: 0.15rem 0.2rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.25rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.85rem;
+}
+
+.pageTotal,
+.zoomIndicator {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  min-width: 2.4rem;
+  text-align: center;
+}
+
+.viewport {
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem;
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .viewport {
+  background: #18181b;
+}
+
+.document {
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .page {
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+}
+
+.loading,
+.fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 240px;
+  padding: 2rem;
+  color: var(--ifm-color-emphasis-600);
+  text-align: center;
+}

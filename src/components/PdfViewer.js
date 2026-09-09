@@ -1,38 +1,18 @@
 import React from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export default function PdfViewer({file, height = 800}) {
+export default function PdfViewer({file, height}) {
   return (
-    <div style={{width: '100%', marginBottom: '1.5rem'}}>
-      <object
-        data={file}
-        type="application/pdf"
-        width="100%"
-        height={height}
-        style={{
-          display: 'block',
-          minHeight: `${height}px`,
-          border: '1px solid var(--ifm-toc-border-color)',
-          borderRadius: '0.5rem',
-        }}
-      >
-        <iframe
-          src={file}
-          width="100%"
-          height={height}
-          style={{
-            border: 'none',
-            minHeight: `${height}px`,
-            borderRadius: '0.5rem',
-          }}
-          title="PDF viewer"
-        />
-        <p>
-          Votre navigateur ne peut pas afficher le PDF.{' '}
-          <a href={file} target="_blank" rel="noopener noreferrer">
-            Ouvrir le PDF
-          </a>
-        </p>
-      </object>
-    </div>
+    <BrowserOnly
+      fallback={
+        <div style={{padding: '2rem', textAlign: 'center', color: 'var(--ifm-color-emphasis-600)'}}>
+          Chargement du visualisateur PDF…
+        </div>
+      }>
+      {() => {
+        const PdfViewerClient = require('./PdfViewerClient').default;
+        return <PdfViewerClient file={file} height={height} />;
+      }}
+    </BrowserOnly>
   );
 }

@@ -49,6 +49,19 @@ const config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'marie',
+        path: 'cours-marie',
+        routeBasePath: '/cours-marie',
+        sidebarPath: './sidebars-marie.js',
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+        showLastUpdateTime: true,
+      }),
+    ],
+    [
       '@docusaurus/plugin-pwa',
       {
         debug: false,
@@ -135,6 +148,11 @@ const config = {
             to: '/docs/tags',
             position: 'left',
             label: 'Tags',
+          },
+          {
+            to: '/cours-marie/',
+            position: 'left',
+            label: 'Cours de Marie',
           },
         ],
       },
