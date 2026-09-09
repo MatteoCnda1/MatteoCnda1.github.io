@@ -2,6 +2,7 @@
 id: Fiche-commande-rpojet
 title: Fiche-commande-projet
 sidebar_position: 1
+tags: [automatisation]
 ---
 
 

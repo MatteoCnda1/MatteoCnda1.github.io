@@ -2,6 +2,7 @@
 id: 02-powershell-avance
 title: PowerShell - Avancé
 sidebar_position: 2
+tags: [programmation, scripting]
 ---
 
 # PowerShell — Avancé

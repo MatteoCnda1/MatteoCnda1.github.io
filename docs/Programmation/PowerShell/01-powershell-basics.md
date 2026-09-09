@@ -2,6 +2,7 @@
 id: 01-powershell-basics
 title: PowerShell - Les bases
 sidebar_position: 1
+tags: [programmation, scripting]
 ---
 
 # PowerShell — Les bases

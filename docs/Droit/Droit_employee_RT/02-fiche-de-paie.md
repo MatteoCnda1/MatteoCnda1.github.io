@@ -2,6 +2,7 @@
 id: 02-fiche-de-paie
 title: La fiche de paie et la rémunération
 sidebar_position: 3
+tags: [droit]
 ---
 
 # La fiche de paie et la rémunération

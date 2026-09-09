@@ -2,6 +2,7 @@
 id: 08-rgpd-pratique-technicien
 title: Le RGPD en pratique pour le technicien R&T
 sidebar_position: 9
+tags: [droit]
 ---
 
 # Le RGPD en pratique pour le technicien R&T

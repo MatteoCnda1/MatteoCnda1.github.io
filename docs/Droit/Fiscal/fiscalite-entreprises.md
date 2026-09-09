@@ -2,6 +2,7 @@
 id: fiscalite-entreprises
 title: La fiscalité des entreprises
 sidebar_position: 2
+tags: [droit]
 ---
 
 # La fiscalité des entreprises

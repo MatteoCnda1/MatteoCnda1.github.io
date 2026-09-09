@@ -2,6 +2,7 @@
 id: 02-linux-firewalling
 title: Linux Firewalling
 sidebar_position: 2
+tags: [linux, reseau]
 ---
 
 # Linux — Pare-feu (Firewalling)

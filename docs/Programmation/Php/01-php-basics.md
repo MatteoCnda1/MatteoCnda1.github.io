@@ -2,6 +2,7 @@
 id: 01-php-basics
 title: PHP - Les bases
 sidebar_position: 1
+tags: [programmation]
 ---
 
 # PHP — Les bases

@@ -2,6 +2,7 @@
 id: vlan-cheatsheet
 title: VLANs - Cheat Sheet
 sidebar_position: 2
+tags: [reseau, cheatsheet]
 ---
 
 # VLANs — Cheat Sheet

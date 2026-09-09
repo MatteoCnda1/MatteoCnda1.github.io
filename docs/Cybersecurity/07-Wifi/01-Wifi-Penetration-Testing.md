@@ -2,6 +2,7 @@
 id: 01-wifi-penetration-testing
 title: WiFi Penetration Testing Guide
 sidebar_position: 2
+tags: [cybersecurite, reseau, red-team]
 ---
 
 # WiFi Penetration Testing Guide

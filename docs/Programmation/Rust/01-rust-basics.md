@@ -2,6 +2,7 @@
 id: 01-rust-basics
 title: Rust - Les bases
 sidebar_position: 1
+tags: [programmation]
 ---
 
 # Rust — Les bases

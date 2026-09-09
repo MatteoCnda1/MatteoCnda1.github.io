@@ -2,6 +2,7 @@
 id: 02-c-avance
 title: C - Avancé
 sidebar_position: 2
+tags: [programmation]
 ---
 
 # C — Avancé

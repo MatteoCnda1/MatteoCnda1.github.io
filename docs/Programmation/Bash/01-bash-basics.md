@@ -2,6 +2,7 @@
 id: 01-bash-basics
 title: Bash - Les bases
 sidebar_position: 1
+tags: [programmation, scripting]
 ---
 
 # Bash — Les bases

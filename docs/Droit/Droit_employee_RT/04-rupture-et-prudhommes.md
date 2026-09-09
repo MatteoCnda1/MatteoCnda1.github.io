@@ -2,6 +2,7 @@
 id: 04-rupture-et-prudhommes
 title: La rupture du contrat et les prud'hommes
 sidebar_position: 5
+tags: [droit]
 ---
 
 # La rupture du contrat de travail et les prud'hommes

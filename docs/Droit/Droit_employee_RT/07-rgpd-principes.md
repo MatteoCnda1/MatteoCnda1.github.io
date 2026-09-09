@@ -2,6 +2,7 @@
 id: 07-rgpd-principes
 title: Le RGPD - Principes et concepts
 sidebar_position: 8
+tags: [droit]
 ---
 
 # Le RGPD — Principes et concepts

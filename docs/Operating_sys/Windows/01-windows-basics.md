@@ -1,6 +1,7 @@
 ---
 id: 01-windows-basics
 title: Windows Basics
+tags: [windows]
 ---
 # Windows — Les fondamentaux
 

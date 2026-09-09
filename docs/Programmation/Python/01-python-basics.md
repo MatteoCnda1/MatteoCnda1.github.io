@@ -2,6 +2,7 @@
 id: 01-python-basics
 title: Python - Les bases
 sidebar_position: 1
+tags: [programmation, scripting]
 ---
 
 # Python — Les bases

@@ -2,6 +2,7 @@
 id: 09-cas-pratiques-international
 title: Cas pratiques et dimension internationale
 sidebar_position: 10
+tags: [droit]
 ---
 
 # Cas pratiques et dimension internationale

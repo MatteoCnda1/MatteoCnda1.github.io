@@ -2,6 +2,7 @@
 id: 02-python-avance
 title: Python - Avancé
 sidebar_position: 2
+tags: [programmation, scripting]
 ---
 
 # Python — Avancé

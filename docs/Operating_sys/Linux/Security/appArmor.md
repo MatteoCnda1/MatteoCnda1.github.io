@@ -1,6 +1,7 @@
 ---
 title: AppArmor
 sidebar_position: 5
+tags: [linux]
 ---
 
 # AppArmor

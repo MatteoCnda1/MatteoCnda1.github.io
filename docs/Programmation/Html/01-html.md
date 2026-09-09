@@ -2,6 +2,7 @@
 id: 01-html
 title: HTML - Structure du web
 sidebar_position: 1
+tags: [programmation]
 ---
 
 # HTML — La structure du web

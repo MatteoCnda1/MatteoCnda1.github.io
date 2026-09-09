@@ -2,6 +2,7 @@
 id: 02-rust-avance
 title: Rust - Avancé
 sidebar_position: 2
+tags: [programmation]
 ---
 
 # Rust — Avancé

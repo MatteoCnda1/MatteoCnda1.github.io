@@ -2,6 +2,7 @@
 id: 01-javascript-basics
 title: JavaScript - Les bases
 sidebar_position: 1
+tags: [programmation]
 ---
 
 # JavaScript — Les bases

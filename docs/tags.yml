@@ -101,3 +101,19 @@ outil:
 productivite:
   label: Productivité
   description: "Pages liées aux méthodes de productivité personnelle et de gestion du temps."
+
+cybersecurite:
+  label: Cybersécurité
+  description: "Pages liées aux concepts généraux de cybersécurité."
+
+programmation:
+  label: Programmation
+  description: "Pages liées à un langage ou une pratique de programmation."
+
+droit:
+  label: Droit
+  description: "Pages liées au droit et à la réglementation."
+
+mobile:
+  label: Mobile
+  description: "Pages liées aux systèmes d'exploitation et à la sécurité mobile."

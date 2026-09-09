@@ -2,6 +2,7 @@
 id: 03-conventions-reglements
 title: Conventions collectives et règlements
 sidebar_position: 4
+tags: [droit]
 ---
 
 # Conventions collectives, règlement intérieur et sources du droit du travail

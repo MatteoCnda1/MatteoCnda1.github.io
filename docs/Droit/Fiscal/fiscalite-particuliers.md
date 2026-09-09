@@ -2,6 +2,7 @@
 id: fiscalite-particuliers
 title: La fiscalité des particuliers
 sidebar_position: 1
+tags: [droit]
 ---
 
 # La fiscalité des particuliers

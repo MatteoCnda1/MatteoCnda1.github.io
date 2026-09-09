@@ -2,6 +2,7 @@
 id: 02-javascript-avance
 title: JavaScript - Avancé
 sidebar_position: 2
+tags: [programmation]
 ---
 
 # JavaScript — Avancé

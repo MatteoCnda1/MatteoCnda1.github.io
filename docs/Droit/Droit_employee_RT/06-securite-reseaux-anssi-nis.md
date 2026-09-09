@@ -2,6 +2,7 @@
 id: 06-securite-reseaux-anssi-nis
 title: La sécurité des réseaux (ANSSI, NIS2, LPM, OIV)
 sidebar_position: 7
+tags: [droit]
 ---
 
 # La sécurité des réseaux : le cadre juridique (ANSSI, NIS2, LPM, OIV)

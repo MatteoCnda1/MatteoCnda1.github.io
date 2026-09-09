@@ -2,6 +2,7 @@
 id: 01-cpp-basics
 title: C++ - Les bases
 sidebar_position: 1
+tags: [programmation]
 ---
 
 # C++ — Les bases

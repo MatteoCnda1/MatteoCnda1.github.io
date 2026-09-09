@@ -2,6 +2,7 @@
 id: 02-php-avance
 title: PHP - Avancé
 sidebar_position: 2
+tags: [programmation]
 ---
 
 # PHP — Avancé

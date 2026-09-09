@@ -2,6 +2,7 @@
 id: 00-introduction-entreprise
 title: L'entreprise et son organisation
 sidebar_position: 1
+tags: [droit]
 ---
 
 # L'entreprise et son organisation

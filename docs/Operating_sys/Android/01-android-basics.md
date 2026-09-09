@@ -2,6 +2,7 @@
 id: 01-android-basics
 title: Android — les fondamentaux
 sidebar_position: 1
+tags: [mobile]
 ---
 
 # Android — les fondamentaux

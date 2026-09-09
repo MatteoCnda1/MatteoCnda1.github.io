@@ -2,6 +2,7 @@
 id: 01-contrat-de-travail
 title: Le contrat de travail
 sidebar_position: 2
+tags: [droit]
 ---
 
 # Le contrat de travail

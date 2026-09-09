@@ -2,6 +2,7 @@
 id: 05-responsabilite-acteurs-numeriques
 title: Responsabilité des acteurs du numérique
 sidebar_position: 6
+tags: [droit]
 ---
 
 # La responsabilité des acteurs du numérique

@@ -2,6 +2,7 @@
 id: 02-bash-avance
 title: Bash - Avancé
 sidebar_position: 2
+tags: [programmation, scripting]
 ---
 
 # Bash — Avancé
