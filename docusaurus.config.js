@@ -47,6 +47,27 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        debug: false,
+        offlineModeActivationStrategies: ['appInstalled', 'standalone', 'queryString'],
+        pwaHead: [
+          {tagName: 'link', rel: 'icon', href: '/img/pwa/icon-192.png'},
+          {tagName: 'link', rel: 'manifest', href: '/manifest.json'},
+          {tagName: 'meta', name: 'theme-color', content: '#2e8555'},
+          {tagName: 'meta', name: 'apple-mobile-web-app-capable', content: 'yes'},
+          {tagName: 'meta', name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent'},
+          {tagName: 'link', rel: 'apple-touch-icon', href: '/img/pwa/apple-icon-180.png'},
+          {tagName: 'link', rel: 'mask-icon', href: '/img/pwa/maskable-icon-512.png', color: '#2e8555'},
+          {tagName: 'meta', name: 'msapplication-TileImage', content: '/img/pwa/icon-192.png'},
+          {tagName: 'meta', name: 'msapplication-TileColor', content: '#2e8555'},
+        ],
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
