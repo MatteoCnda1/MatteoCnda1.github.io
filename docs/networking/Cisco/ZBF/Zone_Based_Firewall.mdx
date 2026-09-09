@@ -8,3 +8,292 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # ZBF
 
 <PdfViewer file="/pdf/networking/CoursFireWallv2022-23RT.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+R&T
+ZBF, T.Nguyen 1 / 23
+Cours Réseaux :
+Firewall ZBF
+
+[Page 2]
+R&T
+ZBF, T.Nguyen 2 / 23
+Plan
+Introduction
+Principes
+Configuration
+Conclusion
+
+[Page 3]
+R&T
+ZBF, T.Nguyen 3 / 23
+Introduction(1)
+
+[Page 4]
+R&T
+ZBF, T.Nguyen 4 / 23
+Introduction (2)
+Firewall
+
+Protection contre l’accès indésirable à des
+ressources du réseau
+
+ACLs
+
+ACLS avancés
+
+« Established »
+
+Dynamiques
+
+Reflexives
+
+CBAC
+
+Zone Base Firewall ZBF ou Zone Policy
+Firewall
+
+[Page 5]
+R&T
+ZBF, T.Nguyen 5 / 23
+Principes(1)
+
+[Page 6]
+R&T
+ZBF, T.Nguyen 6 / 23
+Principes(2)
+
+[Page 7]
+R&T
+ZBF, T.Nguyen 7 / 23
+Stateful Firewall
+
+[Page 8]
+R&T
+ZBF, T.Nguyen 8 / 23
+Principes(3)
+
+[Page 9]
+R&T
+ZBF, T.Nguyen 9 / 23
+Principes(4)
+
+[Page 10]
+R&T
+ZBF, T.Nguyen 10 / 23
+Stateful Firewall
+“stateful packet filters” ou “application-aware packet
+filters.”
+Deux caractéristiques importantes :
+
+Ils maintiennent une table des sessions (table des états)
+permettant de garder trace de toutes les sessions établies
+
+Ils reconnaissent les applications dynamiques et quelles
+connexions supplémentaires doivent être créées entre
+systèmes extrémités.
+
+[Page 11]
+R&T
+ZBF, T.Nguyen 11 / 23
+Application Gateway Firewall
+
+[Page 12]
+R&T
+ZBF, T.Nguyen 12 / 23
+Autres types
+Host-based firewall (personnel ou de serveur) :
+
+PC ou serveur avec logiciel de firewall s’exécutant dessus.
+Firewall Hybride :
+
+Firewall combinant des caractéristiques de différents types
+
+[Page 13]
+R&T
+ZBF, T.Nguyen 13 / 23
+Produits
+
+[Page 14]
+R&T
+ZBF, T.Nguyen 14 / 23
+Architecture
+
+[Page 15]
+R&T
+ZBF, T.Nguyen 15 / 23
+ZBF
+Technique la plus moderne et la plus évoluée des Firewalls Stateful.
+Caratéristiques principales :
+
+Ne dépendent pas des ACLs
+
+Stratégie : Tout est interdit sauf explicitement autorisé
+
+Statégies plus faciles à lire et à dépanner avec C3PL.
+
+Une stratégie affecte tout le traffic concerné au lieu de nécessiter des
+ACLs multiples.
+
+[Page 16]
+R&T
+ZBF, T.Nguyen 16 / 23
+Topologie classique
+Si une nouvelle interface est créee dans la zone private
+alors tous les systèmes qui s’y trouvaient pourront
+communiquer avec les nouveaux appartenant à la
+nouvelle interface.
+La nouvelle interface “hérite” des stratégies de
+communication définie pour la zone.
+
+[Page 17]
+R&T
+ZBF, T.Nguyen 17 / 23
+Actions ZBF
+Inspect
+
+Configure une inspection Cisco IOS SPI.
+
+Automatiquement autorise le trafic de retour et les messages ICMP
+
+Pour les protocoles avancés dynamiques nécessitant des sessions
+multiples et parallèles (FTP, H323,…), Inspect gère de manière
+consistente les établissements de sessions de données.
+Pass
+
+Equivalent à permit dans les ACLs.
+
+Ne garde pas trace de l’état des connexion ou sessions du trafic.
+
+Autorise le trafic que dans un seul sens.
+
+Une stratégie doit être appliquée pour autoriser le trafic retour.
+Drop
+
+Équivalent à deny dans les ACLs.
+
+option log est disponible pour journaliser le trafic refusé.
+
+[Page 18]
+R&T
+ZBF, T.Nguyen 18 / 23
+ZBF : Règles(1)
+Le contrôle du trafic entre zones est effectué selon les
+règles suivantes:
+
+[Page 19]
+R&T
+ZBF, T.Nguyen 19 / 23
+ZBF : Règles (2)
+Le contrôle du trafic avec le routeur est effectué selon
+les règles suivantes:
+
+[Page 20]
+R&T
+ZBF, T.Nguyen 20 / 23
+Configuration
+1. Création des Zones pour le firewall
+zone security
+2. Définir les classes de trafic
+class-map type inspect
+3. Spécifier les Politiques de sécurité du Firewall
+policy-map type inspect
+4. Appliquer les Politiques du Firewall aux
+paires Zone “source”- Zone “destination”
+zone-pair
+5. Affecter les Interfaces du routeur aux zones
+zone-member security
+
+[Page 21]
+R&T
+ZBF, T.Nguyen 21 / 23
+Exemple de configuration
+policy-map type inspect INSIDE-TO-OUTSIDE
+class FOREXAMPLE
+inspect
+!
+zone security INSIDE
+description Inside network
+zone security OUTSIDE
+description Outside network
+zone-pair security ZP-INSIDE-TO-OUTSIDE source INSIDE destination OUTSIDE
+service-policy type inspect INSIDE-TO-OUTSIDE
+!
+interface FastEthernet0/0
+zone-member security INSIDE
+!
+interface Serial0/0/0
+zone-member security OUTSIDE
+!
+class-map type inspect match-any FOREXAMPLE
+match protocol tcp
+match protocol udp
+match protocol icmp
+1. Create the Zones
+3. Specify Firewall Policies
+4. Apply Firewall Policies
+5. Assign Interfaces to Zones
+2. Define the Traffic Classes
+
+[Page 22]
+R&T
+ZBF, T.Nguyen 22 / 23
+Exemple IPv6
+class-map type inspect match-any V6-CLASS
+match protocol ftp
+match protocol tcp
+match protocol udp
+match protocol icmp
+!
+!
+policy-map type inspect V6-POL
+class type inspect V6-CLASS
+inspect
+!
+zone security Z1
+zone security Z2
+!
+zone-pair security ZP source Z1 destination Z2
+service-policy type inspect V6-POL
+!
+Int g0/0
+Zone-member security Z1
+Int g0/1
+Zone-member security Z2
+
+[Page 23]
+R&T
+Vérifications
+Show policy-firewall config
+Show policy-firewall sessions
+show zone security
+show zone-pair security
+show policy-map type inspect zone-pair
+ZBF, T.Nguyen 23 / 23
+
+[Page 24]
+R&T
+ZBF, T.Nguyen 24 / 23
+Conclusion
+Types de Firewall
+
+Stateful FW
+
+Hybride
+ZBF
+
+Version évoluée des Firewall
+
+Basée sur des stratégies
+TPs
+
+Initiation
+
+Challenge
+```
+
+</details>

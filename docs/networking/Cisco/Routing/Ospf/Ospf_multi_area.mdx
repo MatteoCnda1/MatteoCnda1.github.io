@@ -8,3 +8,485 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Ospf Multi Area
 
 <PdfViewer file="/pdf/networking/CoursRoutageMultiArea22.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 1 / 65
+Cours Réseaux :
+Routage Multi-area OSPF
+
+[Page 2]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 2 / 65
+PLAN
+1. Introduction
+2. Rappels et Concepts
+3. Configuration
+4. Conclusion
+
+[Page 3]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 3 / 65
+Introduction
+OSPF monozone
+
+Petites architectures de réseaux
+OSPF multi-area
+
+Architectures complexes
+
+Conception nécessaire
+
+Optimisation de routage
+
+Résumés de route
+Implementation Réseaux entreprise
+
+Cisco IOS
+
+Configurations particulières
+
+Stub, Totally Stubby, NSSA, Virtual Link
+
+[Page 4]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 4 / 65
+Problèmes OSPF
+Calculs fréquents de
+l’algorithme SPF
+Table de routage
+importante
+LSDB de grande
+taille
+Solution :
+Scinder le réseau en
+plusieurs zones OSPF
+
+[Page 5]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 5 / 65
+Multi-area OSPF
+Diminution de la
+fréquence des calculs
+SPF
+Réduction de la taille des
+tables de routage
+Réduction de la
+surcharge des LSU
+
+[Page 6]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 6 / 65
+Routage Multi-area OSPF
+
+[Page 7]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 7 / 65
+Archictecture à deux niveaux
+Zone de backbone (de transit)
+
+Area 0
+Zone normale (hors backbone)
+
+Connecte les utilisateurs et les ressources.
+
+[Page 8]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 8 / 65
+Types de Routeurs
+
+[Page 9]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 9 / 65
+LSAs
+
+[Page 10]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 10 / 65
+Types OSPF LSA
+
+[Page 11]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 11 / 65
+OSPF : LSA Type 1
+
+[Page 12]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 12 / 65
+OSPF : LSA Type 2
+
+[Page 13]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 13 / 65
+LSA Type 3
+Annonce servant à diffuser des
+informations de réseau aux
+zones situées en dehors de la
+zone émettrice (inter-zone)
+Émise par l’ABR de la zone
+émettrice
+Ré-émise par les ABR suivants
+en vue d’une inondation à
+travers le système autonome
+Par défaut, les routes ne sont
+pas résumées. Des LSA de
+type 3 sont diffusées pour
+chaque sous-réseau
+
+[Page 14]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 14 / 65
+LSA Type 4
+
+[Page 15]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 15 / 65
+LSA Type 5
+
+[Page 16]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 16 / 65
+Tables de routage
+
+[Page 17]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 17 / 65
+Tables (2)
+O : les LSA de routeur
+(type 1) et de réseau
+(type 2) annoncent les
+détails relatifs à
+l’intérieur d’une zone
+(la route est interne à
+la zone)
+O IA : les LSA
+résumées
+apparaissent dans la
+table de routage sous
+forme d’IA (routes
+entre les zones)
+O E1 ou OE 2 : LSA
+externes signalées
+comme étant des
+routes de type
+externe 1 (E1) ou
+externe 2 (E2))
+
+[Page 18]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 18 / 65
+Configuration IOS OSPFv2
+
+[Page 19]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 19 / 65
+Configuration OSPFv3
+
+[Page 20]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 20 / 65
+Résumé de routes(1)
+Réseaux OSPF étendus - Grand
+nombre de LSA envoyées
+Tous les routeurs OSPF concernés
+doivent recalculer leur LSDB et
+l’arborescence SPF
+Résumé des routes inter-zone :
+configurée sur les ABR et
+s’applique aux routes de chaque
+zone
+Résumé des routes externes :
+routes externes qui sont
+annoncées dans le réseau OSPF
+via la redistribution des routes.
+Configurée sur les ASBR
+uniquement
+Les plages d’adresses qui sont
+récapitulées doivent être
+contiguës
+
+[Page 21]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 21 / 65
+Résumé de routes(2)
+
+[Page 22]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 22 / 65
+Principe résumé de routes
+Résumer 10.1.1.0/24 et 10.1.2.0/24
+
+[Page 23]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 23 / 65
+Configuration des résumés
+R3
+R1
+
+[Page 24]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 24 / 65
+Résumé de routes inter-zones
+
+[Page 25]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 25 / 65
+Résumé de routes ASBR
+Remarque : les routes RIPv2 doivent également être redistribuées
+dans OSPF, dans cet exemple
+
+[Page 26]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 26 / 65
+Routage par défaut
+Deux méthodes :
+
+default-information originate
+
+default-information originate always
+Le mot clé « always » autorise l’annonce de la route par défaut
+même si le routeur annonceur n’a pas de route par défaut
+Valeur de mesure facultative pour indiquer la préférence
+
+[Page 27]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 27 / 65
+Exemple
+
+[Page 28]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 28 / 65
+Vérifications
+Commandes pour la
+vérification IPv4 :
+show ip ospf neighbor
+show ip ospf
+show ip ospf interface
+show ip protocols
+show ip ospf interface brief
+show ip route ospf
+show ip ospf database
+Commandes pour la
+vérification IPv6:
+show ipv6 ospf neighbor
+show ipv6 ospf
+show ipv6 ospf interface
+show ipv6 protocols
+show ipv6 ospf interface
+brief
+show ipv6 route ospf
+show ipv6 ospf database
+
+[Page 29]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 29 / 65
+Exemple(1)
+
+[Page 30]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 30 / 65
+Exemple(2)
+
+[Page 31]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 31 / 65
+Exemple(3)
+
+[Page 32]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 32 / 65
+Résumé(1)
+adapté aux réseaux complexes
+Résout les problèmes :
+
+taille des tables de routage et des bases LSDB,
+
+fréquence des calculs de l’algorithme SPF
+La zone principale = zone de backbone (zone 0)
+Les processus de nouveau calcul de la base de données sont contenus
+dans une zone
+4 types de routeur OSPF :
+
+Routeur interne
+
+Routeur backbone
+
+Routeur ABR
+
+Routeur ASBR
+Un routeur devient un ABR lorsqu’il a deux instructions network dans
+différentes zones
+
+[Page 33]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 33 / 65
+Résumé(2)
+Routage OSPF à zones multiples :
+Les annonces d’état de liens ou LSA sont au cœur du routage OSPF
+
+Les LSA de type 1 : annonces de routeur
+
+Les LSA de type 2 : annonces de réseau diffusées par un DR
+
+Les LSA de type 3 : annonces résumées émises et propagées par des
+ABR
+
+Les LSA de type 4 : annonces résumées émises et propagées par
+ASBR
+
+Les LSA externes de type 5 : annoncent les routes externes au
+domaine OSPF
+
+L’arborescence SPF permet de déterminer les meilleurs chemins
+Les routes OSPF préfixes pour OSPF dans la table :
+O, O IA (OI), O E1 ou O E2.
+
+[Page 34]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 34 / 65
+Résumé(3)
+Routage OSPF à zones multiples :
+Exemple de configuration du routage OSPFv2 à zones multiples :
+
+R1(config)#router ospf 10
+
+R1(config-router)#router-id 1.1.1.1
+
+R1(config-router)#network 10.1.1.0 0.0.0.15 area 1
+
+R1(config-router)#network 10.1.2.0 0.0.0.3 area 1
+
+R1(config-router)#network 192.168.10.1 0.0.0.0 area 0
+Exemple de configuration du routage OSPFv3 à zones multiples :
+
+[Page 35]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 35 / 65
+Résumé(3)
+Pas de résumés automatiques,
+Configuration manuelle des résumés
+
+area X range (ABR)
+
+summary-address (ASBR)
+Routes par défaut
+
+default-information originate
+
+default-information originate always
+
+[Page 36]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 36 / 65
+Résumé(4)
+Vérification IPv4
+
+show ip ospf neighbor
+
+show ip ospf
+
+show ip ospf interface
+
+show ip protocols
+
+show ip ospf interface brief
+
+show ip route ospf
+
+show ip ospf database
+Vérification IPv6
+
+Show ipv6 …
+
+[Page 37]
+Réseaux
+&
+Télécoms
+Routage Multi-Area OSPF, T.Nguyen 37 / 65
+OSPF : Conclusion
+Protocole multi-area adapté aux
+architectures complexes
+Fonctionnalités riches et performantes
+Configuration IOS en version monozone
+et multi-zone
+Routage IPv4 et IPv6
+TPs
+```
+
+</details>

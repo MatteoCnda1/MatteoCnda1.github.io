@@ -8,3 +8,329 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Switch Security
 
 <PdfViewer file="/pdf/networking/Cours-Rappels-Secu-Switch-2024.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de CiscoID_présentation 1
+Configuration des
+commutateurs
+Rappels CCNA2
+
+[Page 2]
+ID_présentation 2© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Chapitre 5 – Sections et objectifs
+5.1 Configuration de commutateur de base
+• Configurer les paramètres d'origine sur un commutateur Cisco.
+• Configurer les ports de commutateur pour répondre à la configuration réseau
+requise.
+5.2 Sécurité du commutateur : gestion et implémentation
+• Configurer l'interface virtuelle de gestion sur un commutateur.
+• Configurer la fonction de sécurité des ports pour restreindre l'accès au réseau.
+
+[Page 3]
+© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de CiscoID_présentation 3
+5.1 Configuration de
+commutateur de base
+
+[Page 4]
+ID_présentation 4© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Configuration d'un commutateur avec les paramètres d'origine
+La séquence de démarrage du commutateur
+1. Autotest à la mise sous tension (POST).
+2. Exécutez le programme de démarrage.
+3. Il effectue l'initialisation précise du processeur.
+4. Il initialise le système de fichiers de la mémoire Flash.
+5. Il localise et charge dans la mémoire une image logicielle du système
+d'exploitation IOS par défaut et transfère le contrôle du commutateur à
+l'IOS.
+
+[Page 5]
+ID_présentation 5© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Configuration d'un commutateur avec les paramètres d'origine
+La séquence de démarrage du commutateur
+(suite)
+Pour trouver une image IOS appropriée, le commutateur suit cette procédure :
+Étape 1. Il tente de démarrer automatiquement en utilisant les informations de la variable d'environnement
+BOOT.
+Étape 2. Si cette variable n'est pas définie, il cherche dans le système de fichiers flash en le parcourant de
+haut en bas. Il charge et exécute le premier fichier exécutable s'il le peut.
+Étape 3. Le logiciel IOS initialise ensuite les interfaces à l'aide des commandes Cisco IOS disponibles dans
+le fichier de configuration et la configuration initiale, qui est stockée dans la mémoire vive non
+volatile.
+Remarque : la commande boot system sert à définir la variable d'environnement BOOT. Utilisez la
+commande show boot pour voir la configuration actuelle du fichier de démarrage de l'IOS.
+
+[Page 6]
+ID_présentation 6© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Configuration d'un commutateur avec les paramètres d'origine
+Récupération après une panne système
+
+Le programme de démarrage peut également être utilisé pour gérer le
+commutateur s'il est impossible de charger l'IOS.
+
+Il est accessible via une connexion console. Pour cela :
+1. Connectez un PC via un câble de console au port de console du
+commutateur. Débranchez le cordon d'alimentation du commutateur.
+2. Rebranchez le cordon d'alimentation sur le commutateur et
+maintenez le bouton Mode enfoncé.
+3. La LED système devient brièvement orange, puis verte. Relâchez le
+bouton Mode.
+
+L'invite switch: du programme de démarrage s'affiche dans le logiciel
+d'émulation de terminal sur le PC.
+
+[Page 7]
+ID_présentation 7© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Configuration d'un commutateur avec les paramètres d'origine
+Les voyants du commutateur
+
+Sur les commutateurs Cisco Catalyst, chaque port possède des indicateurs d'état.
+
+Par défaut, ces voyants indiquent l'activité du port, mais ils peuvent également fournir
+d'autres informations sur le commutateur via le bouton Mode.
+
+Les modes suivants sont disponibles sur les commutateurs Cisco Catalyst 2960 :
+• LED système
+• LED système d'alimentation
+redondante (RPS)
+• LED état port
+• LED mode duplex
+• LED vitesse port
+• LED mode PoE (Power over
+Ethernet)
+
+[Page 8]
+© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de CiscoID_présentation 8
+5.2 Sécurité du
+commutateur : gestion et
+implémentation
+
+[Page 9]
+ID_présentation 9© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Accès à distance sécurisé
+Le fonctionnement de SSH
+
+Secure Shell (SSH) est un protocole qui permet de se connecter de
+manière sécurisée (connexion chiffrée) à un appareil distant via une ligne
+de commande.
+
+En raison de la fiabilité de ses fonctions de chiffrement, SSH devrait
+remplacer Telnet pour les connexions de gestion.
+
+SSH utilise le port TCP 22 par défaut.
+
+Telnet utilise le port TCP 23.
+
+Il faut disposer d'une version du logiciel IOS comprenant des fonctions et
+des fonctionnalités chiffrées pour pouvoir utiliser SSH sur les
+commutateurs Catalyst 2960.
+
+[Page 10]
+ID_présentation 10© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Accès à distance sécurisé
+La configuration de SSH
+1. Vérifiez que SSH est
+pris en charge : show
+ip ssh.
+2. Configurez le
+domaine IP.
+3. Générez des paires de
+clés RSA.
+4. Configurez
+l'authentification
+utilisateur.
+5. Configurez les lignes
+vty.
+6. Activez SSH version 2.
+
+[Page 11]
+ID_présentation 11© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Accès à distance sécurisé
+La vérification de SSH
+
+[Page 12]
+ID_présentation 12© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Accès à distance sécurisé
+La vérification de SSH (suite)
+
+[Page 13]
+ID_présentation 13© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+Sécuriser les ports inutilisés
+
+[Page 14]
+ID_présentation 14© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+La sécurité des ports : fonctionnement
+
+Les adresses MAC des périphériques légitimes sont ainsi autorisées.
+Toutes les autres adresses MAC sont refusées.
+
+Toute autre tentative de connexion avec des adresses MAC inconnues
+constitue une violation des règles de sécurité.
+
+Les adresses MAC fiables peuvent être configurées de différentes
+manières :
+
+Adresses MAC statiques sécurisées : configurées et ajoutées
+manuellement à la configuration en cours : switchport port-
+security mac-address mac-address
+
+Adresses MAC dynamiques sécurisées : supprimées au
+redémarrage du commutateur
+
+Adresses MAC sécurisées rémanentes : ajoutées à la
+configuration en cours et apprises dynamiquement : commande du
+mode de configuration d'interface : switchport port-
+security mac-address sticky
+
+[Page 15]
+ID_présentation 15© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+La sécurité des ports : modes de violation
+
+L'IOS détecte une violation des règles de sécurité si :
+
+Le nombre maximal d'adresses MAC sécurisées a été ajouté dans la
+table CAM et un appareil dont l'adresse MAC ne figure pas dans cette
+table tente d'accéder à l'interface.
+
+Trois actions peuvent être entreprises en cas de violation :
+
+Protect: aucune notification reçue
+
+Restrict: notification relative à une violation de sécurité reçue
+
+Shutdown
+
+Commande du mode de configuration d'interface switchport port-
+security violation {protect | restrict | shutdown}
+
+[Page 16]
+ID_présentation 16© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+La sécurité des ports : modes de violation
+(suite)
+
+[Page 17]
+ID_présentation 17© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+La sécurité des ports : configuration
+
+[Page 18]
+ID_présentation 18© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+La sécurité des ports : vérification
+
+[Page 19]
+ID_présentation 19© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+La sécurité des ports : vérification (suite)
+
+[Page 20]
+ID_présentation 20© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+Ports désactivés en raison d'une erreur
+
+Une violation des règles de sécurité des ports peut entraîner la désactivation
+d'un commutateur suite à une erreur.
+
+Le port est alors arrêté.
+
+Le commutateur signale ces événements via les messages de console.
+
+[Page 21]
+ID_présentation 21© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+Sécurité des ports de commutateur
+Ports désactivés en raison d'une erreur (suite)
+La commande show
+interface permet
+également de détecter un
+port de commutateur
+désactivé suite à une erreur.
+Il faut utiliser la commande du
+mode de configuration d'interface
+shutdown ou no shutdown
+pour réactiver le port.
+
+[Page 22]
+© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de CiscoID_présentation 22
+5.3 Synthèse du chapitre
+
+[Page 23]
+ID_présentation 23© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+
+Séquence d'amorçage des commutateurs LAN Cisco
+
+Modes des voyants des commutateurs LAN Cisco
+
+Comment accéder à distance à un commutateur LAN Cisco et le gérer via une
+connexion sécurisée
+
+Modes duplex des ports des commutateurs LAN Cisco
+
+Sécurité des ports, modes de violation et actions pour les commutateurs LAN Cisco
+
+Bonnes pratiques relatives aux réseaux commutés
+Synthèse du chapitre
+Synthèse
+
+[Page 24]
+ID_présentation 24© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+ Lorsqu'un commutateur LAN Cisco est mis sous tension pour la première fois, il exécute la séquence
+de démarrage suivante :
+1. D'abord, le commutateur exécute un programme de Power-On Self Test (POST) stocké dans la
+mémoire ROM. Le POST contrôle le sous-système du processeur. Il teste le processeur, la
+mémoire vive dynamique et la partie du périphérique flash qui compose le système de fichiers
+flash.
+2. Le commutateur exécute ensuite le bootloader. Le bootloader est un petit programme stocké
+dans la mémoire morte et exécuté immédiatement après la réussite du POST.
+3. Il effectue l'initialisation de bas niveau du processeur. Il initialise les registres du processeur qui
+contrôlent l'emplacement auquel la mémoire physique est mappée, la quantité de mémoire et sa
+vitesse.
+4. Le bootloader initialise le système de fichiers flash sur la carte système.
+5. Finalement, le chargeur de démarrage localise et charge dans la mémoire une image par défaut
+du logiciel du système d'exploitation IOS et donne le contrôle du commutateur à l'IOS.
+ Si les fichiers du logiciel Cisco IOS sont manquants ou endommagés, le bootloader peut être utilisé
+pour procéder au redémarrage ou à la récupération à la suite d'un problème.
+ L'état opérationnel du commutateur est affiché par une série de LED sur le panneau avant. Ces LED
+affichent des informations telles que l'état des ports, la bidirectionnalité et la vitesse.
+Synthèse du chapitre
+Synthèse
+
+[Page 25]
+ID_présentation 25© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+
+Une adresse IP est configurée sur l'interface SVI du VLAN de gestion afin de permettre la
+configuration à distance du périphérique. Une passerelle par défaut appartenant au VLAN
+de gestion doit être configurée sur le commutateur à l'aide de la commande ip default-
+gateway. Si la passerelle par défaut n'est pas correctement configurée, la gestion à
+distance est impossible.
+
+Il est recommandé d'utiliser Secure Shell (SSH) pour créer une connexion de gestion
+sécurisée (chiffrée) vers un périphérique distant, afin d'éviter que les noms d'utilisateur et
+les mots de passe non chiffrés ne soient interceptés. Certains protocoles, notamment
+Telnet, ne permettent pas de se prémunir contre ces interceptions.
+
+Les commutateurs présentent l'avantage de prendre en charge les communications
+bidirectionnelles simultanées entre les périphériques, doublant ainsi le débit effectif des
+communications. Bien qu'il soit possible de spécifier les paramètres de vitesse et de
+bidirectionnalité d'une interface de commutateur, il est recommandé de laisser le
+commutateur procéder à ces réglages automatiquement afin d'éviter toute erreur.
+
+La sécurité des ports ne constitue qu'une des méthodes permettant de se prémunir contre
+les attaques sur le réseau.
+Synthèse du chapitre
+Synthèse
+
+[Page 26]
+ID_présentation 28© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+
+[Page 27]
+ID_présentation 29© 2008 Cisco Systems, Inc. Tous droits réservés. Informations confidentielles de Cisco
+```
+
+</details>

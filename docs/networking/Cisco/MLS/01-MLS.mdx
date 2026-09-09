@@ -8,3 +8,114 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Multi Layer Switching
 
 <PdfViewer file="/pdf/networking/CoursMLSIPv4-2024-2025.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+MLS, T.Nguyen 1 / 12
+R&T
+Cours Réseaux :
+Multi Layer Switching
+Ipv4
+
+[Page 2]
+MLS, T.Nguyen 2 / 12
+R&T
+MLS
+Introduction
+Principes
+Configuration MLS
+
+IPv4
+Conclusion
+
+[Page 3]
+MLS, T.Nguyen 3 / 12
+R&T
+MLS:Introduction
+Combine fonctionnalités :
+
+Commutation Niveau 2
+
+Commutateur Niveau 3
+
+Commutateur Niveau 4
+Faible Latence
+Mise à l’échelle rapide
+
+[Page 4]
+MLS, T.Nguyen 4 / 12
+R&T
+Principes(1)
+
+[Page 5]
+MLS, T.Nguyen 5 / 12
+R&T
+Principes(2)
+
+[Page 6]
+MLS, T.Nguyen 6 / 12
+R&T
+Cisco Catalyst MLS
+
+[Page 7]
+MLS, T.Nguyen 7 / 12
+R&T
+Principes(3) : Switch
+Virtual Interface
+
+Configuré sur les MLS, 1 par VLAN.
+
+L2 switch = 1 seul SVI actif
+
+Une SVI est associée à un VLAN (doit exister et être actif)
+
+[Page 8]
+MLS, T.Nguyen 8 / 12
+R&T
+Principes(4) : Routed Port
+• Commande no switchport sur
+une interface = routed port
+• Routed ports sont utilisés avec les
+SVI.
+• Un Switch 48-port peut être
+configuré comme un routeur à 48
+ports.
+
+[Page 9]
+MLS, T.Nguyen 9 / 12
+R&T
+Routage InterVlan IPv4 avec SVI
+Etapes :
+
+Switch(config)# ip routing
+
+1/ Switch(config)# interface vlan vlan-id
+
+2/ Switch(config-if)# ip address ip_address
+subnetmask
+
+3/ Switch(config-if)# no shutdown
+
+4/ (Optionnel) Switch(config)# router
+ip_routing_protocol options
+Configuration MLS(1)
+
+[Page 10]
+MLS, T.Nguyen 10 / 12
+R&T
+Exemple
+Switch(config)# ip routing
+Switch(config)# interface vlan 10
+Switch(config-if)# ip address 10.10.1.1 255.0.0.0
+Switch(config-if)# no shutdown
+Switch(config-if)# interface vlan 20
+Switch(config-if)# ip address 10.20.1.1 255.255.255.0
+Switch(config-if)# no shutdown
+Switch(config)# router rip
+Switch(config-router)# network 10.0.0.0
+```
+
+</details>

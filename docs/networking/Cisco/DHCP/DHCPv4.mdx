@@ -8,3 +8,413 @@ import PdfViewer from '@site/src/components/PdfViewer';
 # DHCPv4
 
 <PdfViewer file="/pdf/networking/CoursDHCP-RT-2026.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+DHCP, T.Nguyen 1 / 33
+Réseaux
+&
+Télécoms
+Cours Réseaux :
+Rappels DHCP
+
+[Page 2]
+DHCP, T.Nguyen 2 / 33
+Réseaux
+&
+Télécoms
+PLAN
+Introduction
+Principes et Concepts
+Configuration IOS
+Monitoring et Dépannage
+Conclusion
+
+[Page 3]
+DHCP, T.Nguyen 3 / 33
+Réseaux
+&
+Télécoms
+INTRODUCTION (1)
+Dynamic Host Configuration Protocol
+Protocole Client / Serveur
+Evolution du protocole BOOTP
+
+Port UDP 67 (Serveur)
+
+Port UDP 68 (Client)
+Très employé dans les entreprises
+
+[Page 4]
+DHCP, T.Nguyen 4 / 33
+Réseaux
+&
+Télécoms
+INTRODUCTION (2)
+
+[Page 5]
+DHCP, T.Nguyen 5 / 33
+Réseaux
+&
+Télécoms
+DHCP Concepts : Allocation DHCP
+Allocation manuelle
+
+Adresse IP préallouée par l’administrateur
+
+Selon son @ MAC
+Allocation automatique
+
+@IP allouée de façon permanente
+
+Pas d’expiration
+Allocation dynamique
+
+@IP allouée pour un temps limité (Bail)
+
+Réutilisation possible lorsque le bail expire
+
+[Page 6]
+DHCP, T.Nguyen 6 / 33
+Réseaux
+&
+Télécoms
+DHCP Concepts : Phases du Protocole
+
+[Page 7]
+DHCP, T.Nguyen 7 / 33
+Réseaux
+&
+Télécoms
+DHCP Concepts : BOOTP / DHCP
+
+[Page 8]
+DHCP, T.Nguyen 8 / 33
+Réseaux
+&
+Télécoms
+DHCP : PDU
+
+[Page 9]
+DHCP, T.Nguyen 9 / 33
+Réseaux
+&
+Télécoms
+DHCP : PDU(2)
+Code d’opération (OP)
+
+Type général du message.
+
+Requête=1, Réponse = 2
+Type de matériel :
+
+Ethernet=1, Frame-Relay =15
+Longueur de l’adresse matérielle
+
+8 bits (IEEE MAC)
+Sauts
+
+mis à zéro par le client et utilisé par les agents de relais
+DHCP pour contrôler la transmission des messages
+DHCP.
+Identificateur de transaction
+
+identification à 32 bits qui permet d’associer la requête
+aux réponses reçues sur les serveurs DHCP.
+Secondes
+
+Nb sec écoulé depuis initialisation
+
+utilisé par les serveurs en tant que priorité de
+traitement
+
+[Page 10]
+DHCP, T.Nguyen 10 / 33
+Réseaux
+&
+Télécoms
+Indicateurs
+
+Seule Valeur utilisée à 1
+
+indique au serveur DHCP qu’il doit renvoyer la réponse
+sous forme de diffusion.
+Adresse IP du client
+
+À 0 usuellement
+Votre adresse IP
+
+l’adresse IP que le serveur attribue au client.
+Adresse IP du serveur
+Adresse IP de la passerelle
+Adresse matérielle du client
+Nom du serveur
+
+le serveur envoyant un message DHCPOFFER ou
+DHCPACK peut éventuellement entrer son nom dans ce
+champ.
+Nom du fichier de démarrage
+Options
+DHCP : PDU(3)
+
+[Page 11]
+DHCP, T.Nguyen 11 / 33
+Réseaux
+&
+Télécoms
+DHCP : Requête
+
+[Page 12]
+DHCP, T.Nguyen 12 / 33
+Réseaux
+&
+Télécoms
+DHCP : Réponse
+
+[Page 13]
+DHCP, T.Nguyen 13 / 33
+Réseaux
+&
+Télécoms
+Configuration DHCP: Client IOS
+
+[Page 14]
+DHCP, T.Nguyen 14 / 33
+Réseaux
+&
+Télécoms
+Configuration DHCP: Client Win
+
+[Page 15]
+DHCP, T.Nguyen 15 / 33
+Réseaux
+&
+Télécoms
+Commandes DOS
+
+Ipconfig /release
+
+Ipconfig /renew
+Configuration DHCP: Client XP
+
+[Page 16]
+DHCP, T.Nguyen 16 / 33
+Réseaux
+&
+Télécoms
+Étape 1. Définissez une plage
+d’adresses que le protocole DHCP ne
+doit pas allouer : « Exclusion des @ »
+
+Ip dhcp excluded-address
+Étape 2. Créez le pool DHCP
+
+ip dhcp pool
+Étape 3. Configurez le pool
+
+Network
+
+Default-router
+Configuration DHCP: Serveur IOS
+
+[Page 17]
+DHCP, T.Nguyen 17 / 33
+Réseaux
+&
+Télécoms
+Configuration DHCP(1): Exclusion @
+
+[Page 18]
+DHCP, T.Nguyen 18 / 33
+Réseaux
+&
+Télécoms
+Configuration DHCP(2): Pool DHCP
+
+[Page 19]
+DHCP, T.Nguyen 19 / 33
+Réseaux
+&
+Télécoms
+Configuration DHCP(3): Tâches DHCP
+
+[Page 20]
+DHCP, T.Nguyen 20 / 33
+Réseaux
+&
+Télécoms
+Configuration DHCP(4): Exemple
+
+[Page 21]
+DHCP, T.Nguyen 21 / 33
+Réseaux
+&
+Télécoms
+Configuration fixe(1)
+Créer un pool DHCP
+
+Router(config)# ip dhcp pool name
+Affecter une adresse IP et un masque à l’aide
+de la commande host
+
+Router(dhcp-config)# host
+address [mask |/prefix-length]
+
+Remplace commande network
+
+[Page 22]
+DHCP, T.Nguyen 22 / 33
+Réseaux
+&
+Télécoms
+Configuration Manuelle(2)
+Client Microsoft
+Affectez un client-id selon l’ adresse MAC
+
+Router(dhcp-config)# client-identifier unique-
+identifier
+
+Client id = code 01 (media type ethernet) +
+@MAC
+
+Ex @MAC=0023.4567.89AB
+
+son client ID est : 0100.2345.6789.AB
+
+[Page 23]
+DHCP, T.Nguyen 23 / 33
+Réseaux
+&
+Télécoms
+Configuration Manuelle (3)
+Autres Clients :
+
+hardware-address hardware-address type
+
+hardware-address = @MAC
+
+type = Plateforme matérielle – Par défaut
+Ethernet
+
+no hardware-address
+
+[Page 24]
+DHCP, T.Nguyen 24 / 33
+Réseaux
+&
+Télécoms
+Configuration Manuelle (4)
+Exemple
+
+ip dhcp pool POULE
+
+host 172.16.2.254 /24
+
+Client-identifier 0100.2345.6789.AB
+
+default-router 172.16.2.100
+
+domain-name volaille.com
+
+dns-server 172.16.1.102
+
+[Page 25]
+DHCP, T.Nguyen 25 / 33
+Réseaux
+&
+Télécoms
+Vérifications
+Router# show ip dhcp binding [address]
+
+Affiche les baux dhcp
+Router# show ip dhcp conflict [address]
+
+Affiche les conflits détectés
+Router# show ip dhcp database [url]
+
+Affiche la base dhcp
+Router# show ip dhcp server statistics
+
+Affiche les statistiques sur le server
+
+[Page 26]
+DHCP, T.Nguyen 26 / 33
+Réseaux
+&
+Télécoms
+Vérifications : Exemple
+
+[Page 27]
+DHCP, T.Nguyen 27 / 33
+Réseaux
+&
+Télécoms
+Relais DHCP : Principe(1)
+
+[Page 28]
+DHCP, T.Nguyen 28 / 33
+Réseaux
+&
+Télécoms
+Relais DHCP : Principe(2)
+
+[Page 29]
+DHCP, T.Nguyen 29 / 33
+Réseaux
+&
+Télécoms
+Relais DHCP : Configuration (1)
+
+[Page 30]
+DHCP, T.Nguyen 30 / 33
+Réseaux
+&
+Télécoms
+Relais DHCP : Configuration (2)
+
+[Page 31]
+DHCP, T.Nguyen 31 / 33
+Réseaux
+&
+Télécoms
+DHCP : Dépannage (1)
+
+[Page 32]
+DHCP, T.Nguyen 32 / 33
+Réseaux
+&
+Télécoms
+Dépannage(2)
+Router# clear ip dhcp binding{address | *}
+
+Efface les liaisons DHCP
+Router# clear ip dhcp conflict{address |
+*}.
+
+Efface les messages de conflits
+Router# clear ip dhcp server statistics
+
+Remet tous les compteurs à 0
+Router# debug ip dhcp server {events |
+packets |linkage}
+
+Dépannage du serveur
+
+[Page 33]
+DHCP, T.Nguyen 33 / 33
+Réseaux
+&
+Télécoms
+DHCP : Conclusion
+Protocole de base de configuration des
+réseaux d’entreprise
+Évolution de Bootp
+Configuration IOS
+Monitoring
+Dépannage
+```
+
+</details>

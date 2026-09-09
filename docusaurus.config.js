@@ -42,7 +42,7 @@ const config = {
         indexDocs: true,
         indexPages: true,
         indexBlog: false,
-        docsRouteBasePath: '/docs',
+        docsRouteBasePath: ['/docs', '/cours-marie'],
       }),
     ],
   ],

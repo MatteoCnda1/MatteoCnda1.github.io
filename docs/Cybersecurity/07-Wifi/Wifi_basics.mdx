@@ -8,3 +8,565 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Wifi Basics
 
 <PdfViewer file="/pdf/networking/WIFI_2A.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+25/08/2025
+1
+WLAN (Wireless Local
+Area Network) –
+802.11
+Jean-Luc Damoiseaux
+IUT-Aix-Marseille
+Dpt R&T
+1
+2
+Plan
+l Généralités
+l Architecture d’un réseau 802.11
+l Couche physique
+l Couche liaison de données
+l La sécurité
+Dpt R&T - JLD
+2
+
+[Page 2]
+25/08/2025
+2
+3
+IEEE 802.11 / Wi-Fi Alliance
+l Favoriser l'innovation
+technologique et
+l'excellence au profit de
+l'humanité
+l Mise en place des normes
+802.11
+l Promotion et développement
+du programme Wi-Fi (wireless
+fidelity)
+l Délivrance de tests et de
+certifications pour l'obtention
+du label WI-FI
+Dpt R&T - JLD
+3
+4
+Pourquoi un LAN sans fil ?
+l Pour disposer de toutes les fonctionnalités et avantages
+d’un LAN sans les limitations dues aux fils et cables.
+l Avantages :
+Ø Installation aisée et peu coûteuse
+Ø Mobilité
+Ø Flexibilité et évolutivité
+Dpt R&T - JLD
+4
+
+[Page 3]
+25/08/2025
+3
+5
+Technologies sans fils
+WiMax
+MMDS, LMDS
+GSM, GPRS,
+2.5–3G, 3G+, 4G, 5G
+Bluetooth
+802.11a,b,g,n,ac,ax
+LIFI
+Dpt R&T - JLD
+5
+6
+Evolution des WLANs
+802.11
+(1997)
+Wifi 1
+802.11b
+(1999)
+Wifi 3
+802.11g
+(2003)
+1-2 Mbps 11 Mbps
+Wifi 2
+802.11a
+(1999)
+54 Mbps 600 Mbps 1,3 Gbps 9,6 – 23 Gbps30 Gbps
+Wifi 4
+802.11n
+(2009)
+Wifi 5
+802.11ac
+(2014)
+Wifi 6 \ 6e
+802.11ax
+(2019 - 2021)
+Wifi 7
+802.11be
+2.4 GHz
+(ISM)
+5 GHz
+6GHz
+Dpt R&T - JLD
+6
+
+[Page 4]
+25/08/2025
+4
+Equipements WLAN
+Dpt R&T - JLD
+7
+7
+8
+Phénomènes physiques
+d’altération
+3 à 5 dB
+5 à 8 dB
+8 à 10 dB
+10 à 25 dB
+Dpt R&T - JLD
+8
+
+[Page 5]
+25/08/2025
+5
+9
+Sources d’altération
+l Armoire métallique,
+bureau, etc
+l Murs, cloisons
+l Miroirs, Vitres, etc.
+l Plante
+l Eau (seau, aquarium, …)
+l Bande ISM : Micro-ondes,
+appareil bluetooth, …
+l Eléments topographiques
+(montagnes,courbure de la
+terre)
+l Objets façonnés par
+l’homme (batiments, pylone)
+l Arbres, vol d'oiseaux
+l Brouillard, pluie, etc.
+Dpt R&T - JLD
+9
+Architecture 802.11
+10
+
+[Page 6]
+25/08/2025
+6
+11
+Basic Set Service
+Basic Set Area
+l BSS : Ensemble de terminaux
+munis d ’une carte réseau 802.11
+l BSA : Zone occupée par les
+terminaux d’un BSS
+Dpt R&T - JLD
+11
+12
+Modes de fonctionnement
+l Mode ad-hoc (802.11s)
+Ø Permet aux stations de communiquer sans l'aide d'une
+quelconque infrastructure
+l Mode infrastructure
+Ø Fournit aux différentes stations des services spécifiques sur une
+zone de couverture déterminée par la taille du réseau
+Dpt R&T - JLD
+12
+
+[Page 7]
+25/08/2025
+7
+13
+Mode ad-hoc (IBSS)
+Independent Basic Set Service
+Dpt R&T - JLD
+13
+14
+Mode infrastucture BSS
+Dpt R&T - JLD
+14
+
+[Page 8]
+25/08/2025
+8
+15
+Mode infrastucture étendu
+(Extented Service Set)
+Dpt R&T - JLD
+15
+Architecture à base
+de bornes "lourdes"
+16
+l APs autonomes :
+– assimilable à un commutateur (table ARP
+locale, VLAN) ;
+– gestion des radiofréquences ;
+– gestion des associations 802.11 ;
+– gestion de la sécurité (clés de chiffrements,
+authenticator 802.1x)
+– configuration réseau propre
+l Problèmes
+– gestion individuelle et donc fastidieuse des
+APs (passage à l'échelle)
+– absence de coordination des politiques de
+radiofréquences => qualité du réseau
+mauvaise
+– itinérance
+Dpt R&T - JLD
+16
+
+[Page 9]
+25/08/2025
+9
+Architecture à base
+de bornes "légère"
+17
+l Architecture
+– APs sont de simples antennes (LAP -
+Lightweight Access Points)
+– l'intelligence dans un ou plusieurs
+contrôleurs (Wireless Lan Controller)
+– serveur d'administration des contrôleurs
+(Wireless Control System)
+l Avantages
+– administration simplifiée
+– gestion des fréquences
+– gestion de la sécurité
+l Problèmes :
+– Solution propriétaire !
+– Criticité du contrôleur
+– Coût
+Dpt R&T - JLD
+17
+Couche physique
+18
+
+[Page 10]
+25/08/2025
+10
+l La bande de fréquence est découpée en canaux
+Ødont le nombre varie d'un pays à l'autre
+Øpouvant se recouvrir et/ou être agrégés !
+19
+Bande de fréquence
+20MHz
+1 2 3 4 5 6 7 8 9 10 11 12 13 14
+Dpt R&T - JLD
+Bande 2,4GHz
+19
+Orthogonal Frequency Division
+Multiplexing (WIFI 3 / 802.11g )
+l Un canal est découpé en sous-canaux indépendants pour
+répartir les données sur des fréquences différentes
+l Pendant une durée donnée, tous les sous-canaux sont utilisés
+par le même utilisateur
+20
+Dpt R&T - JLD
+20
+
+[Page 11]
+25/08/2025
+11
+Orthogonal Frequency-Division
+Multiple Access
+(WIFI 6 / 802.11ax et WIFI 7 / 802.11be)
+l Le nombre de sous-canaux a été multiplié par plus de 4
+l WIFI 6 - chaque sous-canal (de taille différente) peut être
+attribué à un utilisateur différent
+l WIFI 7 – Un utilisateur peut utiliser plusieurs sous-canaux (MRU)
+21
+Dpt R&T - JLD
+21
+22
+Modulations
+Débit 1Mbit/s : Modulation de phase différentielle binaire (DBPSK)
+1 bit/symbole
+Dpt R&T - JLD
+64QAM 256QAM 1024QAM 4096QAM
+802.11n-WIFI4 802.11ac/WIFI5 802.11ax/WIFI6 802.11be/WIFI7
+6 bits/symbole 8bits/symbole 10 bits/symbole 12 bits/symbole
+22
+
+[Page 12]
+25/08/2025
+12
+23
+MIMO
+(WIFI 4 / 802.11n)
+l Multiplexage spatial pour transmettre un message en
+plusieurs morceaux sur différentes antennes
+l Plusieurs antennes pour l’émission et la réception du signal
+Dpt R&T - JLD
+23
+24
+Multi User-MIMO
+(à partir du WIFI 6 / 802.11ax)
+Extension du MIMO à plusieurs utilisateurs
+l 802.11ac => 4 périphériques simultanément
+802.11ax => 8 périphériques simultanément
+802.11be => 16 périphériques simultanément
+Dpt R&T - JLD
+24
+
+[Page 13]
+25/08/2025
+13
+25
+Multi Link Operation
+(WIFI 7 / 802.11be)
+Possibilité pour un client de se connecter en même temps sur
+plusieurs bandes
+Dpt R&T - JLD
+25
+26
+A ne pas oublier !
+l Dans les bandes 5 et 6GHz, l'absorption est plus forte donc il
+faut plus de bornes (et peut-être changer vos antennes)
+l + de bornes = + d’énergie => racheter des switches POE !
+l Le mélange des normes fait baisser les débits
+l Si on utilise le même canal qu’un autre point d'accès, la
+bande passante est partagée
+Pour augmenter le débit :
+l augmenter les points d'accès en utilisant des canaux sans
+recouvrement
+l passer au Wifi 6 et Wifi 7
+l Attention le débit réel est de l'ordre de 30 à 50% du débit
+théorique (enfin avant le WIFI6/802.11ax)
+Dpt R&T - JLD
+26
+
+[Page 14]
+25/08/2025
+14
+27
+Types d'antennes
+Dpt R&T - JLD
+27
+28
+Caractéristiques d'une antenne
+l Une antenne est notamment caractérisée par son
+diagramme de rayonnement, l'énergie du lobe central, son
+gain
+l A ne pas oublier à propos du gain :
+Ø +3dB => puissance x 2 -3dB => puissance / 2
+Ø +10dB => puissance x 10 -10dB => puissance / 10
+l La couverture varie en fonction bande de fréquences utilisée
+Dpt R&T - JLD
+28
+
+[Page 15]
+25/08/2025
+15
+Couche Liaison
+29
+30
+Couche MAC 802.11
+l Principe général : CSMA-CA
+Ø Carrier Sense – les stations écoutent le support et vérifient qu'il est
+libre avant de communiquer
+Ø Multiple Access – toutes les stations ont un accès équitable au
+support physique
+Ø Collision Avoidance – plutôt que de gérer les collisions après
+coup (CSMA-CD) on essaie de les éviter
+Dpt R&T - JLD
+30
+
+[Page 16]
+25/08/2025
+16
+31
+CSMA/CA
+acquittement positif - temporisateurs
+DIFS
+SIFS
+Données
+ACK
+Source
+Destination
+Dpt R&T - JLD
+31
+32
+Problème de la station cachée
+Station A
+Station B
+Station C
+A et B communiquent ensemble
+C ne l’entend pas et communique avec A
+Dpt R&T - JLD
+32
+
+[Page 17]
+25/08/2025
+17
+33
+Solution au problème de la
+station cachée : RTS / CTS
+AP
+Station B
+Station C
+A et B vont communiquer ensemble
+C est avertie de cette communication car A diffuse une trame CTS
+1- RTS
+2 - CTS
+2- CTS
+Dpt R&T - JLD
+33
+34
+CSMA/CA
+Network Allocation Vector
+DIFS
+SIFS
+Données
+ACK
+Source
+PA
+Autres
+Stations
+DIFS
+Backoff
+RTS
+SIFS
+CTS
+SIFS
+NAV (rts)
+BackoffNAV (cts)
+Stations
+cachées
+DIFS
+NAV (rts) BackoffNAV (rts)
+Dpt R&T - JLD
+34
+
+[Page 18]
+25/08/2025
+18
+35
+Format d’une trame
+l FC : infos de contrôle (version, WEP, type, etc.)
+l ID : durée de la transmission
+l Seq : Numéro de séquence
+l Adresses
+l Frame Check Sequence
+FC ID SeqAdr 1 FCSDonnéesAdr 2 Adr 3 Adr 4
+2 2 6 6 6 2 6 0-2312 4
+Dpt R&T - JLD
+35
+36
+Types de trames
+l Trames de données
+l Trames de contrôle : contrôle de l’accès au support
+Ø RTS / CTS
+Ø ACK
+l Trame de gestion
+Ø authentification
+Ø association / dé-association
+Ø synchronisation
+Dpt R&T - JLD
+36
+
+[Page 19]
+25/08/2025
+19
+Sécurité
+37
+38 Dialogue simplifié avec la borne
+1) Authentification
+2) Association du client
+3) Echange des
+données
+Dpt R&T - JLD
+38
+
+[Page 20]
+25/08/2025
+20
+39
+Contraintes de sécurisation
+l Authentification : le client dialoguant avec la borne a été
+authentifié
+l Encryption : à un instant t, l’échange des données entre la
+borne et le client est chiffré
+l Intégrité : les données échangées ne peuvent pas être
+modifiées ou rejouées
+Dpt R&T - JLD
+39
+Panorama de la sécurité
+Dpt R&T - JLD
+40
+Encryption
+Gestion des
+clefs
+Intégrité Authentification
+802.11 WEP
+Même clef pour
+tout le monde
+CRC Open ou Shared
+WPA1 TKIP
+Changement
+périodique des
+clefs
+Michael
+Personnel Entreprise
+Pre Shared Key 802.1x – EAP
+WPA2
+WPA3
+802.11i
+AES 128 bits
+AES 192 bits
+AES 256 bits
+Une clef par
+paquet
+et par personne
+OWE en WPA3
+AES
+PSK (4Way
+Handshake
+Protocol)
+PSK- SAE
+(Simultaneous
+Authentication of
+Equals)
+802.1x
+EAP-TLS
+EAP-TTLS
+EAP-PEAP
+40
+
+[Page 21]
+25/08/2025
+21
+41
+Attaques connues
+l Cryptographiques :
+Ø WEP simple, moins de 10 mn pour trouver la clef !
+Ø CRC modification du message sans changement du CRC
+Ø TKIP possible mais compliquée et limitée dans ses résultats
+l Protocolaires
+Ø Sur le protocole 4Way Handshake de l'authentification par clef
+partagée (hashcat, krack)
+Ø Sur la méthode EAP-xxx (ne pas utiliser MD5, LEAP)
+Ø De-authentification et de-association
+l Environnementales
+Ø Brouillage radio
+Ø AP pirate
+Dpt R&T - JLD
+41
+42
+l Si possible, utilisez la norme WPA3
+l Préférez le mode entreprise et une authentification
+EAP-PEAP/TLS/TTLS
+l Dans le mode Personnel, utilisez des clefs partagées
+d'au moins 20 caractères
+l Ne pas oublier d’isoler les réseaux et de mettre en
+place du filtrage
+l Utilisez un VPN si paranoïa grave de type militaire
+l Si possible, désactivez sur les bornes les
+services/protocoles inutiles (web, cdp, telnet)
+Conseils
+Dpt R&T - JLD
+42
+```
+
+</details>

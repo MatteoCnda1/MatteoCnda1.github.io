@@ -8,3 +8,114 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # HSRPv6
 
 <PdfViewer file="/pdf/networking/CoursHSRPipV6v2024.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+HSRP, T.Nguyen 1 / 14
+R&T
+Cours Réseaux
+HSRP IPv6
+
+[Page 2]
+HSRP, T.Nguyen 2 / 14
+R&T
+HSRP pour IPv6
+Introduction
+Principes
+Configuration
+Exemple
+Conclusion
+
+[Page 3]
+HSRP, T.Nguyen 3 / 14
+R&T
+Introduction : HSRP
+IPv6
+Hot Standby Router Protocol
+
+Propriétaire Cisco
+
+IPv6
+
+Version 2
+
+[Page 4]
+HSRP, T.Nguyen 4 / 14
+R&T
+HSRP IPv6 : Principes
+UDP port 2029
+utilisation @LINK LOCAL
+@ MAC virtuelle spécifique
+
+0005.73A0.0000 -> 0005.73A0.0FFF
+@IP destination Multicast
+
+FF02::66
+
+[Page 5]
+HSRP, T.Nguyen 5 / 14
+R&T
+Commandes
+1. enable
+2. configure terminal
+3. ipv6 unicast-routing
+4. interface type number
+5. standby [group-number] ipv6 {ipv6-global-
+address | ipv6-address/prefix-length | ipv6-prefix/
+prefix-length | link-local-address | autoconfig}
+6. standby [group-
+number] preempt [delay {minimum seconds | re
+load seconds | sync seconds}]
+7. standby [group-number] priority priority
+8. exit
+9. show standby [type number [group]]
+[all | brief]
+10. show ipv6 interface [brief] [interface-
+type interface-number] [prefix]
+
+[Page 6]
+HSRP, T.Nguyen 6 / 14
+R&T
+Exemple
+
+[Page 7]
+HSRP, T.Nguyen 7 / 14
+R&T
+Exemple (R1)
+ipv6 unicast-routing
+interface FastEthernet0/0
+ipv6 address 2020:AB8:2001::1010/64
+ipv6 enable
+standby version 2
+standby 1 ipv6 autoconfig
+standby 1 priority 120
+standby 1 preempt delay minimum 30
+standby 1 track Serial0/0 90
+
+[Page 8]
+HSRP, T.Nguyen 8 / 14
+R&T
+Exemple(R2)
+ipv6 unicast-routing
+interface FastEthernet0/0
+ipv6 address 2020:AB8:2001::1011/64
+ipv6 enable
+standby version 2
+standby 1 ipv6 autoconfig
+standby 1 preempt delay minimum 30
+standby 1 track Serial0/0
+
+[Page 9]
+HSRP, T.Nguyen 9 / 14
+R&T
+Conclusion
+HSRP IPv6
+Même config
+Standby, priority, track
+Configuration multi-groupe
+```
+
+</details>

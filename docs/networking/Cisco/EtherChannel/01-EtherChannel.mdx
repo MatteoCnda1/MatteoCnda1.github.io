@@ -8,3 +8,149 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # EtherChannel
 
 <PdfViewer file="/pdf/networking/CoursEtherchannel2025.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+R&T
+EC, T.Nguyen 1 / 7
+Cours Réseaux :
+EtherChannel (EC)
+
+[Page 2]
+R&T
+EC, T.Nguyen 2 / 7
+EtherChannel
+Introduction
+Principes
+Configuration EC
+Vérifications
+Conclusion
+
+[Page 3]
+R&T
+EC, T.Nguyen 3 / 7
+FEC:Introduction
+Agrégation de liens
+
+Un seul Lien Logique
+
+Jusqu’à 8 liens Physiques
+
+Souvent TRUNK
+Répartition de charge
+Niveau 2 ou Niveau 3
+
+[Page 4]
+R&T
+EC, T.Nguyen 4 / 7
+Principes(1):Protocoles
+Port Aggregation Protocol (PAgP).
+
+Propriétaire Cisco : Paquets PAgP sont echangés
+entre ports compatibles pour former des EC.
+
+Quand l’EtherChannel est formé le Spanning tree le
+rajoute en tant que port unique.
+Link Aggregation Control Protocol (LACP).
+
+IEEE 802.3ad.
+
+Fonction similaire à PAgP.
+
+Utilisable dans les environnements mixtes (Cisco
+ou Non). Dans les environnements Cisco les deux
+protocoles sont supportés.
+
+[Page 5]
+R&T
+FEC, T.Nguyen 5 / 7
+Principes(2): Modes PAgP
+Mode Description
+Auto Place l'interface dans un état passif de négociation (répond mais ne prend pas
+d'initiative de lancer la négociation).
+Desirable Place l'interface dans un état actif de négociation pour la création d 'un channel
+On Force l'interface dans un channel sans PAgP.
+
+[Page 6]
+R&T
+EC, T.Nguyen 6 / 7
+Principes(2): Modes LACP
+Mode Purpose
+Passive Place le port dans un état passif de négociation (Comme auto)
+Active Place le port dans un état actif de négoiciation. (Comme desirable)
+On Force l' interface dans un channel sans PAgP ou LACP.
+
+[Page 7]
+R&T
+EC, T.Nguyen 7 / 7
+Step 1. Spécifie les interfaces du FEC
+
+Switch(config)# interface range interface_type
+[interface_range]
+Step 2. Spécifie le protocole utilisé
+
+Switch(config-if-range)# channel-protocol {pagp |
+lacp}
+Step 3. Crée les ports channel et affecte les
+interfaces:
+
+Switch(config-if-range)# channel-group number mode
+{active | on | auto | desirable | passive}
+Step 4. Spécifie l’interface port-channel et
+configuration de paramètres additionnels.
+
+Switch(config)# interface port-channel number
+
+Switch(config-if)# interface parameters
+Configuration FEC
+
+[Page 8]
+R&T
+EC, T.Nguyen 8 / 7
+show interfaces port-channel channel-group-
+number
+
+Exemple
+Cat3560# show interface port-channel 1
+Port-channel1 is up, line protocol is up Hardware is
+EtherChannel, address is 0002.4b28.db02 (bia
+0002.4b28.db02) MTU 1500 bytes, BW 200000 Kbit, DLY
+1000 usec, reliability 255/255, txload 1/255, rxload 1/255
+Encapsulation ARPA, loopback not set Keepalive set (10
+sec) Full-duplex, 100Mb/s input flow-control is off,
+output flow-control is off Members in this channel:
+Gi0/1 Gi0/2
+[…]
+Vérification FEC
+
+[Page 9]
+R&T
+EC, T.Nguyen 9 / 7
+show etherchannel channel-group-
+number summary
+
+Exemple
+Cat3560# show etherchannel 1 summary
+Flags: D - down P - in port-channel I - stand-alone s -
+suspended R - Layer3 S - Layer2 U - port-channel in use
+Group Port-channel Ports
+-----+------------+-----------------------------------------------
+1 Po1(SU) Gi0/1(P) Gi0/2(P)
+Cat3550#
+Vérification FEC (2)
+
+[Page 10]
+R&T
+EC, T.Nguyen 10 / 7
+Conclusion : TPS
+TP 1 : PKA 4.2.1.3 Packet Tracer -
+Configuring EtherChannel
+TP 2: PKA 4.2.2.3 Packet Tracer -
+Troubleshooting EtherChannel
+TP 3 Plateforme Réelle
+```
+
+</details>

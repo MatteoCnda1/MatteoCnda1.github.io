@@ -95,6 +95,14 @@
 
 .document {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.pageWrapper {
+  display: flex;
   justify-content: center;
 }
 

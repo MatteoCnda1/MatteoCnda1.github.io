@@ -8,3 +8,638 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # BDD cours
 
 <PdfViewer file="/pdf/Databases/R310-MariaDB-Python-2024.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+SGBD
+Administrer MariaDB
+Ivan MADJAROV 2024
+
+[Page 2]
+Installation de MariaDB-Server
+q L’installation du SGBD sur Debian est simple puisque MariaDB-
+Server est disponible dans les dépôts.
+q Première étape mettre à jour le référenciel des logiciels :
+>sudo apt update
+q Si besoin, mettre à jour le système
+>sudo apt upgrade
+q Installer le serveur de BD :
+>sudo apt install mariadb-server
+q A la fin de l'installation on peut vérifier le statut du server :
+>systemctl status mariadb
+q Le message "active (running)", alors tout est OK est le SGBD est
+fonctionnel.
+MySQL & Python IvMad, 2024 2
+
+[Page 3]
+Le compte "root" de MariaDB-Server
+q Changer le mot de passe "root" avec la commande :
+>mysqladmin -u root password 'NouveauMotDePasse'
+q Si message "Access denied for user 'root'@'localhost' ", alors, on
+force avec la commande :
+>sudo mysql
+q Pour modifier le mot de passe de l'utilisateur "root", on peut
+exécuter la requête après connexion avec la base de données :
+>SET PASSWORD FOR 'root'@'localhost' =
+PASSWORD('NouveauMotDePasse');
+q Pour confirmer la modification et pour l'enregistrer :
+>flush privileges;
+q Pour quitter MariaDB : >quit;
+MySQL & Python IvMad, 2024 3
+
+[Page 4]
+Le compte "root" de MariaDB-Server
+q Pour vérifier le mot de passe "root", on se reconnecte avec le
+nouveau mot de passe :
+>mysql -u root -p
+q La configuration d'un mot de passe "root" pour MySQL/MariaDB
+est indispensable, différent de celui du système!
+q Pour visualiser les BD déjà présentes sur le serveur :
+MariaDB [(none)]> show databases;
++--------------------+
+| Database |
++--------------------+
+| information_schema |
+| mysql |
+| performance_schema |
++--------------------+
+3 rows in set (0.001 sec)
+MariaDB [(none)]>
+MySQL & Python IvMad, 2024 4
+
+[Page 5]
+Script de sécurité
+q Un script est utilisé pour changer le mot de passe "root" et
+configurer certains aspects de sécurité de MySQL avec la
+commande :
+>mysql_secure_installation
+q La suite est un questionnaire avec réponses "Y" ou "N" :
+o Set root password – Définir le mot de passe root (déjà défini, on répond N)
+o Socket authentication - Définir le mot de passe en format unic-socket (N)
+o Remove anonymous users – Supprimer les utilisateurs anonymes (Y)
+o Disallow root login remotly - Supprimer l'accès distant de root (Y)
+o Remove test database and access to it – Supprimer la base de données
+de test et y accéder (Y)
+o Reload privilege tables now – Recharger les tables de privilèges
+maintenant (Y)
+MySQL & Python IvMad, 2024 5
+
+[Page 6]
+Gestion BD et compte MariaDB
+q Créer une BD avec un utilisateur sur le SGBD MariaDB
+>create database <NomdelaBD>; # Ex: BD "etudiant"
+q Un utilisateur est associé à la BD pour faire la maintenance
+>CREATE USER 'utilisateur'@'ip' IDENTIFIED BY
+'motdepasse';
+q Pour l'utilisateur définir les privilèges d'accès aux données
+>GRANT ALL PRIVILEGES ON NomBaseDeDonnees.* TO
+'utilisateur'@'ip' WITH GRANT OPTION;
+q Offrir à l'utilisateur des privilèges sur les tables de cette BD :
+>GRANT ALL PRIVILEGES ON <NomBD>.* TO
+'<utilisateur>'@'localhost' WITH GRANT OPTION;
+q Confirmer les modifications :
+>FLUSH PRIVILEGES;
+MySQL & Python IvMad, 2024 6
+
+[Page 7]
+Gestion BD et compte MariaDB
+q Créer des tables dans la BD MariaDB
+q Pour avoir accès aux tables de la BD il faut sélectionner la BD :
+>USE <nom_BD>;
+q Pour créer une table dans la BD activée :
+>CREATE [TEMPORARY] [IF NOT EXISTS]
+TABLE <nom_table> (<nom_attribute> TYPE_ATTRIBUT
+[OPTIONS]);
+q Afficher la liste des tables dans la BD :
+q MariaDB [<nom_BD>]> show tables;
+q Afficher la structure de la table créée :
+q MariaDB [<nom_DB>]> describe <nom_table>;
+MySQL & Python IvMad, 2024 7
+
+[Page 8]
+Gestion BD et compte MariaDB
+q Créer une BD et les tables à partir d'une archive
+q Pour restaurer/créer une base de données sur le serveur
+MariaDB à partir/vers une archive on utilise la commande :
+>mysql -u root -p nom_BD < nom_fichier.sql
+q Le nom_fichier.sql étant une sauvegarde d'une BD avec les tables
+qui la constituent.
+q Une autre possibilité d'intégrer les données d'une archive ".sql"
+dans une BD :
+q On se connecte au MariaDB avec les identifiants "root". Sur la ligne
+de commande on choisit la BD à traiter :
+>use nom_BD;
+q L'insertion des données se fait avec la commande :
+>source chemin_vers_le_fichier.sql
+MySQL & Python IvMad, 2024 8
+
+[Page 9]
+Gestion BD et compte MariaDB
+q Pour sauvegarder une BD avec ses tables, on peut utiliser
+mysqldump avec les paramètres nom de la BD et le nom de
+l'archive SQL :
+>mysqldump -u root -p nom_BD > nom_archive.sql
+q Il est possible de compresser le fichier de sauvegarde SQL avec
+gzip :
+>mysqldump -u root -p nom_BD | gzip > nom_archive.sql.gz
+MySQL & Python IvMad, 2024 9
+
+[Page 10]
+Gérer les privilèges des utilisateurs
+q A la connexion au SGBD MariaDB, on s'identifie avec un nom
+d'utilisateur.
+q Chaque utilisateur possède une série de privilèges, relatifs aux
+données stockées sur le serveur :
+q de sélectionner les données,
+q de les modifier,
+q de créer des objets,
+q etc.
+q Ces privilèges peuvent exister à plusieurs niveaux :
+q base de données,
+q tables,
+q colonnes,
+q procédures
+q etc.
+MySQL & Python IvMad, 2024 10
+
+[Page 11]
+Gérer les privilèges des utilisateurs
+q Les informations concernant les utilisateurs sont stockées dans
+la base de données "mysql".
+q Les utilisateurs sont enregistrés dans la table "user", avec leurs
+privilèges globaux.
+q La base "mysql" possède 4 tables permettant de stocker les
+privilèges des utilisateurs à différents niveaux.
+q "db" : privilèges au niveau des bases de données.
+q "tables_priv" : privilèges au niveau des tables.
+q "columns_priv" : privilèges au niveau des colonnes.
+q "proc_priv" : privilèges au niveau des routines.
+MySQL & Python IvMad, 2024 11
+
+[Page 12]
+Gérer les privilèges des utilisateurs
+q La requête à utiliser pour créer un utilisateur :
+>CREATE USER 'login'@'hote' [IDENTIFIED BY 'mot_de_passe'];
+q La requête à utiliser pour supprimer un utilisateur :
+>DROP USER 'login'@'hote';
+q L'utilisateur est défini avec deux éléments :
+q login (l'identifiant de l'utilisateur), ex. : "tom"
+q hôte de connexion (le point d'accès à BD), ex. : "iut.rt.net"
+q L'hôte est l'adresse à partir de laquelle l'utilisateur se connecte. Si
+l'utilisateur se connecte à partir de la machine locale (là où est le
+serveur MariaDB), on peut utiliser 'localhost'. Sinon, on utilise en
+général une adresse IP ou un nom de domaine. Exemples :
+>CREATE USER 'toto'@'localhost' IDENTIFIED BY 'tonton';
+>CREATE USER 'pifou'@'194.28.12.4' IDENTIFIED BY 'pasglop';
+>CREATE USER 'jerry'@'iut.rt.net' IDENTIFIED BY 'tomlechat';
+MySQL & Python IvMad, 2024 12
+
+[Page 13]
+Gérer les privilèges des utilisateurs
+q Il est possible de se connecter à partir de plusieurs hôtes
+différents en utilisant le joker "%". Ex :
+q L'utilisateur "jerry" peut se connecter à partir de n'importe quel hôte du
+domaine "rt.net"
+>CREATE USER 'jerry'@'%.rt.net' IDENTIFIED BY 'lasouris';
+q "tom" peut se connecter à partir de n'importe quel hôte dont l'adresse IP
+commence par 194.28.1.
+>CREATE USER 'tom'@'194.28.1.%' IDENTIFIED BY 'lechat';
+q "paul" est autorisé de se connecter à partir de n'importe quel hôte
+>CREATE USER 'paul'@'%' IDENTIFIED BY 'looking4you';
+MySQL & Python IvMad, 2024 13
+
+[Page 14]
+Gérer les privilèges des utilisateurs
+q La création d'un utilisateur ne lui donne pas automatiquement
+les droits d'accès et de traitement des données dans la BD. Il faut
+lui préciser ses privilèges. Pour accorder tous les droits sur une
+table à 'jean'@'localhost'.
+>GRANT ALL ON <BD>.<table> TO 'jean'@'localhost';
+q Il est possible de préciser les droits d'actions sur les données
+pour un utilisateur. Ex :
+q Pour l'utilisateur 'jeanne'@'localhost', on définit les privilèges
+SELECT, INSERT et DELETE sur une table "<BD>.<table>", et UPDATE
+sur les colonnes "<attribut1>", "<attribut2>".
+>GRANT SELECT, UPDATE (<attribut1>, <attribut2>),
+DELETE, INSERT ON <BD>.<table> TO 'jeanne'@'localhost'
+IDENTIFIED BY 'exemples2023';
+MySQL & Python IvMad, 2024 14
+
+[Page 15]
+Commandes MariaDB
+q CREATE – Permet aux utilisateurs de créer des bases de
+données/tableaux
+q SELECT – Permet aux utilisateurs de récupérer des données
+q INSERT – Permet aux utilisateurs d’ajouter de nouvelles entrées
+dans les tableaux
+q UPDATE – Permet aux utilisateurs de modifier les entrées
+existantes dans les tableaux
+q DELETE – Permet aux utilisateurs de supprimer les entrées dans
+le tableau
+q DROP – Permet aux utilisateurs de supprimer des bases de
+données/tableaux entiers
+MySQL & Python IvMad, 2024 15
+
+[Page 16]
+SGBD
+Les Bases de Données
+Ivan MADJAROV 2024
+
+[Page 17]
+SGBDs & architecture
+q MsAccess
+q SQL Server
+q Oracle
+q MySQL & MariaDB
+q DB2
+q PostgreSQL
+q MongoDB
+q SQLite
+q Neo4j
+q Etc.
+MySQL & Python IvMad, 2024 17
+
+[Page 18]
+SGBDs & architecture
+q Un SGBD est :
+q Un outil pour vérifier, modifier et rechercher efficacement des données
+dans un grand ensemble
+q Une interface entre les applications "utilisateur" et la mémoire externe.
+q Un SGBD comprend :
+q Un système de gestion de fichiers (gestion du stockage physique).
+q Un système interne (placement et accès aux données)
+q Un système externe (langage de requête élaboré).
+MySQL & Python IvMad, 2024 18
+
+[Page 19]
+Modèle entité association (EA)
+q Démarche de construction d’une BD :
+q Construire un schéma conceptuel, modélisé sous forme d’entités et
+d’associations;
+q Transformer le schéma E/A en schéma relationnel;
+q Les étapes de la conception :
+MySQL & Python IvMad, 2024 19
+
+[Page 20]
+Modèle entité association (EA)
+q Schéma global d'une BD :
+MySQL & Python IvMad, 2024 20
+Entité
+Association
+Propriétés
+Identifiant
+Cardinalités
+
+[Page 21]
+PYTHON
+Python & MariaDB
+Ivan MADJAROV 2024
+
+[Page 22]
+CGI : Python : mysql.connector
+• Le schéma d’accès à une base de données MariaDB (MySQL) par un
+script Python
+MySQL & Python IvMad, 2024 22
+
+[Page 23]
+Installation du connecteur MySQL
+q Pour se connecter à une base de données MySQL, il faut installer
+le connecteur MySQL qui est un paquet nommé
+mysql-connector-python
+disponible sur PyPI.
+>python -m pip install mysql-connector-python==8.0.29
+• Le module mysql.connector fournit la méthode connect qui
+retourne l'objet qui référence la connexion vers la BD.
+• On fournit les paramètres "host", "user" et "password" pour
+donner l’adresse du SGBDR, le login et le mot de passe de
+connexion.
+• On peut également fournir le paramètre database pour indiquer la
+base de données à utiliser.
+MySQL & Python IvMad, 2024 23
+
+[Page 24]
+Connexion à la base de données
+q La connexion à la base de données se comporte comme un
+gestionnaire de ressource.
+import mysql.connector
+try:
+db = mysql.connector.connect(
+host = "localhost",
+user = "login",
+password = "mot_de_passe",
+database = "database_python"
+)
+except mysql.connector.Error as e:
+print("Exception : ", e)
+else:
+print("Connexion réussie")
+db.close()
+MySQL & Python IvMad, 2024 24
+
+[Page 25]
+Connexion à la base de données
+q Avec le gestionnaire de ressource on peut employer la syntaxe
+with pour s'assurer de la fermeture de la connexion.
+q On peut employer l’opérateur ** pour faire unpack du
+dictionnaire pour les paramètres de connexion.
+q L’interaction avec la base de données se fait à travers un curseur
+qui permet à la fois d’envoyer des requêtes et de consulter les
+résultats.
+q Pour créer l'objet curseur, on appelle la méthode cursor() en
+référençant la connexion.
+q L'objet curseur est aussi un gestionnaire de ressource, alors on
+peut également employer la syntaxe with
+MySQL & Python IvMad, 2024 25
+
+[Page 26]
+Connexion à la base de données
+q Avec le gestionnaire curseur :
+import mysql.connector
+try:
+connection_params = {
+'host': "localhost",
+'user': "login",
+'password': "mot_de_passe",
+'database': "database_python"
+}
+except mysql.connector.Error as err:
+print("Connexion échouée: {}".format(err))
+else:
+with mysql.connector.connect(**connection_params) as db :
+with db.cursor() as c:
+print("Connexion réussie")
+db.close()
+MySQL & Python IvMad, 2024 26
+
+[Page 27]
+Création de table dans la BD
+q Pour l'exécution d'une requête SQL on utilise la méthode
+execute() fournie par le connecteur MySQL :
+import mysql.connector
+try:
+connection_params = {
+'host': "192.168.1.41",
+'user': "jerry",
+'password': "disney",
+'database': "etudiant"
+}
+except mysql.connector.Error as e:
+print("Exception : ", e)
+else:
+with mysql.connector.connect(**connection_params) as db :
+with db.cursor() as c:
+c.execute("CREATE TABLE IF NOT EXISTS personne \
+(id int NOT NULL AUTO_INCREMENT, nom varchar(25), \
+mail varchar(25), age int, PRIMARY KEY (id));")
+db.commit()
+db.close()
+MySQL & Python IvMad, 2024 27
+• L'avant dernière ligne du code fait
+appel à la méthode commit()
+• La méthode permet de valider les
+modifications.
+• Si la méthode n'est pas appelée, la
+transaction avec la BD ne sera pas
+terminée et l'opération SQL n'aura
+pas son effet.
+
+[Page 28]
+Création de table dans la BD
+q On peut fournir les valeurs à insérer sous la forme de paramètres à
+la méthode execute() en remplaçant les valeurs par %s dans la
+requête. Les valeurs sont passées en deuxième paramètre.
+import mysql.connector
+try:
+connection_params = {
+'host' : "192.168.1.41",
+'user' : "jerry",
+'password' : "disney",
+'database' : "etudiant"
+}
+except mysql.connector.Error as e:
+print("Exception : ", e)
+else:
+request = """insert into personne(nom,mail,age) values(%s,%s,%s)"""
+params = ("Tom","tom@disney.com",82)
+with mysql.connector.connect(**connection_params) as db :
+with db.cursor() as c:
+c.execute(request,params)
+db.commit()
+db.close()
+MySQL & Python IvMad, 2024 28
+La méthode executemany() permet
+d’insérer plusieurs lignes en passant
+un tableau pour les paramètres
+
+[Page 29]
+Sélection de données
+• Pour récupérer des données depuis la BD :
+• il faut passer une requête SQL de type select en paramètre de la
+méthode execute() du curseur
+• L'appelle la méthode fetchall() récupère une liste de n-uplets avec
+les résultats.
+request = "select * from personne"
+with mysql.connector.connect(**connection_params) as db :
+with db.cursor() as c:
+c.execute(request)
+resultats = c.fetchall()
+for personne in resultats:
+print(personne)
+MySQL & Python IvMad, 2024 29
+
+[Page 30]
+Sélection de données avec condition
+q La requête SELECT peut être paramétrée avec des valeurs d’une
+clause where.
+q Ce mécanisme protège contre une injection SQL car la structure de
+la requête est fournie quelle que soit la valeur des paramètres.
+q Les paramètres sont spécifiés par %s dans la requête et leurs
+valeurs sont données par un n-uplet passé comme second
+paramètre à la méthode execute() :
+request = "select id,nom,age from personne where nom = %s"
+params = ("Mickey",) # un type list
+with mysql.connector.connect(**connection_params) as db :
+with db.cursor() as c:
+c.execute(request, params)
+resultats = c.fetchall()
+for personne in resultats:
+print(personne)
+MySQL & Python IvMad, 2024 30
+
+[Page 31]
+SQL rappel
+• La création d'une table avec SQL:
+CREATE [TEMPORARY] [IF NOT EXISTS]
+TABLE nom_relation (nom_attribut TYPE_ATTRIBUT [OPTIONS]);
+• TEMPORARY donne pour une durée de vie à la table (par exemple: le
+temps de la connexion de l’utilisateur au serveur, après, elle sera
+détruite).
+• En l’absence de cette option, la table sera permanente à moins d’être
+détruite par la commande DROP TABLE.
+• L’option IF NOT EXIST permet de ne créer cette table que si une table
+de même nom n’existe pas encore.
+• La définition de la table se fait à l’intérieur des parenthèses. Il sera listé
+tous les attributs, clés et indexes de la table.
+MySQL & Python IvMad, 2024 31
+
+[Page 32]
+SQL rappel
+• A chacun des enregistrements de la relation il faut associer un
+identifiant numérique unique de type entier.
+• Il faut préciser pour cet attribut l’option NOT NULL pour le
+forcer à prendre une valeur de son domaine.
+• Il devra aussi être unique, c.à.d. que deux enregistrements ne
+pourront pas avoir une valeur identique d'identificateur (id).
+• Pour indiquer la clé primaire on utilisera l’option PRIMARY
+KEY.
+• Facultativement on peut signifier que cette valeur doit
+s’incrémenter automatiquement à chaque insertion d’un
+enregistrement. On rajoute alors l’option AUTO_INCREMENT.
+MySQL & Python IvMad, 2024 32
+
+[Page 33]
+SQL rappel
+• Ajouter un enregistrement:
+• Syntaxe d’une "insertion standard" :
+INSERT INTO relation VALUES (liste exhaustive et
+ordonnée des valeurs);
+• Syntaxe d’une "insertion complète" :
+INSERT INTO relation VALUES
+(liste des valeurs),
+(liste d’autres valeurs),
+(liste d’encore d’autres valeurs), …
+MySQL & Python IvMad, 2024 33
+
+[Page 34]
+SQL rappel
+• Une clé étrangère est un champ ou un ensemble de
+champs à l’intérieur d’une table qui se trouve être la clé
+primaire d’une autre table. Exemple:
+CREATE TABLE etudiant (id int NOT NULL
+AUTO_INCREMENT, name CHAR(60) NOT NULL, PRIMARY KEY
+(id));
+CREATE TABLE note ( id int NOT NULL AUTO_INCREMENT,
+matiere CHAR(45), note int, owner int NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (owner) REFERENCES etudiant(id) );
+MySQL & Python IvMad, 2024 34
+
+[Page 35]
+SQL rappel
+• Pour extraire des informations d'une BD.
+SELECT [ DISTINCT ] attributs
+[ INTO OUTFILE fichier ]
+[ FROM relation ]
+[ WHERE condition ]
+[ GROUP BY attributs [ ASC | DESC ] ]
+[ HAVING condition ]
+[ ORDER BY attributs ]
+[ LIMIT [a,] b ]
+• Exemple : la liste des étudiants R&T
+SELECT nom, prenom FROM Etudiants
+WHERE dut LIKE '%RT%';
+MySQL & Python IvMad, 2024 35
+
+[Page 36]
+PYTHON
+Exemple
+Python & MariaDB
+Ivan MADJAROV 2024
+
+[Page 37]
+Python - SQLite – BLOB
+1
+MySQL & Python IvMad, 2024 37
+• BLOB signifie Binary Large Object.
+• SQLite autorise l'utilisation le type de données BLOB pour stocker
+des données binaires telles que des images, des fichiers vidéo ou
+toute donnée binaire brute.
+• Dans une table une colonne de données peut avoir le type de
+données BLOB. Par conséquent, on peut y stocker des données
+binaires.
+• En règle générale, un programme Python lit un fichier tel qu'une
+image et insère son contenu binaire dans une base de données
+SQLite.
+• Pour la démonstration, le programme Python lit les données
+binaires d'un fichier image, l'insère dans une base de données
+SQLite, ensuite récupère les données BLOB et écrit les données
+BLOB sous forme d'image.
+
+[Page 38]
+Python - SQLite – BLOB
+2
+MySQL & Python IvMad, 2024 38
+• Enregistrer l'image dans un champ "blob" (<64Ko) d'une table et
+reconstruire l'image sous un autre nom.
+lg_nexus_5.png
+stored_image.jpg
+
+[Page 39]
+Python - MySQL – Binary - BLOB
+2
+MySQL & Python IvMad, 2024 39
+• Enregistrer l'image dans un champ "blob" (<64Ko) binaire
+• La connexion avec le
+SGBD est établie avec
+les identifiants de
+l'utilisateur
+• La table "images" est
+créée si elle n'existe pas.
+• Pour insérer les données
+dans la table une
+conversion du binaire
+est faite.
+
+[Page 40]
+Python - Base64
+1
+MySQL & Python IvMad, 2024 40
+• Base64 est un système de codage binaire en texte représentant des
+données binaires au format de chaîne ASCII.
+• Il est couramment utilisé pour transmettre des données sur Internet ou
+stocker des données binaires dans un fichier texte ou un champ "BLOB"
+d'une table de BDR.
+• Dans le codage base64, chaque 6 bits des données binaires est
+représenté comme un caractère parmi un ensemble de 64 caractères.
+import base64
+# Convert the image to base64 format
+with open("image.jpg", "rb") as f:
+encoded_image = base64.b64encode(f.read())
+• Dans l'exemple le fichier image est lu en mode binaire "rb".
+• La fonction "b64encode" du module "base64" est appelée pour
+convertir l'image au format base64.
+• L'image encodée est stockée dans la variable "encoded_image".
+
+[Page 41]
+Python - MySQL – Base64 - BLOB
+2
+MySQL & Python IvMad, 2024 41
+• Encoder l'image dans un champ "blob" (<64Ko)
+• La connexion avec le SGBD
+est établie avec les
+identifiants de l'utilisateur
+• La table "images" est créée
+si elle n'existe pas.
+• Pour insérer les données
+dans la table une
+conversion du binaire est
+faite avec la méthode
+base64
+select data from images where like "LG Nexus 5"
+
+[Page 42]
+Python - MySQL – Base64 - BLOB
+3
+MySQL & Python IvMad, 2024 42
+• Extraire image d'un champ base 64 "blob" vers format bitmap
+Pour décoder l'image du BLOB
+on utilise la fonction :
+import base64 with
+open("imageToSave.png","wb") as fh:
+fh.write(base64.decodebytes(img_data))
+```
+
+</details>

@@ -8,3 +8,691 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Intro IPv6
 
 <PdfViewer file="/pdf/networking/CoursIPV6IntroLPpro2022-2023.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+R&T
+IPV6, T.Nguyen 1 /52
+Cours Réseaux :
+Introduction IPv6
+
+[Page 2]
+R&T
+IPV6, T.Nguyen 2 /52
+IPV6
+Introduction
+Principes
+
+Protocole
+
+Adresses
+Configuration IOS de base
+
+Adressage
+
+Routage
+TP
+
+[Page 3]
+R&T
+IPV6, T.Nguyen 3 /52
+Références
+Cours CCNA 1/2/3
+Cours CCNP 1 et 2
+AMETICE cours
+
+[Page 4]
+R&T
+IPV6, T.Nguyen 4 /52
+Introduction : Pourquoi IPv6
+
+[Page 5]
+R&T
+IPV6, T.Nguyen 5 /52
+Introduction : Pourquoi
+
+[Page 6]
+R&T
+IPV6, T.Nguyen 6 /52
+IPV4 : le début de la fin !
+
+[Page 7]
+R&T
+IPV6, T.Nguyen 7 /52
+IPV4 – IPV6
+
+[Page 8]
+R&T
+IPV6, T.Nguyen 8 /52
+IPV6
+128 bits
+340 282 366 920 938 463 463 374
+607 431 768 211 456
+3,402 * 10^38
+N Avagadro =6,022 * 10^23
+665 570 793 348 866 943 898 599
+adresses par mètre carré de la surface
+de la terre !
+
+[Page 9]
+R&T
+IPV6, T.Nguyen 9 /52
+IPv4 -> IPv6
+10
+-10
+10
+19
+Galaxie
+Atome
+
+[Page 10]
+R&T
+IPV6, T.Nguyen 10 /52
+IPV6: Concepts(1)
+Adressage IP avancé :
+
+Accessibilité et souplesse globales
+
+Agrégation
+
+Multihébergement
+
+Configuration automatique
+
+Plug-and-play
+
+Bout en bout sans NAT
+
+Renumérotation
+Mobilité et sécurité :
+
+Compatible RFC IP mobile
+
+IPsec obligatoire (ou natif) pour IPv6
+
+[Page 11]
+R&T
+IPV6, T.Nguyen 11 /52
+IPV6 Concepts(2)
+En-tête simple :
+
+Efficacité du routage
+
+Performances et évolutivité du débit de
+transmission
+
+Aucune diffusion
+
+Aucune somme de contrôle
+
+En-têtes d’extension
+
+Étiquetage de flux (Flow Label)
+
+[Page 12]
+R&T
+IPV6, T.Nguyen 12 /52
+IPV6 Concepts (3)
+Richesse de la transition :
+
+Double pile (Dual Stack)
+
+Tunnels manuels (MCT, GRE)
+
+6to4
+
+ISATAP
+
+Teredo
+
+6rd
+
+Traduction (NAT-PT)
+
+[Page 13]
+R&T
+IPV6, T.Nguyen 13 /52
+IPV6 : PDU
+
+[Page 14]
+R&T
+IPV6, T.Nguyen 14 /52
+IPV6 Adressage
+Type Description Topologie
+Unicast
+“Un vers un”
+Une adresse destinée à une
+interface unique.
+Un paquet envoyé vers une adresse
+unicast est remis à l’interface à
+l’interface identifié par cette
+adresse
+Multicast
+“Un vers Plusieurs”
+Une adresse destinée à un
+ensemble multiple d’interfaces
+généralement appartenant à des
+noeuds différents
+Un paquet envoyé vers cette
+adresse est délivré à toutes les
+interfaces identifiées par cette
+adresse
+Anycast
+“Un vers le plus proche”
+Une adresse destinée à un
+ensemble d’interface
+Dans la plupart des cas, ces
+interfaces appartiennent à différents
+noeuds.
+Est transmis vers le noeud le plus
+proche déterminé par le routeur.
+
+[Page 15]
+R&T
+IPV6, T.Nguyen 15 /52
+IPV6 Adressage
+Format :
+
+- x:x:x:x:x:x:x:x, où x est un champ
+hexadécimal de 16 bits
+
+Majuscules non prises en compte pour
+hexadécimal A, B, C, D, E et F
+
+Dans un champ, les zéros de tête sont
+facultatifs
+
+Des champs successifs de zéros ne
+peuvent être représentés par :: qu’une
+seule fois par adresse
+
+[Page 16]
+R&T
+IPV6, T.Nguyen 16 /52
+IPV6 Adressage (2)
+Exemples :
+
+2031:0000:130F:0000:0000:09C0:876A:130B
+
+peut être représenté par
+2031:0:130f::9c0:876a:130b
+
+ne peut pas être représenté par
+2031::130f::9c0:876a:130b
+
+FF01:0:0:0:0:0:0:1 FF01::1
+
+0:0:0:0:0:0:0:1 ::1
+
+0:0:0:0:0:0:0:0 ::
+
+[Page 17]
+R&T
+IPV6, T.Nguyen 17 /52
+IPV6 Adressage (3)
+Portée des adresses IPV6
+
+[Page 18]
+R&T
+IPV6, T.Nguyen 18 /52
+
+[Page 19]
+R&T
+IPV6, T.Nguyen 19 /52
+IPV6 Adresse Globale
+Adresse Globale UNICAST :
+2001:660::/32 => RENATER
+2001:660:5402::/48 => Université
+2001:660:5402:200::/56 => IUT R&T
+
+[Page 20]
+R&T
+IPV6, T.Nguyen 20 /52
+IPV6 Adresse ULA
+Adresses Unique Local Adress (ULA)
+
+Analogues aux adresses privées IPV4
+
+Communications locales, inter-VPN etc…
+
+Non routables sur Internet
+
+FC00 ::/7
+
+[Page 21]
+R&T
+IPV6, T.Nguyen 21 /52
+IPV6 Adressage Link Local
+Adresse obligatoire pour la communication entre
+deux noeuds sur le même lien (Similaire à ARP
+mais au niveau 3)
+Déterminée automatiquement par le routeur dès
+l’activation de IPv6.
+Aussi utilisée dans la déterminaison du prochain
+saut dans les protocoles de routage.
+Portée spécifique au lien
+54 bits
+
+[Page 22]
+R&T
+IPV6, T.Nguyen 22 /52
+IPV6 Adressage Multicast
+FF02::1 — Tous les noeuds V6 sur le lien (link-local
+scope)
+FF02::2 — Tous les routeurs sur le lien
+FF02::5 — Tous les Routeurs OSPF sur le lien
+FF02::6 — DR routers sur le lien
+FF02::9 — Tous les Routeurs RIP sur le lien
+
+[Page 23]
+R&T
+IPV6, T.Nguyen 23 /52
+IPV6 : Solicited-Node Multicast
+NDP messages
+Multicast address avec une portée link-local
+Solicited-node multicast = prefix + 24 bits poids
+faible de l’unicast XX.XXXX, FF02::1:FFXX:XXXX
+
+[Page 24]
+R&T
+IPV6, T.Nguyen 24 /52
+IPV6 : Adresses spéciales
+Adresse
+IPv6
+Description
+::/0
+Toutes les routes
+Equivalent à (0.0.0.0/0)en IPv4
+::/128 Non spécifiée.
+::1/128
+Loopback.
+Equivalent à 127.0.0.1 en IPv4.
+FE80::/10 Link-local unicast.
+FF00::/8 Multicast .
+Les autres Global unicast.
+
+[Page 25]
+R&T
+IPV6, T.Nguyen 25 /52
+IPV6 : attribution
+Attribution statique
+
+Attribution de l’ID d’interface manuelle
+
+Attribution de l’ID d’interface EUI-64
+Attribution dynamique
+
+Stateless Address Autoconfiguration (SLAAC)
+
+NDP
+
+Stateless DHCP
+
+Attribution Interface en EUI-64 ou aléatoirement
+
+Stateful autoconfiguration (DHCPv6)
+
+[Page 26]
+R&T
+IPV6, T.Nguyen 26 /52
+IPV6 : adressage EUI64
+Extended Unique Identifier 64 (IEEE)
+
+[Page 27]
+R&T
+IPV6, T.Nguyen 27 /52
+Configuration IPv6 IOS
+RouterX(config)# ipv6 unicast-routing
+
+Activer la transmission de trafic IPv6
+
+Ip routing pour V6
+RouterX(config-if)# ipv6 enable
+RouterX(config-if)# ipv6 address
+ipv6prefix/prefix-length [eui64]
+
+Configurer les adresses de l’interface IPv6
+
+[Page 28]
+R&T
+IPV6, T.Nguyen 28 /52
+Configuration Windows
+netsh int ipv6 ?
+
+add - Ajoute une entrée de configuration
+à une table.
+
+delete - Supprime une entrée de
+configuration d'une table.
+
+reset - Réinitialise l'état de configuration
+de IPv6.
+
+set - Définit les
+informations de configuration.
+
+show - Affiche les informations.
+
+[Page 29]
+R&T
+IPV6, T.Nguyen 29 /52
+Configuration Windows(2)
+
+[Page 30]
+R&T
+IPV6, T.Nguyen 30 /52
+IPv6 : Adressage Dynamique
+NDP
+
+RA annonces du
+routeur
+
+Par défaut SLAAC
+
+Bit M (Manage) =
+DHCPv6
+
+Bit O (Other) =
+Stateless DHCP
+
+[Page 31]
+R&T
+IPV6, T.Nguyen 31 /52
+IPv6 NDP
+Neighbor Discovery Protocol
+
+Résolution d’adresse MAC
+
+Stateless Autoconfiguration
+
+messages ICMP v6
+
+[Page 32]
+R&T
+IPV6, T.Nguyen 32 /52
+IPV6 NDP: Messages(1)
+Message ICMPv6 Type Description
+Router Solicitation
+(RS)
+133
+Envoyé au moment du boot sans attendre le prochain RA
+prévu.
+Router
+Advertisement
+(RA)
+134
+RAs contient le préfixe utilisé sur le lien, une suggestion de
+valeur Hop Limit, MTU, etc...
+RAs sont envoyés périodiquement ou en réponse à des RS
+Neighbor
+Solicitation (NS)
+135
+Envoyé par un host pour déterminer l’adresse Liaison d’un
+voisin
+Utilisé pour vérifier que le voisin est actif
+Utilisé aussi dans la procédure de Duplicate Address
+Detection (DAD).
+Neighbor
+Advertisement
+(NA)
+136
+A response to a NS message. Réponse à un message NS
+Un noeud peut envoyer aussi un NA non sollicité en cas de
+changement d’adresse Liaison
+
+[Page 33]
+R&T
+IPV6, T.Nguyen 33 /52
+Neighbor Solicitation
+ICMPv6 Neighbor Solicitation (NS) => IPv4 ARP : Utilisé pour la
+découverte des adresses Liaisions
+A doit envoyer un paquet à B => doit connaitre l’@MAC de B.
+
+Host A envoye un Neighbor Solicitation (ICMPv6 message type
+135) sur l’interface.
+
+L’adresse source est l’adresse IPv6 de A.
+A B
+ICMP type: 135 (NS)
+Source: A
+Destination: Solicited-node multicast de B (FF02::1:FFxx.xxxx)
+Data: @ Link-layer de A
+Query: Quelle est ton adresse MAC?
+
+[Page 34]
+R&T
+IPV6, T.Nguyen 34 /52
+Neighbor Advertisement
+Chaque noeud ayant reçu le NS répond avec NA
+(ICMP type 136)
+@ Source = @ IPv6 du noeud qui répond et l’@ de
+destination = @IPV6 originale (à l’origine du NS).
+Le champ data de réponse comprend l’adresse de
+Data-Link de B
+A B
+ICMP type: 136 (NA)
+Source: B
+Destination: A
+Data: adresse MAC de B
+
+[Page 35]
+R&T
+IPV6, T.Nguyen 35 /52
+Multicast Solicited-Node
+Les deux équipements peuvent
+communiquer car ils connaissent leur
+@ MAC respectives
+A B
+A & B peuvent communiquer sur le lien
+
+[Page 36]
+R&T
+IPV6, T.Nguyen 36 /52
+IPV6 Rappel: Solicited-
+Node Multicast
+NDP messages
+Multicast address avec une portée link-local
+Solicited-node multicast = prefix + 24 bits poids
+faible de l’unicast XX.XXXX, FF02::1:FFXX:XXXX
+
+[Page 37]
+R&T
+IPV6, T.Nguyen 37 /52
+StateLess AutoConfiguration(1)
+Chaque système IPV6 (autres que les routeurs) est capable de
+construire son adresse Unicast Global
+Le mécanisme de Stateless autoconfiguration utilise les
+informations dans les messages RA pour configurer
+automatiquement les hosts.
+RAs sont envoyés périodiquement, mais un noeud peut
+explicitement le demander avec un RS.
+A
+ICMP type: 133 (RS)
+Source: :: (Non spécifié)
+Destination: Adresse multicast de tous les
+routeurs(FF02::2)
+Query: Merci d’envoyer RA
+R1
+
+[Page 38]
+R&T
+IPV6, T.Nguyen 38 /52
+StateLess AutoConfiguration(2)
+Tous les routeurs sur le réseaux répondent avec
+un RA destiné à tous les noeuds.
+
+Le préfixe inclus est utilisé en /64 de l’adresse du
+Host
+
+L’interface ID utilisé utilise le format EUI-64.
+A
+R1
+ICMP type: 134 (RA)
+Source: @ link-local R1
+Destination: @ multicast de tous les noeuds (FF02::1)
+Data: Options, prefixes, lifetime, …
+
+[Page 39]
+R&T
+IPV6, T.Nguyen 39 /52
+StateLess AutoConfiguration(3)
+Le Host crée une @ Link-Local et une adresse solicited-node en
+utilisant le RA.
+Ensuite il vérifie si son @ IPv6 address est unique sur le lien
+avec le mécanisme Duplicate Address Detection (DAD):
+
+A envoie un NS pour vérifier si un autre noeud a le même @
+IPV6 que lui
+
+Si un noeud répond c’est que l’@ de A est déjà utilisée et son
+adresse doit être reconfigurée manuellement
+ICMP type: 135 (NS)
+Source: ::
+Destination:Solicited-node adresse de A
+Data: @Liaison de A
+Query: Quelle est votre adresse Liaison ???
+A B
+
+[Page 40]
+R&T
+IPV6, T.Nguyen 40 /52
+IPV6 Transition
+Transition
+
+Double pile – « Dual Stack »
+
+Tunnel manuel
+
+Tunnel 6to4
+
+Tunnel ISATAP
+
+Tunnel Teredo
+mécanismes de compatibilité :
+
+Proxy et traduction (NAT-PT)
+
+[Page 41]
+R&T
+IPV6, T.Nguyen 41 /52
+IPV6 Double Pile
+DUAL STACK
+
+[Page 42]
+R&T
+IPV6, T.Nguyen 42 /52
+IPV6 DUAL STACK
+
+[Page 43]
+R&T
+IPV6, T.Nguyen 43 /52
+IPv6 Routage RIP-NG
+Caractéristiques IPv4 similaires :
+
+Vecteur de distance, rayon de 15 sauts,
+découpage d’horizon et empoisonnement
+inverse
+
+Basé sur RIPv2
+Caractéristiques mises à jour pour IPv6 :
+
+Préfixe IPv6, adresse IPv6 de tronçon suivant
+
+Utilise le groupe de multidiffusion FF02::9,
+groupe qui contient tous les routeurs RIP,
+comme adresse de destination pour les mises à
+jour RIP
+
+Utilise IPv6 pour le transport
+
+Appelé RIPng
+
+[Page 44]
+R&T
+IPV6, T.Nguyen 44 /52
+IPV6 Routage
+RouterX(config)# ipv6 unicast-routing
+
+Activer la transmission de trafic IPv6
+
+Ip routing pour V6
+RouterX(config-if)# ipv6 address
+ipv6prefix/prefix-length [eui64]
+
+Configurer les adresses de l’interface IPv6
+
+[Page 45]
+R&T
+IPV6, T.Nguyen 45 /52
+IPV6 Routage
+
+[Page 46]
+R&T
+IPV6, T.Nguyen 46 /52
+IPV6 Routage RIP NG
+RouterX(config)# ipv6 router rip <nom>
+
+Crée et active le mode de configuration du
+routeur RIP.
+RouterX(config-if)#ipv6 rip <nom> enable
+
+Configure le protocole RIP sur une interface.
+
+[Page 47]
+R&T
+IPV6, T.Nguyen 47 /52
+IPV6 Routage
+
+[Page 48]
+R&T
+IPV6, T.Nguyen 48 /52
+IPV6 Résolution de noms en IOS
+RouterX(config)# ipv6 host nom [port]
+adr-ipv6 [{adr-ipv6} ...]
+
+RouterX(config)# ipv6 host router1
+3ffe:b00:ffff:b::1
+RouterX(config)#ip name-server
+adresse
+
+RouterX(config)#ip name-server
+3ffe:b00:ffff:1::10
+
+[Page 49]
+R&T
+IPV6, T.Nguyen 49 /52
+IPV6 Commandes
+
+[Page 50]
+R&T
+IPV6, T.Nguyen 50 /52
+IPV6 Commandes
+
+[Page 51]
+R&T
+IPV6, T.Nguyen 51 /52
+Conclusion
+Concepts de Base
+Configuration de Base IOS
+
+Adressage
+
+Routage IPv6, RIPNG
+TP
+
+[Page 52]
+R&T
+IPV6, T.Nguyen 52 /52
+IPV6: « A new Hope »
+
+[Page 53]
+R&T
+IPV6, T.Nguyen 53 /52
+IPV6: « A new Hope »
+”May the IPv6 Force be with you !”
+```
+
+</details>

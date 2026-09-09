@@ -13,12 +13,13 @@ const MAX_PAGE_WIDTH = 900;
 
 export default function PdfViewerClient({file, height = 800}) {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [pageInput, setPageInput] = useState('1');
   const [scale, setScale] = useState(1);
   const [containerWidth, setContainerWidth] = useState(undefined);
   const [loadError, setLoadError] = useState(false);
   const viewportRef = useRef(null);
+  const pageRefs = useRef({});
 
   useEffect(() => {
     const el = viewportRef.current;
@@ -30,40 +31,69 @@ export default function PdfViewerClient({file, height = 800}) {
     return () => observer.disconnect();
   }, []);
 
-  const goToPage = useCallback(
+  const onDocumentLoadSuccess = useCallback(({numPages: total}) => {
+    setNumPages(total);
+    setCurrentPage(1);
+    setPageInput('1');
+    setLoadError(false);
+    pageRefs.current = {};
+  }, []);
+
+  // Track which page is currently in view while scrolling.
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || !numPages || typeof IntersectionObserver === 'undefined') return undefined;
+    const ratios = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          ratios.set(Number(entry.target.dataset.pageNumber), entry.intersectionRatio);
+        });
+        let bestPage = null;
+        let bestRatio = 0;
+        ratios.forEach((ratio, page) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestPage = page;
+          }
+        });
+        if (bestPage) {
+          setCurrentPage(bestPage);
+          setPageInput(String(bestPage));
+        }
+      },
+      {root: viewport, threshold: [0.1, 0.25, 0.5, 0.75, 1]},
+    );
+    Object.values(pageRefs.current).forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, [numPages, containerWidth, scale]);
+
+  const scrollToPage = useCallback(
     (n) => {
-      setPageNumber((prev) => {
-        const max = numPages || 1;
-        const next = Math.min(Math.max(n, 1), max);
-        setPageInput(String(next));
-        return next;
-      });
+      const max = numPages || 1;
+      const target = Math.min(Math.max(n, 1), max);
+      const el = pageRefs.current[target];
+      if (el) el.scrollIntoView({block: 'start', behavior: 'smooth'});
+      setPageInput(String(target));
     },
     [numPages],
   );
 
-  const onDocumentLoadSuccess = useCallback(({numPages: total}) => {
-    setNumPages(total);
-    setPageNumber(1);
-    setPageInput('1');
-    setLoadError(false);
-  }, []);
-
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-      if (e.key === 'ArrowLeft') goToPage(pageNumber - 1);
-      if (e.key === 'ArrowRight') goToPage(pageNumber + 1);
+      if (e.key === 'ArrowLeft') scrollToPage(currentPage - 1);
+      if (e.key === 'ArrowRight') scrollToPage(currentPage + 1);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [pageNumber, goToPage]);
+  }, [currentPage, scrollToPage]);
 
   const submitPageInput = (e) => {
     e.preventDefault();
     const n = parseInt(pageInput, 10);
-    if (!Number.isNaN(n)) goToPage(n);
-    else setPageInput(String(pageNumber));
+    if (!Number.isNaN(n)) scrollToPage(n);
+    else setPageInput(String(currentPage));
   };
 
   const zoomOut = () => setScale((s) => Math.max(MIN_SCALE, +(s - ZOOM_STEP).toFixed(2)));
@@ -80,8 +110,8 @@ export default function PdfViewerClient({file, height = 800}) {
           <button
             type="button"
             className={styles.iconButton}
-            onClick={() => goToPage(pageNumber - 1)}
-            disabled={pageNumber <= 1}
+            onClick={() => scrollToPage(currentPage - 1)}
+            disabled={currentPage <= 1}
             aria-label="Page précédente"
             title="Page précédente">
             ‹
@@ -101,8 +131,8 @@ export default function PdfViewerClient({file, height = 800}) {
           <button
             type="button"
             className={styles.iconButton}
-            onClick={() => goToPage(pageNumber + 1)}
-            disabled={!numPages || pageNumber >= numPages}
+            onClick={() => scrollToPage(currentPage + 1)}
+            disabled={!numPages || currentPage >= numPages}
             aria-label="Page suivante"
             title="Page suivante">
             ›
@@ -167,12 +197,24 @@ export default function PdfViewerClient({file, height = 800}) {
             onLoadError={() => setLoadError(true)}
             loading={<div className={styles.loading}>Chargement du PDF…</div>}
             className={styles.document}>
-            <Page
-              pageNumber={pageNumber}
-              width={pageWidth}
-              className={styles.page}
-              loading={<div className={styles.loading}>Chargement de la page…</div>}
-            />
+            {numPages &&
+              Array.from({length: numPages}, (_, i) => i + 1).map((n) => (
+                <div
+                  key={n}
+                  data-page-number={n}
+                  ref={(el) => {
+                    if (el) pageRefs.current[n] = el;
+                    else delete pageRefs.current[n];
+                  }}
+                  className={styles.pageWrapper}>
+                  <Page
+                    pageNumber={n}
+                    width={pageWidth}
+                    className={styles.page}
+                    loading={<div className={styles.loading}>Chargement de la page {n}…</div>}
+                  />
+                </div>
+              ))}
           </Document>
         )}
       </div>

@@ -1,5 +1,6 @@
 ---
 title: Intro aux ondes
+tags: [physique]
 ---
 
 import PdfViewer from "@site/src/components/PdfViewer";
@@ -7,4 +8,450 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Les ondes
 
 <PdfViewer file="/pdf/Traitement_du_signal/Les_ondes/supportCM_introductionOndes.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+INTRODUCTION
+AUX ONDES
+Phénomènes
+ondulatoires
+
+[Page 2]
+ORGANISATION - PHYSIQUE DES TÉLÉCOM
+• R4.12 => cours d’introduction aux ondes
+• 2h CM
+• 2h TD
+• 8h TP
+• R4.03 => physique des télécom
+• 4h CM
+• 6h TD
+• 12h TP
+
+[Page 4]
+COMMUNICATION = ÉMISSION/RÉCEPTION D’ONDES
+
+[Page 5]
+QU’EST CE QU’UNE ONDE
+• Propagation d’une perturbation
+
+[Page 6]
+QU’EST CE QU’UNE ONDE
+• Propagation d’une perturbation
+• Pas de transport global de matière
+
+[Page 7]
+CONDITIONS PHYSIQUES POUR CRÉER UNE ONDE
+• Deux grandeurs couplées :
+La variation temporelle de l’une entraine une variation spatiale de l’autre
+… et inversement => Élasticité d’un milieu
+
+[Page 8]
+CONDITIONS PHYSIQUES POUR CRÉER UNE ONDE
+• Deux grandeurs couplées :
+La variation temporelle de l’une entraine une variation spatiale de l’autre
+… et inversement => Élasticité d’un milieu
+𝜕𝜓
+𝜕𝑡
+= 𝑎
+𝜕𝜙
+𝜕𝑥
+𝜕𝜙
+𝜕𝑡
+= 𝑏
+𝜕𝜓
+𝜕𝑥
+⟺
+𝜕
+2
+𝜓
+𝜕𝑡
+2
+= 𝑎𝑏
+𝜕
+2
+𝜓
+𝜕𝑥
+2
+
+[Page 9]
+CONDITIONS PHYSIQUES POUR CRÉER UNE ONDE
+• Deux grandeurs couplées :
+La variation temporelle de l’une entraine une variation spatiale de l’autre
+… et inversement => Élasticité d’un milieu
+𝜕𝜓
+𝜕𝑡
+= 𝑎
+𝜕𝜙
+𝜕𝑥
+𝜕𝜙
+𝜕𝑡
+= 𝑏
+𝜕𝜓
+𝜕𝑥
+⟺
+𝜕
+2
+𝜓
+𝜕𝑡
+2
+= 𝑎𝑏
+𝜕
+2
+𝜓
+𝜕𝑥
+2
+Equation d’onde 1D
+(Eq d’Alembert)
+
+[Page 10]
+EXEMPLES DE COUPLAGES
+• Corde : déplacement / tension
+• Son : pression / vitesse de l’air
+• Lumière : Champ électrique / champ magnétique
+
+[Page 11]
+ONDES TRANSVERSALES ET LONGITUDINALES
+• Transversale :
+déplacement ⟂ propagation
+• Longitudinale :
+déplacement ∥ propagation
+
+[Page 12]
+FRONTS D’ONDE
+• Définition : surface (en 3D) virtuelle formée par l’ensemble des points qui vibrent en
+synchronisme (en phase)
+
+[Page 13]
+ONDES PLANES ET SPHÉRIQUES
+Source : Wikipedia creative commons, https://www.flippingphysics.com/sound-gifs.html
+
+[Page 14]
+CÉLÉRITÉ D’UNE ONDE
+• Célérité = vitesse de propagation d’une onde (≠ vitesse des éléments composant l’onde)
+La vitesse dépend du milieu et du type d’onde
+• Célérité du son (ondes acoustiques) dans l’air ~340m/s
+• Célérité de la lumière (ondes électromagnétiques) dans l’air ~300 000km/s
+
+[Page 15]
+LONGUEUR D’ONDE ET PÉRIODE
+• Longueur d’onde 𝝀 = mesure de distance entre
+deux cycles consécutifs d’une onde
+• Période T = temps nécessaire à l’onde pour
+effectuer un cycle complet
+𝑇𝜆
+
+[Page 16]
+FORMALISME MATHÉMATIQUE :
+RÉSOLUTION DE L’ÉQUATION D’ONDE
+𝜕
+2
+𝜓
+𝜕𝑡
+2
+= 𝑐
+2
+𝜕
+2
+𝜓
+𝜕𝑥
+2
+• 𝜓 𝑥, 𝑡 = 𝐴𝑒
+𝑗(𝜔𝑡−𝑘𝑥)
++ 𝐵𝑒
+𝑗(𝜔𝑡+𝑘𝑥)
+onde régressive onde progressive
+𝑅𝑒(𝑒
+𝑗(𝜔𝑡+𝑘𝑥)
+) = cos(𝜔𝑡 + 𝑘𝑥) 𝑅𝑒(𝑒
+𝑗(𝜔𝑡−𝑘𝑥)
+) = cos(𝜔𝑡 − 𝑘𝑥)
+
+[Page 17]
+𝑐 =
+𝜆
+𝑇
+=
+𝜔
+𝑘
+• 𝒄 : vitesse de propagation de l’onde (célérité)
+• 𝑻 : période de l’onde (𝑻 = 𝟏/𝒇)
+• 𝝎 : pulsation 𝑻 = 𝟐𝝅/𝝎
+• 𝝀 : longueur d’onde (‘période spatiale’ )
+• 𝒌 : nombre d’onde 𝝀 = 𝟐𝝅/𝒌
+cos 𝜔𝑡 − 𝑘𝑥 = cos(
+2𝜋
+𝑇
+𝑡 −
+2𝜋
+𝜆
+𝑥)
+
+[Page 18]
+𝑐 =
+𝜆
+𝑇
+=
+𝜔
+𝑘
+• 𝒄 : vitesse de propagation de l’onde (célérité)
+• 𝑻 : période de l’onde (𝑻 = 𝟏/𝒇)
+• 𝝎 : pulsation 𝑻 = 𝟐𝝅/𝝎
+• 𝝀 : longueur d’onde (‘période spatiale’ )
+• 𝒌 : nombre d’onde 𝝀 = 𝟐𝝅/𝒌
+cos 𝜔𝑡 − 𝑘𝑥 = cos(
+2𝜋
+𝑇
+𝑡 −
+2𝜋
+𝜆
+𝑥)
+
+[Page 19]
+DEUX GRANDES FAMILLES D’ONDES
+ONDES MÉCANIQUES ONDES ÉLECTROMAGNÉTIQUES
+
+[Page 20]
+LES ONDES MÉCANIQUES
+• Besoin d’un support physique (déplacement local de matière)
+=> vibrations (de l’eau, de l’air, du sol, de cordes …)
+
+[Page 21]
+LES ONDES MÉCANIQUES
+• Besoin d’un support physique (déplacement local de matière)
+=> vibrations (de l’eau, de l’air, du sol, de cordes …)
+
+[Page 22]
+LE SON
+• Variation de pression de l’air
+• Oreille : capteur de pression
+
+[Page 23]
+LE SON
+• Onde ‘monochromatique’ : son pur (une seule fréquence)
+• Son complexe : plusieurs composantes fréquentielles présentes simultanément
+• Représentations fréquentielles :
+Spectre Spectrogramme
+
+[Page 24]
+LE SON
+• Son tonal : son dont certaines fréquences sont beaucoup plus (spectre de raies)
+• Son harmonique : son tonal dont les fréquences sont multiples d’une fréquence fondamentale
+• Bruit : mélange de composantes fréquentielles aléatoires
+
+[Page 25]
+ONDES ÉLECTROMAGNÉTIQUES
+• Couplage des champs électriques et magnétiques
+• Pas besoin de milieu matériel (peut se propager dans le vide)
+
+[Page 26]
+ONDES ÉLECTROMAGNÉTIQUES
+• Couplage des champs électriques et magnétiques
+• Pas besoin de milieu matériel
+
+[Page 28]
+PERCEPTION DE LA LUMIÈRE
+
+[Page 29]
+PHÉNOMÈNES ONDULATOIRES
+=> PROPAGATION D’UNE ONDE DANS UN MILIEU
+Réflexion, réfraction, diffraction, diffusion, interférences
+
+[Page 30]
+RÉFLEXION D’UNE ONDE
+Réflexion spéculaire
+(surface lisse)
+Réflexion diffuse
+(surface rugueuse)
+
+[Page 31]
+RÉFLEXION ET TRANSMISSION D’UNE ONDE 1D
+• Onde plane 1D rencontrant une discontinuité (changement d’impédance)
+• Exemples : changement de section d’un tube, de milieu
+=> réflexion et transmission
+𝑥 = 0
+Onde incidente
+Onde réfléchie
+Onde transmise
+
+[Page 32]
+RÉFLEXION ET TRANSMISSION D’UNE ONDE 1D
+• Onde : couplage de variables de potentiel (p, V) et de flux (u,I)
+• Impédance : 𝑍 =
+𝑝𝑜𝑡𝑒𝑛𝑡𝑖𝑒𝑙
+𝑓𝑙𝑢𝑥
+• Puissance : P = 𝑝𝑜𝑡𝑒𝑛𝑡𝑖𝑒𝑙 × 𝑓𝑙𝑢𝑥
+𝑥 = 0
+𝑝
+𝑖
+𝑡 𝑒
+−𝑗𝑘𝑥
+𝑝
+𝑟
+𝑡 𝑒
++𝑗𝑘𝑥
+𝑝
+𝑡
+𝑡 𝑒
+−𝑗𝑘𝑥
+
+[Page 33]
+RÉFLEXION ET TRANSMISSION D’UNE ONDE 1D
+• Tronçon 1 (x < 0) • Tronçon 2 (x > 0)
+ቐ
+𝑝
+1
+𝑥, 𝑡 = 𝑝
+𝑖
+(𝑡)𝑒
+−𝑗𝑘𝑥
++ 𝑝
+𝑟
+𝑒
++𝑗𝑘𝑥
+𝑢
+1
+𝑥, 𝑡 =
+1
+𝑍
+1
+𝑝
+𝑖
+(𝑡)𝑒
+−𝑗𝑘𝑥
+− 𝑝
+𝑟
+𝑒
++𝑗𝑘𝑥
+ቐ
+𝑝
+2
+𝑥, 𝑡 = 𝑝
+𝑡
+(𝑡)𝑒
+−𝑗𝑘𝑥
+𝑢
+2
+𝑥, 𝑡 =
+1
+𝑍
+2
+𝑝
+𝑡
+(𝑡)𝑒
+−𝑗𝑘𝑥
+൞
+𝑝
+𝑖
+𝑡 + 𝑝
+𝑟
+(𝑡) = 𝑝
+𝑡
+(𝑡)
+1
+𝑍
+1
+𝑝
+𝑖
+𝑡 − 𝑝
+𝑟
+(𝑡) =
+1
+𝑍
+2
+𝑝
+𝑡
+(𝑡)
+𝑝
+𝑖
+𝑡 𝑒
+−𝑗𝑘𝑥
+𝑝
+𝑟
+𝑡 𝑒
++𝑗𝑘𝑥
+𝑝
+𝑡
+𝑡 𝑒
+−𝑗𝑘𝑥
+tronçon 1
+tronçon 2
+Continuité à l’interface (x=0)
+
+[Page 34]
+RÉFLEXION ET TRANSMISSION D’UNE ONDE 1D
+• Coefficient de réflexion • Coefficient de transmission
+Γ =
+𝑝
+𝑟
+(𝑡)
+𝑝
+𝑖
+(𝑡)
+=
+𝑍
+2
+−𝑍
+1
+𝑍
+2
++𝑍
+1
+T =
+𝑝
+𝑡
+(𝑡)
+𝑝
+𝑖
+(𝑡)
+=
+2𝑍
+2
+𝑍
+2
++𝑍
+1
+
+[Page 35]
+RÉFRACTION
+• Variation de célérité entre 2 milieux ou au sein d’un milieu => déviation de l’onde
+
+[Page 36]
+RÉFRACTION
+𝑛
+1
+sin 𝑖
+1
+= 𝑛
+2
+sin(𝑖
+2
+)
+
+[Page 37]
+DIFFRACTION
+• Contournement des obstacles
+• Dépend de la longueur d’onde
+
+[Page 38]
+INTERFÉRENCES
+
+[Page 39]
+ONDES STATIONNAIRES ET RÉSONANCE
+• Interférence entre onde incidente et réfléchies => superposition et amplification pour certaines
+fréquences
+=> Modes propres
+
+[Page 40]
+DISPERSION
+• Vitesse dépend de la fréquence
+
+[Page 41]
+EFFET DOPPLER
+Source : https://www.flippingphysics.com/sound-gifs.html
+```
+
+</details>
 

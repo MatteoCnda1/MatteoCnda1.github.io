@@ -8,3 +8,606 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # IPv6 routage ACL
 
 <PdfViewer file="/pdf/networking/CoursIPV6-RoutageACL2022-2023RT2A.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+R&T
+IPV6, T.Nguyen 1 / 36
+Cours Réseaux IPv6 (2) :
+Routage Basique IPv6, ACLs, MLS
+
+[Page 2]
+R&T
+IPV6, T.Nguyen 2 / 36
+PLAN
+Introduction
+Principes et rappels
+Protocoles de Routage
+ACLs pour IPV6
+Conclusion
+
+[Page 3]
+R&T
+IPV6, T.Nguyen 3 / 36
+Introduction
+IPv6 supporte le routage suivant :
+
+Routage statique
+
+RIPng
+
+OSPFv3
+
+IS-IS pour IPv6
+
+EIGRP for IPv6
+
+Multiprotocol BGP version 4 (MP-BGPv4)
+IPv6 ne sera pas disponible partout du
+jour au lendemain
+
+Mécanismes de transition
+
+Dual Stack (Double Pile)
+
+[Page 4]
+R&T
+IPV6, T.Nguyen 4 / 36
+Principes (1)
+Quel impact sur le routage ?
+
+[Page 5]
+R&T
+IPV6, T.Nguyen 5 / 36
+Principes(2)
+Mêmes principes que IPv4 (CIDR) :
+
+Plus long préfixe routable
+Routage statique
+
+Comme IPv4
+Rappels IOS
+
+Router(config)# ipv6 unicast-routing
+
+ipv6 route ipv6-prefix/prefix-length {ipv6-
+address | interface-type interface-number [ipv6-
+address]} [administrative-distance]
+[administrative-multicast-distance | unicast |
+multicast] [tag tag]
+
+[Page 6]
+R&T
+IPV6, T.Nguyen 6 / 36
+Commande ip route
+Paramètre Description
+ipv6-prefix/prefix-
+length
+Réseau de destination IPV6 avec sa longueur de préfixe
+ipv6-address L’adresse IPv6 du prochain saut
+interface-type
+interface-number
+Spécifie l’interface par laquelle le réseau de destination peut
+être joint.
+administrative-
+distance
+Distance Administrative; par défaut 1
+administrative-
+multicast-distance
+Distance dans le cas du routage en multicast
+unicast
+Spécifie une route qui ne doit pas être utilisé dans le cas
+d’un routage multicast.
+multicast
+Spécifie une route qui ne doit pas être utilisé dans le cas
+d’un routage multicast.
+tag tag Valeur qui permet de contrôler la redistribution de route
+
+[Page 7]
+R&T
+IPV6, T.Nguyen 7 / 36
+R2(config)# ipv6 unicast-routing
+R2(config)# ipv6 route ::/0 s0/1/0
+R2(config)# exit
+R2# show ipv6 route static
+IPv6 Routing Table – 9 entries
+Codes: C – Connected, L – Local, S – Static, R – RIP, B – BGP
+U – Per-user Static route
+I1 – ISIS L1, I2 – ISIS L2, IA – ISIS interarea, IS – ISIS summary
+O – OSPF intra, OI – OSPF inter, OE1 – OSPF ext 1, OE2 – OSPF ext 2
+ON1 – OSPF NSSA ext 1, ON2 – OSPF NSSA ext 2
+S ::/0 [1/0]
+via ::, Serial0/1/0
+R2#
+2001:1::1/64
+S0/1/0
+S0/1/0
+R1
+Lo102: 13::13:1/64
+2001:1::2/64
+R2
+Lo100: 10::10:1/64
+Lo101: 11::11:1/64
+exemple routage statique
+::/0 spécifie la destination par défaut
+
+[Page 8]
+R&T
+IPV6, T.Nguyen 8 / 36
+RIP NG
+RIP Next Generation
+Caractéristiques IPv4 similaires :
+
+Vecteur de distance, rayon de 15 sauts,
+découpage d’horizon et empoisonnement
+inverse
+
+Basé sur RIPv2
+Caractéristiques mises à jour pour IPv6 :
+
+Préfixe IPv6, adresse IPv6 de tronçon suivant
+
+Utilise le groupe de multicast FF02::9, groupe
+qui contient tous les routeurs RIP, comme
+adresse de destination pour les mises à jour RIP
+
+Utilise UDP + IPv6 pour le transport
+
+[Page 9]
+R&T
+IPV6, T.Nguyen 9 / 36
+RIPv2 vs RIPng
+Caractéristiques RIP-2 RIPng
+Annonce les routes pour ... IPv4 IPv6
+Messages utilisent les protocoles : IPv4, UDP IPv6, UDP
+Port UDP 520 521
+Utilise Vecteur Distance Oui Oui
+Distance Administrative 120 120
+Support du VLSM Oui Oui
+Résumé automatique Oui N/A
+Split Horizon Oui Oui
+Poison Reverse Oui Oui
+Mise à jour périodique de 30 seconds Oui Oui
+Mises à Jour déclenchées Oui Oui
+Métrique en nombre de sauts Oui Oui
+Métrique infinie 16 16
+Support des route tags Oui Oui
+Adresse Groupe Multicast 224.0.0.9 FF02::9
+Authentication Spécifique IPv6 AH/ESP
+
+[Page 10]
+R&T
+IPV6, T.Nguyen 10 / 36
+IPV6 Routage RIP NG
+RouterX(config)# ipv6 router rip nom
+
+Crée et active le mode de configuration du routeur RIP.
+RouterX(config-if)#ipv6 rip nom enable
+
+Configure le protocole RIP sur une interface.
+
+[Page 11]
+R&T
+IPV6, T.Nguyen 11 / 36
+Exemple RIPng
+
+[Page 12]
+R&T
+IPV6, T.Nguyen 12 / 36
+Vérification et Dépannage
+Show ip et show ipv6
+Fonction IPv4 IPv6
+Toutes les routes ... route ... route
+Toutes les routes RIP ... route rip ... route rip
+Détails des routes pour un préfixe spécifique ... route subnet mask ... route prefix/length
+Interfaces sur lesquelles RIP est activé ... protocols ... protocols
+Liste des sources d'information de routage ... protocols ... rip next-hops
+Debug RIP debug ip rip debug ipv6 rip
+
+[Page 13]
+R&T
+IPV6, T.Nguyen 13 / 36
+EIGRP pour IPv6
+EIGRP pour IPv6 est un protocole vecteur distance
+amélioré
+
+Le mode opératoire est similaire à Ipv4.
+Ce qui ne change pas:
+
+Même numéro de protocole (88)
+
+Gère une table topologique et utilise des requêtes
+pour trouver des successeurs faisables.
+
+Utilise DUAL pour calculer les successeurs
+Spécifique à EIGRP pour IPv6:
+
+route prefixes IPv6 .
+
+nécessite l’affectation d’un RID de 32 bit (@IPv4)
+
+Eigrp est configuré sur une interface.
+
+L’adressage Link-local est utilisé pour établir les
+adjacences.
+
+état shutdown par défaut (no shutdown nécessaire)
+
+Pas de résumé automatique.
+
+[Page 14]
+R&T
+IPV6, T.Nguyen 14 / 36
+EIGRP
+Caractéristiques EIGRP pour IPv4
+EIGRP pour
+IPv6
+annoncent routes pour… IPv4 IPv6
+messages EIGRP sur IPv4 IPv6
+Protocol type 88 88
+UDP Port N/A N/A
+Utilise Logique Successor, Feasible Successor Oui Oui
+Utilise Dual Oui Oui
+Support du VLSM Oui Oui
+résumé automatique Oui N/A
+Mises à jour déclenchées Oui Oui
+Métrique composite Oui Oui
+Métrique infinie 2^32 – 1 2^32 – 1
+Support des route tags Oui Oui
+Groupe Multicast 224.0.0.10 FF02::A
+Authentification spécifique à EIGRP IPv6 AH/ESP
+
+[Page 15]
+R&T
+IPV6, T.Nguyen 15 / 36
+Configuration EIGRP
+Configuration en IOS :
+
+Activer le routage IPv6 avec la commande
+Router(Config)# ipv6 unicast-routing
+
+Démarrez le processus de routage EIGRP puis configurez le RID.
+Router(Config)# ipv6 router eigrp <ASN>
+Router(config-rtr)# eigrp router-id <A.A.A.A>
+Router(config-rtr)# no shutdown
+
+Activez le routage EIGRP sur chacune des interfaces à l’aide de
+la commande
+Router(Config-if)# ipv6 eigrp <ASN>
+
+(Optionnel) Configurez d’autres paramètres spécifiques de
+EIGRP
+
+[Page 16]
+R&T
+IPV6, T.Nguyen 16 / 36
+Exemple
+interface Lo0
+ipv6 address 1010:AB8::/64 eui-
+64
+ipv6 eigrp 1
+interface Serial0/0
+ipv6 address FE80::1 link-local
+ipv6 address 2010:AB8::1/64
+ipv6 eigrp 1
+ipv6 router eigrp 1
+router-id 2.2.2.2
+no shutdown
+interface Lo0
+ipv6 address 1000:AB8::/64 eui-64
+ipv6 eigrp 1
+interface Serial0/0
+ipv6 address FE80::2 link-local
+ipv6 address 2010:AB8::2/64
+ipv6 eigrp 1
+ipv6 router eigrp 1
+router-id 1.1.1.1
+no shutdown
+
+[Page 17]
+R&T
+IPV6, T.Nguyen 17 / 36
+Résumés de routes
+RIP NG
+
+RouterX(config)#ipv6 unicast-routing
+
+RouterX(config)# ipv6 router rip <nom>
+
+RouterX(config-if)#ipv6 rip nom enable
+
+RouterX(config-if)#ipv6 rip <nom> summary-address <prefix/masque>
+EIGRP
+
+RouterX(config)#ipv6 unicast-routing
+
+RouterX(config)# ipv6 router eigrp <ASN>
+ RouterX(config-rtr)# no shutdown
+
+RouterX(config-if)#ipv6 eigrp <ASN>
+ RouterX(config-if)#ipv6 summary-address eigrp <ASN> <prefix/masque>
+
+[Page 18]
+R&T
+IPV6, T.Nguyen 18 / 36
+Routage OSPFv3
+Basé sur OSPF version 2 (OSPFv2), avec les modifications
+suivantes :
+
+IPv6 prefixes
+
+S’exécute directement au dessus de IPv6
+
+S’exécute de manière indépendante et distincte de OSPFv2
+
+adresses 128-bit
+
+@ Link-local est utilisé pour les échanges entre routeurs
+
+Adresses Multiples and instances multiples par interface
+Authentification (utilise IPsec)
+
+[Page 19]
+R&T
+IPV6, T.Nguyen 19 / 36
+OSPFv2 vs OSPFv3
+Caractéristiques OSPFv2 OSPFv3
+annonce les routes pour .. IPv4 IPv6
+Messages OSPF utilisent IPv4 IPv6
+IP Protocol Type 89 89
+Utilisation Logique Link State Oui Oui
+Support du VLSM Oui Oui
+Selection du RID en comparaison de OSPFv2 Idem Idem
+Propagation des LSA et expiration Idem Idem
+Structure de Zone comparé à OSPFv2 Idem Idem
+Types de Paquets Idem Idem
+RID basé sur Max @IPv4, des Lo puis Max des autres intf Oui Oui
+32-bit LSID Oui Oui
+Métrique de Coût, basé sur BP Oui Oui
+Metrique infini 2^16 – 1 2^16 – 1
+Support des route tags Oui Oui
+Election DR basé sur Max priority, puis Max RID Oui Oui
+Propagation complète toutes les … 30 minutes 30 minutes
+Multicast OSPF routers 224.0.0.5 FF02::5
+Multicast Designated routers 224.0.0.6 FF02::6
+Authentification Spécifique à OSPF IPv6 AH/ESP
+Instances multiples par interface Non Oui
+
+[Page 20]
+R&T
+IPV6, T.Nguyen 20 / 36
+Configuration OSPFv3
+Configuration en IOS :
+
+Activer le routage IPv6 avec la commande
+Router(Config)# ipv6 unicast-routing
+
+Démarrez le processus de routage OSPFv3 puis configurez le RID.
+Router(Config)# ipv6 router ospf <pid>
+Router(config-rtr)# router-id <A.A.A.A> (@IPv4)
+
+Activez le routage OSPF sur chacune des interfaces à l’aide de la
+commande
+Router(Config-if)# ipv6 ospf <pid> area <Id de zone>
+
+(Optionnel) Configurez d’autres paramètres spécifiques de
+OSPFv3 ( router priority, OSPFv3 cost, etc…)
+
+[Page 21]
+R&T
+IPV6, T.Nguyen 21 / 36
+Exemple
+router#
+router# configure terminal
+router(config)# ipv6 unicast-routing
+router(config)# ipv6 router ospf 1
+router(config-router) router-id 2.2.2.2
+
+[Page 22]
+R&T
+IPV6, T.Nguyen 22 / 36
+Exemple (suite)
+router(config)# interface Ethernet0/0
+router(config-if)# ipv6 address 3FFE:FFFF:1::1/64
+router(config-if)# ipv6 ospf 1 area 0
+router(config-if)# ipv6 ospf priority 20
+router(config-if)# ipv6 ospf cost 20
+
+[Page 23]
+R&T
+IPV6, T.Nguyen 23 / 36
+Exemple (Fin)
+Router1#
+interface S1/1
+ipv6 address
+2001:410:FFFF:1::1/64
+ipv6 ospf 100 area 0
+interface S2/0
+ipv6 address
+3FFE:B00:FFFF:1::2/64
+ipv6 ospf 100 area 1
+ipv6 router ospf 100
+router-id 10.1.1.3
+Router2#
+interface S3/0
+ipv6 address
+3FFE:B00:FFFF:1::1/64
+ipv6 ospf 100 area 1
+ipv6 router ospf 100
+router-id 10.1.1.4
+
+[Page 24]
+R&T
+IPV6, T.Nguyen 24 / 36
+Vérifications
+Fonctions show ipv4... show ipv6...
+Routes OSPF ... route ospf ... route ospf
+Router ID, Timers, ABR, stats ... ospf ... ospf
+Liste des sources d'information de routage ... protocols ... ospf neighbor ... ospf neighbor
+Interfaces affectées à chaque zone ... protocols ... ospf interface brief ... protocols ... ospf interface brief
+Coûts, état, area, nombre de voisins ... interface brief ... interface brief
+Informations détaillées OSPF sur les interfaces ... ospf interface ... ospf interface
+Af fiche un résumé de la base OSPF ... ospf database ... ospf database
+
+[Page 25]
+R&T
+IPV6, T.Nguyen 25 / 36
+ACLs
+ACLs IPv4
+
+ACLs numériques standards
+
+ACLs numériques étendues
+
+ACLs nommées standards
+
+ACLs nommées étendues
+
+Masque générique
+ACLs IPv6
+
+ACLs nommées étendues
+
+Masque standard
+
+[Page 26]
+R&T
+IPV6, T.Nguyen 26 / 36
+Principes(1)
+Mêmes principes que IPv4
+
+Tout est interdit par défaut
+
+Sortie de la liste dès qu’une condition est
+satisfaite.
+
+Il faut appliquer la liste sur une interface
+en entrée ou en sortie
+
+Instruction permit pour autoriser
+
+Instruction deny pour refuser
+
+La dernière instruction qui refuse tout
+trafic est implicite
+
+[Page 27]
+R&T
+IPV6, T.Nguyen 27 / 36
+En ipv6 ajout implicite des instructions
+permit NDP
+
+permit icmp any any nd-ns
+
+permit icmp any any nd-na
+Permettre les requêtes et réponses
+« ARP » pour IPv6…
+Principes(2)
+
+[Page 28]
+R&T
+IPV6, T.Nguyen 28 / 36
+Configuration(1)
+Router(config)#
+ipv6 access-list access-list-name
+permit protocol {source-ipv6-prefix/prefix-length | any |
+host source-ipv6-address} {destination-ipv6-prefix/prefix-
+length | any | host destination-ipv6-address}
+deny protocol {source-ipv6-prefix/prefix-length | any | host
+source-ipv6-address} {destination-ipv6-prefix/prefix-length
+| any | host destination-ipv6-address}
+
+[Page 29]
+R&T
+IPV6, T.Nguyen 29 / 36
+Configuration(2)
+Application sur l’interface
+Router(config-if)#
+ipv6 traffic-filter access-list-name {IN|OUT}
+Restriction d’accès vty (Telnet ou ssh)
+Router(config-line)#
+ipv6 access-class access-list-name {IN|OUT}
+
+[Page 30]
+R&T
+IPV6, T.Nguyen 30 / 36
+Exemple
+ipv6 access-list Deny_Subnet_A_IPv6
+deny ipv6 2001:DB8:0:12::/64 any
+permit ipv6 any any
+!
+interface FastEthernet0/1
+ipv6 traffic-filter Deny_Subnet_A_IPv6 out
+ip access-list standard
+Deny_Subnet_A_IPv4
+deny 192.168.12.0 0.0.0.255
+permit any
+!
+interface FastEthernet0/1
+ip access-group Deny_Subnet_A_IPv4 out
+
+[Page 31]
+R&T
+IPV6, T.Nguyen 31 / 36
+Routage InterVlan avec SVI
+Etapes :
+
+Switch(config)# ipv6 unicast-routing
+
+1/ Switch(config)# interface vlan vlan-id
+
+2/ Switch(config)# ipv6 address prefix/prefix-
+length
+
+3/ Switch(config-if)# no shutdown
+
+4/ (Optionnel) Switch(config)# ipv6 router …
+ip_routing_protocol
+Configuration MLS
+
+[Page 32]
+R&T
+IPV6, T.Nguyen 32 / 36
+Activation IPv6 sur les Switchs
+Switch(Conf)#sdm prefer dual default
+Switch(Conf)#exit
+Switch#copy run startup-config
+Switch# reload
+
+[Page 33]
+R&T
+IPV6, T.Nguyen 33 / 36
+IPv6 Commandes
+
+[Page 34]
+R&T
+IPV6, T.Nguyen 34 / 36
+IPv6 Commandes
+
+[Page 35]
+R&T
+IPV6, T.Nguyen 35 / 36
+Conclusion
+Concepts de Base
+
+Adressage et Protocole
+Configuration de Base en IOS
+
+Adressage, SLAAC, Stateless DHCP
+Protocoles de Routage IPV6
+
+Statique
+
+RIPng, OSPFv3, EIGRP pour IPv6
+ACLs IPv6
+
+Nommées
+
+Etendues
+MLS IPv6
+```
+
+</details>

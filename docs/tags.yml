@@ -117,3 +117,35 @@ droit:
 mobile:
   label: Mobile
   description: "Pages liées aux systèmes d'exploitation et à la sécurité mobile."
+
+physique:
+  label: Physique
+  description: "Pages liées à la physique."
+
+pentest:
+  label: Pentest
+  description: "Pages liées aux tests d'intrusion."
+
+reverse-engineering:
+  label: Reverse Engineering
+  description: "Pages liées à la rétro-ingénierie de programmes ou de matériel."
+
+iot:
+  label: IoT
+  description: "Pages liées à l'Internet des objets et aux systèmes embarqués connectés."
+
+virtualisation:
+  label: Virtualisation
+  description: "Pages liées aux machines virtuelles et aux hyperviseurs."
+
+devops:
+  label: DevOps
+  description: "Pages liées aux pratiques DevOps et à l'intégration/livraison continue."
+
+api:
+  label: API
+  description: "Pages liées à la conception ou à l'utilisation d'API."
+
+stockage:
+  label: Stockage
+  description: "Pages liées aux supports et systèmes de stockage de données."

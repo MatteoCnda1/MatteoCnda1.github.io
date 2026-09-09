@@ -8,3 +8,116 @@ import PdfViewer from '@site/src/components/PdfViewer';
 # DHCPv6
 
 <PdfViewer file="/pdf/networking/CoursIPV6-SLAAC-DHCPv6I-BUT2025-26.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+R&T
+IPV6, T.Nguyen 1 /52
+Cours Réseaux :
+SLAAC/DHCPv6
+
+[Page 2]
+R&T
+IPV6, T.Nguyen 2 /52
+IPV6
+Introduction
+Principes
+
+NDP-RA
+
+DHCPv6
+Configuration IOS de base
+TP
+
+[Page 3]
+IPV6, T.Nguyen 3 /52
+R&T
+IPv6 : Adressage Dynamique
+NDP
+– RA annonces du
+routeur
+• Par défaut SLAAC
+• Bit M (Manage) =
+DHCPv6
+• Bit O (Other) =
+Stateless DHCP
+
+[Page 4]
+IPV6, T.Nguyen 4 /52
+R&T
+Prefix Information Option
+Prefix Information Option (Type 3)
+Fields and Meaning
+Field Size Meaning
+Type 8 bits Value = 3 (Prefix Information)
+Length 8 bits Length of the option (always 4, i.e. 32 bytes)
+Prefix Length 8 bits Length of the IPv6 prefix (e.g., 64
+for /64)
+L (On-link flag) 1 bit 1: the prefix is considered
+on-link (local network)
+A (Autonomous flag) 1 bit 1: the
+prefix can be used for autonomous address configuration (SLAAC)
+Reserved 6 bits Reserved (set to 0)
+Valid Lifetime 32 bits Time during which the prefix is
+valid
+Preferred Lifetime 32 bits Time during
+which the prefix is preferred for creating new addresses
+Reserved2 32 bits Reserved (set to 0)
+
+[Page 5]
+IPV6, T.Nguyen 5 /52
+R&T
+
+[Page 6]
+R&T
+IPV6, T.Nguyen 6 /52
+Ipv6 avec PIO
+A=1 SLAAC
+– NDP
+O=1 StateLess DHCP
+– NDP
+– Autres infos (DNS) avec DHCPv6
+M=1 Statefull DHCP
+– Tout en DHCPv6
+A=1 et M=1
+SLAAC et DHCPv6
+
+[Page 7]
+R&T
+Mode opératoire en
+DHCPv6
+
+[Page 8]
+R&T
+Configuration Statefull DHCP
+
+[Page 9]
+R&T
+
+[Page 10]
+R&T
+Configuration Stateless
+
+[Page 11]
+R&T
+
+[Page 12]
+R&T
+
+[Page 13]
+R&T
+IPV6, T.Nguyen 13 /52
+Conclusion
+Concepts de Base
+– SLAAC/NDP
+– Stateless DHCP
+– Satefull DHCP
+– Relais DHCP
+Configuration en IOS
+TP
+```
+
+</details>

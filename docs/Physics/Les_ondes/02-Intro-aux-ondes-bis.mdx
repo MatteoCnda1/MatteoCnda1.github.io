@@ -1,5 +1,6 @@
 ---
 title: Intro aux ondes - Bis
+tags: [physique]
 ---
 
 import PdfViewer from "@site/src/components/PdfViewer";
@@ -7,4 +8,894 @@ import PdfViewer from "@site/src/components/PdfViewer";
 # Les ondes
 
 <PdfViewer file="/pdf/Traitement_du_signal/Les_ondes/R403_supportCM.pdf" />
+
+<details>
+<summary>Texte extrait du document (pour la recherche)</summary>
+
+```text
+[Page 1]
+R4.03 - PHYSIQUE
+DES TELECOM
+Ondes EM
+Propagation sur une
+ligne
+Adaptation
+d’impédance
+Abaques de Smith
+
+[Page 2]
+ORGANISATION - PHYSIQUE DES TÉLÉCOM
+• R4.12 => cours d’introduction aux ondes
+• 2h CM
+• 2h TD
+• 8h TP
+• R4.03 => physique des télécom
+• 4h CM
+• 6h TD
+• 12h TP
+
+[Page 3]
+TÉLÉCOMMUNICATION
+=> COMMUNICATION A (LONGUE) DISTANCE
+
+[Page 4]
+ONDES ÉLECTROMAGNÉTIQUES
+Le champ électrique 𝑬
+𝐸
+𝑥
+𝐸
+𝑦
+𝐸
+𝑧
+(V/m)
+Une particule électriquement chargée de charge 𝑞 située dans un champ
+électrique 𝐸 subit une force
+Ԧ
+𝑓 = 𝑞𝐸
+• ∇ ⋅ 𝐸 =
+𝜌
+𝜖
+0
+Maxwell-Gauss (Coulomb)
+𝜌 : densité de charge électrique (source en C/m
+3
+)
+𝜖
+0
+: permittivité diélectrique du vide (F/m)
+∇ ⋅ 𝐸 = 𝑑𝑖𝑣𝐸 =
+𝜕𝐸
+𝑥
+𝜕𝑥
++
+𝜕𝐸
+𝑦
+𝜕𝑦
++
+𝜕𝐸
+𝑧
+𝜕𝑧
+
+[Page 5]
+ONDES ÉLECTROMAGNÉTIQUES
+Le champ magnétique 𝑩
+𝐵
+𝑥
+𝐵
+𝑦
+𝐵
+𝑧
+(T)
+Une particule électriquement chargée de charge 𝑞 se déplaçant à la
+vitesse 𝑣 dans un champ magnétique 𝐵 subit une force
+Ԧ
+𝑓 = 𝑞𝑣𝐵
+• ∇ ⋅ 𝐵 = 0 Maxwell-Thomson
+
+[Page 6]
+ONDES ÉLECTROMAGNÉTIQUES
+Les équations de Maxwell
+• ∇ ⋅ 𝐸 =
+𝜌
+𝜖
+0
+Maxwell-Gauss (Loi de Coulomb)
+• ∇ ⋅ 𝐵 = 0 Théorème de Maxwell Thomson
+• ∇ × 𝐸 = −
+𝜕
+𝜕𝑡
+𝐵 Loi de Faraday
+• ∇ × 𝐵 = −𝜇
+0
+Ԧ
+𝐽 − 𝜇
+0
+𝜖
+0
+𝜕
+𝜕𝑡
+𝐸 Théorème de Maxwell-Ampère
+∇ =
+𝜕
+𝜕𝑥
+𝜕
+𝜕𝑦
+𝜕
+𝜕𝑧
+
+[Page 7]
+ONDES ÉLECTROMAGNÉTIQUES
+Les équations de Maxwell en champ libre (pas de ligne de courant)
+• ∇ ⋅ 𝐸 = 0
+• ∇ ⋅ 𝐵 = 0
+• ∇ × 𝐸 = −
+𝜕
+𝜕𝑡
+𝐵
+• ∇ × 𝐵 = −𝜇
+0
+𝜖
+0
+𝜕
+𝜕𝑡
+𝐸
+
+[Page 8]
+ONDES ÉLECTROMAGNÉTIQUES
+Propagation des ondes EM en champ libre
+• ∇ × 𝐸 = −
+𝜕
+𝜕𝑡
+𝐵
+• ∇ × 𝐵 = −𝜇
+0
+𝜖
+0
+𝜕
+𝜕𝑡
+𝐸
+=> En 1D :
+𝜕
+2
+𝐸
+𝜕𝑥
+2
+=
+1
+𝑐
+2
+𝜕
+2
+𝐸
+𝜕𝑡
+2
+et
+𝜕
+2
+𝐵
+𝜕𝑥
+2
+=
+1
+𝑐
+2
+𝜕
+2
+𝐵
+𝜕𝑡
+2
+c
+2
+= 𝜇
+0
+𝜖
+0
+𝜖
+0
+: permittivité diélectrique du vide (F/m) ; 𝜇
+0
+: perméabilité magnétique du vide (H/m)
+∇ × 𝐸 = 𝑟𝑜𝑡𝐸 =
+𝜕
+𝜕𝑥
+𝜕
+𝜕𝑦
+𝜕
+𝜕𝑧
+×
+𝐸
+𝑥
+𝐸
+𝑦
+𝐸
+𝑧
+=
+𝜕𝐸
+𝑧
+𝜕𝑦
+−
+𝜕𝐸
+𝑦
+𝜕𝑧
+𝜕𝐸
+𝑥
+𝜕𝑧
+−
+𝜕𝐸
+𝑧
+𝜕𝑥
+𝜕𝐸
+𝑥
+𝜕𝑦
+−
+𝜕𝐸
+𝑦
+𝜕𝑥
+
+[Page 9]
+ONDES ÉLECTROMAGNÉTIQUES
+• Les équations de Maxwell – qu’en retenir ?
+• Régime stationnaire => E et B indépendant l’un de l’autre
+• Régime ondulatoire => E et B ondulent ensemble => propagation simultanée et orthogonale
+(polarisation)
+• Vitesse de propagation => vitesse de la lumière (vitesse constante en fonction de la longueur
+d’onde/fréquence dans le vide -> pas vrai dans tout les milieux)
+
+[Page 11]
+ONDES ÉLECTROMAGNÉTIQUES
+• Applications :
+• Télécommunications
+GSM : 890 960 MHz, 1,71 1,88 GHz // 4G : 700 MHz, 800 MHz, 1800 MHz, 2600 MHz
+• Radio-commandes
+Radio commandes : 27 MHz, 40 MHz, 72 MHz, 2,4 GHz // Drones : 2,4 GHz, 5,8 GHz
+• Radiodiffusions
+Radio FM (bande II) : 87,5 108 MHz // Radio-amateurs : 144 148 MHz
+• Radionavigation
+GPS : 1217 1237 MHz et 1565 1585 MHz
+• Four à micro-onde : 2,45GHz
+
+[Page 12]
+SUPPORTS DE TRANSMISSION
+Propagation libre (terrestre/spatiale) Propagation guidée (câble/guide d’onde)
+
+[Page 13]
+LES LIGNES POUR LA
+TRANSMISSION
+
+[Page 14]
+SUPPORT DE TRANSMISSION (LIGNE)
+Choix de ligne en fonction de la bande passante et de l’atténuation de ligne
+Ligne bifilaire Ligne coaxiale
+Ligne micro-ruban (microstrip) Guide d’onde métallique
+• Fibre optique …
+
+[Page 15]
+ATTÉNUATION DE LIGNE
+
+[Page 16]
+MESURE ET CALCUL DE PUISSANCE
+• radiofréquences (RF) et Télécoms optiques => Puissance exprimée en mW ou dBm
+• Calcul de la Puissance en Watt dans une ligne de transmission d’impédance 𝑍
+𝑐
+
+[Page 17]
+MESURE ET CALCUL DE PUISSANCE
+• radiofréquences (RF) et Télécoms optiques => Puissance exprimée en mW ou dBm
+• Calcul de la Puissance en Watt dans une ligne de transmission d’impédance 𝑍
+𝑐
+𝑃 𝑊 =
+𝑈
+𝑒𝑓𝑓
+2
+𝑍
+𝑐
+Tension efficace (en V) : 𝑈
+𝑒𝑓𝑓
+=
+𝑈
+𝑎𝑚𝑝
+2
+avec 𝑈
+𝑎𝑚𝑝
+l’amplitude de la tension
+
+[Page 18]
+RAPPEL SUR LES DECIBELS
+• bel (B) : exprime un rapport de puissance en échelle logarithmique de base 10
+𝑋(𝐵) = log
+10
+𝑃
+1
+𝑃
+2
+Exemple :
+𝑃
+1
+𝑃
+2
+= 100 = 10
+2
+⇒ 𝑋 = 2 𝐵
+
+[Page 19]
+RAPPEL SUR LES DECIBELS
+• bel (B) : exprime un rapport de puissance en échelle logarithmique de base 10
+𝑋(𝐵) = log
+10
+𝑃
+1
+𝑃
+2
+Exemple :
+𝑃
+1
+𝑃
+2
+= 100 = 10
+2
+⇒ 𝑋 = 2 𝐵
+• décibel (dB) : 𝑋 𝑑𝐵 = 10 ⋅ 𝑋(𝐵) = 10 log
+10
+𝑃
+1
+𝑃
+2
+Exemple :
+𝑃
+1
+𝑃
+2
+= 1000 = 10
+3
+⇒ 𝑋 = 3 𝐵 ⇒ 𝑋 = 30 𝑑𝐵
+
+[Page 20]
+MESURE ET CALCUL DE PUISSANCE
+• Puissance en dBm
+𝑃 𝑑𝐵𝑚 = 10 log 𝑃 𝑚𝑊 ⇔ 𝑃 𝑚𝑊 = 10
+𝑃(𝑑𝐵𝑚)/10
+
+[Page 21]
+MESURE ET CALCUL DE PUISSANCE
+• Puissance en dBm
+𝑃 𝑑𝐵𝑚 = 10 log 𝑃 𝑚𝑊 ⇔ 𝑃 𝑚𝑊 = 10
+𝑃(𝑑𝐵𝑚)/10
+Remarque : pour un câble d’impédance 𝑍
+𝑐
+= 50Ω et une puissance de 1mW
+𝑈
+𝑒𝑓𝑓
+= 𝑃 𝑊 𝑍
+𝑐
+= 0.001 ∗ 50 = 0.2236V
+𝑃 𝑑𝐵𝑚 = 20 log
+𝑈
+𝑒𝑓𝑓
+0.2236
+
+[Page 22]
+MESURE ET CALCUL DE PUISSANCE
+• Puissance en dBm
+𝑃 𝑑𝐵𝑚 = 10 log 𝑃 𝑚𝑊 ⇔ 𝑃 𝑚𝑊 = 10
+𝑃(𝑑𝐵𝑚)/10
+Remarque : pour un câble d’impédance 𝑍
+𝑐
+= 50Ω et une puissance de 1mW
+𝑈
+𝑒𝑓𝑓
+= 𝑃 𝑊 𝑍
+𝑐
+= 0.001 ∗ 50 = 0.2236V
+𝑃 𝑑𝐵𝑚 = 20 log
+𝑈
+𝑒𝑓𝑓
+0.2236
+• Gain (>0), atténuation ou pertes (<0) en dB
+𝛼 𝑑𝐵 = 10 log
+𝑃
+𝑠
+𝑃
+𝑒
+= 20 log
+𝑈
+𝑠
+𝑈
+𝑒
+
+[Page 23]
+PROPAGATION DANS UNE LIGNE
+Transmission de signaux électriques dans une ligne
+
+[Page 24]
+ELECTRONIQUE HYPERFRÉQUENCE (MICRO-ONDE)
+300𝑀𝐻𝑧 < 𝑓 < 300𝐺𝐻𝑧
+• Electronique classique
+• Basse fréquence
+• Approximation des Régimes Quasi-Stationnaires (ARQS ou ARQP pour Permanents).
+• Temps de propagation négligeable
+• Ondes électromagnétiques (OEM) à l'instant t : les mêmes dans le circuit
+• Electronique micro-onde
+• Haute fréquence
+• Dimensions des circuits > longueur d’onde => variations de courant dans le circuit non négligeables
+⇒ v(x, t), i(x, t), Z(x, t)
+
+[Page 25]
+ELECTRONIQUE HYPERFRÉQUENCE (MICRO-ONDE)
+• En pratique, phénomènes ondulatoires à prendre en compte si 𝑳 > 𝝀/𝟏𝟎
+Rappels et notations
+• Longueur d’onde dans le vide : 𝝀
+𝟎
+=
+𝒄
+𝒇
+avec 𝑐 = 3 ⋅ 10
+8
+𝑚/𝑠 (vitesse de la lumière dans le vide)
+• Vitesse de phase : 𝒗
+𝝋
+=
+𝒄
+𝒏
+=
+𝒄
+𝝐
+𝒓
+𝑛 : indice de réfraction ; 𝜖
+𝑟
+: permittivité relative du diélectrique
+• Longueur d’onde guidée : 𝝀
+𝒈
+=
+𝒗
+𝝋
+𝒇
+=
+𝝀
+𝟎
+𝒏
+=
+𝝀
+𝟎
+𝝐
+𝒓
+
+[Page 26]
+PHÉNOMÈNES DANS UNE LIGNE
+• Basses fréquences (<1MHz)
+Pertes par effet Joule et par rayonnement => ligne modélisée par une simple résistance en série
+• Si on augmente la fréquence
+1. Filtrage passe-bas => Modélisation par une capacité en parallèle sur la ligne
+2. Comportement inductif (auto-inductance) => Modélisation par une inductance en série
+3. Courant de fuite entre les 2 conducteurs => Modélisation par une résistance (ou conductance)
+en parallèle
+
+[Page 27]
+SCHÉMA ÉQUIVALENT D’UN SEGMENT DE LIGNE
+• R : résistance linéique Ω/m
+• L : inductance linéique H/m
+• C : capacité linéique F/m
+• G : conductance linéique Ω
+−1
+/m
+𝐝𝐱 ≪ 𝝀
+
+[Page 28]
+EQUATION DES TÉLÉGRAPHISTES
+𝜕𝑣 𝑥, 𝑡
+𝜕𝑥
+= −𝑅 ⋅ 𝑖 𝑥, 𝑡 − 𝐿
+𝜕𝑖 𝑥, 𝑡
+𝜕𝑡
+𝜕𝑖 𝑥, 𝑡
+𝜕𝑥
+= −𝐺 ⋅ 𝑣 𝑥, 𝑡 − 𝐶
+𝜕𝑣 𝑥, 𝑡
+𝜕𝑡
+Solution générale :
+• 𝑖 𝑥, 𝑡 = 𝐼
+𝑖
+𝑒
+𝑗𝜔𝑡−𝛾𝑥
++ 𝐼
+𝑟
+𝑒
+𝑗𝜔𝑡+𝛾𝑥
+= 𝑖
+𝑖
+𝑡 𝑒
+−𝛾𝑥
++ 𝑖
+𝑟
+𝑡 𝑒
+𝛾𝑥
+• 𝑣 𝑥, 𝑡 = 𝑉
+𝑖
+𝑒
+𝑗𝜔𝑡−𝛾𝑥
++ 𝑉
+𝑟
+𝑒
+𝑗𝜔𝑡+𝛾𝑥
+= 𝑣
+𝑖
+𝑡 𝑒
+−𝛾𝑥
++ 𝑣
+𝑟
+𝑡 𝑒
+𝛾𝑥
+Constante de propagation : 𝛾 = 𝑅 + 𝑗𝜔𝐿 𝐺 + 𝑗𝜔𝐶 = 𝛼 + 𝑗𝛽
+
+[Page 29]
+EQUATION DES TÉLÉGRAPHISTES
+• Représentation de l’onde progressive
+• 𝛾 = 𝑅 + 𝑗𝜔𝐿 𝐺 + 𝑗𝜔𝐶 = 𝛼 + 𝑗𝛽
+• 𝛼 : paramètre d’atténuation (np/m)
+• 𝛽 : paramètre de phase (équivalent nombre d’onde 𝑘)
+ℜ 𝑉
+𝑖
+𝑒
+𝑗𝜔𝑡−𝛾𝑥
+= 𝑉
+𝑖
+e
+−𝛼𝑥
+cos(𝜔𝑡 − 𝛽𝑥)
+𝛼 𝑑𝐵/𝑚 = 20 log 𝑒
+−𝛼
+= −8.68𝛼
+
+[Page 30]
+IMPÉDANCE CARACTÉRISTIQUE D’UNE LIGNE
+• Impédance : 𝑍 =
+𝑝𝑜𝑡𝑒𝑛𝑡𝑖𝑒𝑙
+𝑓𝑙𝑢𝑥
+• Impédance caractéristique d’une ligne ⇒ 𝑍
+𝑐
+=
+𝑣
+𝑖
+𝑥,𝑡
+𝑖
+𝑖
+𝑥,𝑡
+= −
+𝑣
+𝑟
+𝑥,𝑡
+𝑖
+𝑟
+𝑥,𝑡
+𝑍
+𝑐
+=
+𝑅 + 𝑗𝜔𝐿
+𝐺 + 𝑗𝜔𝐶
+
+[Page 31]
+LIGNE SANS PERTE
+𝑅 ≪ 𝑗𝜔𝐿 𝐺 ≪ 𝑗𝜔𝐶
+Représentation de l’onde progressive
+• 𝛾 = 𝑗𝛽 = 𝑗𝜔 𝐿𝐶
+ℜ 𝑉
+𝑖
+𝑒
+𝑗𝜔𝑡−𝛾𝑥
+= 𝑉
+𝑖
+cos(𝜔𝑡 − 𝛽𝑥)
+
+[Page 32]
+LIGNE SANS PERTE
+𝑅 ≪ 𝑗𝜔𝐿 𝐺 ≪ 𝑗𝜔𝐶
+Représentation de l’onde progressive
+• 𝛾 = 𝑗𝛽 = 𝑗𝜔 𝐿𝐶
+ℜ 𝑉
+𝑖
+𝑒
+𝑗𝜔𝑡−𝛾𝑥
+= 𝑉
+𝑖
+cos(𝜔𝑡 − 𝛽𝑥)
+𝜔 =
+2𝜋
+𝑇
+𝛽 =
+2𝜋
+𝜆
+𝑣
+𝜑
+=
+𝜆
+𝑇
+=
+𝜔
+𝛽
+⇒ 𝑣
+𝜑
+=
+1
+𝐿𝐶
+
+[Page 33]
+LIGNE SANS PERTE
+Impédance caractéristique 𝒁
+𝒄
+=
+𝑳
+𝑪
+• Câble RG58
+• 𝐿 ≈ 250 𝑛𝐻/𝑚
+• 𝐶 ≈ 100 𝑝𝐹/𝑚
+𝑍
+𝑐
+=
+250⋅10
+−9
+100⋅10
+−12
+= 50 Ω v
+𝜑
+=
+1
+𝐿𝐶
+=
+1
+250⋅10
+−9
+×100⋅10
+−12
+= 2 ⋅ 10
+8
+𝑚/𝑠
+
+[Page 34]
+REFLEXION ET ONDE STATIONNAIRE DANS UNE LIGNE
+• Changement d’impédance => réflexion d’une partie de l’onde
+Ex : changement de section dans un tube et propagation d’une onde acoustique
+Coefficient de réflexion :
+𝚪 =
+𝒁
+𝟐
+− 𝒁
+𝟏
+𝒁
+𝟐
++ 𝒁
+𝟏
+Onde incidente
+Onde réfléchie
+Onde transmise
+
+[Page 35]
+REFLEXION ET ONDE STATIONNAIRE DANS UNE LIGNE
+Coefficient de réflexion au générateur Coefficient de réflexion à la charge
+𝚪 =
+𝒁
+𝒈
+− 𝒁
+𝒄
+𝒁
+𝒈
++ 𝒁
+𝒄
+𝚪 =
+𝒁
+𝑳
+− 𝒁
+𝒄
+𝒁
+𝑳
++ 𝒁
+𝒄
+• Impédance caractéristique de la ligne 𝒁
+𝒄
+• Impédance du générateur 𝒁
+𝒈
+• Impédance de la charge 𝒁
+𝑳
+
+[Page 36]
+REFLEXION ET ONDE STATIONNAIRE DANS UNE LIGNE
+Cas particuliers :
+• Circuit adapté : Z
+L
+= Z
+C
+⇒ 𝚪 =
+𝒁
+𝑳
+−𝒁
+𝒄
+𝒁
+𝑳
++𝒁
+𝒄
+= 𝟎
+• Circuit ouvert : Z
+L
+→ ∞ ⇒ 𝚪 =
+𝒁
+𝑳
+−𝒁
+𝒄
+𝒁
+𝑳
++𝒁
+𝒄
+≈ 𝟏
+• Court-circuit : Z
+L
+= 0 ⇒ 𝚪 =
+𝒁
+𝑳
+−𝒁
+𝒄
+𝒁
+𝑳
++𝒁
+𝒄
+= −𝟏
+
+[Page 37]
+REFLEXION ET ONDE STATIONNAIRE DANS UNE LIGNE
+Expression de l’onde de tension dans une ligne :
+𝑣 𝑥, 𝑡 = 𝑉
+𝑖
+𝑒
+𝑗(𝜔𝑡−𝑘𝑥)
++ 𝑉
+𝑟
+𝑒
+𝑗(𝜔𝑡+𝑘𝑥)
+= 𝑉
+𝑖
+𝑒
+𝑗 𝜔𝑡−𝑘𝑥
+1 + Γ𝑒
+2𝑗𝛽(𝑥−𝑙)
+• Taux d’onde stationnaire (TOS)
+𝑆 =
+𝑉
+𝑚𝑎𝑥
+𝑉
+𝑚𝑖𝑛
+=
+1 + Γ
+1 − Γ
+Modulation d’amplitude
+
+[Page 38]
+REFLEXION ET ONDE STATIONNAIRE DANS UNE LIGNE
+• Taux d’onde stationnaire
+𝑆 =
+𝑉
+𝑚𝑎𝑥
+𝑉
+𝑚𝑖𝑛
+=
+1+ Γ
+1− Γ
+
+[Page 39]
+ABAQUE DE SMITH
+• Représentation du coefficient de réflexion dans le plan complexe
+𝚪 =
+𝒁 − 𝒁
+𝒄
+𝒁 + 𝒁
+𝒄
+• On travaille avec des impédances réduites
+𝒛 =
+𝒁
+𝒁
+𝒄
+⇒ 𝚪 =
+𝒛 − 𝟏
+𝒛 + 𝟏
+avec 𝒛 = 𝒓 + 𝒋𝒙
+
+[Page 40]
+ABAQUE DE SMITH
+𝒛 =
+𝒁
+𝒁
+𝒄
+⇒ 𝚪 =
+𝒛 − 𝟏
+𝒛 + 𝟏
+Exemples :
+A) Z = Z
+c
+⇒ 𝑧 = 1 ⇒ Γ = 0
+B) Z = 0 ⇒ 𝑧 = 0 ⇒ Γ = −1
+C) Z → ∞ ⇒ 𝑧 = 1 ⇒ Γ = 1
+D) Z = 𝑗Z
+c
+⇒ 𝑧 = 𝑗 ⇒ Γ = −𝑗
+ℜ
+ℑ
+𝑨𝑩 𝑪
+𝑫
+1
+1
+
+[Page 41]
+LES ANTENNES
+Les transmissions Hertziennes
+
+[Page 42]
+STRUCTURE D’UNE TRANSMISSION HERTZIENNE
+• Emetteur : • Antenne de réception
+Produit un signal électrique transmis à l’antenne Capte une (petite) partie de l’OEM et transforme en signal électrique
+• Antenne d’émission : • Récepteur :
+Transforme le signal électrique en OEM Extrait l’information transmise du signal électrique reçu
+
+[Page 43]
+PROPAGATION EN CHAMP LIBRE
+• L’onde électromagnétique est émise par une antenne.
+• En espace libre, elle se propage environ à la vitesse de la lumière dans le vide : c = 3 · 10^8 m/s.
+• La puissance subit une atténuation proportionnelle au carré de la distance parcourue.
+• Interaction avec les obstacles => phénomènes ondulatoires
+
+[Page 44]
+PROPAGATION EN CHAMP LIBRE
+• 3 zones de propagation distinctes :
+• Champ proche (zone de Rayleigh) 𝑑 <
+𝐷
+2
+2𝜆
+• Champ intermédiaire (zone de Fresnel)
+• Champ lointain (zone de Fraunhofer) 𝑑 >
+2𝐷
+2
+𝜆
+
+[Page 45]
+PROPAGATION EN CHAMP LIBRE
+• Champ proche (zone de Rayleigh) 𝑑 <
+𝐷
+2
+2𝜆
+Problèmes d’interférence avec les réflexions sur le sol
+
+[Page 46]
+PROPAGATION EN CHAMP LIBRE
+• Champ intermédiaire (zone de Fresnel)
+𝐷
+2
+2𝜆
+< 𝑑 <
+2𝐷
+2
+𝜆
+Ellipsoïde de Fresnel (ordre 1) contient 60% de la puissance émise => éviter les obstacles dans cette zone
+𝑟 =
+𝜆 × 𝑑
+1
+× 𝑑
+2
+𝐷
+
+[Page 47]
+POLARISATION DE L’ONDE
+
+[Page 48]
+CARACTÉRISATION D’UNE ANTENNE
+• Diagramme de rayonnement
+Représentation de la directivité d’une antenne (puissance émise en dB en fonction de l’angle)
+
+[Page 49]
+CARACTÉRISATION D’UNE ANTENNE
+antenne dipôle antenne patch antenne Yagi
+
+[Page 50]
+CARACTÉRISATION D’UNE ANTENNE
+• Bande passante et fréquence de résonance
+Antenne = circuit ouvert sauf pour les fréquences voisine de la fréquence de résonance
+=> Transmission possible pour une certaine bande de fréquence (bande passante)
+Représentation du coefficient de réflexion en fonction de la fréquence
+```
+
+</details>
 
