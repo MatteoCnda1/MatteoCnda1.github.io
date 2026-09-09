@@ -97,3 +97,7 @@ cheatsheet:
 outil:
   label: Outil
   description: "Pages présentant un outil spécifique."
+
+productivite:
+  label: Productivité
+  description: "Pages liées aux méthodes de productivité personnelle et de gestion du temps."

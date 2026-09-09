@@ -4,11 +4,10 @@ sidebar_position: 14
 tags: [automatisation]
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 # Configuration Management & Automation
 
 > Automatisation et gestion de configuration avec Ansible.
 
-- Inventory, variables, idempotence
-- Playbooks, rôles, templates Jinja2
-- Ansible Vault, hardening automatisé
-- Projet Ansible de bout en bout
+<DocCardList />
