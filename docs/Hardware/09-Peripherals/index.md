@@ -3,6 +3,10 @@ title: Peripherals
 sidebar_position: 1
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 # Peripherals
 
-Dossier Hardware Peripherals
+> HID, écrans, claviers, souris, imprimantes : les périphériques d'entrée/sortie.
+
+<DocCardList />

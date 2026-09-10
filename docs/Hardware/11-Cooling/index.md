@@ -3,6 +3,10 @@ title: Cooling
 sidebar_position: 1
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 # Cooling
 
-Dossier Hardware Cooling
+> TDP, air vs liquide, pâte thermique, pression d'air, throttling thermique.
+
+<DocCardList />
