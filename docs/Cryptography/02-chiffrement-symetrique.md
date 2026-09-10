@@ -135,3 +135,9 @@ Même contrainte que CTR : le **nonce doit être unique** par message pour une c
 - **AES** est le standard incassable depuis 2001 ; on ne le réimplémente jamais soi-même, on utilise une bibliothèque éprouvée.
 - **Le mode opératoire est le vrai enjeu de sécurité** : ECB fuit la structure (à bannir), CBC est piégeux (padding oracle, besoin de MAC), CTR transforme AES en stream cipher (nonce jamais réutilisé), **GCM/AEAD est le bon choix moderne** (chiffrement + authentification).
 - Les failles réelles viennent presque toujours de l'usage — nonce/IV réutilisé, absence d'authentification, ECB — pas de l'algorithme lui-même.
+
+## Voir aussi
+
+- [XOR et one-time pad](./01-xor-et-one-time-pad.md) — le cours précédent.
+- [RSA](./03-rsa.md) — le cours suivant, chiffrement asymétrique.
+- [Cryptographie — OpenSSL et GnuPG](../Operating_sys/Linux/Security/03-cryptographie-openssl-gnupg.md) — mettre AES en pratique sous Linux.

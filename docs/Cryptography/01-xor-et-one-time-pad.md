@@ -146,3 +146,8 @@ Les formats de fichiers (BMP, PNG, PDF, ZIP) ont des en-têtes fixes et connus. 
 - Le One-Time Pad (XOR + clé vraiment aléatoire, aussi longue que le message, jamais réutilisée) est le **seul chiffrement parfait**, mais inutilisable en pratique à cause de la distribution des clés.
 - Les trois attaques à connaître : **réutilisation de clé** (deux ciphertexts → la clé s'annule), **clé courte répétée** (Vigenère binaire, cassable par fréquence), **clair connu** (l'en-tête donne la clé).
 - Dans la vraie vie, on ne recode jamais du XOR maison : on utilise AES ou ChaCha20, qui génèrent un keystream cryptographiquement sûr qu'on XOR avec les données. C'est l'objet du cours suivant.
+
+## Voir aussi
+
+- [Introduction à la cryptographie](./00-introduction.md) — le cours précédent.
+- [Chiffrement symétrique](./02-chiffrement-symetrique.md) — le cours suivant.

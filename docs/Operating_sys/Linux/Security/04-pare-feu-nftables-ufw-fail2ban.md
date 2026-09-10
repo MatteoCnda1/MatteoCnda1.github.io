@@ -106,3 +106,8 @@ Sur un serveur type : pare-feu en deny par défaut n'ouvrant que SSH et les serv
 - Réflexe : **autoriser SSH avant d'activer** le pare-feu sur une machine distante, sous peine de se verrouiller dehors.
 - **fail2ban** : protection **dynamique** contre le brute force ; surveille les journaux et bannit automatiquement les IP fautives (config dans `jail.local`, `maxretry`/`bantime`). Indispensable pour SSH exposé.
 - **Combinaison** : pare-feu (surface statique) + fail2ban (réaction dynamique) = défense en profondeur côté réseau.
+
+## Voir aussi
+
+- [SSH — accès distant et durcissement](./02-ssh-durcissement.md) — fail2ban appliqué à SSH.
+- [Audit, détection et gestion des vulnérabilités](./06-audit-detection-patch.md) — le cours suivant.

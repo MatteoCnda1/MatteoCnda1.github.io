@@ -325,3 +325,7 @@ Chercher le champ `denied_mask` (la permission refusée) et `name` (la ressource
 - Les **abstractions** (`include <abstractions/...>`) mutualisent des règles communes.
 - Diagnostiquer un refus : `journalctl`/`dmesg` + `grep apparmor`, lire `denied_mask` et `name`.
 - Attention : `apparmor_parser -r` charge **directement en enforce** ; basculer en `aa-complain` juste après si on veut observer.
+
+## Voir aussi
+
+- [SELinux](./05-selinux.md) — l'alternative plus stricte (Red Hat/Fedora/CentOS).

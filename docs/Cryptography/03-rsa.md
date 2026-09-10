@@ -152,3 +152,9 @@ La parade : des implémentations à temps constant et le **blinding** (on masque
 - **Ne jamais utiliser le textbook RSA** : toujours avec un padding (OAEP pour le chiffrement, PSS pour la signature).
 - RSA sert surtout à **transporter une clé symétrique** et à **signer**, pas à chiffrer de gros volumes.
 - Les attaques réelles ne cassent pas les maths mais l'usage : **clés trop courtes, mauvais aléa (premiers partagés, `gcd`), side-channels sur embarqué, absence de padding**. Menace future : l'algorithme de Shor sur ordinateur quantique.
+
+## Voir aussi
+
+- [Chiffrement symétrique](./02-chiffrement-symetrique.md) — le cours précédent.
+- [Diffie-Hellman](./04-diffie-hellman.md) — le cours suivant, échange de clé.
+- [Clés publiques/privées et certificats](./07-cles-publiques-privees-et-certificats.md) — RSA appliqué au TLS.

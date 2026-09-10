@@ -123,3 +123,8 @@ Le Diffie-Hellman « classique » (sur les entiers modulo `p`) nécessite des `p
 - Faille majeure : **pas d'authentification → vulnérable au Man-in-the-Middle actif**. On doit l'associer à des signatures/certificats.
 - En mode **éphémère (DHE/ECDHE)**, il offre la **forward secrecy** : le trafic passé reste protégé même si la clé long-terme est volée plus tard. C'est pourquoi TLS 1.3 l'impose.
 - La version moderne est **ECDH** (sur courbes elliptiques), plus rapide et plus compacte — cours suivant.
+
+## Voir aussi
+
+- [RSA](./03-rsa.md) — le cours précédent.
+- [Courbes elliptiques](./05-courbes-elliptiques.md) — le cours suivant, ECDH/ECDSA.

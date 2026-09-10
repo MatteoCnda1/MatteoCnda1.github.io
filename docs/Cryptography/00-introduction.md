@@ -89,3 +89,8 @@ Puisque c'est l'angle qui nous intéresse, voici les grandes catégories d'attaq
 - *Serious Cryptography*, Jean-Philippe Aumasson — la référence moderne et accessible.
 - *Cryptopals Challenges* (cryptopals.com) — des exercices pratiques pour casser de la crypto en codant, parfait pour ton profil.
 - *Handbook of Applied Cryptography* — gratuit en ligne, très complet (plus théorique).
+
+## Voir aussi
+
+- [XOR et one-time pad](./01-xor-et-one-time-pad.md) — le cours suivant.
+- [Glossaire](../Glossaire/index.md) — acronymes cryptographiques (AES, RSA, PKI...).

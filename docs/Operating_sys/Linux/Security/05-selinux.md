@@ -104,3 +104,8 @@ Retiens l'essentiel : ce sont deux réponses au même besoin (confiner les appli
 - **Modes** : `enforcing` (applique), `permissive` (journalise sans bloquer — pour diagnostiquer), `disabled`. `getenforce`/`setenforce`, config dans `/etc/selinux/config`.
 - **Quotidien** : `ls -Z` (voir les contextes), `ausearch`/`sealert` (diagnostiquer les refus AVC), `restorecon` (réappliquer les bons contextes — souvent LA solution), **booléens** `setsebool -P` (activer des comportements prévus sans toucher à la politique).
 - **SELinux vs AppArmor** : plus strict/complet mais plus complexe (SELinux) vs plus simple mais moins hermétique (AppArmor) ; on prend celui de sa distribution. Savoir diagnostiquer les deux.
+
+## Voir aussi
+
+- [AppArmor](./appArmor.md) — l'alternative plus simple.
+- [Utilisateurs, groupes et permissions](./01-utilisateurs-groupes-permissions.md) — les permissions classiques que SELinux vient compléter.

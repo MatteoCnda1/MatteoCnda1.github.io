@@ -144,3 +144,8 @@ La sécurité n'est pas un état figé qu'on atteint une fois, mais un processus
 - **CVE** : identifiants mondiaux des vulnérabilités connues (`CVE-AAAA-NNNNN`, gravité **CVSS**) ; faire de la **veille** sur ses composants.
 - **Patch management** : maintenir le système **à jour** (`apt upgrade`, `dnf upgrade`, `unattended-upgrades`) est la mesure la plus rentable — la plupart des attaques exploitent des failles **déjà corrigées**.
 - La sécurité est un **cycle continu** : connaître → durcir → surveiller → détecter → corriger.
+
+## Voir aussi
+
+- [Pare-feu — nftables, ufw, fail2ban](./04-pare-feu-nftables-ufw-fail2ban.md) — le cours précédent.
+- [Glossaire](../../../Glossaire/index.md) — CVE, CVSS, CWE.

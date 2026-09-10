@@ -109,3 +109,8 @@ Cas d'usage typique d'un serveur bien durci : SSH sur un port non standard, logi
 - **Durcissement** (dans `sshd_config`) : `PermitRootLogin no`, `PasswordAuthentication no` (le plus efficace contre le brute force), changer le `Port`, `AllowUsers`, `MaxAuthTries`. Toujours `sshd -t` avant de recharger, et garder une session ouverte.
 - **fail2ban** bannit automatiquement les IP qui échouent trop souvent (complément essentiel sur un serveur exposé).
 - Compléments : passphrase + `ssh-agent`, `~/.ssh/config`, mises à jour régulières, surveillance des journaux (`journalctl -u ssh`).
+
+## Voir aussi
+
+- [Utilisateurs, groupes et permissions](./01-utilisateurs-groupes-permissions.md) — le cours précédent.
+- [Pare-feu — nftables, ufw, fail2ban](./04-pare-feu-nftables-ufw-fail2ban.md) — fail2ban en détail.

@@ -126,3 +126,8 @@ Les deux reposent sur les mêmes fondations mathématiques (celles de ta crypto)
 - **GnuPG** (`gpg`) = chiffrement et signature **entre personnes**, basé sur un **trousseau** de clés : chiffrer avec la clé **publique** du destinataire, déchiffrer avec sa clé **privée** ; signer/vérifier pour l'**authenticité** (dont la vérification des logiciels/paquets).
 - **Répartition des rôles** : OpenSSL pour TLS et le bas niveau ; GnuPG pour les échanges entre personnes et la confiance dans les fichiers/logiciels.
 - Réflexe sécurité : toujours **vérifier les empreintes/signatures** des fichiers téléchargés avant de les utiliser.
+
+## Voir aussi
+
+- [Chiffrement symétrique](../../../Cryptography/02-chiffrement-symetrique.md) et [Certificats](../../../Cryptography/07-cles-publiques-privees-et-certificats.md) — les fondements théoriques mis en pratique ici.
+- [SSH — accès distant et durcissement](./02-ssh-durcissement.md) — une autre application de la crypto au quotidien.

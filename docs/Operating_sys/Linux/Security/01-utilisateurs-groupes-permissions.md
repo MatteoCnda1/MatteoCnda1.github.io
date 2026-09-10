@@ -152,3 +152,8 @@ Avantages sécurité de sudo : chaque action privilégiée est **journalisée** 
 - **Permissions spéciales** : **setuid** (s'exécute avec les droits du propriétaire — ex. `passwd`, mais risque d'élévation de privilèges), **setgid**, **sticky bit** (ex. `/tmp`). Auditer avec `find / -perm -4000`.
 - **Capabilities** : découpent les pouvoirs de root en droits fins (ex. `CAP_NET_BIND_SERVICE`) → principe de **moindre privilège**. Audit avec `getcap -r /`.
 - **sudo** : élévation **contrôlée, granulaire et journalisée** ; config via `visudo`. Préférer sudo à une connexion root directe.
+
+## Voir aussi
+
+- [SSH — accès distant et durcissement](./02-ssh-durcissement.md) — le cours suivant.
+- [SELinux](./05-selinux.md) et [AppArmor](./appArmor.md) — contrôle d'accès obligatoire, au-delà des permissions classiques.

@@ -114,3 +114,8 @@ Mauvaise nouvelle qu'ECC partage avec RSA et DH : l'**algorithme de Shor** casse
 - Faille critique d'ECDSA : le **nonce**. Réutilisé ou prévisible → **clé privée récupérable** (cas PS3, portefeuilles Bitcoin). Parades : nonce déterministe (RFC 6979) ou **Ed25519**.
 - Préférer les courbes transparentes (**Curve25519/Ed25519**) aux courbes NIST quand on a le choix ; ne jamais inventer sa courbe.
 - Comme RSA et DH, ECC est **cassable par un ordinateur quantique** (Shor) → transition post-quantique en cours.
+
+## Voir aussi
+
+- [Diffie-Hellman](./04-diffie-hellman.md) — le cours précédent.
+- [Fonctions de hachage](./06-fonctions-de-hachage.md) — le cours suivant.

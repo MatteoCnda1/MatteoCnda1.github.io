@@ -188,3 +188,9 @@ Pour de la production réelle, tu ne génères plus de certificats à la main : 
 - **TLS** assemble tout : ECDHE pour établir un secret (avec forward secrecy), certificat + signature pour authentifier, AES-GCM/ChaCha20 pour chiffrer le trafic.
 - Les attaques visent l'**écosystème**, pas la crypto : **CA compromises** (DigiNotar → parade : Certificate Transparency, crt.sh), **MitM par CA injectée** (Burp, proxys SSL), **pinning et son contournement**, **downgrade** vers vieux protocoles, **validation client absente** (fréquent en IoT/mobile).
 - Outils : `openssl`, `testssl.sh`, `sslscan`, `nmap --script ssl-enum-ciphers`, **crt.sh** pour l'OSINT ; **Let's Encrypt/certbot** pour émettre en prod.
+
+## Voir aussi
+
+- [Fonctions de hachage](./06-fonctions-de-hachage.md) — le cours précédent.
+- [RSA](./03-rsa.md) — le fondement des signatures numériques.
+- [Cryptographie — OpenSSL et GnuPG](../Operating_sys/Linux/Security/03-cryptographie-openssl-gnupg.md) — manipuler des certificats en pratique.

@@ -135,3 +135,9 @@ HMAC est partout : TLS (intégrité des enregistrements), JWT (signature des tok
 - **MD5 et SHA-1 sont morts** (collisions réelles : faux certificats, Flame, SHAttered). Standards actuels : **SHA-2 (SHA-256)** et **SHA-3**.
 - **Mots de passe** : jamais en clair, jamais un hash rapide nu. Utiliser **salt + fonction lente (bcrypt, scrypt, Argon2)**, éventuellement un pepper.
 - **HMAC** ajoute une clé secrète au hash pour garantir **intégrité + authenticité**, et évite l'attaque par extension de longueur. Toujours comparer les MAC **en temps constant**.
+
+## Voir aussi
+
+- [Courbes elliptiques](./05-courbes-elliptiques.md) — le cours précédent.
+- [Clés publiques/privées et certificats](./07-cles-publiques-privees-et-certificats.md) — le cours suivant.
+- [Glossaire](../Glossaire/index.md) — HMAC, salage, KDF.
