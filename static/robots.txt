@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /cours-marie/
+Allow: /
+
+Sitemap: https://matteocnda1.github.io/sitemap.xml

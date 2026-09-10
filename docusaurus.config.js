@@ -69,13 +69,13 @@ const config = {
         pwaHead: [
           {tagName: 'link', rel: 'icon', href: '/img/pwa/icon-192.png'},
           {tagName: 'link', rel: 'manifest', href: '/manifest.json'},
-          {tagName: 'meta', name: 'theme-color', content: '#2e8555'},
+          {tagName: 'meta', name: 'theme-color', content: '#4f46e5'},
           {tagName: 'meta', name: 'apple-mobile-web-app-capable', content: 'yes'},
           {tagName: 'meta', name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent'},
           {tagName: 'link', rel: 'apple-touch-icon', href: '/img/pwa/apple-icon-180.png'},
-          {tagName: 'link', rel: 'mask-icon', href: '/img/pwa/maskable-icon-512.png', color: '#2e8555'},
+          {tagName: 'link', rel: 'mask-icon', href: '/img/pwa/maskable-icon-512.png', color: '#4f46e5'},
           {tagName: 'meta', name: 'msapplication-TileImage', content: '/img/pwa/icon-192.png'},
-          {tagName: 'meta', name: 'msapplication-TileColor', content: '#2e8555'},
+          {tagName: 'meta', name: 'msapplication-TileColor', content: '#4f46e5'},
         ],
       },
     ],
@@ -96,6 +96,9 @@ const config = {
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
+        },
+        sitemap: {
+          ignorePatterns: ['/cours-marie/**'],
         },
       }),
     ],
@@ -158,6 +161,16 @@ const config = {
       },
       footer: {
         style: 'dark',
+        links: [
+          {
+            title: 'Site',
+            items: [
+              {label: 'Dernières mises à jour', to: '/recent-updates'},
+              {label: 'Glossaire', to: '/docs/Glossaire'},
+              {label: 'Tags', to: '/docs/tags'},
+            ],
+          },
+        ],
         copyright: `© ${new Date().getFullYear()} Mes ressources`,
       },
       prism: {
