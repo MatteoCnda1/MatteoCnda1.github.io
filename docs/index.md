@@ -14,6 +14,7 @@ Choisissez une catégorie ci-dessous pour commencer.
 - [Cybersecurity](./Cybersecurity/index.md) — concepts, techniques, outils et mécanismes de défense.
 - [Networking](./networking/index.md) — réseaux et configuration Cisco.
 - [CCNA](./CCNA/index.md) — certification Cisco CCNA (modules 1, 2 et 3).
+- [CCNP ENCOR](./CCNP_ENCOR/index.md) — certification Cisco CCNP Enterprise (350-401).
 - [Cryptography](./Cryptography/index.md) — chiffrement, hachage, clés publiques/privées.
 - [OSINT](./OSINT/index.md) — renseignement en sources ouvertes.
 
