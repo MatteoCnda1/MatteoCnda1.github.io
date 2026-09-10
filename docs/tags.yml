@@ -149,3 +149,7 @@ api:
 stockage:
   label: Stockage
   description: "Pages liées aux supports et systèmes de stockage de données."
+
+psychologie:
+  label: Psychologie
+  description: "Pages liées à la psychologie cognitive, sociale ou comportementale."
