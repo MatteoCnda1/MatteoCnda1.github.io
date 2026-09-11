@@ -153,3 +153,91 @@ stockage:
 psychologie:
   label: Psychologie
   description: "Pages liées à la psychologie cognitive, sociale ou comportementale."
+
+services:
+  label: Services
+  description: "Fiches de référence sur un service/démon système (installation, configuration, exploitation)."
+
+systeme:
+  label: Système
+  description: "Pages liées à l'administration système bas niveau."
+
+securite:
+  label: Sécurité
+  description: "Pages liées à la sécurisation d'un système ou d'un service."
+
+logs:
+  label: Logs
+  description: "Pages liées à la journalisation et à l'analyse de logs."
+
+monitoring:
+  label: Monitoring
+  description: "Pages liées à la surveillance et aux métriques système/applicatives."
+
+impression:
+  label: Impression
+  description: "Pages liées à l'impression réseau et aux serveurs d'impression."
+
+applicatif:
+  label: Applicatif
+  description: "Pages liées au déploiement et à l'exécution d'applications."
+
+bases-de-donnees:
+  label: Bases de données
+  description: "Pages liées aux moteurs de bases de données."
+
+data:
+  label: Data
+  description: "Pages liées aux systèmes de cache, de messaging ou de recherche/indexation."
+
+mail:
+  label: Mail
+  description: "Pages liées aux serveurs de messagerie électronique."
+
+partage-fichiers:
+  label: Partage de fichiers
+  description: "Pages liées aux services de partage de fichiers réseau."
+
+vpn:
+  label: VPN
+  description: "Pages liées aux réseaux privés virtuels."
+
+ha-cluster:
+  label: Haute disponibilité
+  description: "Pages liées aux clusters et à la haute disponibilité."
+
+sauvegarde:
+  label: Sauvegarde
+  description: "Pages liées à la sauvegarde et à la synchronisation de données."
+
+ci-cd:
+  label: CI/CD
+  description: "Pages liées à l'intégration et au déploiement continus."
+
+exploitation:
+  label: Exploitation
+  description: "Pages liées à l'exploitation de vulnérabilités."
+
+arp-spoofing:
+  label: ARP Spoofing
+  description: "Pages liées à l'usurpation ARP et aux attaques de couche 2."
+
+credentials:
+  label: Credentials
+  description: "Pages liées à la capture ou à l'analyse d'identifiants."
+
+threat-modeling:
+  label: Threat Modeling
+  description: "Pages liées à la modélisation des menaces."
+
+finance:
+  label: Finance
+  description: "Pages liées à la finance et aux systèmes bancaires."
+
+wifi:
+  label: WiFi
+  description: "Pages liées aux réseaux sans fil et à leur sécurité."
+
+pgp:
+  label: PGP
+  description: "Pages liées à PGP/OpenPGP et à la toile de confiance."
