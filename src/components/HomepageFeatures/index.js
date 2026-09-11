@@ -4,87 +4,90 @@ import styles from './styles.module.css';
 
 const CategoryGroups = [
   {
+    ref: '01',
     title: 'Cybersécurité & Réseaux',
     items: [
-      {icon: '🛡️', title: 'Cybersecurity', to: '/docs/Cybersecurity'},
-      {icon: '🌐', title: 'Networking', to: '/docs/networking'},
-      {icon: '🔐', title: 'Cryptography', to: '/docs/Cryptography'},
-      {icon: '🔎', title: 'OSINT', to: '/docs/OSINT'},
+      {title: 'Cybersecurity', to: '/docs/Cybersecurity'},
+      {title: 'Networking', to: '/docs/networking'},
+      {title: 'Cryptography', to: '/docs/Cryptography'},
+      {title: 'OSINT', to: '/docs/OSINT'},
     ],
   },
   {
+    ref: '02',
     title: 'Systèmes & Infrastructure',
     items: [
-      {icon: '💻', title: 'Operating Systems', to: '/docs/Operating_sys'},
-      {icon: '📦', title: 'Containers', to: '/docs/Containers'},
-      {icon: '☸️', title: 'Container Orchestration', to: '/docs/Container_Orchestration'},
-      {icon: '⚙️', title: 'Config Management & Automation', to: '/docs/Configuration_Management_Automation'},
-      {icon: '🔧', title: 'Hardware', to: '/docs/Hardware'},
-      {icon: '🚀', title: 'DevOps', to: '/docs/DevOps'},
-      {icon: '☁️', title: 'Cloud Computing', to: '/docs/Cloud_Computing'},
-      {icon: '🔌', title: 'Électronique', to: '/docs/Electronique'},
-      {icon: '🦾', title: 'Robotique & Embarqué', to: '/docs/Robotique'},
+      {title: 'Operating Systems', to: '/docs/Operating_sys'},
+      {title: 'Containers', to: '/docs/Containers'},
+      {title: 'Container Orchestration', to: '/docs/Container_Orchestration'},
+      {title: 'Config Management & Automation', to: '/docs/Configuration_Management_Automation'},
+      {title: 'Hardware', to: '/docs/Hardware'},
+      {title: 'DevOps', to: '/docs/DevOps'},
+      {title: 'Cloud Computing', to: '/docs/Cloud_Computing'},
+      {title: 'Électronique', to: '/docs/Electronique'},
+      {title: 'Robotique & Embarqué', to: '/docs/Robotique'},
     ],
   },
   {
+    ref: '03',
     title: 'Programmation & Données',
     items: [
-      {icon: '👨‍💻', title: 'Programmation', to: '/docs/Programmation'},
-      {icon: '🗄️', title: 'Database', to: '/docs/Databases'},
-      {icon: '🤖', title: 'AI', to: '/docs/Artificial_Intelligence'},
-      {icon: '🧮', title: 'Algorithmique & Structures de données', to: '/docs/Algorithmique_Structures_De_Donnees'},
-      {icon: '🏗️', title: 'Architecture logicielle', to: '/docs/Software_Architecture'},
-      {icon: '🕸️', title: 'Systèmes distribués', to: '/docs/Systemes_Distribues'},
+      {title: 'Programmation', to: '/docs/Programmation'},
+      {title: 'Database', to: '/docs/Databases'},
+      {title: 'AI', to: '/docs/Artificial_Intelligence'},
+      {title: 'Algorithmique & Structures de données', to: '/docs/Algorithmique_Structures_De_Donnees'},
+      {title: 'Architecture logicielle', to: '/docs/Software_Architecture'},
+      {title: 'Systèmes distribués', to: '/docs/Systemes_Distribues'},
     ],
   },
   {
+    ref: '04',
     title: 'Sciences',
     items: [
-      {icon: '📐', title: 'Mathématiques', to: '/docs/Mathématics'},
-      {icon: '⚛️', title: 'Physics', to: '/docs/Physics'},
-      {icon: '📡', title: 'Traitement du signal', to: '/docs/Traitement_du_signal'},
-      {icon: '📊', title: 'Statistiques & Probabilités', to: '/docs/Statistiques_Probabilites'},
-      {icon: '🧪', title: 'Chimie', to: '/docs/Chimie'},
-      {icon: '🧬', title: 'Biologie', to: '/docs/Biologie'},
+      {title: 'Mathématiques', to: '/docs/Mathématics'},
+      {title: 'Physics', to: '/docs/Physics'},
+      {title: 'Traitement du signal', to: '/docs/Traitement_du_signal'},
+      {title: 'Statistiques & Probabilités', to: '/docs/Statistiques_Probabilites'},
+      {title: 'Chimie', to: '/docs/Chimie'},
+      {title: 'Biologie', to: '/docs/Biologie'},
     ],
   },
   {
+    ref: '05',
     title: 'Culture générale & vie pratique',
     items: [
-      {icon: '⚖️', title: 'Droit', to: '/docs/Droit'},
-      {icon: '🗣️', title: 'Langues', to: '/docs/Langues'},
-      {icon: '💰', title: 'Économie & Finance', to: '/docs/Economie_Finance'},
-      {icon: '🗂️', title: 'Productivité', to: '/docs/Productivite'},
-      {icon: '📋', title: 'Gestion de projet', to: '/docs/Gestion_de_Projet'},
-      {icon: '🧠', title: 'Philosophie', to: '/docs/Philosophie'},
-      {icon: '🏛️', title: 'Histoire', to: '/docs/Histoire'},
-      {icon: '🌍', title: 'Géopolitique', to: '/docs/Geopolitique'},
-      {icon: '🩺', title: 'Santé & Nutrition', to: '/docs/Sante_Nutrition'},
+      {title: 'Droit', to: '/docs/Droit'},
+      {title: 'Langues', to: '/docs/Langues'},
+      {title: 'Économie & Finance', to: '/docs/Economie_Finance'},
+      {title: 'Productivité', to: '/docs/Productivite'},
+      {title: 'Gestion de projet', to: '/docs/Gestion_de_Projet'},
+      {title: 'Philosophie', to: '/docs/Philosophie'},
+      {title: 'Histoire', to: '/docs/Histoire'},
+      {title: 'Géopolitique', to: '/docs/Geopolitique'},
+      {title: 'Santé & Nutrition', to: '/docs/Sante_Nutrition'},
     ],
   },
 ];
 
-function CategoryCard({icon, title, to}) {
+function CategoryRow({ref, title, items}) {
   return (
-    <Link to={to} className={styles.card}>
-      <span className={styles.cardIcon} aria-hidden="true">
-        {icon}
-      </span>
-      <span className={styles.cardTitle}>{title}</span>
-    </Link>
-  );
-}
-
-function CategoryGroup({title, items}) {
-  return (
-    <div className={styles.group}>
-      <Heading as="h3" className={styles.groupTitle}>
-        {title}
-      </Heading>
-      <div className={styles.grid}>
-        {items.map((item) => (
-          <CategoryCard key={item.title} {...item} />
-        ))}
+    <div className={styles.row}>
+      <div className={styles.rowMark} aria-hidden="true">
+        {ref}
+      </div>
+      <div className={styles.rowBody}>
+        <Heading as="h3" className={styles.rowTitle}>
+          {title}
+        </Heading>
+        <ul className={styles.itemList}>
+          {items.map((item) => (
+            <li key={item.title} className={styles.itemEntry}>
+              <Link to={item.to} className={styles.itemLink}>
+                {item.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -95,7 +98,7 @@ export default function HomepageFeatures() {
     <section className={styles.features}>
       <div className="container">
         {CategoryGroups.map((group) => (
-          <CategoryGroup key={group.title} {...group} />
+          <CategoryRow key={group.title} {...group} />
         ))}
       </div>
     </section>

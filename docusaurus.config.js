@@ -69,13 +69,13 @@ const config = {
         pwaHead: [
           {tagName: 'link', rel: 'icon', href: '/img/pwa/icon-192.png'},
           {tagName: 'link', rel: 'manifest', href: '/manifest.json'},
-          {tagName: 'meta', name: 'theme-color', content: '#4f46e5'},
+          {tagName: 'meta', name: 'theme-color', content: '#1D3FAE'},
           {tagName: 'meta', name: 'apple-mobile-web-app-capable', content: 'yes'},
           {tagName: 'meta', name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent'},
           {tagName: 'link', rel: 'apple-touch-icon', href: '/img/pwa/apple-icon-180.png'},
-          {tagName: 'link', rel: 'mask-icon', href: '/img/pwa/maskable-icon-512.png', color: '#4f46e5'},
+          {tagName: 'link', rel: 'mask-icon', href: '/img/pwa/maskable-icon-512.png', color: '#1D3FAE'},
           {tagName: 'meta', name: 'msapplication-TileImage', content: '/img/pwa/icon-192.png'},
-          {tagName: 'meta', name: 'msapplication-TileColor', content: '#4f46e5'},
+          {tagName: 'meta', name: 'msapplication-TileColor', content: '#1D3FAE'},
         ],
       },
     ],
@@ -107,6 +107,10 @@ const config = {
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
+      type: 'text/css',
+    },
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap',
       type: 'text/css',
     },
   ],

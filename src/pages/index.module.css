@@ -3,26 +3,55 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.hero {
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
 }
 
 @media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+  .hero {
+    padding: 2.5rem 1.5rem 2rem;
   }
 }
 
-.heroDescription {
-  max-width: 640px;
-  margin: 0 auto 2rem;
+.heroTitle {
+  font-size: clamp(2.1rem, 4vw, 2.85rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
 }
 
-.buttons {
-  display: flex;
+.heroTagline {
+  font-family: var(--ifm-heading-font-family);
+  color: var(--accent-brass);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+
+.heroDescription {
+  max-width: 620px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.75rem;
+}
+
+.heroAction {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  padding: 0.65rem 1.4rem;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color var(--site-transition), color var(--site-transition);
+}
+
+.heroAction:hover {
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
 }

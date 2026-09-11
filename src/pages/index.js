@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
@@ -8,21 +7,19 @@ import styles from './index.module.css';
 
 function HomepageHeader() {
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={styles.hero}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
+        <Heading as="h1" className={styles.heroTitle}>
           Mes ressources
         </Heading>
-        <p className="hero__subtitle">Knowledge is key</p>
+        <p className={styles.heroTagline}>Knowledge is key</p>
         <p className={styles.heroDescription}>
-          Base de connaissances personnelle : notes et cours sur la cybersécurité, les
-          réseaux, les systèmes d&apos;exploitation, la programmation et plus encore.
+          Notes et cours personnels, classés et tenus à jour au fil de l&apos;apprentissage :
+          cybersécurité, réseaux, systèmes, programmation, sciences, droit et culture générale.
         </p>
-        <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/docs">
-            Parcourir les ressources
-          </Link>
-        </div>
+        <Link className={styles.heroAction} to="/docs">
+          Parcourir les ressources
+        </Link>
       </div>
     </header>
   );

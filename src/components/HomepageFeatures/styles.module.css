@@ -1,57 +1,74 @@
 .features {
   width: 100%;
-  padding: 1rem 0 3rem;
+  padding: 0.5rem 0 3rem;
 }
 
-.group {
-  margin-top: 2.5rem;
-}
-
-.groupTitle {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--ifm-color-primary);
-  margin-bottom: 1rem;
-}
-
-.grid {
+.row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.5rem 1.5rem;
+  padding: 1.85rem 0;
+  border-top: 1px solid var(--rule);
 }
 
-.card {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.1rem;
-  border-radius: var(--ifm-global-radius);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  background: var(--ifm-background-surface-color);
-  color: var(--ifm-font-color-base);
-  text-decoration: none;
-  transition: transform var(--site-transition), box-shadow var(--site-transition),
-    border-color var(--site-transition);
+.row:last-child {
+  border-bottom: 1px solid var(--rule);
 }
 
-.card:hover {
-  color: var(--ifm-font-color-base);
-  text-decoration: none;
-  transform: translateY(-2px);
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme='dark'] .card:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-}
-
-.cardIcon {
-  font-size: 1.5rem;
+.rowMark {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 800;
+  font-size: 1.9rem;
   line-height: 1;
+  color: var(--accent-brass);
+  font-variant-numeric: tabular-nums;
 }
 
-.cardTitle {
-  font-weight: 600;
-  font-size: 0.95rem;
+.rowTitle {
+  margin: 0 0 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.itemList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.itemEntry:not(:first-child) {
+  border-left: 1px solid var(--rule);
+}
+
+.itemLink {
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--site-transition), border-color var(--site-transition);
+}
+
+.itemEntry:first-child .itemLink {
+  padding-left: 0;
+}
+
+.itemLink:hover {
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+@media screen and (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .rowMark {
+    font-size: 1.4rem;
+  }
 }

@@ -6,19 +6,21 @@
  */
 
 .cardContainer {
-  --ifm-link-color: var(--ifm-color-emphasis-800);
-  --ifm-link-hover-color: var(--ifm-color-emphasis-700);
+  --ifm-link-color: var(--ink);
+  --ifm-link-hover-color: var(--ink);
   --ifm-link-hover-decoration: none;
 
-  box-shadow: 0 1.5px 3px 0 rgb(0 0 0 / 15%);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  transition: all var(--ifm-transition-fast) ease;
-  transition-property: border, box-shadow;
+  box-shadow: none;
+  border: 1px solid var(--rule);
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  transition: border-color var(--site-transition), background-color var(--site-transition);
 }
 
 .cardContainer:hover {
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
+  border-color: var(--rule);
+  border-left-color: var(--accent-brass);
+  background-color: var(--paper-alt);
 }
 
 .cardContainer *:last-child {
@@ -29,9 +31,8 @@
   margin: -1rem -1rem 0.75rem;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 0.75rem 0.75rem 0 0;
-  background: var(--ifm-color-emphasis-100);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--paper-alt);
+  border-bottom: 1px solid var(--rule);
 }
 
 .thumbnail {
