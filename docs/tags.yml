@@ -241,3 +241,35 @@ wifi:
 pgp:
   label: PGP
   description: "Pages liées à PGP/OpenPGP et à la toile de confiance."
+
+langues:
+  label: Langues
+  description: "Pages liées à l'apprentissage des langues étrangères."
+
+anglais:
+  label: Anglais
+  description: "Pages liées à la langue anglaise."
+
+espagnol:
+  label: Espagnol
+  description: "Pages liées à la langue espagnole."
+
+italien:
+  label: Italien
+  description: "Pages liées à la langue italienne."
+
+darija:
+  label: Darija
+  description: "Pages liées à la darija, l'arabe dialectal marocain."
+
+grammaire:
+  label: Grammaire
+  description: "Pages liées à la grammaire d'une langue."
+
+conjugaison:
+  label: Conjugaison
+  description: "Pages liées à la conjugaison des verbes."
+
+vocabulaire:
+  label: Vocabulaire
+  description: "Pages liées au vocabulaire et au lexique thématique."
